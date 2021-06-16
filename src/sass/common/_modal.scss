@@ -1,0 +1,31 @@
+.ant-modal.app-modal {
+    .ant-modal-content {
+        box-shadow: $box_shadow_card_search;
+        border-radius: 16px;
+        .ant-modal-body {
+            padding: 32px;
+        }
+        .ant-modal-close {
+            top: 32px;
+            right: 32px;
+            .ant-modal-close-x {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
+
+@include _responsive(xs) {
+    .ant-modal.app-modal {
+        .ant-modal-content {
+            .ant-modal-body {
+                padding: 24px;
+            }
+            .ant-modal-close {
+                top: 24px;
+                right: 24px;
+            }
+        }
+    }
+}

@@ -1,0 +1,143 @@
+@mixin _styleColumn() {
+    .store-data {
+        &__content {
+            margin-left: 0;
+        }
+        &__card {
+            flex-direction: column;
+            align-items: flex-start;
+            .ant-image {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
+
+.store-data {
+    margin-bottom: 80px;
+    @include _container;
+    padding-top: 100px;
+    overflow: hidden;
+    &__card {
+        @include _flexBox(center, flex-start);
+    }
+    &__top {
+        @include _flexBox(center, space-between);
+        margin-bottom: 32px;
+    }
+    &__link-all {
+        font-weight: 600;
+        font-size: $font_size_base - 2;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        margin-right: 8px;
+        color: $color_count_review;
+        > svg {
+            margin-left: 8px;
+        }
+    }
+    &__image {
+        width: 205px;
+        height: 205px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    &__content {
+        margin-left: 30px;
+        @include _flexBox(flex-start, space-between);
+        flex-direction: column;
+        min-height: 205px;
+        max-height: 205px;
+        overflow: hidden;
+        width: 100%;
+        .title-store {
+            font-weight: 600;
+            font-size: $font_size_base;
+            line-height: 26px;
+            color: $color_title_store;
+            margin-bottom: 0;
+            max-width: calc(100% - 30px);
+        }
+        .ant-space.ant-space-vertical {
+            gap: 5px !important;
+        }
+        .star {
+            margin-right: 4px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    &__content-top {
+        width: 100%;
+    }
+    &__rate {
+        margin-top: 2px;
+    }
+    &__tag {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        @include _flexBox(center, flex-start);
+        .ant-typography-expand {
+            display: none;
+        }
+        span:not(.ant-tag) {
+            @extend .app-tag;
+            padding-top: 2px;
+        }
+    }
+    &__rate-count {
+        font-size: $font_size_base - 4;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        color: $color_count_review;
+    }
+    &__store-description {
+        font-weight: normal;
+        font-size: $font_size_base - 4;
+        line-height: 18px;
+        color: $color_title_store;
+        max-width: calc(100% - 30px);
+    }
+    .app-btn {
+        height: 36px;
+    }
+}
+
+@include _responsive(lg) {
+    .store-data {
+        padding: 0 32px;
+        padding-top: 82px;
+    }
+}
+
+@include _responsive(xs) {
+    .store-data {
+        &__top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        &__card {
+            margin-bottom: 20px;
+            .ant-image {
+                width: 100%;
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+        &__btn-gr {
+            display: flex;
+            width: 100%;
+            .ant-space-item {
+                width: 100%;
+                button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    @include _styleColumn;
+}

@@ -1,0 +1,17 @@
+html,
+body {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    background-color: $color_bg_page;
+    scroll-behavior: smooth;
+    .ant-layout {
+        min-height: 100vh;
+    }
+    .title-section.ant-typography {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 42px;
+        color: $color_title_section;
+        margin-bottom: 0px;
+    }
+}
