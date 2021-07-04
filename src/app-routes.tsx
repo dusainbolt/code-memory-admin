@@ -1,10 +1,22 @@
 import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
-// import Contact from "./components/login/contact";
+import { LoginPages } from './pages/login';
 
-export const AppRoutes: React.FC = () => (
-    <Switch>
-        <Redirect exact={true} from={`/`} to={'/contact'} />
-        {/* <Route exact={true} path={"/contact"} component={Contact} /> */}
-    </Switch>
-);
+const publicRoute = [
+    {
+        name: 'Login',
+        path: '/login',
+        component: LoginPages,
+        exact: true,
+    },
+];
+
+const privateRoutes = [
+    {
+        name: 'Dashboard',
+        path: '/dashboard',
+        component: LoginPages,
+        exact: true,
+    },
+];
+
+export { publicRoute, privateRoutes };
