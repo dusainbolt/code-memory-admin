@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { LoginPages } from './pages/login';
+import { DashBoard } from './pages/dashboard';
+
 
 const publicRoute = [
     {
@@ -8,13 +10,19 @@ const publicRoute = [
         component: LoginPages,
         exact: true,
     },
+    {
+        name: 'Dashboard',
+        path: '/dashboard',
+        component: DashBoard,
+        exact: true,
+    },
 ];
 
 const privateRoutes = [
     {
         name: 'Dashboard',
         path: '/dashboard',
-        component: LoginPages,
+        component: DashBoard,
         exact: true,
     },
 ];
