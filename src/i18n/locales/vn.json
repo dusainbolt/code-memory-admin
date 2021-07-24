@@ -5,5 +5,16 @@
     "txt_tooltip_connect": "Liên kết tới {{connect}} của CodeMemory",
     "txt_tooltip_access": "Truy cập tới {{access}} của CodeMemory",
     "txt_view_next": "Xem tiếp"
+  },
+  "login": {
+    "title_login": "Đăng nhập hệ thống quản trị CodeMemory",
+    "credential": "Tài khoản",
+    "password": "Mật khẩu",
+    "place_credential": "nhập username hoặc email",
+    "place_password": "nhập mật khẩu"
+  },
+  "message": {
+    "MSG_1": "{{fieldName}} không được để trống",
+    "MSG_2": "Tài khoản hoặc mật khẩu không chính xác"
   }
 }

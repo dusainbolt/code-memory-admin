@@ -1,38 +1,38 @@
 @mixin _responsive($breakpoint) {
-    @if $breakpoint == xs {
-        @media (max-width: $screen-xs) {
-            @content;
-        }
+  @if $breakpoint == xs {
+    @media (max-width: $screen-xs) {
+      @content;
     }
-    @if $breakpoint == sm {
-        @media (max-width: $screen-sm) {
-            @content;
-        }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: $screen-sm) {
+      @content;
     }
-    @if $breakpoint == md {
-        @media (max-width: $screen-md) {
-            @content;
-        }
+  }
+  @if $breakpoint == md {
+    @media (max-width: $screen-md) {
+      @content;
     }
-    @if $breakpoint == lg {
-        @media (max-width: $screen-lg) {
-            @content;
-        }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: $screen-lg) {
+      @content;
     }
-    @if $breakpoint == xl {
-        @media (min-width: $screen-xl) {
-            @content;
-        }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $screen-xl) {
+      @content;
     }
+  }
 }
 
 @mixin _flexBox($align: center, $justify-content: center) {
-    display: flex;
-    align-items: $align;
-    justify-content: $justify-content;
+  display: flex;
+  align-items: $align;
+  justify-content: $justify-content;
 }
 
 @mixin _container() {
-    max-width: $width_container;
-    margin: auto;
+  max-width: $width_container;
+  margin: auto;
 }

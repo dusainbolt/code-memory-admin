@@ -1,8 +1,8 @@
 import { User } from './UserModel';
 
 export interface LoginInput {
-  credential: string;
-  password: string;
+  credential: String;
+  password: String;
 }
 
 export interface LoginOutput {

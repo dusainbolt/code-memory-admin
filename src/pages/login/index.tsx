@@ -1,21 +1,22 @@
 import { Formik } from 'formik';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Box from '../../common/Box';
-import { LoginInput } from '../../models/LoginModel';
+import { LoginForm } from '../../components/Login/LoginForm';
+import { useLogin } from '../../hooks/useLogin';
+import { fieldLogin } from '../../models/FieldModel';
+import ValidateService from '../../services/validateService';
 
 export const LoginPages = () => {
-  const loginInput: LoginInput = { credential: '', password: '' };
-  // const validateLoginInput = Yup.object({
-  //   credential: Yup.string().required(t('message.MSG_1', { fieldName: t('login.credential') })),
-  //   password: Yup.string().required(t('message.MSG_1', { fieldName: t('login.password') })),
-  // });
-  const handleLogin = values => {
-    console.log(values);
-  };
+  const { t } = useTranslation();
+  const validateInput = new ValidateService(t).validateLoginInput(fieldLogin);
+  const { loginInput, handleLogin } = useLogin();
+
   return (
     <Box className="login__container">
-      123123
-      {/* <Formik initialValues={loginInput} onSubmit={handleLogin} validationSchema={validateLoginInput}></Formik> */}
+      <Formik initialValues={loginInput} onSubmit={handleLogin} validationSchema={validateInput}>
+        <LoginForm fieldLogin={fieldLogin} />
+      </Formik>
     </Box>
   );
 };

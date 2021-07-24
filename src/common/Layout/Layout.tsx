@@ -13,7 +13,6 @@ interface ILayoutProps {
 
 const LayoutCommon: React.FC<ILayoutProps> = props => {
   const { token } = useAppSelector(state => state.loginReducer);
-
   return (
     <Layout className="layout">
       {/* <HeaderCommon /> */}

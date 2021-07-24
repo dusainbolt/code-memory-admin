@@ -1,9 +1,9 @@
 // // init style common
-// @import './common/variables';
-// @import './common/minxin';
-// @import './common/common';
+@import './common/variables';
+@import './common/minxin';
+@import './common/common';
 // @import './common/button';
-// @import './common/input';
+@import './common/input';
 // @import './common/icon';
 // @import './common/select';
 // @import './common/tag';
@@ -14,6 +14,5 @@
 // @import './layout/header';
 // @import './layout/footer';
 
-// // style for pages
-// @import './page/home';
-// @import './page/store-search';
+// style for pages
+@import './page/login.scss';
