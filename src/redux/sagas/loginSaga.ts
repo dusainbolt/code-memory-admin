@@ -1,15 +1,24 @@
-import { loginActionTypes } from './../actions/loginActionCreators';
-import { put, takeLatest } from 'redux-saga/effects';
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
+import { postLoginRequest } from '../../graphql/userRequest';
+import { LoginOutput } from '../../models/LoginModel';
+import { actionLogin } from '../actionsCreators/loginActionCreators';
+import { actionUser } from '../actionsCreators/userActionCreators';
+import { postLoginAction, POST_LOGIN_REQUESTING } from '../actionTypes/loginActionTypes';
 
-function* login() {
-    try {
-        // const response = yield getConfigNFTAPI();
-        // yield put(configNFTAction.getConfigNFTSuccess(response));
-    } catch (e) {
-        // yield put(configNFTAction.getConfigNFTError(e));
-    }
+function* onPostLogin(action: postLoginAction) {
+  try {
+    const { token, user } = yield postLoginRequest(action.loginInput) as LoginOutput;
+    yield put(actionLogin.postLoginSuccess(token));
+    yield put(actionUser.setUser(user));
+  } catch (error) {
+    yield put(actionLogin.postLoginError(error.message as string));
+  }
 }
 
-export function* watchLogin() {
-    yield takeLatest(loginActionTypes.LOGIN_REQUEST, login);
+function* watchHandleLogin() {
+  yield takeEvery(POST_LOGIN_REQUESTING, onPostLogin);
+}
+
+export default function* loginSaga(): any {
+  yield all([fork(watchHandleLogin)]);
 }

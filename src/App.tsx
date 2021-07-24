@@ -1,33 +1,28 @@
 import * as React from 'react';
 import { BrowserRouter, Router, Switch, Route } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
 import { createBrowserHistory } from 'history';
+import { privateRoutes, publicRoute } from './appRoutes';
+import { Provider } from 'react-redux';
+import store from './redux/rootStore';
+import LayoutCommon from './common/Layout/Layout';
+import './i18n/i18n';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
-import apolloClient from './graphql/apollo.client';
-import { privateRoutes, publicRoute } from './app-routes';
-import LayoutCommon from './common/layout';
+import './sass/_app.scss';
 
 const history = createBrowserHistory();
 
-class App extends React.Component<{}, {}> {
-    render() {
-        console.log(`process.env.GRAPH_URI : ${process.env.REACT_APP_GRAPH_URI}`);
-        return (
-            <React.Fragment>
-                <ApolloProvider client={apolloClient}>
-                    <BrowserRouter>
-                        <Router history={history}>
-                            <Switch>
-                                <Route path={[...publicRoute, ...privateRoutes].map(item => item.path)} component={LayoutCommon} />
-                            </Switch>
-                        </Router>
-                    </BrowserRouter>
-                </ApolloProvider>
-            </React.Fragment>
-        );
-    }
-}
+const App: React.FC<any> = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <Router history={history}>
+          <Switch>
+            <Route path={[...publicRoute, ...privateRoutes].map(item => item.path)} component={LayoutCommon} />
+          </Switch>
+        </Router>
+      </BrowserRouter>
+    </Provider>
+  );
+};
 
 export default App;

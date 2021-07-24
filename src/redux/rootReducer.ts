@@ -1,10 +1,9 @@
-import { combineReducers } from '@reduxjs/toolkit';
 import { loginReducer } from './reducers/loginReducer';
-
+import { combineReducers } from 'redux';
 export interface IRootProps {
-    loginReducer: any
+  loginReducer: any;
 }
 
 export default combineReducers({
-    loginReducer,
+  loginReducer,
 });
