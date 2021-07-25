@@ -1,30 +1,47 @@
 import * as React from 'react';
 import { Layout } from 'antd';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, RouteChildrenProps } from 'react-router-dom';
 import { useAppSelector } from '../../redux/rootStore';
-import { privateRoutes, publicRoute } from '../../appRoutes';
+import { IRoute, privateRoutes, publicRoute, RouteLayoutAdmin } from '../../appRoutes';
 import { LoginPages } from '../../pages/Login';
+import { HeaderAdmin } from './HeaderAdmin';
 
 const { Content } = Layout;
 
-interface ILayoutProps {
-  error: any;
+// interface ILayoutCommon extends RouteChildrenProps {
+//   path: string;
+// }
+
+interface ILayoutAuth {
+  type: string;
+  token: string;
 }
 
-const LayoutCommon: React.FC<ILayoutProps> = props => {
-  const { token } = useAppSelector(state => state.loginReducer);
+const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
   return (
     <Layout className="layout">
-      {/* <HeaderCommon /> */}
-      <Content>
-        <Switch>
-          <Route component={LoginPages} />
-          {token
-            ? privateRoutes.map((route, index) => <Route path={route.path} component={route.component} exact={route.exact} key={index} />)
-            : publicRoute.map((route, index) => <Route path={route.path} component={route.component} exact={route.exact} key={index} />)}
-        </Switch>
-      </Content>
+      {/* Header container */}
+      {RouteLayoutAdmin.includes(type) && token && <HeaderAdmin />}
+      {/* Header container END */}
+      <Content>{children}</Content>
     </Layout>
+  );
+};
+
+const LayoutCommon: React.FC<RouteChildrenProps> = ({ history, location, match }) => {
+  const { token } = useAppSelector(state => state.loginReducer);
+  console.log('history', history);
+  console.log('location', history);
+  console.log('match', history);
+  return (
+    <LayoutAuth token={token} type={history.location.pathname}>
+      <Switch>
+        {token
+          ? privateRoutes.map((route, index) => <Route path={route.path} component={route.component} exact={route.exact} key={index} />)
+          : publicRoute.map((route, index) => <Route path={route.path} component={route.component} exact={route.exact} key={index} />)}
+        <Route component={LoginPages} />
+      </Switch>
+    </LayoutAuth>
   );
 };
 

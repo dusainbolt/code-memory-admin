@@ -1,6 +1,9 @@
+import { DashboardPages } from './pages/DashBoard';
 import { LoginPages } from './pages/Login';
 
-interface IRoute {
+export const RouteLayoutAdmin = ['/dashboard'];
+export const RouteLayoutPublic = ['/', '/login'];
+export interface IRoute {
   name: string;
   path: string;
   exact: boolean;
@@ -26,7 +29,7 @@ const privateRoutes: IRoute[] = [
   {
     name: 'Dashboard',
     path: '/dashboard',
-    component: LoginPages,
+    component: DashboardPages,
     exact: true,
   },
 ];
