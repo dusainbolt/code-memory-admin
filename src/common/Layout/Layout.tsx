@@ -2,15 +2,12 @@ import * as React from 'react';
 import { Layout } from 'antd';
 import { Switch, Route, RouteChildrenProps } from 'react-router-dom';
 import { useAppSelector } from '../../redux/rootStore';
-import { IRoute, privateRoutes, publicRoute, RouteLayoutAdmin } from '../../appRoutes';
+import { privateRoutes, publicRoute, RouteLayoutAdmin } from '../../appRoutes';
 import { LoginPages } from '../../pages/Login';
 import { HeaderAdmin } from './HeaderAdmin';
+import { SiderAdmin } from './SiderAdmin';
 
 const { Content } = Layout;
-
-// interface ILayoutCommon extends RouteChildrenProps {
-//   path: string;
-// }
 
 interface ILayoutAuth {
   type: string;
@@ -18,12 +15,19 @@ interface ILayoutAuth {
 }
 
 const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
+  const isAdmin = RouteLayoutAdmin.includes(type) && token;
   return (
-    <Layout className="layout">
-      {/* Header container */}
-      {RouteLayoutAdmin.includes(type) && token && <HeaderAdmin />}
-      {/* Header container END */}
-      <Content>{children}</Content>
+    <Layout className="layout" style={{ minHeight: '100vh' }}>
+      {isAdmin && <SiderAdmin />}
+      <Layout className="site-layout">
+        {/* <Content>{children}</Content> */}
+        <Layout className="site-layout">
+          {/* Header container */}
+          {isAdmin && <HeaderAdmin />}
+          {/* Header container END */}
+          <Content>{children}</Content>
+        </Layout>
+      </Layout>
     </Layout>
   );
 };

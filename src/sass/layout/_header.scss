@@ -1,88 +1,22 @@
-// .header {
-//     &.ant-layout-header {
-//         padding: 0;
-//         background-color: white;
-//         height: 80px;
-//         @include _flexBox;
-//         position: fixed;
-//         z-index: 1000;
-//         width: 100%;
-//         border-bottom: 1px solid $color_border_input;
-//     }
-//     &__container {
-//         max-width: $width_container;
-//         @include _flexBox(center, space-between);
-//         margin: auto;
-//         width: 100%;
-//     }
-//     &__link-logo {
-//         height: 32px;
-//         align-items: center;
-//         display: flex;
-//     }
-//     &__right-content {
-//         @include _flexBox(center);
-//     }
-//     &__menu {
-//         list-style-type: none;
-//         margin-bottom: 0;
-//         margin-right: 26px;
-//         li {
-//             float: right;
-//             cursor: pointer;
-//             margin: 0 10px;
-//             a {
-//                 font-weight: 600;
-//                 font-size: $font_size_base;
-//                 line-height: 26px;
-//                 color: $color_text_menu_header;
-//                 transition: 0.2s all;
-//                 &:hover {
-//                     opacity: 0.7;
-//                 }
-//             }
-//         }
-//     }
-//     .icon-menu {
-//         display: none;
-//     }
-// }
-
-// @include _responsive(lg) {
-//     .header {
-//         &__container {
-//             padding: 0 32px;
-//         }
-//     }
-// }
-
-// @include _responsive(md) {
-//     .header {
-//         .icon-menu {
-//             display: block;
-//             margin-left: 8px;
-//         }
-//         &.ant-layout-header {
-//             padding-bottom: 13px;
-//             border-bottom: 1px solid $color_border_input;
-//             .header__right-content {
-//                 display: none;
-//             }
-//         }
-//         &__right-content {
-//             flex-direction: column;
-//             .ant-btn.ant-btn-primary.app-btn {
-//                 margin-right: auto;
-//             }
-//         }
-//         &__menu {
-//             padding-left: 0;
-//             margin-bottom: 35px;
-//             li {
-//                 float: left;
-//                 margin: 5px 0;
-//                 font-size: $font_size_base;
-//             }
-//         }
-//     }
-// }
+.ant-layout-header.header {
+  background: $color_bg_page;
+  padding: 0 50px;
+  margin: 20px 0;
+  .info-wrap {
+    float: right;
+    width: max-content;
+    height: 100%;
+    background: $color_bg_wrap;
+    padding: 5px 10px;
+    border-radius: 16px;
+    h4.ant-typography {
+      font-weight: 600;
+      margin-bottom: 2px;
+      font-size: $font_size_base - 2;
+    }
+    &__name-tag {
+      @include _flexBox(flex-end, center);
+      flex-direction: column;
+    }
+  }
+}
