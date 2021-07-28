@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '../../common/Box';
 import { ContentState, convertToRaw, EditorState } from 'draft-js';
@@ -6,6 +6,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { TextAreaCommon } from '../../common/Input/TextArea';
+import clsx from 'clsx';
 
 const content = {
   entityMap: {},
@@ -21,7 +23,7 @@ const htmlToDraftBlocks = html => {
   return editorState;
 };
 
-export const DashboardPages = () => {
+export const DraftEditor = ({ className }: any) => {
   const { t } = useTranslation();
   const [contentState, setContentState] = useState(htmlToDraftBlocks(draftToHtml(content)));
 
@@ -30,48 +32,21 @@ export const DashboardPages = () => {
     console.log(convertToRaw(values.getCurrentContent()));
     setContentState(values);
   };
+  const onChangeTextarea = ({ target: { value } }) => {
+    setContentState(htmlToDraftBlocks(value));
+  };
 
   return (
-    <Box className="admin__content add-blog">
-      <Editor editorState={contentState} wrapperClassName="demo-wrapper" editorClassName="demo-editor" onEditorStateChange={onContentStateChange} />
-      <Box>
-        <textarea disabled value={draftToHtml(convertToRaw(contentState.getCurrentContent()))} />
+    <Box className={clsx('draft-editor', [className] && className)}>
+      <Editor
+        editorState={contentState}
+        wrapperClassName="draft-editor__form-wrapper"
+        editorClassName="draft-editor__form-editor"
+        onEditorStateChange={onContentStateChange}
+      />
+      <Box className="wrap-raw-html">
+        <TextAreaCommon onChange={onChangeTextarea} value={draftToHtml(convertToRaw(contentState.getCurrentContent()))} autoSize={{ minRows: 3 }} />
       </Box>
     </Box>
   );
 };
-
-// import React, { Component } from 'react';
-
-// class EditorConvertToJSON extends Component {
-//   constructor(props) {
-//     super(props);
-//     const contentState = convertFromRaw(content);
-//     this.state = {
-//       contentState,
-//     }
-//   }
-
-//   onContentStateChange: Function = (contentState) => {
-//     this.setState({
-//       contentState,
-//     });
-//   };
-
-//   render() {
-//     const { contentState } = this.state;
-//     return (
-//       <div>
-//         <Editor
-//           wrapperClassName="demo-wrapper"
-//           editorClassName="demo-editor"
-//           onContentStateChange={this.onContentStateChange}
-//         />
-//         <textarea
-//           disabled
-//           value={JSON.stringify(contentState, null, 4)}
-//         />
-//       </div>
-//     );
-//   }
-// }
