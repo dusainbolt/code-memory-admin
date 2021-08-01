@@ -21,6 +21,14 @@
     "label_title": "Tiêu đề",
     "place_title": "Hãy nhập tiêu đề",
     "label_description": "Mô tả",
-    "place_description": "Hãy nhập mô tả"
+    "place_description": "Hãy nhập mô tả",
+    "title_field_blog_info": "Thông tin bài đăng",
+    "title_field_blog_content": "Nội dung bài đăng"
+  },
+  "menu": {
+    "blog": "Bài đăng",
+    "blog_child_add": "Thêm bài đăng",
+    "blog_child_list": "Danh sách bài đăng",
+    "tag": "Thẻ tag"
   }
 }

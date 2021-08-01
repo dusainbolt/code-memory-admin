@@ -11,6 +11,8 @@ import ButtonCommon from '../../common/Button';
 import { FormInputBlog } from '../../components/Blog/FormInputBlog';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
+import { Divider } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const code = `const App = props => {
   return (
@@ -38,6 +40,7 @@ const contentDefault: BlogContent[] = [
 export const AddBlogPage = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(state => state.userReducer);
+  const { t } = useTranslation();
 
   const onSubmit = (values: blogInput) => {
     // console.log('HaNDLE SUBMIT ==========>', values);
@@ -76,9 +79,15 @@ export const AddBlogPage = () => {
     <Formik initialValues={toObject(contentDefault, BLOG_FIELD_NAME)} onSubmit={onSubmit}>
       {({ values, handleSubmit }) => (
         <Box className="admin__content">
+          <Divider orientation="left" className="title-field-divider" plain>
+            {t('blog.title_field_blog_info')}
+          </Divider>
           <FormInputBlog />
+          <Divider orientation="left" className="title-field-divider" plain>
+            {t('blog.title_field_blog_content')}
+          </Divider>
           {renderListFiedl(values)}
-          <ButtonCommon onClick={handleSubmit} children="OKe" className="btn-gr" />
+          <ButtonCommon onClick={handleSubmit} children="OKe" className="mt-30" />
         </Box>
       )}
     </Formik>

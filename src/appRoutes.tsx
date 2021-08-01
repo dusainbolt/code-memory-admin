@@ -6,10 +6,11 @@ export const ROUTE = {
   INDEX: '/',
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
-  ADD_BLOG: '/add-blog',
+  BLOG_ADD: '/blog-add',
+  BLOG_LIST: '/blog-list',
 };
 
-export const RouteLayoutAdmin = [ROUTE.DASHBOARD, ROUTE.ADD_BLOG];
+export const RouteLayoutAdmin = [ROUTE.DASHBOARD, ROUTE.BLOG_ADD];
 export const RouteLayoutPublic = [ROUTE.INDEX, ROUTE.LOGIN];
 export interface IRoute {
   name: string;
@@ -42,7 +43,7 @@ const privateRoutes: IRoute[] = [
   },
   {
     name: 'Dashboard',
-    path: ROUTE.ADD_BLOG,
+    path: ROUTE.BLOG_ADD,
     component: AddBlogPage,
     exact: true,
   },

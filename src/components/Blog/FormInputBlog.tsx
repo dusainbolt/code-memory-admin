@@ -6,7 +6,7 @@ import { fieldBlog } from '../../models/FieldModel';
 
 export const FormInputBlog = () => {
   return (
-    <Row className="form-input-blog">
+    <Row className="form-input-blog" gutter={[24, 24]}>
       <Col xs={24}>
         <Field {...fieldBlog.title} component={InputComponent} />
       </Col>
