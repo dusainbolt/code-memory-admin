@@ -1,0 +1,18 @@
+import { Col, Row } from 'antd';
+import { Field } from 'formik';
+import React from 'react';
+import { InputComponent } from '../../common/Input';
+import { fieldBlog } from '../../models/FieldModel';
+
+export const FormInputBlog = () => {
+  return (
+    <Row className="form-input-blog">
+      <Col xs={24}>
+        <Field {...fieldBlog.title} component={InputComponent} />
+      </Col>
+      <Col xs={24}>
+        <Field {...fieldBlog.description} component={InputComponent} />
+      </Col>
+    </Row>
+  );
+};

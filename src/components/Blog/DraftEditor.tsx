@@ -8,6 +8,7 @@ import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { TextAreaCommon } from '../../common/Input/TextArea';
 import clsx from 'clsx';
+import { BlogContent } from '../../models/BlogModel';
 
 const content = {
   entityMap: {},
@@ -15,7 +16,6 @@ const content = {
 };
 
 const htmlToDraftBlocks = html => {
-  console.log(html);
   const blocksFromHtml = htmlToDraft(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -23,7 +23,12 @@ const htmlToDraftBlocks = html => {
   return editorState;
 };
 
-export const DraftEditor = ({ className }: any) => {
+export interface IDraftEditor extends BlogContent {
+  className?: string;
+  fieldName?: string;
+}
+
+export const DraftEditor = ({ className, type, data, language }: IDraftEditor) => {
   const { t } = useTranslation();
   const [contentState, setContentState] = useState(htmlToDraftBlocks(draftToHtml(content)));
 

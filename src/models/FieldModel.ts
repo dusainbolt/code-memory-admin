@@ -23,3 +23,21 @@ export const fieldLogin: FieldLogin = {
     passwordMode: true,
   },
 };
+
+export interface FieldBlog {
+  title: IField;
+  description: IField;
+}
+
+export const fieldBlog: FieldBlog = {
+  title: {
+    name: 'title',
+    label: 'blog.label_title',
+    placeholder: 'blog.place_title',
+  },
+  description: {
+    name: 'description',
+    label: 'blog.label_description',
+    placeholder: 'blog.place_description',
+  },
+};

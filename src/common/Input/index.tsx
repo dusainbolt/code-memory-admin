@@ -5,7 +5,7 @@ import { FC } from 'react';
 import Box from '../Box';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-interface IInputComponent {
+export interface IInputComponent {
   label?: string;
   prefix?: any;
   suffix?: any;
@@ -13,9 +13,9 @@ interface IInputComponent {
   className?: string;
   classNameWrap?: string;
   passwordMode?: boolean;
-  field: FieldInputProps<any>;
-  form: FormikState<any>;
-  meta: FieldMetaProps<any>;
+  field?: FieldInputProps<any>;
+  form?: FormikState<any>;
+  meta?: FieldMetaProps<any>;
 }
 
 export const InputComponent: FC<IInputComponent> = ({
