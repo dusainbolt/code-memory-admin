@@ -17,7 +17,7 @@ export const useLogin = (): UseLogin => {
 
   useEffect(() => {
     if (token) {
-      history.push('/dashboard');
+      history.push('/DASHBOARD_BLOG');
     }
   }, [token]);
   const loginInput: LoginInput = { credential: '', password: '' };

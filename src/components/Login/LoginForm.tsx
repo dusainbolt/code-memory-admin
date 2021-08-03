@@ -22,8 +22,8 @@ export const LoginForm = ({ fieldLogin }: ILoginForm) => {
     <Box className="login__form">
       {messageError && <AlertCommon message={t(`message.${messageError}`)} />}
       <Title level={4}>{t('login.title_login')}</Title>
-      <Field {...fieldLogin.credential} component={InputComponent} />
-      <Field {...fieldLogin.password} component={InputComponent} />
+      <Field {...fieldLogin.credential} component={InputComponent} onPressEnter={handleSubmit} />
+      <Field {...fieldLogin.password} component={InputComponent} onPressEnter={handleSubmit} />
       <ButtonCommon actionTypeLoading={POST_LOGIN_REQUESTING} onClick={handleSubmit} children="Dang Nhap" />
     </Box>
   );

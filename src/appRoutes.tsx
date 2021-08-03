@@ -1,16 +1,18 @@
-import { DashboardPages } from './pages/DashBoard';
 import { LoginPages } from './pages/Login';
 import { AddBlogPage } from './pages/Blog/AddBlog';
+import { TagListPage } from './pages/Tag/List';
+import { DashBoardPage } from './pages/DashBoard';
 
 export const ROUTE = {
   INDEX: '/',
   LOGIN: '/login',
-  DASHBOARD: '/dashboard',
-  BLOG_ADD: '/blog-add',
-  BLOG_LIST: '/blog-list',
+  DASHBOARD_BLOG: '/dashboard',
+  BLOG_ADD: '/blog/add',
+  BLOG_LIST: '/blog',
+  TAG_LIST: '/tag',
 };
 
-export const RouteLayoutAdmin = [ROUTE.DASHBOARD, ROUTE.BLOG_ADD];
+export const RouteLayoutAdmin = [ROUTE.DASHBOARD_BLOG, ROUTE.BLOG_ADD, ROUTE.BLOG_LIST, ROUTE.TAG_LIST];
 export const RouteLayoutPublic = [ROUTE.INDEX, ROUTE.LOGIN];
 export interface IRoute {
   name: string;
@@ -36,15 +38,27 @@ const publicRoute: IRoute[] = [
 
 const privateRoutes: IRoute[] = [
   {
-    name: 'Dashboard',
-    path: ROUTE.DASHBOARD,
-    component: DashboardPages,
+    name: 'DashBoardBlog',
+    path: ROUTE.DASHBOARD_BLOG,
+    component: DashBoardPage,
     exact: true,
   },
   {
-    name: 'Dashboard',
+    name: 'BlogList',
+    path: ROUTE.BLOG_LIST,
+    component: AddBlogPage,
+    exact: true,
+  },
+  {
+    name: 'AddBlog',
     path: ROUTE.BLOG_ADD,
     component: AddBlogPage,
+    exact: true,
+  },
+  {
+    name: 'TagList',
+    path: ROUTE.TAG_LIST,
+    component: TagListPage,
     exact: true,
   },
 ];
