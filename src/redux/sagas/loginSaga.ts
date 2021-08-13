@@ -1,24 +1,21 @@
 import { all, fork, put, takeEvery } from 'redux-saga/effects';
 import { postLoginRequest } from '../../graphql/userRequest';
-import { LoginOutput } from '../../models/LoginModel';
-import { actionLogin } from '../actionsCreators/loginActionCreators';
-import { actionUser } from '../actionsCreators/userActionCreators';
-import { postLoginAction, POST_LOGIN_REQUESTING } from '../actionTypes/loginActionTypes';
+import { LoginActionInput } from '../actionTypes/loginActionTypes';
+import { loginSliceError, loginSliceStart, loginSliceSuccess } from '../slices/loginSlice';
 
-function* onPostLogin(action: postLoginAction) {
+function* loginSaga(action: LoginActionInput) {
   try {
-    const { token, user } = yield postLoginRequest(action.loginInput) as LoginOutput;
-    yield put(actionLogin.postLoginSuccess(token));
-    yield put(actionUser.setUser(user));
+    const data = yield postLoginRequest(action.payload.input);
+    yield put(loginSliceSuccess(data));
   } catch (error) {
-    yield put(actionLogin.postLoginError(error.message as string));
+    yield put(loginSliceError(error.message as string));
   }
 }
 
 function* watchHandleLogin() {
-  yield takeEvery(POST_LOGIN_REQUESTING, onPostLogin);
+  yield takeEvery(loginSliceStart, loginSaga);
 }
 
-export default function* loginSaga(): any {
+export default function* WatchLoginSaga(): any {
   yield all([fork(watchHandleLogin)]);
 }

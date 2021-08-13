@@ -18,7 +18,6 @@ export interface _ButtonCommon extends BaseButtonProps {
 const ButtonCommon: React.FC<_ButtonCommon> = ({
   children,
   shape,
-  actionTypeLoading,
   type = 'primary',
   className,
   placement = 'bottom',
@@ -26,12 +25,9 @@ const ButtonCommon: React.FC<_ButtonCommon> = ({
   titleTooltip,
   ...props
 }) => {
-  const isLoadingReducer = useAppSelector(store => store.loadingReducer);
-  const loadingRequest = actionTypeLoading && isLoadingReducer[actionTypeLoading] ? true : false;
-
   return (
     <Tooltip overlayClassName={clsx(`${className}-tooltip`)} placement={placement} title={titleTooltip || children}>
-      <Button loading={loadingRequest} type={type} shape={shape} className={clsx({ 'app-btn': true, [className]: className })} icon={icon} {...props}>
+      <Button type={type} shape={shape} className={clsx({ 'app-btn': true, [className]: className })} icon={icon} {...props}>
         {children}
       </Button>
     </Tooltip>

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ROUTE } from '../appRoutes';
 import { LoginInput } from '../models/LoginModel';
-import { actionLogin } from '../redux/actionsCreators/loginActionCreators';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
+import { loginSliceStart } from '../redux/slices/loginSlice';
 
 interface UseLogin {
   loginInput: LoginInput;
@@ -11,19 +12,19 @@ interface UseLogin {
 
 export const useLogin = (): UseLogin => {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector(state => state.loginReducer);
+  const { token } = useAppSelector(state => state.loginSlice);
 
   const history = useHistory();
 
   useEffect(() => {
     if (token) {
-      history.push('/DASHBOARD_BLOG');
+      history.push(ROUTE.DASHBOARD_BLOG);
     }
   }, [token]);
   const loginInput: LoginInput = { credential: '', password: '' };
 
-  const handleLogin = (values: LoginInput) => {
-    dispatch(actionLogin.postLogin(values));
+  const handleLogin = (input: LoginInput) => {
+    dispatch(loginSliceStart({ input }));
   };
 
   return { loginInput, handleLogin };

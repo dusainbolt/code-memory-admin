@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 import blogSaga from './sagas/blogSaga';
-import loginSaga from './sagas/loginSaga';
+import WatchLoginSaga from './sagas/loginSaga';
 
 function* rootSaga() {
-  yield all([loginSaga(), blogSaga()]);
+  yield all([WatchLoginSaga(), blogSaga()]);
 }
 export default rootSaga;

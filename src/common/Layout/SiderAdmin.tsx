@@ -69,7 +69,7 @@ const menuSider: IMenuSider[] = [
     icon: <PieChartOutlined />,
     child: [
       {
-        title: 'menu.blog_child_list',
+        title: 'menu.tag_child_list',
         key: ROUTE.TAG_LIST,
         url: ROUTE.TAG_LIST,
       },

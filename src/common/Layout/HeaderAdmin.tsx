@@ -9,7 +9,8 @@ import Box from '../Box';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 export const HeaderAdmin = () => {
-  const user = useAppSelector(state => state.userReducer);
+  const user = useAppSelector(state => state.loginSlice.user);
+
   return (
     <Header className="header">
       <Box className="info-wrap flx-center">

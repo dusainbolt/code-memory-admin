@@ -17,7 +17,7 @@ interface ILoginForm {
 export const LoginForm = ({ fieldLogin }: ILoginForm) => {
   const { t } = useTranslation();
   const { handleSubmit } = useFormikContext();
-  const { messageError } = useAppSelector(state => state.loginReducer);
+  const { messageError } = useAppSelector(state => state.loginSlice);
   return (
     <Box className="login__form">
       {messageError && <AlertCommon message={t(`message.${messageError}`)} />}

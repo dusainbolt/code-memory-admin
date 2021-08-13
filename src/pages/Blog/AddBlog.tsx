@@ -10,7 +10,7 @@ import { ignoreString, mapContentBlog, toObject } from '../../services/utils';
 import ButtonCommon from '../../common/Button';
 import { FormInputBlog } from '../../components/Blog/FormInputBlog';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
+// import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
 import { Divider } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -39,7 +39,7 @@ const contentDefault: BlogContent[] = [
 
 export const AddBlogPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useAppSelector(state => state.userReducer);
+  const { id } = useAppSelector(state => state.loginSlice.user);
   const { t } = useTranslation();
 
   const onSubmit = (values: blogInput) => {
@@ -50,7 +50,7 @@ export const AddBlogPage = () => {
       content: mapContentBlog(values),
       createBy: id,
     };
-    dispatch(actionBlog.addBlog(data));
+    // dispatch(actionBlog.addBlog(data));
   };
 
   const renderListFiedl = fieldObject => {

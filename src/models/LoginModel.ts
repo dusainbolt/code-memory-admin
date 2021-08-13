@@ -18,3 +18,10 @@ export interface Login {
 export type LoginHashCookie = {
   token: string;
 };
+
+export interface LoginSlice {
+  token?: string;
+  messageError?: string;
+  user: User;
+  loadingLogin: boolean;
+}

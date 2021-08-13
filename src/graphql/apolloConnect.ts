@@ -10,7 +10,7 @@ export const createApolloClient = () => {
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = store.getState().loginReducer;
+    const token = '';
 
     return {
       headers: {

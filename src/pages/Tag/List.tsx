@@ -1,79 +1,23 @@
-import React, { ReactNode, useState } from 'react';
+import React from 'react';
 import Box from '../../common/Box';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { DraftEditor } from '../../components/Blog/DraftEditor';
-import { Code } from '../../components/Blog/Code';
-import { CodeEditor } from '../../components/Blog/CodeEditor';
-import { Formik } from 'formik';
-import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
-import { ignoreString, mapContentBlog, toObject } from '../../services/utils';
-import ButtonCommon from '../../common/Button';
-import { FormInputBlog } from '../../components/Blog/FormInputBlog';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
-import { Divider } from 'antd';
 import { useTranslation } from 'react-i18next';
-
-const code = `const App = props => {
-  return (
-    <div>
-      <h1> React App </h1>
-      <div>Awesome code</div>
-    </div>
-  );
-};
-`;
-
-const contentDefault: BlogContent[] = [
-  {
-    type: BlogContentType.NORMAL,
-    data: '123123',
-    language: 'normal',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
-  },
-];
+import Title from 'antd/lib/typography/Title';
+import { Divider } from 'antd';
+import { TableTagList } from '../../components/Tag/TableTagList';
+import { SearchTagList } from '../../components/Tag/SearchTagList';
 
 export const TagListPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useAppSelector(state => state.userReducer);
+  // const { id } = useAppSelector(state => state.userReducer);
   const { t } = useTranslation();
 
-  // const onSubmit = (values: blogInput) => {
-  //   // console.log('HaNDLE SUBMIT ==========>', values);
-  //   const data: blogInput = {
-  //     title: values.title,
-  //     description: values.description,
-  //     content: mapContentBlog(values),
-  //     createBy: id,
-  //   };
-  //   dispatch(actionBlog.addBlog(data));
-  // };
-
-  // const renderListFiedl = fieldObject => {
-  //   let htmlFlieds: ReactNode[] = [];
-  //   if (!!!fieldObject) {
-  //     return htmlFlieds;
-  //   }
-  //   let index = 0;
-  //   for (const data of Object.entries(fieldObject)) {
-  //     const blogContent: BlogContent = data[1];
-  //     const fieldName: string = data[0];
-  //     if (ignoreString(fieldName, BLOG_FIELD_NAME)) {
-  //       continue;
-  //     }
-  //     if (blogContent.type === BlogContentType.CODE) {
-  //       htmlFlieds.push(<CodeEditor fieldName={fieldName} key={index} className="mt-26" />);
-  //     } else {
-  //       htmlFlieds.push(<DraftEditor fieldName={fieldName} key={index} />);
-  //     }
-  //     index++;
-  //   }
-  //   return htmlFlieds;
-  // };
-
-  return <Box className="admin__content">TAG LIST</Box>;
+  return (
+    <Box className="admin__content tag-list">
+      <Title className="title-page">{t('menu.tag_child_list')}</Title>
+      <Divider />
+      <SearchTagList />
+      <TableTagList />
+    </Box>
+  );
 };

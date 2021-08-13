@@ -33,7 +33,7 @@ const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
 };
 
 const LayoutCommon: React.FC<RouteChildrenProps> = ({ history, location, match }) => {
-  const { token } = useAppSelector(state => state.loginReducer);
+  const { token } = useAppSelector(state => state.loginSlice);
   console.log('history', history);
   console.log('location', history);
   console.log('match', history);

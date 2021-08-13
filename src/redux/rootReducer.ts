@@ -1,20 +1,10 @@
-import { loginReducer } from './reducers/loginReducer';
-import { combineReducers } from 'redux';
-import { LoadingReducer, loadingReducer } from './reducers/loadingReducer';
-import { userReducer } from './reducers/userReducer';
-import { User } from '../models/UserModel';
-import { Login } from '../models/LoginModel';
-import { blogReducer, BlogReducer } from './reducers/blogReducer';
-export interface IRootProps {
-  loginReducer: Login;
-  loadingReducer: LoadingReducer;
-  userReducer: User;
-  blogReducer: BlogReducer;
-}
+import { combineReducers } from '@reduxjs/toolkit';
+import loginSlice from './slices/loginSlice';
 
-export default combineReducers({
-  loginReducer,
-  loadingReducer,
-  userReducer,
-  blogReducer,
-});
+export const whitelist = ['loginSlice'];
+
+const rootReducer = combineReducers({ loginSlice });
+
+export type IRootState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;

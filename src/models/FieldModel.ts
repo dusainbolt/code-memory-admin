@@ -41,3 +41,19 @@ export const fieldBlog: FieldBlog = {
     placeholder: 'blog.place_description',
   },
 };
+
+export interface FieldSearchTag {
+  key: IField;
+  status: IField;
+}
+
+export const fieldSearchTag: FieldSearchTag = {
+  key: {
+    name: 'key',
+    label: 'tag.label_search_key',
+    placeholder: 'tag.place_search_key',
+  },
+  status: {
+    name: 'status',
+  },
+};

@@ -30,6 +30,7 @@
     "blog_child_add": "Thêm bài đăng",
     "blog_child_list": "Danh sách bài đăng",
     "tag": "Thẻ tag",
-    "dashboard": "Thống kê"
+    "dashboard": "Thống kê",
+    "tag_child_list": "Danh sách thẻ tag"
   }
 }
