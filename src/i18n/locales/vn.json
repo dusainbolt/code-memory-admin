@@ -4,7 +4,13 @@
     "txt_tooltip_contact": "{{contact}} của CodeMemory",
     "txt_tooltip_connect": "Liên kết tới {{connect}} của CodeMemory",
     "txt_tooltip_access": "Truy cập tới {{access}} của CodeMemory",
-    "txt_view_next": "Xem tiếp"
+    "txt_view_next": "Xem tiếp",
+    "create_by": "Người tạo",
+    "create_at": "Ngày tạo",
+    "status": "Trạng thái",
+    "description": "Giới thiệu",
+    "text_page_size": "Trang",
+    "table_no": "STT"
   },
   "login": {
     "title_login": "Đăng nhập hệ thống quản trị CodeMemory",
@@ -36,5 +42,10 @@
     "tag": "Thẻ tag",
     "dashboard": "Thống kê",
     "tag_child_list": "Danh sách thẻ tag"
+  },
+  "tag": {
+    "tag_name": "Tên thẻ tag",
+    "active": "Hoạt động",
+    "hide": "Ngừng hoạt động"
   }
 }

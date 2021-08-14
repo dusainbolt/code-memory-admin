@@ -5,8 +5,8 @@ import RequestService from '../services/requestService';
 const requestService = new RequestService();
 
 const postLoginQuery = gql`
-  mutation LoginMutation($credential: String!, $password: String!) {
-    login(input: { credential: $credential, password: $password }) {
+  mutation LoginMutation($input: LoginInput!) {
+    login(input: $input) {
       token
       user {
         id
@@ -21,6 +21,6 @@ const postLoginQuery = gql`
   }
 `;
 
-export const postLoginRequest = (variables: LoginInput): any => {
-  return requestService.mutation(postLoginQuery, variables, 'login');
+export const postLoginRequest = (input: LoginInput): any => {
+  return requestService.mutation(postLoginQuery, { input }, 'login');
 };

@@ -6,6 +6,8 @@
 @import './common/input';
 @import './common/typography';
 @import './common/notify';
+@import './common/table';
+@import './common/badge';
 // @import './common/icon';
 // @import './common/select';
 // @import './common/tag';
@@ -18,3 +20,4 @@
 // Style for pages
 @import './page/login';
 @import './page/blog';
+@import './page/tag';

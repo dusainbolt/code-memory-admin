@@ -1,0 +1,11 @@
+.tag {
+  &__box-icon {
+    @include _flexBox(center, flex-start);
+    .ant-image {
+      max-width: 50px;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  }
+}

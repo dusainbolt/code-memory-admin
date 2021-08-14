@@ -14,7 +14,7 @@ export default class RequestService {
     };
 
   query = (query: DocumentNode, variables: any = {}, callback = ''): any => {
-    return this.client.query({ query }, variables).then(this.handleResponse(callback));
+    return this.client.query({ query, variables }).then(this.handleResponse(callback));
   };
 
   mutation = (mutation: DocumentNode, variables: any = {}, callback = ''): any => {

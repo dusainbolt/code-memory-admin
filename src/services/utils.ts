@@ -30,3 +30,7 @@ export const mapContentBlog = (values: any): BlogContent[] => {
   }
   return contents;
 };
+
+export const getFullNameUser = (user: User): string => {
+  return `${user.firstName} ${user.lastName}`;
+};

@@ -1,23 +1,4 @@
-// import { User } from './UserModel';
-
-// export interface LoginInput {
-//   credential: String;
-//   password: String;
-// }
-
-// export interface LoginOutput {
-//   token: string;
-//   User: User;
-// }
-
-// export interface Login {
-//   token?: string;
-//   messageError?: string;
-// }
-
-// export type LoginHashCookie = {
-//   token: string;
-// };
+import { User } from './UserModel';
 
 export enum TagStatus {
   HIDE = 'HIDE',
@@ -32,4 +13,30 @@ export enum TagType {
 export interface SearchTagInput {
   key: string;
   status: TagStatus[];
+  limit: number;
+  offset: number;
+}
+
+export interface Tag {
+  createBy?: string;
+  createdAt?: string;
+  description?: string;
+  id?: string;
+  slug?: string;
+  status?: TagStatus;
+  tagType?: TagType;
+  thumbnail?: string;
+  title?: string;
+  updatedAt?: string;
+  userCreate?: User;
+}
+
+export type TagSlice = {
+  dataTags: Tag[];
+  total: number;
+};
+
+export interface SearchTagOutput {
+  dataTags: Tag[];
+  total: number;
 }

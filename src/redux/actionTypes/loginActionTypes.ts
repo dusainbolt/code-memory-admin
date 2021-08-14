@@ -1,13 +1,13 @@
 import { LoginInput, LoginSlice } from '../../models/LoginModel';
 
+export type PayloadName = 'payload';
+
 export type loginAction = {
   type: string;
   loginInput: LoginInput;
   token: string;
   messageError: string;
 };
-
-type PayloadName = 'payload';
 
 export type LoginActionInput = Record<
   PayloadName,

@@ -1,11 +1,11 @@
 import { all, put } from 'redux-saga/effects';
 import { NotifySystem, TypeNotify } from '../models/LayoutModel';
-import blogSaga from './sagas/blogSaga';
-import WatchLoginSaga from './sagas/loginSaga';
 import { setNotifySlice } from './slices/layoutSlice';
+import WatchLoginSaga from './sagas/loginSaga';
+import watchTagSaga from './sagas/tagSaga';
 
 function* rootSaga() {
-  yield all([WatchLoginSaga(), blogSaga()]);
+  yield all([WatchLoginSaga(), watchTagSaga()]);
 }
 
 export function* handleErrorSaga(error) {
