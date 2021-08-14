@@ -1,10 +1,22 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
 import layoutSlice from './slices/layoutSlice';
 import loginSlice from './slices/loginSlice';
 
-export const whitelist = ['loginSlice'];
+export const getPersistConfig = (key = '', nested = {}) => {
+  return {
+    key,
+    storage: storage,
+    ...nested,
+  };
+};
 
-const rootReducer = combineReducers({ loginSlice, layoutSlice });
+export const whitelist = [];
+
+const persistLoginSlice = persistReducer(getPersistConfig('loginSlice', { whitelist: ['token', 'user'] }), loginSlice);
+
+const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice });
 
 export type IRootState = ReturnType<typeof rootReducer>;
 

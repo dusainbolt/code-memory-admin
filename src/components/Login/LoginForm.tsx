@@ -16,14 +16,14 @@ interface ILoginForm {
 export const LoginForm = ({ fieldLogin }: ILoginForm) => {
   const { t } = useTranslation();
   const { handleSubmit } = useFormikContext();
-  const { messageError } = useAppSelector(state => state.loginSlice);
+  const { messageError, loadingLogin } = useAppSelector(state => state.loginSlice);
   return (
     <Box className="login__form">
       {messageError && <AlertCommon message={t(`message.${messageError}`)} />}
       <Title level={4}>{t('login.title_login')}</Title>
       <Field {...fieldLogin.credential} component={InputComponent} onPressEnter={handleSubmit} />
       <Field {...fieldLogin.password} component={InputComponent} onPressEnter={handleSubmit} />
-      <ButtonCommon onClick={handleSubmit} children="Dang Nhap" />
+      <ButtonCommon loading={loadingLogin} onClick={handleSubmit} children="Dang Nhap" />
     </Box>
   );
 };
