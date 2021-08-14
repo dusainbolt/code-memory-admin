@@ -11,7 +11,7 @@ export const LoginPages = () => {
   const { t } = useTranslation();
   const validateInput = new ValidateService(t).validateLoginInput(fieldLogin);
   const { loginInput, handleLogin } = useLogin();
-  console.log('RENDER PAGE LOGIN');
+
   return (
     <Box className="login__container">
       <Formik initialValues={loginInput} onSubmit={handleLogin} validationSchema={validateInput}>

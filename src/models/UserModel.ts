@@ -1,19 +1,20 @@
 export enum Gender {
-  FEMALE,
-  MALE,
-  OTHER,
+  FEMALE = 'FEMALE',
+  MALE = 'MALE',
+  OTHER = 'OTHER',
 }
 
 export enum Role {
-  USER,
-  ADMIN,
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  CREATOR = 'CREATOR',
 }
 
 export enum UserStatus {
-  ACTIVE,
-  INACTIVE,
-  PAUSE,
-  BLOCK,
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  PAUSE = 'PAUSE',
+  BLOCK = 'BLOCK',
 }
 
 export interface User {
