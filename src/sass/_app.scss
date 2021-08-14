@@ -4,7 +4,8 @@
 @import './common/common';
 // @import './common/button';
 @import './common/input';
-@import './common/typography.scss';
+@import './common/typography';
+@import './common/notify';
 // @import './common/icon';
 // @import './common/select';
 // @import './common/tag';
@@ -12,8 +13,8 @@
 // @import './common/modal';
 
 // Style layout
-@import './layout/index.scss';
+@import './layout/index';
 
 // Style for pages
-@import './page/login.scss';
-@import './page/blog.scss';
+@import './page/login';
+@import './page/blog';

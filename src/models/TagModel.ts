@@ -19,7 +19,17 @@
 //   token: string;
 // };
 
+export enum TagStatus {
+  HIDE = 'HIDE',
+  ACTIVE = 'ACTIVE',
+}
+
+export enum TagType {
+  SYSTEM = 'SYSTEM',
+  ADDITION = 'ADDITION',
+}
+
 export interface SearchTagInput {
   key: string;
-  status: [];
+  status: TagStatus[];
 }

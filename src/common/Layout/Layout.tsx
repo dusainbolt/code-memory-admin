@@ -6,6 +6,7 @@ import { privateRoutes, publicRoute, RouteLayoutAdmin } from '../../appRoutes';
 import { LoginPages } from '../../pages/Login';
 import { HeaderAdmin } from './HeaderAdmin';
 import { SiderAdmin } from './SiderAdmin';
+import { NotifySystem } from '../Notify/NotifySystem';
 
 const { Content } = Layout;
 
@@ -28,12 +29,13 @@ const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
           <Content>{children}</Content>
         </Layout>
       </Layout>
+      <NotifySystem />
     </Layout>
   );
 };
 
 const LayoutCommon: React.FC<RouteChildrenProps> = ({ history, location, match }) => {
-  const { token } = useAppSelector(state => state.loginSlice);
+  const token = useAppSelector(state => state.loginSlice.token);
   console.log('history', history);
   console.log('location', history);
   console.log('match', history);

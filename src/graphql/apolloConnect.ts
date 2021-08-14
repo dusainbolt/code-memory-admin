@@ -10,12 +10,11 @@ export const createApolloClient = () => {
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = '';
-
+    const token = store.getState().loginSlice.token || '';
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : '',
+        authorization: `Bearer ${token}`,
       },
     };
   });

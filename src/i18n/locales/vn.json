@@ -15,7 +15,11 @@
   },
   "message": {
     "MSG_1": "{{fieldName}} không được để trống",
-    "MSG_2": "Tài khoản hoặc mật khẩu không chính xác"
+    "MSG_2": "Tài khoản hoặc mật khẩu không chính xác",
+    "title_error": "Đã xảy ra lỗi",
+    "title_warning": "Cảnh báo",
+    "title_info": "Thông báo",
+    "title_success": "Thành công"
   },
   "blog": {
     "label_title": "Tiêu đề",
