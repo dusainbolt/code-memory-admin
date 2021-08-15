@@ -21,6 +21,7 @@
         "persistor",
         "sider",
         "CodeMemoryAdmin",
-        "anticon"
+        "anticon",
+        "formik"
     ],
 }

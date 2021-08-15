@@ -1,8 +1,17 @@
+import { TagStatus } from './TagModel';
+
+export interface OptionSelect {
+  label: string;
+  value: string;
+  urlIcon?: any;
+  disabled?: boolean;
+}
 export interface IField {
   name: string;
   label?: string;
   placeholder?: string;
   passwordMode?: boolean;
+  options?: OptionSelect[];
 }
 
 export interface FieldLogin {
@@ -42,6 +51,17 @@ export const fieldBlog: FieldBlog = {
   },
 };
 
+export const OPTION_FILTER_STATUS_TAG: OptionSelect[] = [
+  {
+    label: 'tag.active',
+    value: TagStatus.ACTIVE,
+  },
+  {
+    label: 'tag.hide',
+    value: TagStatus.HIDE,
+  },
+];
+
 export interface FieldSearchTag {
   key: IField;
   status: IField;
@@ -55,5 +75,7 @@ export const fieldSearchTag: FieldSearchTag = {
   },
   status: {
     name: 'status',
+    label: 'tag.label_search_status',
+    options: OPTION_FILTER_STATUS_TAG,
   },
 };

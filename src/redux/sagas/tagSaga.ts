@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, delay, fork, put, takeEvery } from 'redux-saga/effects';
 import { getListTagRequest } from '../../graphql/tagRequest';
 import { GetListTagAction } from '../actionTypes/tagActionTypes';
 import { handleErrorSaga } from '../rootSaga';
@@ -7,6 +7,7 @@ import { getTagListSliceError, getTagListSliceStart, getTagListSliceSuccess } fr
 function* getListTagSaga(action: GetListTagAction) {
   try {
     const data = yield getListTagRequest(action.payload.input);
+    yield delay(300);
     yield put(getTagListSliceSuccess(data));
   } catch (error) {
     yield put(getTagListSliceError({}));

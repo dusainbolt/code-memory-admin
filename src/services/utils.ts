@@ -26,11 +26,17 @@ export const mapContentBlog = (values: any): BlogContent[] => {
     if (ignoreString(key, BLOG_FIELD_NAME)) {
       continue;
     }
-    contents.push(value);
   }
   return contents;
 };
 
 export const getFullNameUser = (user: User): string => {
   return `${user.firstName} ${user.lastName}`;
+};
+
+export const getOrderType = (order: string) => (order === 'ascend' && 1) || (order === 'descend' && -1) || null;
+
+export const handleResetSearch = (handleReset: any, handleSubmit: any) => () => {
+  handleReset();
+  handleSubmit();
 };

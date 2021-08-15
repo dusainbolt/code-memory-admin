@@ -15,6 +15,8 @@ export interface SearchTagInput {
   status: TagStatus[];
   limit: number;
   offset: number;
+  sortBy?: number | string;
+  orderBy?: string;
 }
 
 export interface Tag {
@@ -34,9 +36,17 @@ export interface Tag {
 export type TagSlice = {
   dataTags: Tag[];
   total: number;
+  isLoadingList: boolean;
 };
 
 export interface SearchTagOutput {
   dataTags: Tag[];
   total: number;
+}
+
+export interface CreateTagInput {
+  description: string;
+  status: TagStatus;
+  thumbnail: string;
+  title: string;
 }

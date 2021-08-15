@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { FilterValue, GetRowKey, SorterResult, TableCurrentDataSource } from 'antd/lib/table/interface';
 import { SizeType } from 'antd/lib/config-provider/SizeContext';
+import { AppSpinning } from '../Spining';
 
 type TableProps = {
   columns?: ColumnsType<any>;
@@ -42,40 +43,43 @@ function TableCommon({
   onChangeTable,
   onChangePagination,
   size,
+  loading = false,
   enablePagination = true,
   ...props
 }: TableProps) {
   const { t } = useTranslation();
   return (
-    <div className="table">
-      <Table
-        className="table__table"
-        locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('common.noData')} /> }}
-        pagination={false}
-        columns={columns}
-        bordered
-        rowClassName={rowClassName}
-        dataSource={dataSource}
-        onChange={onChangeTable}
-        rowKey={record => record?.id}
-        showSorterTooltip={false}
-        {...props}
-      />
-      {enablePagination && (
-        <div className="my-pagination">
-          <Pagination
-            size="small"
-            total={total ? total : 1}
-            current={current}
-            pageSize={pageSize}
-            pageSizeOptions={pageSizeOptions}
-            onChange={onChangePagination}
-            locale={{ items_per_page: `/ ${t('common.text_page_size')}` }}
-            showSizeChanger
-          />
-        </div>
-      )}
-    </div>
+    <AppSpinning loading={loading}>
+      <div className="table">
+        <Table
+          className="table__table"
+          locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('common.no_data')} /> }}
+          pagination={false}
+          columns={columns}
+          bordered
+          rowClassName={rowClassName}
+          dataSource={dataSource}
+          onChange={onChangeTable}
+          rowKey={record => record?.id}
+          showSorterTooltip={false}
+          {...props}
+        />
+        {enablePagination && (
+          <div className="my-pagination">
+            <Pagination
+              size="small"
+              total={total ? total : 1}
+              current={current}
+              pageSize={pageSize}
+              pageSizeOptions={pageSizeOptions}
+              onChange={onChangePagination}
+              locale={{ items_per_page: `/ ${t('common.text_page_size')}` }}
+              showSizeChanger
+            />
+          </div>
+        )}
+      </div>
+    </AppSpinning>
   );
 }
 

@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 import { TFunction } from 'react-i18next';
@@ -21,6 +20,7 @@ export const useColumnTag = (t: TFunction, pageIndex: any) => {
     {
       title: t('tag.tag_name'),
       dataIndex: 'title',
+      sorter: true,
       render: (value: any, row: Tag) => <BoxIconAndName name={value} tag={row} />,
     },
     {
@@ -40,7 +40,8 @@ export const useColumnTag = (t: TFunction, pageIndex: any) => {
     {
       title: t('common.create_at'),
       dataIndex: 'createdAt',
-      render: (value: any) => dayjs(parseInt(value)).format(TIME_FORMAT.DD_MM_YYYY_HH_MM),
+      sorter: true,
+      render: (value: any) => dayjs(parseInt(value)).format(TIME_FORMAT.DD_MM_YYYY_HH_MM_SS),
     },
     {
       title: '',

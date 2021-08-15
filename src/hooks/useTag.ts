@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { SearchTagInput } from '../models/TagModel';
+import { useCallback, useEffect, useState } from 'react';
+import { SearchTagInput, TagStatus } from '../models/TagModel';
 import { getTagListSliceStart } from '../redux/slices/tagSlice';
+import { getOrderType } from '../services/utils';
 
 export const useSearchTagList = (
   dispatch: any
@@ -8,14 +9,14 @@ export const useSearchTagList = (
   paramsSearch: SearchTagInput;
   handleSearch: any;
   // handleResetSearch: any;
-  // handleChangePage: any;
-  // handleChangeTable: any;
+  handleChangePage: any;
+  handleSortByParams: any;
   getPageIndexNumber: any;
   // handleGetListCategory: any;
 } => {
   const [paramsSearch, setParamsSearch] = useState<SearchTagInput>({
     key: '',
-    status: [],
+    status: [TagStatus.ACTIVE, TagStatus.HIDE],
     limit: 10,
     offset: 0,
   });
@@ -29,12 +30,22 @@ export const useSearchTagList = (
   }, [paramsSearch]);
 
   const handleSearch = (values: SearchTagInput) => {
-    console.log('TAGGGGGGGGGGGG => ', values);
+    console.log(paramsSearch);
+    setParamsSearch({ ...paramsSearch, key: values.key.trim(), status: values.status });
+  };
+
+  const handleChangePage = (page: number, pageSize: number) => {
+    setParamsSearch({ ...paramsSearch, offset: page - 1, limit: pageSize });
+  };
+
+  const handleSortByParams = (pagination: any, filter: any, sorter: any) => {
+    const { order, field } = sorter;
+    setParamsSearch({ ...paramsSearch, orderBy: field, sortBy: getOrderType(order) });
   };
 
   const getPageIndexNumber = () => {
     return paramsSearch.offset * paramsSearch.limit;
   };
 
-  return { paramsSearch, handleSearch, getPageIndexNumber };
+  return { paramsSearch, handleSearch, getPageIndexNumber, handleChangePage, handleSortByParams };
 };

@@ -3,8 +3,6 @@ import { Button, Tooltip } from 'antd';
 import { BaseButtonProps } from 'antd/lib/button/button';
 import { TooltipPlacement } from 'antd/lib/tooltip';
 import clsx from 'clsx';
-import { useAppSelector } from '../../redux/rootStore';
-
 export interface _ButtonCommon extends BaseButtonProps {
   children?: any;
   titleTooltip?: string;

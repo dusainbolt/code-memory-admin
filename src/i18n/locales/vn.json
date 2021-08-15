@@ -7,9 +7,11 @@
     "txt_view_next": "Xem tiếp",
     "create_by": "Người tạo",
     "create_at": "Ngày tạo",
+    "upload_dec": "Tải lên",
     "status": "Trạng thái",
     "description": "Giới thiệu",
     "text_page_size": "Trang",
+    "no_data": "Không có dữ liệu",
     "table_no": "STT"
   },
   "login": {
@@ -46,6 +48,9 @@
   "tag": {
     "tag_name": "Tên thẻ tag",
     "active": "Hoạt động",
-    "hide": "Ngừng hoạt động"
+    "hide": "Ngừng hoạt động",
+    "label_search_key": "Tên thẻ tag",
+    "place_search_key": "Tìm kiếm theo tên thẻ tag",
+    "label_search_status": "Trạng thái"
   }
 }
