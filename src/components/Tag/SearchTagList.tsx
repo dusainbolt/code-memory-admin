@@ -17,7 +17,7 @@ export const SearchTagListForm = () => {
   const { t } = useTranslation();
   const isLoadingList = useAppSelector(getTagSlice).isLoadingList;
 
-  const { handleSubmit, handleReset, setFieldValue } = useFormikContext();
+  const { handleSubmit, handleReset } = useFormikContext();
 
   return (
     <Form className="tag-list__form-search">
@@ -26,7 +26,7 @@ export const SearchTagListForm = () => {
           <Field {...fieldSearchTag.key} component={InputComponent} onPressEnter={handleSubmit} />
         </Col>
         <Col xs={8} xxl={6}>
-          <Field {...fieldSearchTag.status} mode="multiple" component={SelectComponent} setFieldValue={setFieldValue} />
+          <Field {...fieldSearchTag.status} mode="multiple" component={SelectComponent} />
         </Col>
         <Col xs={4}>
           <Box className="flx-center align-left control-btn mt-6">

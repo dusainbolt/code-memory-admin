@@ -1,47 +1,55 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Input } from 'antd';
-import { FieldInputProps, FieldMetaProps, FormikProps, FormikState } from 'formik';
-import { FC } from 'react';
 import Box from '../Box';
-import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-export interface IInputComponent {
+import { useTranslation } from 'react-i18next';
+import { FieldInputProps, FieldMetaProps, FormikProps, FormikState } from 'formik';
+
+const { TextArea } = Input;
+
+export interface ITextAreaComponent {
   label?: string;
   prefix?: any;
   suffix?: any;
+  autoSize?: any;
   placeholder?: string;
   className?: string;
   classNameWrap?: string;
-  passwordMode?: boolean;
   field?: FieldInputProps<any>;
   form?: FormikProps<any>;
   meta?: FieldMetaProps<any>;
 }
 
-export const InputComponent: FC<IInputComponent> = ({
+export const TextAreaComponent: FC<ITextAreaComponent> = ({
   field,
-  form: { touched: formTouched, errors: formErrors },
+  form: { touched: formTouched, errors: formErrors, setFieldValue: formSetFieldValue },
   label = '',
   prefix = null,
   suffix = null,
   placeholder = '',
-  passwordMode = false,
   className = '',
+  autoSize = { minRows: 3 },
   classNameWrap = '',
   ...props
 }) => {
   const { t } = useTranslation();
   const touched = formTouched[field.name];
   const errorMessage = formErrors[field.name];
-  const InputCommon = passwordMode ? Input.Password : Input;
+
+  const onChangeTextArea = ({ target: { value } }) => {
+    formSetFieldValue && formSetFieldValue(field.name, value);
+  };
+
+  console.log(touched, errorMessage);
+
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
-      <InputCommon
-        className={clsx('app-input', [className] && className)}
+      <TextArea
+        autoSize={autoSize}
+        className={clsx('app-textarea', [className] && className)}
         placeholder={t(placeholder)}
-        prefix={prefix}
-        suffix={suffix}
+        onChange={onChangeTextArea}
         {...field}
         {...props}
       />

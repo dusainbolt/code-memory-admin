@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Select } from 'antd';
 import clsx from 'clsx';
-import { FieldInputProps, FieldMetaProps, FormikState } from 'formik';
+import { FieldInputProps, FieldMetaProps, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Box from '../Box';
 import { OptionSelect } from '../../models/FieldModel';
@@ -14,21 +14,22 @@ export interface ISelectComponent {
   className?: string;
   classNameWrap?: string;
   field?: FieldInputProps<any>;
-  form?: FormikState<any>;
+  form?: FormikProps<any>;
   meta?: FieldMetaProps<any>;
   setFieldValue?: any;
+  allowClear: boolean;
   options: OptionSelect[];
 }
 
 export const SelectComponent: FC<ISelectComponent> = ({
   field,
-  form: { touched: formTouched, errors: formErrors },
-  setFieldValue,
+  form: { touched: formTouched, errors: formErrors, setFieldValue: formSetFieldValue },
   label = '',
   placeholder = '',
   className = '',
   classNameWrap = '',
   options = [],
+  allowClear = true,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -36,13 +37,13 @@ export const SelectComponent: FC<ISelectComponent> = ({
   const errorMessage = formErrors[field.name];
 
   const handleChange = (values: any) => {
-    setFieldValue && setFieldValue(field.name, values);
+    formSetFieldValue && formSetFieldValue(field.name, values);
   };
 
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
-      <Select allowClear style={{ width: '100%' }} placeholder={t(placeholder)} onChange={handleChange} value={field.value} {...props}>
+      <Select allowClear={allowClear} style={{ width: '100%' }} placeholder={t(placeholder)} onChange={handleChange} value={field.value} {...props}>
         {options.map((item: OptionSelect, index: number) => (
           <Option key={index} value={item.value} disabled={item.disabled}>
             {t(item.label)}

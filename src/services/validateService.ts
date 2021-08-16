@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
-import { FieldLogin } from '../models/FieldModel';
+import { FieldCreateTag, FieldLogin } from '../models/FieldModel';
 
 export default class ValidateService {
   public instance = Yup;
   public i18n = null;
   readonly MESSAGE_REQUIRE = 'message.MSG_1';
+  readonly LABEL_FIELD_IMAGE = 'common.image';
 
   constructor(i18n) {
     this.i18n = i18n;
@@ -19,6 +20,15 @@ export default class ValidateService {
     return Yup.object({
       [credential.name]: this.stringRequire(credential.label),
       [password.name]: this.stringRequire(password.label),
+    });
+  };
+
+  readonly validateCreateTagInput = (fieldCreateTag: FieldCreateTag) => {
+    const { title, description, thumbnail } = fieldCreateTag;
+    return Yup.object({
+      [title.name]: this.stringRequire(title.label),
+      [description.name]: this.stringRequire(description.label),
+      [thumbnail.name]: this.stringRequire(this.LABEL_FIELD_IMAGE),
     });
   };
 }

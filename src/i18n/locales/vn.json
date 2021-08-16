@@ -8,6 +8,8 @@
     "create_by": "Người tạo",
     "create_at": "Ngày tạo",
     "upload_dec": "Tải lên",
+    "txt_completed": "Hoàn tất",
+    "image": "Ảnh",
     "status": "Trạng thái",
     "description": "Giới thiệu",
     "text_page_size": "Trang",
@@ -51,6 +53,11 @@
     "hide": "Ngừng hoạt động",
     "label_search_key": "Tên thẻ tag",
     "place_search_key": "Tìm kiếm theo tên thẻ tag",
-    "label_search_status": "Trạng thái"
+    "label_search_status": "Trạng thái",
+    "label_thumbnail": "Tải ảnh đại diện thẻ Tag",
+    "place_input_tag": "Nhập tên thẻ tag",
+    "place_input_tag_dec": "Nội dung giới thiệu",
+    "add_tag_title": "Thêm thẻ Tag",
+    "update_tag_title": "Chỉnh sửa thẻ Tag"
   }
 }

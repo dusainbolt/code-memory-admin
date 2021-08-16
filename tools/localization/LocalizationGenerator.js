@@ -149,7 +149,7 @@ function listMajors(auth) {
 
                 let key = `${row[2]}`;
                 let value = `${row[OUTPUT_LANG_INDEX]}`;
-                if (subGroupKey === 'EMPTY') {
+                if (subGroupKey === 'EMPTY' || !subGroupKey) {
                   groups[key] = value;
                 } else {
                   let subGroups = groups[subGroupKey];

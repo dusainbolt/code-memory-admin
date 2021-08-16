@@ -79,3 +79,30 @@ export const fieldSearchTag: FieldSearchTag = {
     options: OPTION_FILTER_STATUS_TAG,
   },
 };
+
+export interface FieldCreateTag {
+  description: IField;
+  status: IField;
+  title: IField;
+  thumbnail?: IField;
+}
+
+export const fieldCreateTag: FieldCreateTag = {
+  title: {
+    name: 'title',
+    label: 'tag.tag_name',
+    placeholder: 'tag.place_input_tag',
+  },
+  description: {
+    name: 'key',
+    label: 'tag.place_input_tag_dec',
+  },
+  status: {
+    name: 'status',
+    label: 'tag.label_search_status',
+    options: OPTION_FILTER_STATUS_TAG,
+  },
+  thumbnail: {
+    name: 'thumbnail',
+  },
+};
