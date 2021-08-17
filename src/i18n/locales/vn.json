@@ -26,6 +26,7 @@
   "message": {
     "MSG_1": "{{fieldName}} không được để trống",
     "MSG_2": "Tài khoản hoặc mật khẩu không chính xác",
+    "SUBMIT_SUCCESS": "Submit thành công",
     "title_error": "Đã xảy ra lỗi",
     "title_warning": "Cảnh báo",
     "title_info": "Thông báo",

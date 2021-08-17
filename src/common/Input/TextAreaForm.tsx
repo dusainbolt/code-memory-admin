@@ -40,8 +40,6 @@ export const TextAreaComponent: FC<ITextAreaComponent> = ({
     formSetFieldValue && formSetFieldValue(field.name, value);
   };
 
-  console.log(touched, errorMessage);
-
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}

@@ -18,11 +18,15 @@ export const createApolloClient = () => {
       },
     };
   });
-  return new ApolloClient({
+  return {
     ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({
       addTypename: false,
     }),
-  });
+  };
 };
+
+export const apolloInstance = new ApolloClient(createApolloClient());
+
+export type ApolloType = typeof apolloInstance;

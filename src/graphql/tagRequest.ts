@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { SearchTagInput } from '../models/TagModel';
+import { FormTagInput, SearchTagInput } from '../models/TagModel';
 import RequestService from '../services/requestService';
 
 const requestService = new RequestService();
@@ -31,36 +31,35 @@ const getListTagQuery = gql`
   }
 `;
 
-export const getListTagRequest = (input: SearchTagInput): any => {
-  return requestService.query(getListTagQuery, { input }, 'listTags');
+export const getListTagRequest = (input: SearchTagInput, fetchPolicy?: any): any => {
+  console.log(fetchPolicy);
+  return requestService.query(getListTagQuery, { input }, 'listTags', fetchPolicy);
 };
 
-// const addTagQuery = gql`
-//   mutation createTagMutation($description: String!, $thumbnail: String!, $title: String!, $status: TagStatus!) {
-//     createTag(input: { description: $description, thumbnail: $thumbnail, title: $title, status: $status }) {
-//       createBy
-//       createdAt
-//       id
-//       slug
-//       status
-//       title
-//       updatedAt
-//       description
-//       tagType
-//     }
-//   }
-// `;
+const addTagQuery = gql`
+  mutation createTagMutation($input: CreateTagInput!) {
+    createTag(input: $input) {
+      createBy
+      createdAt
+      description
+      id
+      slug
+      tagType
+      status
+      title
+      thumbnail
+      updatedAt
+      userCreate {
+        avatar
+        email
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
 
-// export const postLoginRequest = (variables: LoginInput): any => {
-//   return requestService.mutation(
-//     addTagQuery,
-//     {
-//       description: 'This iaaas tag test',
-//       tagType: 1,
-//       thumbnail: 'https://i.pinimg.com/736x/ec/14/7c/ec147c4c53abfe86df2bc7e70c0181ff.jpg',
-//       title: 'Tag 1asdsadasd11 3132a asdsa 45678919012',
-//       status: TagStatus.ACTIVE,
-//     },
-//     'login'
-//   );
-// };
+export const addTagRequest = (input: FormTagInput): any => {
+  return requestService.mutation(addTagQuery, { input }, 'createTag');
+};

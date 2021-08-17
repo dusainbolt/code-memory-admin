@@ -36,9 +36,6 @@ const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
 
 const LayoutCommon: React.FC<RouteChildrenProps> = ({ history, location, match }) => {
   const token = useAppSelector(state => state.loginSlice.token);
-  console.log('history', history);
-  console.log('location', history);
-  console.log('match', history);
   return (
     <LayoutAuth token={token} type={history.location.pathname}>
       <Switch>

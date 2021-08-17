@@ -1,10 +1,11 @@
 import { DocumentNode } from 'graphql';
-import { createApolloClient } from '../graphql/apolloConnect';
+import { FETCH_POLICY } from '../constant';
+import { apolloInstance, ApolloType } from '../graphql/apolloConnect';
 
 export default class RequestService {
-  client = null;
+  client: ApolloType = null;
   constructor() {
-    this.client = createApolloClient();
+    this.client = apolloInstance;
   }
 
   handleResponse =
@@ -13,11 +14,11 @@ export default class RequestService {
       return callback ? res.data[callback] : res.data;
     };
 
-  query = (query: DocumentNode, variables: any = {}, callback = ''): any => {
-    return this.client.query({ query, variables }).then(this.handleResponse(callback));
+  query = (query: DocumentNode, variables: any = {}, callback = '', fetchPolicy: any = FETCH_POLICY.DEFAULT) => {
+    return this.client.query({ query, variables, fetchPolicy }).then(this.handleResponse(callback));
   };
 
-  mutation = (mutation: DocumentNode, variables: any = {}, callback = ''): any => {
+  mutation = (mutation: DocumentNode, variables: any = {}, callback = '') => {
     return this.client.mutate({ mutation, variables }).then(this.handleResponse(callback));
   };
 }

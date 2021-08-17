@@ -8,8 +8,12 @@ function* rootSaga() {
   yield all([WatchLoginSaga(), watchTagSaga()]);
 }
 
-export function* handleErrorSaga(error) {
+export function* handleMessageErrorSaga(error) {
+  yield console.log('catch: ', error);
   yield put(setNotifySlice({ messageNotify: error.message, typeNotify: TypeNotify.ERROR, createTime: new Date().getTime() } as NotifySystem));
+}
+export function* handleMessageSuccessSaga(messageNotify) {
+  yield put(setNotifySlice({ messageNotify, typeNotify: TypeNotify.SUCCESS, createTime: new Date().getTime() } as NotifySystem));
 }
 
 export default rootSaga;

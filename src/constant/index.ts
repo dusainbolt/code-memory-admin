@@ -11,3 +11,12 @@ export const STATUS_BADGE_ANT: any = {
   processing: 'processing',
   warning: 'warning',
 };
+
+export const MESSAGE = {
+  SUBMIT_SUCCESS: 'SUBMIT_SUCCESS',
+};
+
+export const FETCH_POLICY = {
+  DEFAULT: 'cache-first',
+  NO_CACHE: 'no-cache',
+};

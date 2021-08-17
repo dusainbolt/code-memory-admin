@@ -7,28 +7,28 @@ const ROUTE_COUNT = {
 };
 
 export const useGetActiveSider = () => {
-  const [activeKey, setActiveKey] = useState(['']);
-  const [activeSubKey, setActiveSubKey] = useState(['']);
+  const [activeKey, setActiveKey] = useState([]);
+  const [activeSubKey, setActiveSubKey] = useState([]);
 
   const history = useHistory();
+  const pathName = history.location.pathname;
 
   useEffect(() => {
-    const routePath = history?.location?.pathname;
-    if (!!routePath) {
-      const keyMenus = routePath.split('/');
+    if (!!pathName) {
+      const keyMenus = pathName.split('/');
       if (ROUTE_COUNT.SUB_URL === keyMenus?.length) {
-        setActiveSubKey([routePath]);
-        setActiveKey([keyMenus[1]]);
+        setActiveSubKey([pathName]);
+        !!!activeKey.length && setActiveKey([keyMenus[1]]);
       } else if (ROUTE_COUNT.URL === keyMenus?.length) {
         setActiveSubKey([`/${keyMenus[1]}`]);
-        setActiveKey([keyMenus[1]]);
+        !!!activeKey.length && setActiveKey([keyMenus[1]]);
       }
     }
-  }, []);
+  }, [pathName, activeKey]);
 
-  const onChangeActiveKey = subKeys => {
-    setActiveKey(subKeys);
+  const onOpenTabChange = openKey => {
+    setActiveKey(openKey);
   };
 
-  return { activeKey, activeSubKey, onChangeActiveKey };
+  return { activeKey, activeSubKey, onOpenTabChange };
 };

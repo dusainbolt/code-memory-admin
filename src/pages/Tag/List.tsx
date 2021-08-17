@@ -20,7 +20,7 @@ export const TagListPage = () => {
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { paramsSearch, handleSearch, getPageIndexNumber, handleChangePage, handleSortByParams } = useSearchTagList(dispatch);
+  const { paramsSearch, handleSearch, getPageIndexNumber, handleGetListCategory, handleChangePage, handleSortByParams } = useSearchTagList(dispatch);
   const { offset, limit } = paramsSearch;
 
   const column = useColumnTag(t, getPageIndexNumber());
@@ -61,7 +61,7 @@ export const TagListPage = () => {
           columns={column}
         />
       </Box>
-      <DrawerTagForm visible={visibleFormTag} setVisible={setVisibleFormTag} />
+      <DrawerTagForm callbackSubmit={handleGetListCategory} visible={visibleFormTag} setVisible={setVisibleFormTag} />
     </Box>
   );
 };

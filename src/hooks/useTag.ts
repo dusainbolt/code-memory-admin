@@ -12,7 +12,7 @@ export const useSearchTagList = (
   handleChangePage: any;
   handleSortByParams: any;
   getPageIndexNumber: any;
-  // handleGetListCategory: any;
+  handleGetListCategory: any;
 } => {
   const [paramsSearch, setParamsSearch] = useState<SearchTagInput>({
     key: '',
@@ -21,8 +21,8 @@ export const useSearchTagList = (
     offset: 0,
   });
 
-  const handleGetListCategory = () => {
-    dispatch(getTagListSliceStart({ input: paramsSearch }));
+  const handleGetListCategory = (fetchPolicy?: any) => {
+    dispatch(getTagListSliceStart({ input: paramsSearch, fetchPolicy }));
   };
 
   useEffect(() => {
@@ -47,5 +47,5 @@ export const useSearchTagList = (
     return paramsSearch.offset * paramsSearch.limit;
   };
 
-  return { paramsSearch, handleSearch, getPageIndexNumber, handleChangePage, handleSortByParams };
+  return { paramsSearch, handleSearch, getPageIndexNumber, handleChangePage, handleSortByParams, handleGetListCategory };
 };

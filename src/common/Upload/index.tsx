@@ -1,9 +1,12 @@
 import { Upload, message, Spin } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ImgCrop from 'antd-img-crop';
 import { AppSpinning } from '../Spining';
+import { useFormikContext } from 'formik';
+import Box from '../Box';
+import clsx from 'clsx';
 
 function getBase64(img: any, callback: any) {
   const reader = new FileReader();
@@ -32,13 +35,18 @@ interface IUploadComponent {
   name?: string;
   setFieldValue?: any;
   urlDefault?: string;
+  classNameWrap?: string;
   crop?: boolean;
+  isLoadingForm?: boolean;
 }
 
-export const UploadComponent = ({ setFieldValue, name, urlDefault = '', crop = false }: IUploadComponent) => {
+export const UploadComponent = ({ setFieldValue, name, urlDefault = '', crop = false, classNameWrap = '', isLoadingForm }: IUploadComponent) => {
+  const { errors, submitCount } = useFormikContext();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(urlDefault || '');
+
+  const errorMessage = errors[name];
 
   useEffect(() => {
     setImageUrl(urlDefault);
@@ -67,18 +75,22 @@ export const UploadComponent = ({ setFieldValue, name, urlDefault = '', crop = f
     </div>
   );
   const UploadChild = (
-    <Upload
-      name="avatar"
-      listType="picture-card"
-      className="upload__wrap"
-      showUploadList={false}
-      action="/"
-      method="put"
-      maxCount={1}
-      beforeUpload={beforeUpload(t)}
-      onChange={handleChange}>
-      <AppSpinning loading={loading}>{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}</AppSpinning>
-    </Upload>
+    <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="upload__wrap"
+        showUploadList={false}
+        action="/"
+        disabled={isLoadingForm}
+        method="put"
+        maxCount={1}
+        beforeUpload={beforeUpload(t)}
+        onChange={handleChange}>
+        <AppSpinning loading={loading}>{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}</AppSpinning>
+      </Upload>
+      {errorMessage && !!submitCount && <span className="required">{errorMessage}</span>}
+    </Box>
   );
   return crop ? <ImgCrop rotate>{UploadChild}</ImgCrop> : UploadChild;
 };

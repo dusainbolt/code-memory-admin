@@ -94,7 +94,7 @@ export const fieldCreateTag: FieldCreateTag = {
     placeholder: 'tag.place_input_tag',
   },
   description: {
-    name: 'key',
+    name: 'description',
     label: 'tag.place_input_tag_dec',
   },
   status: {

@@ -11,8 +11,16 @@ export default class ValidateService {
     this.i18n = i18n;
   }
 
+  getMessageRequire = fieldName => {
+    return this.i18n('message.MSG_1', { fieldName: this.i18n(fieldName) });
+  };
+
   stringRequire = fieldName => {
-    return Yup.string().required(this.i18n('message.MSG_1', { fieldName: this.i18n(fieldName) }));
+    return Yup.string().required(this.getMessageRequire(fieldName));
+  };
+
+  mixRequire = fieldName => {
+    return Yup.mixed().required(this.getMessageRequire(fieldName));
   };
 
   readonly validateLoginInput = (fieldLogin: FieldLogin) => {
@@ -23,12 +31,12 @@ export default class ValidateService {
     });
   };
 
-  readonly validateCreateTagInput = (fieldCreateTag: FieldCreateTag) => {
+  readonly validateFormTagInput = (fieldCreateTag: FieldCreateTag) => {
     const { title, description, thumbnail } = fieldCreateTag;
     return Yup.object({
       [title.name]: this.stringRequire(title.label),
       [description.name]: this.stringRequire(description.label),
-      [thumbnail.name]: this.stringRequire(this.LABEL_FIELD_IMAGE),
+      [thumbnail.name]: this.mixRequire(this.LABEL_FIELD_IMAGE),
     });
   };
 }
