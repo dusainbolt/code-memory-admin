@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TagSlice } from '../../models/TagModel';
-import { GetListTagAction, GetListTagSuccessAction, SubmitFormTagAction } from '../actionTypes/tagActionTypes';
+import { GetListTagAction, GetListTagSuccessAction, SubmitFormTagAction, SubmitFormTagActionSuccess } from '../actionTypes/tagActionTypes';
 import { IRootState } from '../rootReducer';
 
 const initialState: TagSlice = {
@@ -8,6 +8,7 @@ const initialState: TagSlice = {
   total: 0,
   isLoadingList: false,
   isLoadingForm: false,
+  tagResponse: {},
 };
 
 export const tagSlice = createSlice({
@@ -31,8 +32,9 @@ export const tagSlice = createSlice({
     submitFormTagSliceStart: (state: TagSlice, action: SubmitFormTagAction) => {
       state.isLoadingForm = true;
     },
-    submitFormTagSliceSuccess: (state: TagSlice, action: any) => {
+    submitFormTagSliceSuccess: (state: TagSlice, action: SubmitFormTagActionSuccess) => {
       state.isLoadingForm = false;
+      state.tagResponse = action.payload;
     },
     submitFormTagSliceError: (state: TagSlice, action: any) => {
       state.isLoadingForm = false;

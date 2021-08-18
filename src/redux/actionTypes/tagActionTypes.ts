@@ -1,4 +1,4 @@
-import { FormTagInput, SearchTagInput, SearchTagOutput } from '../../models/TagModel';
+import { FormTagInput, SearchTagInput, SearchTagOutput, Tag } from '../../models/TagModel';
 import { PayloadName } from './loginActionTypes';
 
 export type GetListTagAction = Record<
@@ -16,5 +16,7 @@ export type SubmitFormTagAction = Record<
     callback?: any;
   }
 >;
+
+export type SubmitFormTagActionSuccess = Record<PayloadName, Tag>;
 
 export type GetListTagSuccessAction = Record<PayloadName, SearchTagOutput>;

@@ -12,6 +12,7 @@
     "image": "Ảnh",
     "status": "Trạng thái",
     "description": "Giới thiệu",
+    "upload_s3_dec": "Đảng tải file lên AWS S3",
     "text_page_size": "Trang",
     "no_data": "Không có dữ liệu",
     "table_no": "STT"

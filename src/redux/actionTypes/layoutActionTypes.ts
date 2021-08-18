@@ -1,5 +1,5 @@
-import { NotifySystem } from '../../models/LayoutModel';
-import { LoginInput, LoginSlice } from '../../models/LoginModel';
+import { NotifySystem, ProcessUpload } from '../../models/LayoutModel';
+import { LoginInput } from '../../models/LoginModel';
 
 export type loginAction = {
   type: string;
@@ -11,3 +11,4 @@ export type loginAction = {
 type PayloadName = 'payload';
 
 export type SetNotifyAction = Record<PayloadName, NotifySystem>;
+export type SetProcessUploadAction = Record<PayloadName, ProcessUpload>;

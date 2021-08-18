@@ -25,6 +25,9 @@
   &.space-center {
     justify-content: space-between;
   }
+  &.column {
+    flex-direction: column;
+  }
 }
 
 .control-btn {

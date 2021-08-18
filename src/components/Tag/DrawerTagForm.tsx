@@ -15,6 +15,8 @@ import ValidateService from '../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { getTagSlice, submitFormTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';
+import UploadService from '../../services/uploadService';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 const TagForm = ({ t, onCloseForm, isLoadingForm }: { t: TFunction; onCloseForm: any; isLoadingForm: boolean }) => {
   const { handleSubmit, setFieldValue } = useFormikContext();
@@ -51,10 +53,12 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
     setVisible(false);
   };
 
-  const handleSubmitForm = values => {
+  const handleSubmitForm = async (values: FormTagInput) => {
+    const uploadService = new UploadService();
+    const thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.title);
     dispatch(
       submitFormTagSliceStart({
-        input: { ...values, thumbnail: 'https://nftify.s3.ap-southeast-1.amazonaws.com/banner/60efefb91d959f07d8b2f393-1626946787521.jpg' },
+        input: { ...values, thumbnail },
         callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
       })
     );

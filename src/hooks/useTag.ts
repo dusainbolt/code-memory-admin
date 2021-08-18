@@ -30,7 +30,6 @@ export const useSearchTagList = (
   }, [paramsSearch]);
 
   const handleSearch = (values: SearchTagInput) => {
-    console.log(paramsSearch);
     setParamsSearch({ ...paramsSearch, key: values.key.trim(), status: values.status });
   };
 

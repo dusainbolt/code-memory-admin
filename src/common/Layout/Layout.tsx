@@ -7,6 +7,8 @@ import { LoginPages } from '../../pages/Login';
 import { HeaderAdmin } from './HeaderAdmin';
 import { SiderAdmin } from './SiderAdmin';
 import { NotifySystem } from '../Notify/NotifySystem';
+import { ModalCommon } from '../Modal';
+import { ModalProcessUpload } from '../Modal/ModalProcessUpload';
 
 const { Content } = Layout;
 
@@ -30,6 +32,7 @@ const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
         </Layout>
       </Layout>
       <NotifySystem />
+      <ModalProcessUpload />
     </Layout>
   );
 };
