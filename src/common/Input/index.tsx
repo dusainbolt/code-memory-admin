@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'antd';
-import { FieldInputProps, FieldMetaProps, FormikProps, FormikState } from 'formik';
+import { FieldInputProps, FieldMetaProps, FormikProps } from 'formik';
 import { FC } from 'react';
 import Box from '../Box';
 import { useTranslation } from 'react-i18next';

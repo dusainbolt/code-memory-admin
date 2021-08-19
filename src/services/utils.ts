@@ -22,7 +22,7 @@ export const ignoreString = (string: string, key: string) => {
 
 export const mapContentBlog = (values: any): BlogContent[] => {
   let contents = [];
-  for (const [key, value] of Object.entries(values)) {
+  for (const [key] of Object.entries(values)) {
     if (ignoreString(key, BLOG_FIELD_NAME)) {
       continue;
     }

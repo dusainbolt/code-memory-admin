@@ -11,7 +11,7 @@ import { getFullNameUser } from '../../services/utils';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
 
-export const useColumnTag = (t: TFunction, pageIndex: any) => {
+export const useColumnTag = (t: TFunction, pageIndex: any, callbackEdit: any) => {
   return [
     {
       title: t('common.table_no'),
@@ -47,7 +47,7 @@ export const useColumnTag = (t: TFunction, pageIndex: any) => {
       title: '',
       render: (_id: string, row: Tag) => (
         <Box className="flx-center align-left">
-          <ButtonCommon type="primary" shape="round" icon={<EditOutlined />} size="small" />
+          <ButtonCommon onClick={callbackEdit(row)} type="primary" shape="round" icon={<EditOutlined />} size="small" />
         </Box>
       ),
     },

@@ -31,7 +31,7 @@ export default class ValidateService {
     });
   };
 
-  readonly validateFormTagInput = (fieldCreateTag: FieldCreateTag) => {
+  readonly validateCreateTagInput = (fieldCreateTag: FieldCreateTag) => {
     const { title, description, thumbnail } = fieldCreateTag;
     return Yup.object({
       [title.name]: this.stringRequire(title.label),

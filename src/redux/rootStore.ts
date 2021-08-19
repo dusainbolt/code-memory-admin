@@ -1,6 +1,5 @@
 import rootReducer, { getPersistConfig, IRootState, whitelist } from './rootReducer';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import createSagaMiddleware from 'redux-saga';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';

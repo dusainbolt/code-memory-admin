@@ -6,7 +6,7 @@ export interface IModalCommon extends ModalProps {}
 
 export const ModalCommon: FC<IModalCommon> = ({ title = '', maskClosable = false, footer = false, className = '', children, ...props }) => {
   return (
-    <Modal title={title} footer={footer} maskClosable={maskClosable} className={clsx('app-modal', className && className)} {...props}>
+    <Modal title={title} footer={footer} maskClosable={maskClosable} className={clsx('app-modal', className)} {...props}>
       {children}
     </Modal>
   );

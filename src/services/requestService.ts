@@ -14,8 +14,11 @@ export default class RequestService {
       return callback ? res.data[callback] : res.data;
     };
 
-  query = (query: DocumentNode, variables: any = {}, callback = '', fetchPolicy: any = FETCH_POLICY.DEFAULT) => {
-    return this.client.query({ query, variables, fetchPolicy }).then(this.handleResponse(callback));
+  query = async (query: DocumentNode, variables: any = {}, callback = '', fetchPolicy: any = FETCH_POLICY.DEFAULT) => {
+    if (fetchPolicy === FETCH_POLICY.NO_CACHE) {
+      await this.client.resetStore();
+    }
+    return await this.client.query({ query, variables, fetchPolicy }).then(this.handleResponse(callback));
   };
 
   mutation = (mutation: DocumentNode, variables: any = {}, callback = '') => {

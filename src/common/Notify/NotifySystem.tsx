@@ -16,7 +16,7 @@ export const NotifySystem = () => {
       className: 'notify-sys',
       message: t(`message.title_${notify.typeNotify}`),
       key: `${notify.createTime}`,
-      duration: 10000,
+      duration: 10,
       description: (
         <Box className="notify-sys-content">
           <Typography.Paragraph className="dec mb-0">{t(`message.${notify.messageNotify}`)}</Typography.Paragraph>

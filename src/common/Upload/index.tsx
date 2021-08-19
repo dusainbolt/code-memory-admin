@@ -7,6 +7,7 @@ import { AppSpinning } from '../Spining';
 import { useFormikContext } from 'formik';
 import Box from '../Box';
 import clsx from 'clsx';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 function getBase64(img: any, callback: any) {
   const reader = new FileReader();
@@ -37,20 +38,32 @@ interface IUploadComponent {
   urlDefault?: string;
   classNameWrap?: string;
   crop?: boolean;
+  visible?: boolean;
   isLoadingForm?: boolean;
 }
 
-export const UploadComponent = ({ setFieldValue, name, urlDefault = '', crop = false, classNameWrap = '', isLoadingForm }: IUploadComponent) => {
-  const { errors, submitCount } = useFormikContext();
+export const UploadComponent = ({ setFieldValue, name, crop = false, classNameWrap = '', isLoadingForm }: IUploadComponent) => {
+  const { errors, submitCount, values } = useFormikContext();
+  const fieldValue = values[name];
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(urlDefault || '');
+  const [imageUrl, setImageUrl] = useState('');
 
   const errorMessage = errors[name];
 
   useEffect(() => {
-    setImageUrl(urlDefault);
-  }, [urlDefault]);
+    if (!!fieldValue && !!(fieldValue as UploadFile).type) {
+      // Get this url from response in real world.
+      getBase64(fieldValue.originFileObj, (imageUrl: string) => {
+        setTimeout(() => {
+          setLoading(false);
+          setImageUrl(imageUrl);
+        }, 200);
+      });
+    } else {
+      setImageUrl(fieldValue);
+    }
+  }, [fieldValue]);
 
   const handleChange = (info: any) => {
     if (info.file.status === 'uploading') {
@@ -59,14 +72,6 @@ export const UploadComponent = ({ setFieldValue, name, urlDefault = '', crop = f
     }
     if (info.file.status === 'done' || true) {
       setFieldValue && isValidFormat(info.file.type) && setFieldValue(name, info.file);
-      // Get this url from response in real world.
-      info.file?.originFileObj &&
-        getBase64(info.file?.originFileObj, (imageUrl: string) => {
-          setTimeout(() => {
-            setLoading(false);
-            setImageUrl(imageUrl);
-          }, 200);
-        });
     }
   };
   const uploadButton = (

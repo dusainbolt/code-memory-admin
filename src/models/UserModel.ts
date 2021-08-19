@@ -27,7 +27,7 @@ export interface User {
   lastName?: string;
   password?: string;
   phone?: string;
-  role?: Role;
+  roles?: Role[];
   status?: UserStatus;
 }
 

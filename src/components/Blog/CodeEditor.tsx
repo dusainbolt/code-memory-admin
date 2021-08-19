@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import { useFormikContext } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '../../common/Box';
 import { TextAreaCommon } from '../../common/Input/TextArea';
 import { BlogContent } from '../../models/BlogModel';
 import { Code } from './Code';
-const code = ``;
 
 export interface ICodeEditor {
   className?: string;

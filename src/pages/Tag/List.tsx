@@ -7,7 +7,7 @@ import { Divider } from 'antd';
 import { SearchTagListForm } from '../../components/Tag/SearchTagList';
 import { Formik } from 'formik';
 import TableCommon from '../../common/Table';
-import { useSearchTagList } from '../../hooks/useTag';
+import { useFormTag, useSearchTagList } from '../../hooks/useTag';
 import { getTagSlice } from '../../redux/slices/tagSlice';
 import { useColumnTag } from '../../components/Tag/ColumTagList';
 import ButtonCommon from '../../common/Button';
@@ -16,18 +16,13 @@ import { DrawerTagForm } from '../../components/Tag/DrawerTagForm';
 
 export const TagListPage = () => {
   const { dataTags, total, isLoadingList } = useAppSelector(getTagSlice);
-  const [visibleFormTag, setVisibleFormTag] = useState<boolean>(false);
-
+  const { openFormModal, visibleFormTag, setVisible, openFormEdit } = useFormTag();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { paramsSearch, handleSearch, getPageIndexNumber, handleGetListCategory, handleChangePage, handleSortByParams } = useSearchTagList(dispatch);
   const { offset, limit } = paramsSearch;
 
-  const column = useColumnTag(t, getPageIndexNumber());
-
-  const openFormModal = () => {
-    setVisibleFormTag(true);
-  };
+  const column = useColumnTag(t, getPageIndexNumber(), openFormEdit);
 
   return (
     <Box className="admin__content tag-list">
@@ -61,7 +56,7 @@ export const TagListPage = () => {
           columns={column}
         />
       </Box>
-      <DrawerTagForm callbackSubmit={handleGetListCategory} visible={visibleFormTag} setVisible={setVisibleFormTag} />
+      <DrawerTagForm callbackSubmit={handleGetListCategory} visible={visibleFormTag} setVisible={setVisible} />
     </Box>
   );
 };

@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TagSlice } from '../../models/TagModel';
-import { GetListTagAction, GetListTagSuccessAction, SubmitFormTagAction, SubmitFormTagActionSuccess } from '../actionTypes/tagActionTypes';
+import {
+  GetListTagAction,
+  GetListTagSuccessAction,
+  setVisibleTagFormAction,
+  SubmitTagAction,
+  SubmitTagActionSuccess,
+} from '../actionTypes/tagActionTypes';
 import { IRootState } from '../rootReducer';
 
 const initialState: TagSlice = {
@@ -8,13 +14,18 @@ const initialState: TagSlice = {
   total: 0,
   isLoadingList: false,
   isLoadingForm: false,
-  tagResponse: {},
+  visibleFormTag: false,
+  tagDetail: {},
 };
 
 export const tagSlice = createSlice({
   name: 'tag',
   initialState,
   reducers: {
+    setVisibleFormTag: (state: TagSlice, { payload }: setVisibleTagFormAction) => ({
+      ...state,
+      ...payload,
+    }),
     getTagListSliceStart: (state: TagSlice, action: GetListTagAction) => {
       state.isLoadingList = true;
     },
@@ -29,14 +40,14 @@ export const tagSlice = createSlice({
     getTagListSliceError: (state: TagSlice, action: any) => {
       state.isLoadingList = false;
     },
-    submitFormTagSliceStart: (state: TagSlice, action: SubmitFormTagAction) => {
+    submitTagSliceStart: (state: TagSlice, action: SubmitTagAction) => {
       state.isLoadingForm = true;
     },
-    submitFormTagSliceSuccess: (state: TagSlice, action: SubmitFormTagActionSuccess) => {
+    submitTagSliceSuccess: (state: TagSlice, action: SubmitTagActionSuccess) => {
       state.isLoadingForm = false;
-      state.tagResponse = action.payload;
+      state.visibleFormTag = false;
     },
-    submitFormTagSliceError: (state: TagSlice, action: any) => {
+    submitTagSliceError: (state: TagSlice, action: any) => {
       state.isLoadingForm = false;
     },
   },
@@ -48,9 +59,10 @@ export const {
   getTagListSliceStart,
   getTagListSliceSuccess,
   getTagListSliceError,
-  submitFormTagSliceStart,
-  submitFormTagSliceSuccess,
-  submitFormTagSliceError,
+  submitTagSliceStart,
+  submitTagSliceSuccess,
+  submitTagSliceError,
+  setVisibleFormTag,
 } = tagSlice.actions;
 
 export default tagSlice.reducer;

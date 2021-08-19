@@ -1,7 +1,7 @@
 import { Divider, Drawer, Row } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { Field, Formik, useFormikContext } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TFunction, useTranslation } from 'react-i18next';
 import Box from '../../common/Box';
 import { InputComponent } from '../../common/Input';
@@ -9,23 +9,50 @@ import { TextAreaComponent } from '../../common/Input/TextAreaForm';
 import { SelectComponent } from '../../common/Select';
 import { UploadComponent } from '../../common/Upload';
 import { fieldCreateTag } from '../../models/FieldModel';
-import { FormTagInput, TagStatus } from '../../models/TagModel';
+import { CreateTagInput, TagStatus } from '../../models/TagModel';
 import { ButtonForm } from '../../common/Button/ButtonForm';
 import ValidateService from '../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-import { getTagSlice, submitFormTagSliceStart } from '../../redux/slices/tagSlice';
+import { getTagSlice, submitTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';
 import UploadService from '../../services/uploadService';
 import { UploadFile } from 'antd/lib/upload/interface';
 
-const TagForm = ({ t, onCloseForm, isLoadingForm }: { t: TFunction; onCloseForm: any; isLoadingForm: boolean }) => {
-  const { handleSubmit, setFieldValue } = useFormikContext();
+const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
+  const { handleSubmit, setFieldValue, handleReset, setValues } = useFormikContext();
+  const { tagDetail } = useAppSelector(getTagSlice);
+
+  useEffect(() => {
+    if (!!tagDetail.id) {
+      setValues({
+        description: tagDetail.description,
+        id: tagDetail.id,
+        status: tagDetail.status,
+        thumbnail: tagDetail.thumbnail,
+        title: tagDetail.title,
+      } as CreateTagInput);
+    } else {
+      handleReset();
+    }
+  }, [tagDetail]);
+
+  useEffect(() => {
+    if (!visible) {
+      handleReset();
+    }
+  }, [visible]);
 
   return (
     <Row className="tag-form form-label-md">
       <Box className="upload__field center-block">
         <Text className="tag-upload-dec">{t('tag.label_thumbnail')}</Text>
-        <UploadComponent setFieldValue={setFieldValue} isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
+        <UploadComponent
+          setFieldValue={setFieldValue}
+          visible={visible}
+          isLoadingForm={isLoadingForm}
+          name={fieldCreateTag.thumbnail.name}
+          crop={true}
+        />
       </Box>
       <Field {...fieldCreateTag.title} component={InputComponent} />
       <Field {...fieldCreateTag.description} component={TextAreaComponent} />
@@ -40,24 +67,32 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const validateTagInput = new ValidateService(t).validateFormTagInput(fieldCreateTag);
+  const validateTagInput = new ValidateService(t).validateCreateTagInput(fieldCreateTag);
 
-  const initialValues: FormTagInput = {
+  const initialValues: CreateTagInput = {
     description: '',
     status: TagStatus.ACTIVE,
     thumbnail: '',
     title: '',
+    id: '',
   };
 
   const onCloseDrawer = () => {
     setVisible(false);
   };
 
-  const handleSubmitForm = async (values: FormTagInput) => {
+  const handleSubmitForm = async (values: CreateTagInput) => {
+    // handle set thumbnail
+    let thumbnail = '';
     const uploadService = new UploadService();
-    const thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.title);
+    if (!!(values.thumbnail as UploadFile).size) {
+      thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.title);
+    } else {
+      thumbnail = values.thumbnail;
+    }
+
     dispatch(
-      submitFormTagSliceStart({
+      submitTagSliceStart({
         input: { ...values, thumbnail },
         callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
       })
@@ -67,7 +102,7 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
   return (
     <Drawer title={t('tag.add_tag_title')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
       <Formik onSubmit={handleSubmitForm} validationSchema={validateTagInput} initialValues={initialValues}>
-        <TagForm isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
+        <TagForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>
     </Drawer>
   );

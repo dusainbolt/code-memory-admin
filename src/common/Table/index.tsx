@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pagination, Table, Empty } from 'antd';
+import { Pagination, Table, Empty, Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { FilterValue, GetRowKey, SorterResult, TableCurrentDataSource } from 'antd/lib/table/interface';
@@ -53,12 +53,18 @@ function TableCommon({
       <div className="table">
         <Table
           className="table__table"
-          locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('common.no_data')} /> }}
+          locale={{
+            emptyText: loading ? (
+              <Skeleton paragraph={{ rows: 7 }} active />
+            ) : (
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('common.no_data')} />
+            ),
+          }}
           pagination={false}
           columns={columns}
           bordered
           rowClassName={rowClassName}
-          dataSource={dataSource}
+          dataSource={loading ? [] : dataSource}
           onChange={onChangeTable}
           rowKey={record => record?.id}
           showSorterTooltip={false}

@@ -38,7 +38,8 @@ export type TagSlice = {
   total: number;
   isLoadingList: boolean;
   isLoadingForm: boolean;
-  tagResponse?: Tag;
+  tagDetail?: Tag;
+  visibleFormTag: boolean;
 };
 
 export interface SearchTagOutput {
@@ -46,9 +47,15 @@ export interface SearchTagOutput {
   total: number;
 }
 
-export interface FormTagInput {
+export interface CreateTagInput {
   description: string;
   status: TagStatus;
   thumbnail: any;
   title: string;
+  id: string;
+}
+
+export interface UpdateTagInput {
+  data: CreateTagInput;
+  tagId: string;
 }

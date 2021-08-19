@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import Box from '../Box';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { FieldInputProps, FieldMetaProps, FormikProps, FormikState } from 'formik';
+import { FieldInputProps, FieldMetaProps, FormikProps } from 'formik';
 
 const { TextArea } = Input;
 

@@ -1,17 +1,17 @@
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects';
-import { FETCH_POLICY, MESSAGE } from '../../constant';
-import { addTagRequest, getListTagRequest } from '../../graphql/tagRequest';
+import { MESSAGE } from '../../constant';
+import { getListTagRequest, submitTagRequest } from '../../graphql/tagRequest';
 import { ProcessUpload } from '../../models/LayoutModel';
-import { GetListTagAction, SubmitFormTagAction } from '../actionTypes/tagActionTypes';
+import { GetListTagAction, SubmitTagAction } from '../actionTypes/tagActionTypes';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
 import { setProcessUploadSlice } from '../slices/layoutSlice';
 import {
   getTagListSliceError,
   getTagListSliceStart,
   getTagListSliceSuccess,
-  submitFormTagSliceError,
-  submitFormTagSliceStart,
-  submitFormTagSliceSuccess,
+  submitTagSliceError,
+  submitTagSliceStart,
+  submitTagSliceSuccess,
 } from '../slices/tagSlice';
 
 function* getListTagSaga({ payload }: GetListTagAction) {
@@ -25,25 +25,25 @@ function* getListTagSaga({ payload }: GetListTagAction) {
   }
 }
 
-function* submitFormTagSaga({ payload }: SubmitFormTagAction) {
+function* submitTagSaga({ payload: { input, callback } }: SubmitTagAction) {
   try {
-    const data = yield addTagRequest(payload.input);
+    const data = yield submitTagRequest(input);
     yield delay(300);
-    yield put(submitFormTagSliceSuccess(data));
+    yield put(submitTagSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);
-    if (!!payload.callback) {
-      yield call(payload.callback);
+    if (!!callback) {
+      yield call(callback);
       yield put(setProcessUploadSlice({ visibleProcessModal: false } as ProcessUpload));
     }
   } catch (error) {
-    yield put(submitFormTagSliceError({}));
+    yield put(submitTagSliceError({}));
     yield handleMessageErrorSaga(error);
   }
 }
 
 function* watchHandleTag() {
   yield takeEvery(getTagListSliceStart, getListTagSaga);
-  yield takeEvery(submitFormTagSliceStart, submitFormTagSaga);
+  yield takeEvery(submitTagSliceStart, submitTagSaga);
 }
 
 export default function* watchTagSaga(): any {

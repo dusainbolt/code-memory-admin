@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { SearchTagInput, TagStatus } from '../models/TagModel';
-import { getTagListSliceStart } from '../redux/slices/tagSlice';
+import { SearchTagInput, Tag, TagStatus } from '../models/TagModel';
+import { useAppDispatch, useAppSelector } from '../redux/rootStore';
+import { getTagListSliceStart, getTagSlice, setVisibleFormTag } from '../redux/slices/tagSlice';
 import { getOrderType } from '../services/utils';
 
 export const useSearchTagList = (
@@ -47,4 +48,28 @@ export const useSearchTagList = (
   };
 
   return { paramsSearch, handleSearch, getPageIndexNumber, handleChangePage, handleSortByParams, handleGetListCategory };
+};
+
+export const useFormTag = (): {
+  openFormModal: any;
+  setVisible: any;
+  openFormEdit: any;
+  visibleFormTag: boolean;
+} => {
+  const dispatch = useAppDispatch();
+  const { visibleFormTag } = useAppSelector(getTagSlice);
+
+  const openFormModal = () => {
+    dispatch(setVisibleFormTag({ visibleFormTag: true }));
+  };
+
+  const setVisible = (value: boolean) => {
+    dispatch(setVisibleFormTag({ visibleFormTag: value }));
+  };
+
+  const openFormEdit = (tagDetail: Tag) => () => {
+    dispatch(setVisibleFormTag({ visibleFormTag: true, tagDetail }));
+  };
+
+  return { openFormModal, visibleFormTag, setVisible, openFormEdit };
 };
