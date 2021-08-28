@@ -3,11 +3,12 @@ import { Layout } from 'antd';
 import { Switch, Route, RouteChildrenProps } from 'react-router-dom';
 import { useAppSelector } from '../../redux/rootStore';
 import { privateRoutes, publicRoute, RouteLayoutAdmin } from '../../appRoutes';
-import { LoginPages } from '../../pages/Login';
+// import { LoginPages } from '../../pages/Login';
 import { HeaderAdmin } from './HeaderAdmin';
 import { SiderAdmin } from './SiderAdmin';
 import { NotifySystem } from '../Notify/NotifySystem';
 import { ModalProcessUpload } from '../Modal/ModalProcessUpload';
+import { LoginPages } from '../../pages/LoginPage';
 
 const { Content } = Layout;
 

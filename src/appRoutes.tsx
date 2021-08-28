@@ -1,7 +1,8 @@
-import { LoginPages } from './pages/Login';
+// import { LoginPages } from './pages/Login';
 import { AddBlogPage } from './pages/Blog/AddBlog';
 import { TagListPage } from './pages/Tag/List';
 import { DashBoardPage } from './pages/DashBoard';
+import { LoginPages } from './pages/LoginPage';
 
 export const ROUTE = {
   INDEX: '/',
