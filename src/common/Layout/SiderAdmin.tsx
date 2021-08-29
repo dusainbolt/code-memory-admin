@@ -8,11 +8,11 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import { useTranslation } from 'react-i18next';
 import { ROUTE } from '../../appRoutes';
 import { useGetActiveSider } from '../../hooks/useLayout';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface IMenuItem {
   title: string;
-  key: string;
+  key?: string;
   url?: string;
 }
 
@@ -31,13 +31,11 @@ const menuSider: IMenuSider[] = [
     menu: {
       title: 'menu.dashboard',
       key: getKeyMenu(ROUTE.DASHBOARD_BLOG),
-      url: ROUTE.DASHBOARD_BLOG,
     },
     icon: <PieChartOutlined />,
     child: [
       {
         title: 'menu.blog_child_list',
-        key: ROUTE.DASHBOARD_BLOG,
         url: ROUTE.DASHBOARD_BLOG,
       },
     ],
@@ -51,12 +49,10 @@ const menuSider: IMenuSider[] = [
     child: [
       {
         title: 'menu.blog_child_list',
-        key: ROUTE.BLOG_LIST,
         url: ROUTE.BLOG_LIST,
       },
       {
         title: 'menu.blog_child_list',
-        key: ROUTE.BLOG_ADD,
         url: ROUTE.BLOG_ADD,
       },
     ],
@@ -65,14 +61,29 @@ const menuSider: IMenuSider[] = [
     menu: {
       title: 'menu.tag',
       key: getKeyMenu(ROUTE.TAG_LIST),
-      // url: ROUTE.TAG_LIST,
     },
     icon: <PieChartOutlined />,
     child: [
       {
         title: 'menu.tag_child_list',
-        key: ROUTE.TAG_LIST,
         url: ROUTE.TAG_LIST,
+      },
+    ],
+  },
+  {
+    menu: {
+      title: 'menu.setting_seo',
+      key: getKeyMenu(ROUTE.SEO),
+    },
+    icon: <PieChartOutlined />,
+    child: [
+      {
+        title: 'menu.seo_home',
+        url: ROUTE.SEO,
+      },
+      {
+        title: 'menu.seo_history',
+        url: ROUTE.SEO_HISTORY,
       },
     ],
   },
@@ -92,7 +103,7 @@ export const SiderAdmin = () => {
           return (
             <SubMenu key={menu.key} icon={icon} title={t(menu.title)}>
               {child.map((subMenu: IMenuItem) => (
-                <Menu.Item key={subMenu.key}>
+                <Menu.Item key={subMenu.url}>
                   <Link to={subMenu.url}>{t(subMenu.title)}</Link>
                 </Menu.Item>
               ))}

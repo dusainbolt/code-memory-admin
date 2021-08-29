@@ -10,3 +10,10 @@ export const TagResolver = `
   thumbnail
   updatedAt
 `;
+
+export const RESPONSE_TAG = {
+  tagCreate: "createTag",
+  tagUpdate: "tagUpdate",
+  userCreate: "userCreate",
+  tagList: "tagList"
+};

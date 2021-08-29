@@ -24,11 +24,15 @@ export const loginSlice = createSlice({
     loginSliceError: (state: LoginSlice, action: any) => {
       state.loadingLogin = false;
     },
+    logoutSliceStart: (state: LoginSlice) => {
+      state.user = {};
+      state.token = "";
+    }
   },
 });
 
 export const getloginSlice = (state: any) => state.loginSlice;
 
-export const { loginSliceStart, loginSliceSuccess, loginSliceError } = loginSlice.actions;
+export const { loginSliceStart, loginSliceSuccess, loginSliceError, logoutSliceStart } = loginSlice.actions;
 
 export default loginSlice.reducer;
