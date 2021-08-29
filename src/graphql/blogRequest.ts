@@ -7,12 +7,12 @@ const requestService = new RequestService();
 
 const addBlogQuery = gql`
   mutation BlogMutation($title: String!, $createBy: String!, $description: String!, $content: [BlogContentInput!]!) {
-    createBlog(input: { title: $title, createBy: $createBy, description: $description, content: $content }) {
+    blogCreate(input: { title: $title, createBy: $createBy, description: $description, content: $content }) {
       id
     }
   }
 `;
 
 export const addBlogRequest = (variables: blogInput): any => {
-  return requestService.mutation(addBlogQuery, variables, 'createBlog');
+  return requestService.mutation(addBlogQuery, variables, 'blogCreate');
 };
