@@ -23,7 +23,7 @@ export interface ISelectComponent {
 
 export const SelectComponent: FC<ISelectComponent> = ({
   field,
-  form: { touched: formTouched, errors: formErrors, setFieldValue: formSetFieldValue },
+  form: { touched: formTouched, errors: formErrors, setFieldValue },
   label = '',
   placeholder = '',
   className = '',
@@ -37,7 +37,7 @@ export const SelectComponent: FC<ISelectComponent> = ({
   const errorMessage = formErrors[field.name];
 
   const handleChange = (values: any) => {
-    formSetFieldValue && formSetFieldValue(field.name, values);
+    setFieldValue && setFieldValue(field.name, values);
   };
 
   return (

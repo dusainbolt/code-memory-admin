@@ -42,8 +42,8 @@ interface IUploadComponent {
   isLoadingForm?: boolean;
 }
 
-export const UploadComponent = ({ setFieldValue, name, crop = false, classNameWrap = '', isLoadingForm }: IUploadComponent) => {
-  const { errors, submitCount, values } = useFormikContext();
+export const UploadComponent = ({ name, crop = false, classNameWrap = '', isLoadingForm }: IUploadComponent) => {
+  const { errors, submitCount, values, setFieldValue } = useFormikContext();
   const fieldValue = values[name];
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
