@@ -1,4 +1,4 @@
-import { Upload, message } from 'antd';
+import { Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,44 +8,47 @@ import { useFormikContext } from 'formik';
 import Box from '../Box';
 import clsx from 'clsx';
 import { UploadFile } from 'antd/lib/upload/interface';
-import Text from 'antd/lib/typography/Text';
 import { HelperService } from '../../services/helperService';
 import UploadService from '../../services/uploadService';
 
 const helper = new HelperService();
 const uploadService = new UploadService();
 
-function getBase64(img: any, callback: any) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
 interface FieldUpload {
   name?: string;
   setFieldValue?: any;
   urlDefault?: string;
   classNameWrap?: string;
+  limitSize?: number;
   label?: string;
   crop?: boolean;
   isLoadingForm?: boolean;
   center?: boolean;
-  limitSize?: number;
+  fullWidth?: boolean;
 }
 
-export const FieldUpload = ({ name, limitSize = 0.5, center = false, crop = false, classNameWrap = '', isLoadingForm, label }: FieldUpload) => {
+export const FieldUpload = ({
+  name,
+  limitSize = 0.5,
+  fullWidth = false,
+  center = false,
+  crop = false,
+  classNameWrap = '',
+  isLoadingForm,
+  label,
+}: FieldUpload) => {
   const { errors, submitCount, values, setFieldValue } = useFormikContext();
-  const fieldValue = helper.getValueByStringKey(values, name);
+  const fieldValue = helper.getValByStrKey(values, name);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
 
-  const errorMessage = helper.getValueByStringKey(errors, name);
+  const errorMessage = helper.getValByStrKey(errors, name);
 
   useEffect(() => {
     if (!!fieldValue && !!(fieldValue as UploadFile).type) {
       // Get this url from response in real world.
-      getBase64(fieldValue.originFileObj, (imageUrl: string) => {
+      uploadService.getBase64(fieldValue.originFileObj, (imageUrl: string) => {
         setTimeout(() => {
           setLoading(false);
           setImageUrl(imageUrl);
@@ -85,9 +88,9 @@ export const FieldUpload = ({ name, limitSize = 0.5, center = false, crop = fals
     </Upload>
   );
   return (
-    <Box className={clsx('field-wrap upload-filed', [classNameWrap] && classNameWrap, center && 'center-field')}>
-      {label && <Text className="label">{t(label)}</Text>}
-      <Box>{crop ? <ImgCrop rotate>{UploadChild}</ImgCrop> : UploadChild}</Box>
+    <Box className={clsx('field-wrap upload-filed', [classNameWrap] && classNameWrap, center && 'center-field', fullWidth && 'full-width')}>
+      {label && <label className="field-wrap__label">{t(label)}</label>}
+      {crop ? <ImgCrop rotate>{UploadChild}</ImgCrop> : UploadChild}
       {errorMessage && !!submitCount && <span className="required">{errorMessage}</span>}
     </Box>
   );

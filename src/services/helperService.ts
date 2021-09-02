@@ -33,7 +33,12 @@ export class HelperService {
     handleSubmit();
   };
 
-  getValueByStringKey = (obj: any, key: string) => {
+  getKeyByObjStr = (key: string) => {
+    const keyArr = key?.split(".");
+    return keyArr.length > 1 ? keyArr[1] : key;
+  }
+
+  getValByStrKey = (obj: any, key: string) => {
     const keyArr = key.split(".");
     return keyArr.length > 1 ? obj[keyArr[0]]?.[keyArr[1]] : obj[key];
   };

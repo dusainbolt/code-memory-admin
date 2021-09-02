@@ -84,12 +84,12 @@ export const fieldSeoHome: FieldSeoHome = {
   searchBoxUrl: {
     name: "searchBoxUrl",
     label: "seo.searchBoxUrl",
-    placeholder: "placeholder_searchBoxUrl",
+    placeholder: "seo.placeholder_searchBoxUrl",
   },
   languageAlternates: {
     name: "languageAlternates",
     label: "seo.languageAlternates",
-    placeholder: "placeholder_languageAlternates",
+    placeholder: "seo.placeholder_languageAlternates",
   },
   facebookChatPlugin: {
     name: "facebookChatPlugin",
@@ -119,7 +119,7 @@ export const fieldSeoHome: FieldSeoHome = {
     },
     logoAlt: {
       name: "image.logoAlt",
-      label: "seo.logoAlt"
+      label: "seo.logoAlt",
     },
   },
   social: {

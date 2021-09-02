@@ -45,6 +45,11 @@ export default class UploadService {
     return this.validateUploadImage(file, limitSize, t);
   };
 
+  getBase64 = (img: any, callback: any) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
 
   validateUploadImage = (file: UploadFile, limitSize: number, t: TFunction = null) => {
     const isJpgOrPng = this.isValidFormatImage(file.type);

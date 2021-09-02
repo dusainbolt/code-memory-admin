@@ -11,7 +11,7 @@ import { UploadComponent } from '../../common/Upload';
 import { fieldCreateTag } from '../../models/FieldModel';
 import { CreateTagInput, TagStatus } from '../../models/TagModel';
 import { ButtonForm } from '../../common/Button/ButtonForm';
-import ValidateService from '../../services/validateService';
+import { ValidateService } from '../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { getTagSlice, submitTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';

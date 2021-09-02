@@ -34,4 +34,9 @@
     min-width: 102px;
     min-height: 102px;
   }
+  &.full-width {
+    .ant-upload {
+      width: 100%;
+    }
+  }
 }
