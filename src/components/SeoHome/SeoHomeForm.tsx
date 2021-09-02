@@ -2,18 +2,28 @@ import { Col, Row } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import Title from 'antd/lib/typography/Title';
 import { Field, useFormikContext } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ButtonCommon from '../../common/Button';
 import { InputComponent } from '../../common/Input';
 import { TextAreaComponent } from '../../common/Input/TextAreaForm';
 import { FieldUpload } from '../../common/Upload/FieldUpload';
 import { fieldSeoHome } from '../../models/SeoHomeModel';
+import { useAppSelector } from '../../redux/rootStore';
+import { getSeoHomeSlice } from '../../redux/slices/seoHomeSlice';
 
 export const SeoHomeForm = () => {
   const { t } = useTranslation();
   const { social, image } = fieldSeoHome;
-  const { handleSubmit } = useFormikContext();
+  const { seoHome } = useAppSelector(getSeoHomeSlice);
+  const { handleSubmit, setValues } = useFormikContext();
+
+  useEffect(() => {
+    // Init data form Seo Home
+    if (seoHome?.id) {
+      setValues(seoHome);
+    }
+  }, [seoHome]);
 
   return (
     <Row gutter={[32, 32]} className="container-md">

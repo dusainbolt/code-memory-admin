@@ -31,4 +31,5 @@ export const seoHomeResolver = `
 
 export const RS_SEO_HOME = {
   seoHomeCreate: "seoHomeCreate",
+  getSeoHome: "seoHome",
 };
