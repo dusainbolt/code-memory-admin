@@ -8,10 +8,12 @@
     "create_by": "Người tạo",
     "create_at": "Ngày tạo",
     "upload_dec": "Tải lên",
+    "logout": "Đăng xuất",
     "txt_completed": "Hoàn tất",
     "image": "Ảnh",
     "status": "Trạng thái",
     "description": "Giới thiệu",
+    "upload_s3_success": "Tải lên thành công, đang xử lý tiếp...",
     "upload_s3_dec": "Đảng tải file lên AWS S3",
     "text_page_size": "Trang",
     "no_data": "Không có dữ liệu",
@@ -47,7 +49,13 @@
     "blog_child_list": "Danh sách bài đăng",
     "tag": "Thẻ tag",
     "dashboard": "Thống kê",
-    "tag_child_list": "Danh sách thẻ tag"
+    "tag_child_list": "Danh sách thẻ tag",
+    "profile": "Hồ sơ",
+    "setting_seo": "Cài đặt SEO",
+    "seo_home": "Cài đặt",
+    "seo_history": "Lịch sử",
+    "experience_list": "Quá trình làm việc",
+    "company_list": "Danh sách nơi làm việc"
   },
   "tag": {
     "tag_name": "Tên thẻ tag",
@@ -61,5 +69,28 @@
     "place_input_tag_dec": "Nội dung giới thiệu",
     "add_tag_title": "Thêm thẻ Tag",
     "update_tag_title": "Chỉnh sửa thẻ Tag"
+  },
+  "profile": {
+    "experience_list": "Quá trình làm việc",
+    "company_list": "Danh sách nơi làm việc",
+    "serial": "STT",
+    "description_vn": "Mô tả(Tiếng Việt)",
+    "description_en": "Mô tả(Tiếng Anh)",
+    "position": "Vị trí",
+    "time": "Thời gian",
+    "work_place_name_vn": "Nơi làm việc(Tiếng  Việt)",
+    "work_place_name_en": "Nơi làm việc(Tiếng Anh)",
+    "status": "Trạng thái",
+    "update_date": "Ngày chỉnh sửa",
+    "search": "TÌm kiếm",
+    "experience": "Kinh nghiệm",
+    "type": "Loại",
+    "label_thumbnail": "Tải ảnh lên"
+  },
+  "seo": {
+    "title_page": "Cài đặt SEO",
+    "info_basic": "Thông tin cơ bản",
+    "social": "Social",
+    "image": "Ảnh"
   }
 }

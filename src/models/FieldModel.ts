@@ -62,7 +62,24 @@ export const OPTION_FILTER_STATUS_TAG: OptionSelect[] = [
   },
 ];
 
+export const OPTION_FILTER_STATUS_EXPERIENCE: OptionSelect[] =[
+  {
+    label: 'tag.active',
+    value: TagStatus.ACTIVE,
+  },
+  {
+    label: 'tag.hide',
+    value: TagStatus.HIDE,
+  },
+]
+
+
 export interface FieldSearchTag {
+  key: IField;
+  status: IField;
+}
+
+export interface FieldSearchExperience {
   key: IField;
   status: IField;
 }
@@ -79,6 +96,20 @@ export const fieldSearchTag: FieldSearchTag = {
     options: OPTION_FILTER_STATUS_TAG,
   },
 };
+
+
+export const fieldSearchExperience : FieldSearchExperience = {
+  key: {
+    name: 'key',
+    label: 'profile.experience',
+    placeholder: 'profile.experience',
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_EXPERIENCE,
+  },
+}
 
 export interface FieldCreateTag {
   description: IField;
@@ -105,4 +136,69 @@ export const fieldCreateTag: FieldCreateTag = {
   thumbnail: {
     name: 'thumbnail',
   },
+};
+
+export interface FieldCreateExperience {
+  nameVN: IField;
+  nameEN: IField;
+  type: IField;
+  position: IField;
+  descriptionVN: IField;
+  descriptionEN: IField;
+  startTime: IField;
+  endTime: IField;
+  status: IField;
+  thumbnail?: IField;
+}
+
+export const fieldCreateExperience: FieldCreateExperience = {
+  nameVN: {
+    name: 'nameVN',
+    label: 'profile.work_place_name_vn',
+    placeholder: 'profile.work_place_name_vn',
+  },
+  nameEN: {
+    name: 'nameEN',
+    label: 'profile.work_place_name_en',
+    placeholder: 'profile.work_place_name_en'
+  },
+  type:{
+    name: 'type',
+    label: 'profile.type',
+    options: OPTION_FILTER_STATUS_EXPERIENCE,
+  },
+  position: {
+    name: 'position',
+    label: 'profile.position',
+    placeholder: 'profile.position'
+  },
+  descriptionVN: {
+    name: 'descriptionVN',
+    label: 'profile.description_vn',
+    placeholder: 'profile.description_vn'
+  },
+  descriptionEN: {
+    name: 'descriptionEN',
+    label: 'profile.description_en',
+    placeholder: 'profile.description_en'
+  },
+  startTime: {
+    name: 'startTime',
+    label: 'profile.start',
+    placeholder: 'profile.start'
+  },
+  endTime: {
+    name: 'endTime',
+    label: 'profile.end',
+    placeholder: 'profile.end'
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_EXPERIENCE,
+  },
+  thumbnail: {
+    name: 'thumbnail',
+  },
+
 };

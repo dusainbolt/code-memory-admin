@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { FieldCreateTag, FieldLogin } from '../models/FieldModel';
+import { FieldCreateExperience, fieldCreateExperience, FieldCreateTag, FieldLogin } from '../models/FieldModel';
 
 export default class ValidateService {
   public instance = Yup;
@@ -39,4 +39,17 @@ export default class ValidateService {
       [thumbnail.name]: this.mixRequire(this.LABEL_FIELD_IMAGE),
     });
   };
+
+  readonly validateCreateExperienceInput = (fieldCreateExperience: FieldCreateExperience) => {
+    const { nameVN,nameEN, descriptionVN, descriptionEN, position, thumbnail } = fieldCreateExperience;
+    return Yup.object({
+      [nameVN.name]: this.stringRequire(nameVN.label),
+      [nameEN.name]: this.stringRequire(nameEN.label),
+      [descriptionEN.name]: this.stringRequire(descriptionEN.label),
+      [descriptionVN.name]: this.stringRequire(descriptionVN.label),
+      [position.name]: this.stringRequire(position.label),
+      [position.name]: this.stringRequire(position.label),
+      [thumbnail.name]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+    })
+  }
 }

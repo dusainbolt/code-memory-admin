@@ -1,7 +1,7 @@
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import React, { ReactNode } from 'react';
-import { PieChartOutlined } from '@ant-design/icons';
+import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
 import AntImage from '../Image/AntImage';
 import LogoSider from '../../asset/image/logo_header.webp';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -76,6 +76,25 @@ const menuSider: IMenuSider[] = [
       },
     ],
   },
+  {
+    menu:{
+      title: 'menu.profile',
+      key: getKeyMenu(ROUTE.PROFILE)
+    },
+    icon: <UserOutlined/>,
+    child:[
+      {
+        title: 'menu.experience_list',
+        key: ROUTE.PROFILE_EXPERIENCE_LIST,
+        url: ROUTE.PROFILE_EXPERIENCE_LIST,
+      },
+      {
+        title: 'menu.company_list',
+        key: ROUTE.PROFILE_COMPANY_LIST,
+        url: ROUTE.PROFILE_COMPANY_LIST,
+      }
+    ]
+  }
 ];
 
 export const SiderAdmin = () => {
