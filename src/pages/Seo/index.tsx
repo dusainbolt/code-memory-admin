@@ -6,16 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { Divider } from 'antd';
 import { Formik } from 'formik';
 import { getSeoHomeSlice } from '../../redux/slices/seoHomeSlice';
-import { useSeoHome } from '../../hooks/useSeoHome';
 import { SeoHomeForm } from '../../components/SeoHome/SeoHomeForm';
 import { ValidateService } from '../../services/validateService';
 import { fieldSeoHome } from '../../models/SeoHomeModel';
+import { useSeoHome } from '../../hooks/useSeoHome';
 
 export const SeoPage = () => {
-  const seoHome = useAppSelector(getSeoHomeSlice);
+  const { seoHome } = useAppSelector(getSeoHomeSlice);
   const { t } = useTranslation();
-  const { onSubmitSeoHome } = useSeoHome();
   const validateSchema = new ValidateService(t).validateSeoHomeInput(fieldSeoHome);
+  const { onSubmitSeoHome } = useSeoHome();
 
   return (
     <Box className="admin__content seo-page">
