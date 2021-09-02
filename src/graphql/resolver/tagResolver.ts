@@ -12,7 +12,7 @@ export const TagResolver = `
 `;
 
 export const RESPONSE_TAG = {
-  tagCreate: "createTag",
+  tagCreate: "tagCreate",
   tagUpdate: "tagUpdate",
   userCreate: "userCreate",
   tagList: "tagList"

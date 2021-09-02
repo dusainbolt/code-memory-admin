@@ -4,10 +4,11 @@ import { UploadFile } from 'antd/lib/upload/interface';
 import S3 from 'react-aws-s3';
 import { ProcessUpload } from '../models/LayoutModel';
 import store from '../redux/rootStore';
-import { setProcessUploadSlice } from '../redux/slices/layoutSlice';
+import { setUploadSliceDone, setUploadSliceStart } from '../redux/slices/layoutSlice';
 
 export enum Storage {
   TAG = 'tag',
+  META = "meta",
 }
 
 export type ResponseS3 = {
@@ -63,20 +64,24 @@ export default class UploadService {
     return isJpgOrPng && isLt1M;
   };
 
-  async uploadFile(file: any, fileName, typeStorage = Storage.TAG) {
-    this.dispatch(setProcessUploadSlice({ loadingUpload: true, visibleProcessModal: true } as ProcessUpload));
-    return await this.s3
-      .uploadFile(file, `${typeStorage}/${fileName}`)
-      .then(({ location }: ResponseS3) => {
-        this.dispatch(setProcessUploadSlice({ loadingUpload: false, uploadDone: false } as ProcessUpload));
-        return location;
-      })
-      .catch(err => {
-        console.error(err);
-        this.dispatch(setProcessUploadSlice({ loadingUpload: false, messageUpload: err } as ProcessUpload));
-        return false;
-      });
+  handleUpload = async (file: any, fileName, typeStorage = Storage.TAG): Promise<string> => {
+    if (!!(file as UploadFile).size) {
+      // when upload file show modal process
+      this.dispatch((setUploadSliceStart({ visibleProcessModal: true } as ProcessUpload)));
+      return await this.s3
+        .uploadFile((file as UploadFile).originFileObj, `${typeStorage}/${fileName}`)
+        .then(({ location }: ResponseS3) => {
+          this.dispatch(setUploadSliceDone({}));
+          return location;
+        })
+        .catch(err => {
+          console.error(err);
+          this.dispatch(setUploadSliceDone({ msgErrUpload: err } as ProcessUpload));
+          return false;
+        });
+    } else {
+      this.dispatch(setUploadSliceDone({}));
+      return file;
+    }
   }
-
-
 }
