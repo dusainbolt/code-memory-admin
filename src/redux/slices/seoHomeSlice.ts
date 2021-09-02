@@ -6,6 +6,7 @@ import { SeoHome } from './../../models/SeoHomeModel';
 export interface SeoHomeSlice {
   seoHome: SeoHome,
   isLoadingSubmit: boolean;
+  isLoadingSeoHome: boolean;
 }
 
 const initialState: SeoHomeSlice = {
@@ -34,6 +35,7 @@ const initialState: SeoHomeSlice = {
     id: "",
   },
   isLoadingSubmit: false,
+  isLoadingSeoHome: true,
 };
 
 
@@ -41,7 +43,16 @@ export const seoHomeSlice = createSlice({
   name: 'seoHome',
   initialState,
   reducers: {
-    getSeoHomeSuccess: (state: SeoHomeSlice, action: any) => ({ ...state, ...action.payload }),
+    getSeoHomeStart: (state: SeoHomeSlice) => {
+      state.isLoadingSeoHome = true;
+    },
+    getSeoHomeSuccess: (state: SeoHomeSlice, action: any) => {
+      state.seoHome = action.payload;
+      state.isLoadingSeoHome = false;
+    },
+    getSeoHomeError: (state: SeoHomeSlice, action: any) => {
+      state.isLoadingSeoHome = false;
+    },
     submitSeoHomeStart: (state: SeoHomeSlice, action: SubmitSeoHomeAction) => {
       state.isLoadingSubmit = true;
     },
@@ -57,6 +68,6 @@ export const seoHomeSlice = createSlice({
 
 export const getSeoHomeSlice = (state: IRootState): SeoHomeSlice => state.seoHomeSlice;
 
-export const { getSeoHomeSuccess, submitSeoHomeSuccess, submitSeoHomeStart, submitSeoHomeError } = seoHomeSlice.actions;
+export const { getSeoHomeStart, getSeoHomeSuccess, getSeoHomeError, submitSeoHomeSuccess, submitSeoHomeStart, submitSeoHomeError } = seoHomeSlice.actions;
 
 export default seoHomeSlice.reducer;
