@@ -5,6 +5,10 @@ import { FC } from 'react';
 import Box from '../Box';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import { HelperService } from '../../services/helperService';
+
+const helper = new HelperService();
+
 export interface IInputComponent {
   label?: string;
   prefix?: any;
@@ -31,15 +35,16 @@ export const InputComponent: FC<IInputComponent> = ({
   ...props
 }) => {
   const { t } = useTranslation();
-  const touched = formTouched[field.name];
-  const errorMessage = formErrors[field.name];
+  const touched = helper.getValByStrKey(formTouched, field.name);
+  const errorMessage = helper.getValByStrKey(formErrors, field.name);
   const InputCommon = passwordMode ? Input.Password : Input;
+  const placeHolderDefault = !!label ? t('message.placeholder_default', { label: t(label) }) : '';
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
       <InputCommon
         className={clsx('app-input', [className] && className)}
-        placeholder={t(placeholder)}
+        placeholder={!!placeholder ? t(placeholder) : placeHolderDefault}
         prefix={prefix}
         suffix={suffix}
         {...field}

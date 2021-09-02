@@ -7,9 +7,11 @@ import { BoxIconAndName } from './BoxIconAndName';
 import { TIME_FORMAT } from '../../constant';
 import { StatusTag } from './StatusTag';
 import { User } from '../../models/UserModel';
-import { getFullNameUser } from '../../services/utils';
+import { HelperService } from '../../services/helperService';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
+
+const helper = new HelperService();
 
 export const useColumnTag = (t: TFunction, pageIndex: any, callbackEdit: any) => {
   return [
@@ -35,7 +37,7 @@ export const useColumnTag = (t: TFunction, pageIndex: any, callbackEdit: any) =>
     {
       title: t('common.create_by'),
       dataIndex: 'userCreate',
-      render: (userCreate: User) => getFullNameUser(userCreate),
+      render: (userCreate: User) => helper.getFullNameUser(userCreate),
     },
     {
       title: t('common.create_at'),

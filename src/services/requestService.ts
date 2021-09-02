@@ -10,9 +10,9 @@ export default class RequestService {
 
   handleResponse =
     (callback = '') =>
-    (res: any): any => {
-      return callback ? res.data[callback] : res.data;
-    };
+      (res: any): any => {
+        return callback ? res.data[callback] : res.data;
+      };
 
   query = async (query: DocumentNode, variables: any = {}, callback = '', fetchPolicy: any = FETCH_POLICY.DEFAULT) => {
     if (fetchPolicy === FETCH_POLICY.NO_CACHE) {

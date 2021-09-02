@@ -1,8 +1,10 @@
+import { HelperService } from '../services/helperService';
 import { useCallback, useEffect, useState } from 'react';
 import { SearchTagInput, Tag, TagStatus } from '../models/TagModel';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
 import { getTagListSliceStart, getTagSlice, setVisibleFormTag } from '../redux/slices/tagSlice';
-import { getOrderType } from '../services/utils';
+
+const helper = new HelperService();
 
 export const useSearchTagList = (
   dispatch: any
@@ -40,7 +42,7 @@ export const useSearchTagList = (
 
   const handleSortByParams = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
-    setParamsSearch({ ...paramsSearch, orderBy: field, sortBy: getOrderType(order) });
+    setParamsSearch({ ...paramsSearch, orderBy: field, sortBy: helper.getOrderType(order) });
   };
 
   const getPageIndexNumber = () => {

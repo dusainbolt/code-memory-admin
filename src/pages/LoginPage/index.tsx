@@ -5,7 +5,7 @@ import Box from '../../common/Box';
 import { LoginForm } from '../../components/Login/LoginForm';
 import { useLogin } from '../../hooks/useLogin';
 import { fieldLogin } from '../../models/FieldModel';
-import ValidateService from '../../services/validateService';
+import { ValidateService } from '../../services/validateService';
 
 export const LoginPages = () => {
   const { t } = useTranslation();

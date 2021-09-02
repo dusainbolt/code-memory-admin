@@ -11,7 +11,9 @@ import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { SelectComponent } from '../../common/Select';
 import { useAppSelector } from '../../redux/rootStore';
 import { getTagSlice } from '../../redux/slices/tagSlice';
-import { handleResetSearch } from '../../services/utils';
+import { HelperService } from '../../services/helperService';
+
+const helper = new HelperService();
 
 export const SearchTagListForm = () => {
   const { t } = useTranslation();
@@ -40,7 +42,7 @@ export const SearchTagListForm = () => {
               size="middle"
             />
             <ButtonCommon
-              onClick={handleResetSearch(handleReset, handleSubmit)}
+              onClick={helper.handleResetSearch(handleReset, handleSubmit)}
               loading={isLoadingList}
               type="primary"
               shape="circle"

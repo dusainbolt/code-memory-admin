@@ -1,3 +1,4 @@
+import seoHomeSlice from './slices/seoHomeSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
@@ -17,7 +18,7 @@ export const whitelist = [];
 
 const persistLoginSlice = persistReducer(getPersistConfig('loginSlice', { whitelist: ['token', 'user'] }), loginSlice);
 
-const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice, tagSlice });
+const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice, tagSlice, seoHomeSlice });
 
 export type IRootState = ReturnType<typeof rootReducer>;
 

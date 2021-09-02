@@ -11,7 +11,7 @@ import { UploadComponent } from '../../../common/Upload';
 import { fieldCreateExperience } from '../../../models/FieldModel';
 import { CreateTagInput,  TagStatus } from '../../../models/TagModel';
 import { ButtonForm } from '../../../common/Button/ButtonForm';
-import ValidateService from '../../../services/validateService';
+import { ValidateService } from '../../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
 import { getTagSlice, submitTagSliceStart } from '../../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../../constant';
@@ -51,7 +51,6 @@ const ExperienceForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFuncti
         <Text className="tag-upload-dec">{t('profile.label_thumbnail')}</Text>
         <UploadComponent
           setFieldValue={setFieldValue}
-          visible={visible}
           isLoadingForm={isLoadingForm}
           name={fieldCreateExperience.thumbnail.name}
           crop={true}

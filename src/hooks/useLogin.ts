@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ROUTE } from '../appRoutes';
+import { privateRoutes, ROUTE, RouteLayoutAdmin } from '../appRoutes';
 import { LoginInput } from '../models/LoginModel';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
 import { loginSliceStart } from '../redux/slices/loginSlice';
@@ -18,7 +18,9 @@ export const useLogin = (): UseLogin => {
 
   useEffect(() => {
     if (token) {
-      history.push(ROUTE.DASHBOARD_BLOG);
+      !RouteLayoutAdmin.includes(history.location.pathname) && history.push(ROUTE.DASHBOARD_BLOG);
+    } else {
+      history.push(ROUTE.INDEX);
     }
   }, [token]);
   const loginInput: LoginInput = { credential: '', password: '' };

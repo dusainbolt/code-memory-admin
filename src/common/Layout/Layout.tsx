@@ -9,6 +9,7 @@ import { SiderAdmin } from './SiderAdmin';
 import { NotifySystem } from '../Notify/NotifySystem';
 import { ModalProcessUpload } from '../Modal/ModalProcessUpload';
 import { LoginPages } from '../../pages/LoginPage';
+import { useLogin } from '../../hooks/useLogin';
 
 const { Content } = Layout;
 
@@ -38,6 +39,7 @@ const LayoutAuth: React.FC<ILayoutAuth> = ({ type, children, token }) => {
 };
 
 const LayoutCommon: React.FC<RouteChildrenProps> = ({ history, location, match }) => {
+  useLogin();
   const token = useAppSelector(state => state.loginSlice.token);
   return (
     <LayoutAuth token={token} type={history.location.pathname}>
