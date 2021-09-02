@@ -6,13 +6,15 @@ import { Code } from '../../components/Blog/Code';
 import { CodeEditor } from '../../components/Blog/CodeEditor';
 import { Formik } from 'formik';
 import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
-import { ignoreString, mapContentBlog, toObject } from '../../services/utils';
 import ButtonCommon from '../../common/Button';
 import { FormInputBlog } from '../../components/Blog/FormInputBlog';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 // import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
 import { Divider } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { HelperService } from '../../services/helperService';
+
+const helper = new HelperService();
 
 const code = `const App = props => {
   return (
@@ -36,6 +38,16 @@ const contentDefault: BlogContent[] = [
     language: 'javascript',
   },
 ];
+
+const mapContentBlog = (values: any): BlogContent[] => {
+  let contents = [];
+  for (const [key] of Object.entries(values)) {
+    if (helper.ignoreString(key, BLOG_FIELD_NAME)) {
+      continue;
+    }
+  }
+  return contents;
+};
 
 export const AddBlogPage = () => {
   const dispatch = useAppDispatch();
@@ -62,7 +74,7 @@ export const AddBlogPage = () => {
     for (const data of Object.entries(fieldObject)) {
       const blogContent: BlogContent = data[1];
       const fieldName: string = data[0];
-      if (ignoreString(fieldName, BLOG_FIELD_NAME)) {
+      if (helper.ignoreString(fieldName, BLOG_FIELD_NAME)) {
         continue;
       }
       if (blogContent.type === BlogContentType.CODE) {
@@ -76,7 +88,7 @@ export const AddBlogPage = () => {
   };
 
   return (
-    <Formik initialValues={toObject(contentDefault, BLOG_FIELD_NAME)} onSubmit={onSubmit}>
+    <Formik initialValues={helper.toObject(contentDefault, BLOG_FIELD_NAME)} onSubmit={onSubmit}>
       {({ values, handleSubmit }) => (
         <Box className="admin__content">
           <Divider orientation="left" className="title-field-divider" plain>

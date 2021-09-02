@@ -46,7 +46,7 @@ const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onC
     <Row className="tag-form form-label-md">
       <Box className="upload__field center-block">
         <Text className="tag-upload-dec">{t('tag.label_thumbnail')}</Text>
-        <UploadComponent visible={visible} isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
+        <UploadComponent isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
       </Box>
       <Field {...fieldCreateTag.title} component={InputComponent} />
       <Field {...fieldCreateTag.description} component={TextAreaComponent} />

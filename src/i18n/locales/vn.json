@@ -30,6 +30,8 @@
     "MSG_1": "{{fieldName}} không được để trống",
     "MSG_2": "Tài khoản hoặc mật khẩu không chính xác",
     "SUBMIT_SUCCESS": "Submit thành công",
+    "upload_format_invalid": "File không đúng định dạng",
+    "upload_limit_size": "File không được quá {{size}} MB",
     "title_error": "Đã xảy ra lỗi",
     "title_warning": "Cảnh báo",
     "title_info": "Thông báo",
@@ -54,7 +56,7 @@
     "setting_seo": "Cài đặt SEO",
     "seo_home": "Cài đặt",
     "seo_history": "Lịch sử",
-    "experience_list": "Danh sách kinh nghiệm",
+    "experience_list": "Quá trình làm việc",
     "company_list": "Danh sách nơi làm việc"
   },
   "tag": {
@@ -71,17 +73,23 @@
     "update_tag_title": "Chỉnh sửa thẻ Tag"
   },
   "profile": {
-    "experience_list": "Danh sách kinh nghiệm",
+    "experience_list": "Quá trình làm việc",
     "company_list": "Danh sách nơi làm việc",
     "serial": "STT",
-    "description": "Mô tả",
+    "description_vn": "Mô tả(Tiếng Việt)",
+    "description_en": "Mô tả(Tiếng Anh)",
     "position": "Vị trí",
     "time": "Thời gian",
-    "company": "Nơi làm việc",
+    "work_place_name_vn": "Nơi làm việc(Tiếng  Việt)",
+    "work_place_name_en": "Nơi làm việc(Tiếng Anh)",
     "status": "Trạng thái",
     "update_date": "Ngày chỉnh sửa",
     "search": "TÌm kiếm",
-    "experience": "Kinh nghiệm"
+    "experience": "Kinh nghiệm",
+    "type": "Loại",
+    "start": "Bắt đầu",
+    "end": "Kết thúc",
+    "label_thumbnail": "Tải ảnh lên"
   },
   "seo": {
     "title_page": "Cài đặt SEO",

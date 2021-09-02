@@ -1,3 +1,4 @@
+import { IRootState } from './../rootReducer';
 import { createSlice } from '@reduxjs/toolkit';
 import { LoginSlice } from '../../models/LoginModel';
 import { LoginActionInput, LoginActionOutput } from '../actionTypes/loginActionTypes';
@@ -31,7 +32,7 @@ export const loginSlice = createSlice({
   },
 });
 
-export const getloginSlice = (state: any) => state.loginSlice;
+export const getloginSlice = (state: IRootState) => state.loginSlice;
 
 export const { loginSliceStart, loginSliceSuccess, loginSliceError, logoutSliceStart } = loginSlice.actions;
 
