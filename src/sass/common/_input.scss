@@ -26,3 +26,17 @@
     color: $color_text_alert_warning;
   }
 }
+
+.field-wrap.upload-filed {
+  .ant-upload {
+    margin: 0;
+    height: auto;
+    min-width: 102px;
+    min-height: 102px;
+  }
+  &.full-width {
+    .ant-upload {
+      width: 100%;
+    }
+  }
+}

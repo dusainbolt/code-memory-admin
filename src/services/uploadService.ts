@@ -1,10 +1,14 @@
+import { TFunction } from 'react-i18next';
+import { message } from 'antd';
+import { UploadFile } from 'antd/lib/upload/interface';
 import S3 from 'react-aws-s3';
 import { ProcessUpload } from '../models/LayoutModel';
 import store from '../redux/rootStore';
-import { setProcessUploadSlice } from '../redux/slices/layoutSlice';
+import { setUploadSliceDone, setUploadSliceStart } from '../redux/slices/layoutSlice';
 
 export enum Storage {
   TAG = 'tag',
+  META = "meta",
 }
 
 export type ResponseS3 = {
@@ -30,18 +34,54 @@ export default class UploadService {
     this.dispatch = store.dispatch;
   }
 
-  async uploadFile(file: any, fileName, typeStorage = Storage.TAG) {
-    this.dispatch(setProcessUploadSlice({ loadingUpload: true, visibleProcessModal: true } as ProcessUpload));
-    return await this.s3
-      .uploadFile(file, `${typeStorage}/${fileName}`)
-      .then(({ location }: ResponseS3) => {
-        this.dispatch(setProcessUploadSlice({ loadingUpload: false, uploadDone: false } as ProcessUpload));
-        return location;
-      })
-      .catch(err => {
-        console.error(err);
-        this.dispatch(setProcessUploadSlice({ loadingUpload: false, messageUpload: err } as ProcessUpload));
-        return false;
-      });
+  isValidFormatImage = (type: string) => {
+    return type === 'image/jpeg' || type === 'image/png' || type === 'image/svg+xml' || type === 'image/heic';
+  };
+
+  isValidSize = (fileSize, limitSize: number) => {
+    return fileSize / 1024 / 1024 <= limitSize;
+  }
+
+  beforeUpload = (t: any, limitSize: number) => (file: any) => {
+    return this.validateUploadImage(file, limitSize, t);
+  };
+
+  getBase64 = (img: any, callback: any) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
+
+  validateUploadImage = (file: UploadFile, limitSize: number, t: TFunction = null) => {
+    const isJpgOrPng = this.isValidFormatImage(file.type);
+    if (!isJpgOrPng && !!t) {
+      message.error(t('message.upload_format_invalid'));
+    }
+    const isLt1M = this.isValidSize(file.size, limitSize);
+    if (!isLt1M && !!t) {
+      message.error(t('message.upload_limit_size', { size: limitSize }));
+    }
+    return isJpgOrPng && isLt1M;
+  };
+
+  handleUpload = async (file: any, fileName, typeStorage = Storage.TAG): Promise<string> => {
+    if (!!(file as UploadFile).size) {
+      // when upload file show modal process
+      this.dispatch((setUploadSliceStart({ visibleProcessModal: true } as ProcessUpload)));
+      return await this.s3
+        .uploadFile((file as UploadFile).originFileObj, `${typeStorage}/${fileName}`)
+        .then(({ location }: ResponseS3) => {
+          this.dispatch(setUploadSliceDone({}));
+          return location;
+        })
+        .catch(err => {
+          console.error(err);
+          this.dispatch(setUploadSliceDone({ msgErrUpload: err } as ProcessUpload));
+          return false;
+        });
+    } else {
+      this.dispatch(setUploadSliceDone({}));
+      return file;
+    }
   }
 }

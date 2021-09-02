@@ -14,8 +14,8 @@ export interface NotifySystem {
 export interface ProcessUpload {
   loadingUpload?: boolean;
   visibleProcessModal?: boolean;
-  messageUpload?: string;
-  uploadDone?: boolean;
+  msgErrUpload?: string;
+  count?: number;
 }
 
 export interface LayoutSlice {

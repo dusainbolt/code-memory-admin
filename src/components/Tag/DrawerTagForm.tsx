@@ -11,15 +11,18 @@ import { UploadComponent } from '../../common/Upload';
 import { fieldCreateTag } from '../../models/FieldModel';
 import { CreateTagInput, TagStatus } from '../../models/TagModel';
 import { ButtonForm } from '../../common/Button/ButtonForm';
-import ValidateService from '../../services/validateService';
+import { ValidateService } from '../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { getTagSlice, submitTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';
 import UploadService from '../../services/uploadService';
 import { UploadFile } from 'antd/lib/upload/interface';
+import { setUploadSliceClose, setUploadSliceStart } from '../../redux/slices/layoutSlice';
+import { setUploadSliceAction } from '../../redux/actionTypes/layoutActionTypes';
+import { ProcessUpload } from '../../models/LayoutModel';
 
 const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
-  const { handleSubmit, setFieldValue, handleReset, setValues } = useFormikContext();
+  const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { tagDetail } = useAppSelector(getTagSlice);
 
   useEffect(() => {
@@ -46,13 +49,7 @@ const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onC
     <Row className="tag-form form-label-md">
       <Box className="upload__field center-block">
         <Text className="tag-upload-dec">{t('tag.label_thumbnail')}</Text>
-        <UploadComponent
-          setFieldValue={setFieldValue}
-          visible={visible}
-          isLoadingForm={isLoadingForm}
-          name={fieldCreateTag.thumbnail.name}
-          crop={true}
-        />
+        <UploadComponent isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
       </Box>
       <Field {...fieldCreateTag.title} component={InputComponent} />
       <Field {...fieldCreateTag.description} component={TextAreaComponent} />
@@ -82,19 +79,15 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
   };
 
   const handleSubmitForm = async (values: CreateTagInput) => {
-    // handle set thumbnail
-    let thumbnail = '';
     const uploadService = new UploadService();
-    if (!!(values.thumbnail as UploadFile).size) {
-      thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.title);
-    } else {
-      thumbnail = values.thumbnail;
-    }
-
+    // handle set thumbnail
+    dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
+    const thumbnail = await uploadService.handleUpload(values.thumbnail, values.title);
     dispatch(
       submitTagSliceStart({
         input: { ...values, thumbnail },
         callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
+        beforeCallback: setUploadSliceClose,
       })
     );
   };

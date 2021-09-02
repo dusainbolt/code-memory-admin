@@ -11,3 +11,8 @@ export const UserResolver = `
   roles
   status
 `;
+
+
+export const RESPONSE_USER = {
+  userLogin: "userLogin",
+};

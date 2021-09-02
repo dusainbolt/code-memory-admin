@@ -3,9 +3,10 @@ import { NotifySystem, TypeNotify } from '../models/LayoutModel';
 import { setNotifySlice } from './slices/layoutSlice';
 import WatchLoginSaga from './sagas/loginSaga';
 import watchTagSaga from './sagas/tagSaga';
+import { watchSeoHome } from './sagas/seoHomeSaga';
 
 function* rootSaga() {
-  yield all([WatchLoginSaga(), watchTagSaga()]);
+  yield all([WatchLoginSaga(), watchTagSaga(), watchSeoHome()]);
 }
 
 export function* handleMessageErrorSaga(error) {

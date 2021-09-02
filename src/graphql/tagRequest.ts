@@ -1,17 +1,17 @@
 import { gql } from '@apollo/client';
 import { CreateTagInput, SearchTagInput, UpdateTagInput } from '../models/TagModel';
 import RequestService from '../services/requestService';
-import { TagResolver } from './resolver/tagResolver';
+import { TagResolver, RESPONSE_TAG } from './resolver/tagResolver';
 import { UserResolver } from './resolver/userResolver';
 
 const requestService = new RequestService();
 
 const getListTagQuery = gql`
   query ListTagQuery($input: SearchTagInput!) {
-    listTags(input: $input) {
+    ${RESPONSE_TAG.tagList}(input: $input) {
       dataTags {
         ${TagResolver}
-        userCreate {
+        ${RESPONSE_TAG.userCreate} {
           ${UserResolver}
         }
       }
@@ -21,14 +21,14 @@ const getListTagQuery = gql`
 `;
 
 export const getListTagRequest = (input: SearchTagInput, fetchPolicy?: any): any => {
-  return requestService.query(getListTagQuery, { input }, 'listTags', fetchPolicy);
+  return requestService.query(getListTagQuery, { input }, RESPONSE_TAG.tagList, fetchPolicy);
 };
 
 const addTagQuery = gql`
   mutation createTagMutation($input: CreateTagInput!) {
-    createTag(input: $input) {
+    ${RESPONSE_TAG.tagCreate}(input: $input) {
       ${TagResolver}
-      userCreate {
+      ${RESPONSE_TAG.userCreate} {
         ${UserResolver}
       }
     }
@@ -37,9 +37,9 @@ const addTagQuery = gql`
 
 const updateTagQuery = gql`
   mutation UpdateTagMutation($input: UpdateTagInput!) {
-    updateTag(input: $input) {
+    ${RESPONSE_TAG.tagUpdate}(input: $input) {
       ${TagResolver}
-      userCreate {
+      ${RESPONSE_TAG.userCreate} {
         ${UserResolver}
       }
     }
@@ -51,8 +51,8 @@ export const submitTagRequest = (input: CreateTagInput): any => {
   delete input.id;
   if (!!id) {
     const dataQueryUpdate: UpdateTagInput = { data: input, tagId: id };
-    return requestService.mutation(updateTagQuery, { input: dataQueryUpdate }, 'updateTag');
+    return requestService.mutation(updateTagQuery, { input: dataQueryUpdate }, RESPONSE_TAG.tagUpdate);
   } else {
-    return requestService.mutation(addTagQuery, { input }, 'createTag');
+    return requestService.mutation(addTagQuery, { input }, RESPONSE_TAG.tagCreate);
   }
 };

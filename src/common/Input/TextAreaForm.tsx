@@ -22,7 +22,7 @@ export interface ITextAreaComponent {
 
 export const TextAreaComponent: FC<ITextAreaComponent> = ({
   field,
-  form: { touched: formTouched, errors: formErrors, setFieldValue: formSetFieldValue },
+  form: { touched: formTouched, errors: formErrors, setFieldValue },
   label = '',
   prefix = null,
   suffix = null,
@@ -37,7 +37,7 @@ export const TextAreaComponent: FC<ITextAreaComponent> = ({
   const errorMessage = formErrors[field.name];
 
   const onChangeTextArea = ({ target: { value } }) => {
-    formSetFieldValue && formSetFieldValue(field.name, value);
+    setFieldValue && setFieldValue(field.name, value);
   };
 
   return (
