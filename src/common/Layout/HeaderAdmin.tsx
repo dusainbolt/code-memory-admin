@@ -4,7 +4,7 @@ import { Header } from 'antd/lib/layout/layout';
 import Title from 'antd/lib/typography/Title';
 import React, { useState } from 'react';
 import { useAppSelector } from '../../redux/rootStore';
-import { getFullName } from '../../services/utils';
+import { HelperService } from '../../services/helperService';
 import Box from '../Box';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -12,6 +12,8 @@ import ButtonCommon from '../Button';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { logoutSliceStart } from '../../redux/slices/loginSlice';
+
+const helper = new HelperService();
 
 export const HeaderAdmin = () => {
   const { t } = useTranslation();
@@ -47,7 +49,7 @@ export const HeaderAdmin = () => {
         onVisibleChange={onChangeVisiblePopover}>
         <Box className="info-wrap flx-center">
           <Box className="info-wrap__name-tag mr-10">
-            <Title level={4}>{getFullName(user)}</Title>
+            <Title level={4}>{helper.getFullName(user)}</Title>
             <Tag icon={<CheckCircleOutlined />} className="mr-0" color="success">
               ADMIN
             </Tag>

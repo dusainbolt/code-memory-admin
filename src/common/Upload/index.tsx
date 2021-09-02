@@ -22,14 +22,15 @@ const isValidFormat = (type: string) => {
 const beforeUpload = (t: any) => (file: any) => {
   const isJpgOrPng = isValidFormat(file.type);
   if (!isJpgOrPng) {
-    message.error(t('message.E12a'));
+    message.error(t('message.upload_format_invalid'));
     return false;
   }
-  const isLt2M = file.size / 1024 / 1024 <= 1;
-  if (!isLt2M) {
-    message.error(t('message.E14a'));
+  const isLt1M = file.size / 1024 / 1024 <= 1;
+  if (!isLt1M) {
+    message.error(t('message.upload_limit_size', { size: 1 }));
+    return false;
   }
-  return isJpgOrPng && isLt2M;
+  return isJpgOrPng && isLt1M;
 };
 
 interface IUploadComponent {
@@ -38,7 +39,6 @@ interface IUploadComponent {
   urlDefault?: string;
   classNameWrap?: string;
   crop?: boolean;
-  visible?: boolean;
   isLoadingForm?: boolean;
 }
 
@@ -84,7 +84,6 @@ export const UploadComponent = ({ name, crop = false, classNameWrap = '', isLoad
       <Upload
         name="avatar"
         listType="picture-card"
-        className="upload__wrap"
         showUploadList={false}
         action="/"
         disabled={isLoadingForm}

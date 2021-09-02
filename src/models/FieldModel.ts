@@ -106,3 +106,4 @@ export const fieldCreateTag: FieldCreateTag = {
     name: 'thumbnail',
   },
 };
+
