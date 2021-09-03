@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Col, Divider, Row } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import Title from 'antd/lib/typography/Title';
 import { Field, useFormikContext } from 'formik';
@@ -16,12 +16,12 @@ export const SeoHomeForm = () => {
   const { t } = useTranslation();
   const { social, image } = fieldSeoHome;
   const { seoHome, isLoadingSubmit } = useAppSelector(getSeoHomeSlice);
-  const { handleSubmit, setValues } = useFormikContext();
+  const { handleSubmit, setValues, setFieldValue } = useFormikContext();
 
   useEffect(() => {
     // Init data form Seo Home
     if (seoHome?.id) {
-      setValues(seoHome);
+      setValues({ ...seoHome, reason: '' });
     }
   }, [seoHome]);
 
@@ -45,6 +45,9 @@ export const SeoHomeForm = () => {
         <Field {...social.facebookPageUrl} component={InputComponent} />
         <Field {...social.youtubeUrl} component={InputComponent} />
         <Field {...social.twitterUrl} component={InputComponent} />
+        <Divider />
+        <Field {...fieldSeoHome.reason} component={InputComponent} />
+
         <ButtonCommon loading={isLoadingSubmit} onClick={handleSubmit}>
           {t('common.txt_completed')}
         </ButtonCommon>

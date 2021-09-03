@@ -91,7 +91,12 @@
     "type": "Loại",
     "start": "Bắt đầu",
     "end": "Kết thúc",
-    "label_thumbnail": "Tải ảnh lên"
+    "label_thumbnail": "Tải ảnh lên",
+    "active": "Hoạt động",
+    "inactive": "Ngừng hoạt động",
+    "certificate": "Chứng chỉ",
+    "learn": "Học tập",
+    "work": "Công ty"
   },
   "seo": {
     "title_page": "Cài đặt SEO",
@@ -107,6 +112,7 @@
     "placeholder_description": "Nhập mô tả  của website",
     "domain": "Tên miền",
     "placeholder_domain": "Tên miền của website",
+    "reason": "Lý do thay đổi",
     "searchBoxUrl": "URL thanh tìm kiếm",
     "placeholder_searchBoxUrl": "NHập URL thanh tìm kiếm của website",
     "languageAlternates": "Ngôn ngữ thay thế",

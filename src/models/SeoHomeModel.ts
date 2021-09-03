@@ -59,6 +59,7 @@ export interface FieldSeoHome {
   searchBoxUrl: IField;
   languageAlternates: IField;
   siteName: IField;
+  reason: IField;
   image: FieldImageSeoHome,
   social: FieldSocialSeoHome,
 }
@@ -100,6 +101,10 @@ export const fieldSeoHome: FieldSeoHome = {
     name: "facebookChatPlugin",
     label: "seo.facebookChatPlugin",
     placeholder: "seo.placeholder_facebookChatPlugin"
+  },
+  reason: {
+    name: "reason",
+    label: "seo.reason",
   },
   image: {
     faviconUrlICO: {
