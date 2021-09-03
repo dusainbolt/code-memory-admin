@@ -25,14 +25,14 @@ export const SeoHomeForm: FC<{
     if (seoHome?.id) {
       setValues({ ...seoHome, reason: '' });
     }
-    if (seoHomeFill?.id && !seoHome?.id) {
+    if (seoHomeFill?.id) {
       setValues({ ...seoHomeFill, reason: '' });
     }
   }, [seoHome, seoHomeFill]);
 
   return (
     <Row gutter={[32, 32]} className="container-md">
-      {seoHomeFill.id && (
+      {seoHomeFill?.id && (
         <Col xs={24}>
           <Alert message={t('common.des_completed_extend')} banner closable />
         </Col>
