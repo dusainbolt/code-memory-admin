@@ -87,7 +87,6 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
       submitTagSliceStart({
         input: { ...values, thumbnail },
         callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
-        beforeCallback: setUploadSliceClose,
       })
     );
   };

@@ -29,6 +29,7 @@
   "message": {
     "MSG_1": "{{-fieldName}} không được để trống",
     "MSG_2": "Tài khoản hoặc mật khẩu không chính xác",
+    "MSG_4": "Dữ liệu bị trùng lặp vui lòng thay đổi",
     "SUBMIT_SUCCESS": "Submit thành công",
     "upload_format_invalid": "File không đúng định dạng",
     "upload_limit_size": "File không được quá {{size}} MB",
@@ -94,6 +95,7 @@
   },
   "seo": {
     "title_page": "Cài đặt SEO",
+    "title_page_history": "Lịch sử thay đổi",
     "info_basic": "Thông tin cơ bản",
     "social": "Social",
     "image": "Ảnh",

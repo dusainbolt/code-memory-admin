@@ -8,3 +8,12 @@
     margin-bottom: 22px;
   }
 }
+
+.seo-history-page {
+  .history-wrap {
+    .ant-timeline-item-label {
+      font-weight: bold;
+      color: $color_primary;
+    }
+  }
+}

@@ -24,11 +24,17 @@ export const useSeoHome = (): {
     const logo1280x720 = await uploadService.handleUpload(values.image.logo1280x720, `preview-1280x720-${currentTime}`, Storage.META);
     const logo800x600 = await uploadService.handleUpload(values.image.logo800x600, `preview-800x600-${currentTime}`, Storage.META);
     const logo400x400 = await uploadService.handleUpload(values.image.logo400x400, `preview-400x400-${currentTime}`, Storage.META);
-    delete values.id;
-    console.log(values);
     dispatch(submitSeoHomeStart({
       input: {
-        ...values, image: {
+        description: values.description,
+        domain: values.domain,
+        facebookChatPlugin: values.facebookChatPlugin,
+        siteName: values.siteName,
+        social: values.social,
+        languageAlternates: values.languageAlternates,
+        searchBoxUrl: values.searchBoxUrl,
+        title: values.title,
+        image: {
           logoAlt: values.image.logoAlt,
           faviconUrlICO,
           faviconUrlJPG,
@@ -37,7 +43,6 @@ export const useSeoHome = (): {
           logo400x400,
         }
       },
-      beforeCallback: setUploadSliceClose,
     }))
 
   };

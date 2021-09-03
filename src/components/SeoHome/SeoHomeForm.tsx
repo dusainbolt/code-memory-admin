@@ -15,7 +15,7 @@ import { getSeoHomeSlice } from '../../redux/slices/seoHomeSlice';
 export const SeoHomeForm = () => {
   const { t } = useTranslation();
   const { social, image } = fieldSeoHome;
-  const { seoHome } = useAppSelector(getSeoHomeSlice);
+  const { seoHome, isLoadingSubmit } = useAppSelector(getSeoHomeSlice);
   const { handleSubmit, setValues } = useFormikContext();
 
   useEffect(() => {
@@ -45,7 +45,9 @@ export const SeoHomeForm = () => {
         <Field {...social.facebookPageUrl} component={InputComponent} />
         <Field {...social.youtubeUrl} component={InputComponent} />
         <Field {...social.twitterUrl} component={InputComponent} />
-        <ButtonCommon onClick={handleSubmit}>{t('common.txt_completed')}</ButtonCommon>
+        <ButtonCommon loading={isLoadingSubmit} onClick={handleSubmit}>
+          {t('common.txt_completed')}
+        </ButtonCommon>
       </Col>
       <Col xs={12}>
         <Title className="title-form" level={3}>
@@ -54,15 +56,15 @@ export const SeoHomeForm = () => {
         <Field {...image.logoAlt} component={InputComponent} />
         <Row>
           <Col xs={12}>
-            <FieldUpload isLoadingForm={false} {...image.faviconUrlICO} crop={false} />
+            <FieldUpload isLoadingForm={isLoadingSubmit} {...image.faviconUrlICO} crop={false} />
           </Col>
           <Col xs={12}>
-            <FieldUpload isLoadingForm={false} {...image.faviconUrlJPG} crop={false} />
+            <FieldUpload isLoadingForm={isLoadingSubmit} {...image.faviconUrlJPG} crop={false} />
           </Col>
         </Row>
-        <FieldUpload isLoadingForm={false} {...image.logo400x400} crop={false} />
-        <FieldUpload fullWidth isLoadingForm={false} {...image.logo800x600} crop={false} />
-        <FieldUpload fullWidth isLoadingForm={false} {...image.logo1280x720} crop={false} />
+        <FieldUpload isLoadingForm={isLoadingSubmit} {...image.logo400x400} crop={false} />
+        <FieldUpload fullWidth isLoadingForm={isLoadingSubmit} {...image.logo800x600} crop={false} />
+        <FieldUpload fullWidth isLoadingForm={isLoadingSubmit} {...image.logo1280x720} crop={false} />
       </Col>
     </Row>
   );

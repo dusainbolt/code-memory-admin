@@ -1,3 +1,4 @@
+import { User } from './UserModel';
 import { IField } from "./FieldModel";
 
 
@@ -28,6 +29,10 @@ export interface SeoHome {
   siteName: string,
   social: SeoHomeSocial,
   title: string,
+  createBy?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  userCreate?: User;
 }
 
 export interface FieldSocialSeoHome {
