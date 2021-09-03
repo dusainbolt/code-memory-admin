@@ -47,7 +47,7 @@ export const useColumnTag = (t: TFunction, pageIndex: any, callbackEdit: any): C
       dataIndex: 'createdAt',
       sorter: true,
       width: 100,
-      render: (value: any) => dayjs(parseInt(value)).format(TIME_FORMAT.DD_MM_YYYY_HH_MM_SS),
+      render: (value: any) => helper.convertTimeDisplay(value),
     },
     {
       title: '',

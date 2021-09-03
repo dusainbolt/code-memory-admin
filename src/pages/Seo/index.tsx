@@ -7,15 +7,12 @@ import { Divider, Skeleton } from 'antd';
 import { Formik } from 'formik';
 import { getSeoHomeSlice } from '../../redux/slices/seoHomeSlice';
 import { SeoHomeForm } from '../../components/SeoHome/SeoHomeForm';
-import { ValidateService } from '../../services/validateService';
-import { fieldSeoHome } from '../../models/SeoHomeModel';
 import { useSeoHome } from '../../hooks/useSeoHome';
 
 export const SeoPage = () => {
   const { seoHome, isLoadingSeoHome } = useAppSelector(getSeoHomeSlice);
   const { t } = useTranslation();
-  const validateSchema = new ValidateService(t).validateSeoHomeInput(fieldSeoHome);
-  const { onSubmitSeoHome } = useSeoHome();
+  const { onSubmitSeoHome, validateSchema } = useSeoHome();
 
   return (
     <Box className="admin__content seo-page">

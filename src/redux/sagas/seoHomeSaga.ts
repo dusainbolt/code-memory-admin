@@ -1,8 +1,8 @@
-import { getSeoHomeRequest } from './../../graphql/seoHomeRequest';
+import { getSeoHomeRequest, getSeoHomeEntireRequest } from './../../graphql/seoHomeRequest';
 import { MESSAGE } from './../../constant/index';
-import { delay, put, takeEvery, call } from 'redux-saga/effects';
+import { delay, put, takeEvery } from 'redux-saga/effects';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
-import { getSeoHomeError, getSeoHomeStart, getSeoHomeSuccess, submitSeoHomeError, submitSeoHomeStart, submitSeoHomeSuccess } from '../slices/seoHomeSlice';
+import { getSeoHomeError, getSeoHomeEntireError, getSeoHomeEntireStart, getSeoHomeEntireSuccess, getSeoHomeStart, getSeoHomeSuccess, submitSeoHomeError, submitSeoHomeStart, submitSeoHomeSuccess } from '../slices/seoHomeSlice';
 import { submitSeoHomeRequest } from '../../graphql/seoHomeRequest';
 import { setUploadSliceClose } from '../slices/layoutSlice';
 import { SubmitSeoHome } from '../actionTypes/seoHomeActionTypes';
@@ -31,7 +31,19 @@ function* getSeoHomeSaga() {
   }
 }
 
+
+function* getSeoHomeEntireSaga() {
+  try {
+    const seoHomeEntire = yield getSeoHomeEntireRequest();
+    yield put(getSeoHomeEntireSuccess({ seoHomeEntire }));
+  } catch (error: any) {
+    yield put(getSeoHomeEntireError({}));
+    yield handleMessageErrorSaga(error);
+  }
+}
+
 export function* watchSeoHome() {
   yield takeEvery(submitSeoHomeStart, submitSeoHomeSaga);
   yield takeEvery(getSeoHomeStart, getSeoHomeSaga);
+  yield takeEvery(getSeoHomeEntireStart, getSeoHomeEntireSaga);
 }

@@ -1,17 +1,27 @@
-import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ValidateService } from './../services/validateService';
+import { useEffect, useState } from 'react';
 import { ProcessUpload } from './../models/LayoutModel';
-import { setUploadSliceClose, setUploadSliceStart } from '../redux/slices/layoutSlice';
+import { setUploadSliceStart } from '../redux/slices/layoutSlice';
 import UploadService, { Storage } from '../services/uploadService';
-import { SeoHome } from './../models/SeoHomeModel';
+import { SeoHome, fieldSeoHome } from './../models/SeoHomeModel';
 import { useAppDispatch } from './../redux/rootStore';
-import { getSeoHomeStart, submitSeoHomeStart } from '../redux/slices/seoHomeSlice';
-export const useSeoHome = (): {
-  onSubmitSeoHome: any
+import { getSeoHomeEntireStart, getSeoHomeStart, submitSeoHomeStart } from '../redux/slices/seoHomeSlice';
+
+
+export const useSeoHome = (isCallValue: boolean = true): {
+  onSubmitSeoHome: any,
+  validateSchema: any,
 } => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const validateSchema = new ValidateService(t).validateSeoHomeInput(fieldSeoHome);
+
 
   useEffect(() => {
-    dispatch(getSeoHomeStart());
+    if (isCallValue) {
+      dispatch(getSeoHomeStart());
+    }
   }, []);
 
   const onSubmitSeoHome = async (values: SeoHome) => {
@@ -34,6 +44,7 @@ export const useSeoHome = (): {
         languageAlternates: values.languageAlternates,
         searchBoxUrl: values.searchBoxUrl,
         title: values.title,
+        reason: values.reason,
         image: {
           logoAlt: values.image.logoAlt,
           faviconUrlICO,
@@ -46,5 +57,25 @@ export const useSeoHome = (): {
     }))
 
   };
-  return { onSubmitSeoHome }
+  return { onSubmitSeoHome, validateSchema }
 }
+
+
+export const useSeoHomeHistory = (): {
+  seoHomeDetail: SeoHome,
+  onViewSeoHomeDetail: any,
+} => {
+  const [seoHomeDetail, setSeoHomeDetail] = useState<SeoHome>({});
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getSeoHomeEntireStart())
+  }, []);
+
+  const onViewSeoHomeDetail = (seoHome: SeoHome) => () => {
+    setSeoHomeDetail(seoHome);
+  };
+
+  return { seoHomeDetail, onViewSeoHomeDetail }
+
+};

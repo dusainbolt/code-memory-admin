@@ -1,5 +1,6 @@
-import { BlogContent, BLOG_FIELD_NAME } from '../models/BlogModel';
+import { TIME_FORMAT } from './../constant/index';
 import { User } from '../models/UserModel';
+import dayjs from 'dayjs';
 
 export class HelperService {
 
@@ -42,6 +43,10 @@ export class HelperService {
     const keyArr = key.split(".");
     return keyArr.length > 1 ? obj[keyArr[0]]?.[keyArr[1]] : obj[key];
   };
+
+  convertTimeDisplay = (value: any, format: string = TIME_FORMAT.DD_MM_YYYY_HH_MM_SS) => {
+    return dayjs(parseInt(value)).format(format);
+  }
 
 };
 
