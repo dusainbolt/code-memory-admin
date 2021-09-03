@@ -151,3 +151,18 @@
     }
   }
 }
+
+.table {
+  .ant-table {
+    .ant-table-tbody {
+      .box-diff-value {
+        color: $color_success;
+
+        &.old-value {
+          color: $color_text_alert_warning;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}

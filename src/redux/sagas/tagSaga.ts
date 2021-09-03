@@ -3,6 +3,7 @@ import { MESSAGE } from '../../constant';
 import { getListTagRequest, submitTagRequest } from '../../graphql/tagRequest';
 import { GetListTagAction, SubmitTagAction } from '../actionTypes/tagActionTypes';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
+import { setUploadSliceClose } from '../slices/layoutSlice';
 import {
   getTagListSliceError,
   getTagListSliceStart,
@@ -23,14 +24,14 @@ function* getListTagSaga({ payload }: GetListTagAction) {
   }
 }
 
-function* submitTagSaga({ payload: { input, callback, beforeCallback } }: SubmitTagAction) {
+function* submitTagSaga({ payload: { input, callback } }: SubmitTagAction) {
   try {
     yield delay(1000);
-    yield put(beforeCallback());
+    yield put(setUploadSliceClose({}));
     const data = yield submitTagRequest(input);
     yield put(submitTagSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);
-    yield call(callback);
+    yield callback && call(callback);
   } catch (error) {
     yield put(submitTagSliceError({}));
     yield handleMessageErrorSaga(error);

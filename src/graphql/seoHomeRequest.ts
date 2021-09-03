@@ -25,6 +25,19 @@ export const seoHomeQuery = gql`
   }
 `;
 
+export const seoHomeEntireQuery = gql`
+  {
+    ${RS_SEO_HOME.seoHomeEntire} {
+      ${seoHomeResolver}
+    }
+  }
+`;
+
 export const getSeoHomeRequest = async (): Promise<SeoHome> => {
   return await requestService.query(seoHomeQuery, {}, RS_SEO_HOME.getSeoHome, FETCH_POLICY.NO_CACHE);
+};
+
+
+export const getSeoHomeEntireRequest = async (policy): Promise<SeoHome> => {
+  return await requestService.query(seoHomeEntireQuery, {}, RS_SEO_HOME.seoHomeEntire, policy);
 };

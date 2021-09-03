@@ -1,12 +1,13 @@
-import { SubmitSeoHomeAction } from './../actionTypes/seoHomeActionTypes';
 import { createSlice } from '@reduxjs/toolkit';
 import { IRootState } from './../rootReducer';
 import { SeoHome } from './../../models/SeoHomeModel';
-
+import { SubmitSeoHome, SubmitSeoHomeSuccess, GetEntireSeoHomeStart, GetEntireSeoHomeSuccess } from './../actionTypes/seoHomeActionTypes';
 export interface SeoHomeSlice {
   seoHome: SeoHome,
+  seoHomeEntire: SeoHome[],
   isLoadingSubmit: boolean;
   isLoadingSeoHome: boolean;
+  isLoadingList: boolean;
 }
 
 const initialState: SeoHomeSlice = {
@@ -36,6 +37,8 @@ const initialState: SeoHomeSlice = {
   },
   isLoadingSubmit: false,
   isLoadingSeoHome: true,
+  isLoadingList: true,
+  seoHomeEntire: [],
 };
 
 
@@ -53,11 +56,22 @@ export const seoHomeSlice = createSlice({
     getSeoHomeError: (state: SeoHomeSlice, action: any) => {
       state.isLoadingSeoHome = false;
     },
-    submitSeoHomeStart: (state: SeoHomeSlice, action: SubmitSeoHomeAction) => {
+    getSeoHomeEntireStart: (state: SeoHomeSlice, action: GetEntireSeoHomeStart) => {
+      state.isLoadingList = true;
+    },
+    getSeoHomeEntireSuccess: (state: SeoHomeSlice, { payload }: GetEntireSeoHomeSuccess) => {
+      state.isLoadingList = false;
+      state.seoHomeEntire = payload.seoHomeEntire;
+    },
+    getSeoHomeEntireError: (state: SeoHomeSlice, action: any) => {
+      state.isLoadingList = false;
+    },
+    submitSeoHomeStart: (state: SeoHomeSlice, action: SubmitSeoHome) => {
       state.isLoadingSubmit = true;
     },
-    submitSeoHomeSuccess: (state: SeoHomeSlice, action: any) => {
+    submitSeoHomeSuccess: (state: SeoHomeSlice, { payload }: SubmitSeoHomeSuccess) => {
       state.isLoadingSubmit = false;
+      state.seoHome = payload.seoHome;
     },
     submitSeoHomeError: (state: SeoHomeSlice, action: any) => {
       state.isLoadingSubmit = false;
@@ -68,6 +82,6 @@ export const seoHomeSlice = createSlice({
 
 export const getSeoHomeSlice = (state: IRootState): SeoHomeSlice => state.seoHomeSlice;
 
-export const { getSeoHomeStart, getSeoHomeSuccess, getSeoHomeError, submitSeoHomeSuccess, submitSeoHomeStart, submitSeoHomeError } = seoHomeSlice.actions;
+export const { getSeoHomeEntireStart, getSeoHomeEntireSuccess, getSeoHomeEntireError, getSeoHomeStart, getSeoHomeSuccess, getSeoHomeError, submitSeoHomeSuccess, submitSeoHomeStart, submitSeoHomeError } = seoHomeSlice.actions;
 
 export default seoHomeSlice.reducer;

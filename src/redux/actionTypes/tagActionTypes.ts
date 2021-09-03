@@ -14,7 +14,6 @@ export type SubmitTagAction = Record<
   {
     input: CreateTagInput;
     callback?: any;
-    beforeCallback?: any;
   }
 >;
 

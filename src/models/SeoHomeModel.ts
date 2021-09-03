@@ -1,3 +1,5 @@
+import { HistoryField } from './CommonModel';
+import { User } from './UserModel';
 import { IField } from "./FieldModel";
 
 
@@ -19,15 +21,20 @@ export type SeoHomeSocial = {
 
 export interface SeoHome {
   id?: string,
-  description: string,
-  domain: string,
-  facebookChatPlugin: string,
-  image: SeoHomeImage,
-  languageAlternates: string,
-  searchBoxUrl: string,
-  siteName: string,
-  social: SeoHomeSocial,
-  title: string,
+  description?: string,
+  domain?: string,
+  facebookChatPlugin?: string,
+  image?: SeoHomeImage,
+  languageAlternates?: string,
+  searchBoxUrl?: string,
+  siteName?: string,
+  social?: SeoHomeSocial,
+  history?: HistoryField[],
+  title?: string,
+  createBy?: string;
+  createdAt?: string;
+  reason?: string;
+  userCreate?: User;
 }
 
 export interface FieldSocialSeoHome {
@@ -54,6 +61,7 @@ export interface FieldSeoHome {
   searchBoxUrl: IField;
   languageAlternates: IField;
   siteName: IField;
+  reason: IField;
   image: FieldImageSeoHome,
   social: FieldSocialSeoHome,
 }
@@ -95,6 +103,10 @@ export const fieldSeoHome: FieldSeoHome = {
     name: "facebookChatPlugin",
     label: "seo.facebookChatPlugin",
     placeholder: "seo.placeholder_facebookChatPlugin"
+  },
+  reason: {
+    name: "reason",
+    label: "seo.reason",
   },
   image: {
     faviconUrlICO: {
