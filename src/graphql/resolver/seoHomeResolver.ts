@@ -27,8 +27,12 @@ export const seoHomeResolver = `
     facebookPageUrl
   }
   title
+  createdAt
+  reason
 `;
 
 export const RS_SEO_HOME = {
   seoHomeCreate: "seoHomeCreate",
+  getSeoHome: "seoHome",
+  seoHomeEntire: "seoHomeEntire"
 };

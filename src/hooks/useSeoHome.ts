@@ -1,13 +1,29 @@
+import { FETCH_POLICY } from './../constant/index';
+import { useTranslation } from 'react-i18next';
+import { ValidateService } from './../services/validateService';
+import { useEffect, useState } from 'react';
 import { ProcessUpload } from './../models/LayoutModel';
-import { setUploadSliceClose, setUploadSliceStart } from '../redux/slices/layoutSlice';
+import { setUploadSliceStart } from '../redux/slices/layoutSlice';
 import UploadService, { Storage } from '../services/uploadService';
-import { SeoHome } from './../models/SeoHomeModel';
+import { SeoHome, fieldSeoHome } from './../models/SeoHomeModel';
 import { useAppDispatch } from './../redux/rootStore';
-import { submitSeoHomeStart } from '../redux/slices/seoHomeSlice';
-export const useSeoHome = (): {
-  onSubmitSeoHome: any
+import { getSeoHomeEntireStart, getSeoHomeStart, submitSeoHomeStart } from '../redux/slices/seoHomeSlice';
+
+
+export const useSeoHome = (isCallValue: boolean = true, callback: any = null): {
+  onSubmitSeoHome: any,
+  validateSchema: any,
 } => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const validateSchema = new ValidateService(t).validateSeoHomeInput(fieldSeoHome);
+
+
+  useEffect(() => {
+    if (isCallValue) {
+      dispatch(getSeoHomeStart());
+    }
+  }, []);
 
   const onSubmitSeoHome = async (values: SeoHome) => {
     const uploadService = new UploadService();
@@ -19,10 +35,18 @@ export const useSeoHome = (): {
     const logo1280x720 = await uploadService.handleUpload(values.image.logo1280x720, `preview-1280x720-${currentTime}`, Storage.META);
     const logo800x600 = await uploadService.handleUpload(values.image.logo800x600, `preview-800x600-${currentTime}`, Storage.META);
     const logo400x400 = await uploadService.handleUpload(values.image.logo400x400, `preview-400x400-${currentTime}`, Storage.META);
-    delete values.id;
     dispatch(submitSeoHomeStart({
       input: {
-        ...values, image: {
+        description: values.description,
+        domain: values.domain,
+        facebookChatPlugin: values.facebookChatPlugin,
+        siteName: values.siteName,
+        social: values.social,
+        languageAlternates: values.languageAlternates,
+        searchBoxUrl: values.searchBoxUrl,
+        title: values.title,
+        reason: values.reason,
+        image: {
           logoAlt: values.image.logoAlt,
           faviconUrlICO,
           faviconUrlJPG,
@@ -31,9 +55,35 @@ export const useSeoHome = (): {
           logo400x400,
         }
       },
-      beforeCallback: setUploadSliceClose,
+      callback: callback
     }))
 
   };
-  return { onSubmitSeoHome }
+  return { onSubmitSeoHome, validateSchema }
 }
+
+
+export const useSeoHomeHistory = (): {
+  seoHomeDetail: SeoHome,
+  onViewSeoHomeDetail: any,
+  onCallbackUpdateSeoHome: any,
+} => {
+  const [seoHomeDetail, setSeoHomeDetail] = useState<SeoHome>({});
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.DEFAULT }))
+  }, []);
+
+  const onViewSeoHomeDetail = (seoHome: SeoHome) => () => {
+    setSeoHomeDetail(seoHome);
+  };
+
+  const onCallbackUpdateSeoHome = () => {
+    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.NO_CACHE }))
+    setSeoHomeDetail({})
+  };;
+
+  return { seoHomeDetail, onViewSeoHomeDetail, onCallbackUpdateSeoHome }
+
+};

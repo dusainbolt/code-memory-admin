@@ -1,10 +1,11 @@
 import { SeoHome } from './../../models/SeoHomeModel';
 import { PayloadName } from './loginActionTypes';
 
-export type SubmitSeoHome = {
-  input: SeoHome,
-  beforeCallback?: any,
-}
 
-export type SubmitSeoHomeAction = Record<PayloadName, SubmitSeoHome>;
+export type SubmitSeoHome = Record<PayloadName, { input: SeoHome, callback?: any }>;
 
+export type GetEntireSeoHomeStart = Record<PayloadName, { policy: string }>;
+
+export type GetEntireSeoHomeSuccess = Record<PayloadName, { seoHomeEntire: SeoHome[] }>;
+
+export type SubmitSeoHomeSuccess = Record<PayloadName, { seoHome: SeoHome }>;
