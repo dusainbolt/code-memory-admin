@@ -21,7 +21,7 @@ export const BoxDiffValue: FC<{
 
   const renderValueDiff = () => {
     if (DATA_KEY_IMAGE.includes(history.key)) {
-      return <AntImage width={100} src={value} />;
+      return <AntImage preview={true} width={100} src={value} />;
     }
     return value;
   };

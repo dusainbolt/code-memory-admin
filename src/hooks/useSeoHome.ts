@@ -1,3 +1,4 @@
+import { FETCH_POLICY } from './../constant/index';
 import { useTranslation } from 'react-i18next';
 import { ValidateService } from './../services/validateService';
 import { useEffect, useState } from 'react';
@@ -9,7 +10,7 @@ import { useAppDispatch } from './../redux/rootStore';
 import { getSeoHomeEntireStart, getSeoHomeStart, submitSeoHomeStart } from '../redux/slices/seoHomeSlice';
 
 
-export const useSeoHome = (isCallValue: boolean = true): {
+export const useSeoHome = (isCallValue: boolean = true, callback: any = null): {
   onSubmitSeoHome: any,
   validateSchema: any,
 } => {
@@ -54,6 +55,7 @@ export const useSeoHome = (isCallValue: boolean = true): {
           logo400x400,
         }
       },
+      callback: callback
     }))
 
   };
@@ -64,18 +66,24 @@ export const useSeoHome = (isCallValue: boolean = true): {
 export const useSeoHomeHistory = (): {
   seoHomeDetail: SeoHome,
   onViewSeoHomeDetail: any,
+  onCallbackUpdateSeoHome: any,
 } => {
   const [seoHomeDetail, setSeoHomeDetail] = useState<SeoHome>({});
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getSeoHomeEntireStart())
+    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.DEFAULT }))
   }, []);
 
   const onViewSeoHomeDetail = (seoHome: SeoHome) => () => {
     setSeoHomeDetail(seoHome);
   };
 
-  return { seoHomeDetail, onViewSeoHomeDetail }
+  const onCallbackUpdateSeoHome = () => {
+    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.NO_CACHE }))
+    setSeoHomeDetail({})
+  };;
+
+  return { seoHomeDetail, onViewSeoHomeDetail, onCallbackUpdateSeoHome }
 
 };

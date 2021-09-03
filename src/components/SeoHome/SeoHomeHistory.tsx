@@ -21,11 +21,11 @@ const { TabPane } = Tabs;
 const helper = new HelperService();
 
 export const SeoHomeHistory = () => {
-  const { onViewSeoHomeDetail, seoHomeDetail } = useSeoHomeHistory();
+  const { onViewSeoHomeDetail, seoHomeDetail, onCallbackUpdateSeoHome } = useSeoHomeHistory();
   const { isLoadingList, seoHomeEntire } = useAppSelector(getSeoHomeSlice);
 
   const { t } = useTranslation();
-  const { onSubmitSeoHome, validateSchema } = useSeoHome(false);
+  const { onSubmitSeoHome, validateSchema } = useSeoHome(false, onCallbackUpdateSeoHome);
 
   const columns = useColumnDiff(t, 'seo');
 
@@ -47,18 +47,20 @@ export const SeoHomeHistory = () => {
           <Skeleton active />
         )}
       </Box>
-      <Box className="into-right">
-        <Tabs defaultActiveKey="1">
-          <TabPane tab={t('common.compare')} key="1">
-            <TableCommon dataSource={seoHomeDetail.history} columns={columns} enablePagination={false} />
-          </TabPane>
-          <TabPane tab={t('common.detail')} key="2">
-            <Formik validationSchema={validateSchema} onSubmit={onSubmitSeoHome} initialValues={{}}>
-              <SeoHomeForm seoHomeFill={seoHomeDetail} />
-            </Formik>
-          </TabPane>
-        </Tabs>
-      </Box>
+      {seoHomeDetail.id && (
+        <Box className="into-right">
+          <Tabs defaultActiveKey="1">
+            <TabPane tab={t('common.compare')} key="1">
+              <TableCommon dataSource={seoHomeDetail.history} columns={columns} enablePagination={false} />
+            </TabPane>
+            <TabPane tab={t('common.detail')} key="2">
+              <Formik validationSchema={validateSchema} onSubmit={onSubmitSeoHome} initialValues={{}}>
+                <SeoHomeForm seoHomeFill={seoHomeDetail} />
+              </Formik>
+            </TabPane>
+          </Tabs>
+        </Box>
+      )}
     </Box>
   );
 };

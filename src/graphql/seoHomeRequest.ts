@@ -38,6 +38,6 @@ export const getSeoHomeRequest = async (): Promise<SeoHome> => {
 };
 
 
-export const getSeoHomeEntireRequest = async (): Promise<SeoHome> => {
-  return await requestService.query(seoHomeEntireQuery, {}, RS_SEO_HOME.seoHomeEntire);
+export const getSeoHomeEntireRequest = async (policy): Promise<SeoHome> => {
+  return await requestService.query(seoHomeEntireQuery, {}, RS_SEO_HOME.seoHomeEntire, policy);
 };

@@ -1,4 +1,4 @@
-import { Col, Divider, Row } from 'antd';
+import { Alert, Col, Divider, Row } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import Title from 'antd/lib/typography/Title';
 import { Field, useFormikContext } from 'formik';
@@ -18,20 +18,25 @@ export const SeoHomeForm: FC<{
   const { t } = useTranslation();
   const { social, image } = fieldSeoHome;
   const { seoHome, isLoadingSubmit } = useAppSelector(getSeoHomeSlice);
-  const { handleSubmit, setValues, setFieldValue } = useFormikContext();
+  const { handleSubmit, setValues } = useFormikContext();
 
   useEffect(() => {
     // Init data form Seo Home
     if (seoHome?.id) {
       setValues({ ...seoHome, reason: '' });
     }
-    if (seoHomeFill?.id) {
-      setValues(seoHomeFill);
+    if (seoHomeFill?.id && !seoHome?.id) {
+      setValues({ ...seoHomeFill, reason: '' });
     }
   }, [seoHome, seoHomeFill]);
 
   return (
     <Row gutter={[32, 32]} className="container-md">
+      {seoHomeFill.id && (
+        <Col xs={24}>
+          <Alert message={t('common.des_completed_extend')} banner closable />
+        </Col>
+      )}
       <Col xs={12}>
         <Title className="title-form" level={3}>
           {t('seo.info_basic')}

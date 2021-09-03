@@ -31,7 +31,7 @@ function* submitTagSaga({ payload: { input, callback } }: SubmitTagAction) {
     const data = yield submitTagRequest(input);
     yield put(submitTagSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);
-    yield call(callback);
+    yield callback && call(callback);
   } catch (error) {
     yield put(submitTagSliceError({}));
     yield handleMessageErrorSaga(error);
