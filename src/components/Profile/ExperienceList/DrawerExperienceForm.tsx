@@ -27,7 +27,7 @@ import {
 } from "../../../models/ExperienceModel";
 import { DateComponent } from "../../../common/DatePicker/DatePickerForm";
 import { FieldUpload } from "../../../common/Upload/FieldUpload";
-import { submitExpSliceStart } from "../../../redux/slices/experienceSlice";
+import { getExpSlice, submitExpSliceStart } from "../../../redux/slices/experienceSlice";
 
 const ExperienceForm = ({
   t,
@@ -40,23 +40,28 @@ const ExperienceForm = ({
   visible: boolean;
   isLoadingForm: boolean;
 }) => {
-  const { handleSubmit, setFieldValue, handleReset, setValues } =
-    useFormikContext();
-  const { tagDetail } = useAppSelector(getTagSlice);
+  const { handleSubmit, setFieldValue, handleReset, setValues } = useFormikContext();
+  const { expDetail } = useAppSelector(getExpSlice);
 
   useEffect(() => {
-    if (!!tagDetail.id) {
+    if (!!expDetail.id) {
       setValues({
-        description: tagDetail.description,
-        id: tagDetail.id,
-        status: tagDetail.status,
-        thumbnail: tagDetail.thumbnail,
-        title: tagDetail.title,
-      } as CreateTagInput);
+        id: expDetail.id,
+        nameVN: expDetail.nameVN,
+        nameEN: expDetail.nameEN,
+        workType: expDetail.workType,
+        position: expDetail.position,
+        descriptionVN: expDetail.descriptionVN,
+        descriptionEN: expDetail.descriptionEN,
+        startTime: expDetail.startTime,
+        endTime: expDetail.endTime,
+        status: expDetail.status,
+        thumbnail: expDetail.thumbnail,
+      } as CreateExpInput);
     } else {
       handleReset();
     }
-  }, [tagDetail]);
+  }, [expDetail]);
 
   useEffect(() => {
     if (!visible) {

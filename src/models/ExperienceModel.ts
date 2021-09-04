@@ -29,7 +29,7 @@ export interface Experience {
     id?: string;
     nameVN?: string;
     nameEN?: string;
-    type?: string;
+    workType?: string;
     position?: string;
     descriptionVN?: string;
     descriptionEN?: string;
@@ -91,12 +91,12 @@ export type ExpSlice = {
     total: number;
     isLoadingList: boolean;
     isLoadingForm: boolean;
-    tagDetail?: Experience;
+    expDetail?: Experience;
     visibleFormExp: boolean;
   };
 
 
 export interface UpdateExpInput {
     data: CreateExpInput;
-    expId: string;
+    workId: string;
 }

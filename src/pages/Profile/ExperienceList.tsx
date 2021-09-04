@@ -23,18 +23,20 @@ import { Experience, ExperienceStatus, ExperienceType } from "../../models/Exper
 import { Status } from "../../components/Profile/Status";
 import { TypeExp } from "../../components/Profile/ExperienceList/TypeExp";
 import moment from "moment";
+import { EditOutlined } from '@ant-design/icons';
+
 
 export const ExperienceList = () => {
   const { t } = useTranslation();
   const { dataExps, isLoadingList, total } = useAppSelector(getExpSlice)
-  const { openFormModal, visibleFormExp, setVisible } = useFormExp();
+  const { openFormModal, visibleFormExp, setVisible, openFormEdit } = useFormExp();
   const dispatch = useAppDispatch();
   const { paramsSearch, handleGetListCategory, getPageIndexNumber, handleSearch, handleChangePage, handleSortByParams } = useSearchExpList(dispatch)
   const { offset, limit } = paramsSearch;
 
 
 
-  const column = (t, pageIndex) => [
+  const column = (t, pageIndex, callbackEdit) => [
     {
       title: t("profile.serial"),
       render: (value: any, row: Experience, index: number) => pageIndex+index+1
@@ -86,6 +88,14 @@ export const ExperienceList = () => {
       dataIndex: "descriptionEN",
       key: "descriptionEN",
     },
+    {
+      title: t('profile.edit'),
+      render: (_id: string, row: Experience) => (
+        <Box className="flx-center align-left">
+          <ButtonCommon onClick={callbackEdit(row)} type="primary" shape="round" icon={<EditOutlined />} size="small" />
+        </Box>
+      ),
+    },
   ];
 
   return (
@@ -117,7 +127,7 @@ export const ExperienceList = () => {
           scroll={{ x: 800 }}
           total={total}
           dataSource={dataExps}
-          columns={column(t, getPageIndexNumber())}
+          columns={column(t, getPageIndexNumber(),openFormEdit)}
         />
       </Box>
       <DrawerExperienceForm

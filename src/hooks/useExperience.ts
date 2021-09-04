@@ -59,6 +59,7 @@ export const useFormExp = (): {
     openFormModal: any;
     setVisible: any;
     visibleFormExp: boolean;
+    openFormEdit: any
   } => {
     const dispatch = useAppDispatch();
     const { visibleFormExp } = useAppSelector(getExpSlice);
@@ -71,9 +72,9 @@ export const useFormExp = (): {
       dispatch(setVisibleFormExp({ visibleFormExp: value }));
     };
   
-    // const openFormEdit = (tagDetail: Experience) => () => {
-    //   dispatch(setVisibleFormExp({ visibleFormExp: true, tagDetail }));
-    // };
+    const openFormEdit = (expDetail: Experience) => () => {
+      dispatch(setVisibleFormExp({ visibleFormExp: true, expDetail }));
+    };
   
-    return { openFormModal, visibleFormExp, setVisible  };
+    return { openFormModal, visibleFormExp, setVisible, openFormEdit  };
   };

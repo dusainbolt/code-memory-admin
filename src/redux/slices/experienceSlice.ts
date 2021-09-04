@@ -10,7 +10,7 @@ const initialState: ExpSlice = {
   isLoadingList: false,
   isLoadingForm: false,
   visibleFormExp: false,
-  tagDetail: {},
+  expDetail: {},
 };
 
 export const expSlice = createSlice({
