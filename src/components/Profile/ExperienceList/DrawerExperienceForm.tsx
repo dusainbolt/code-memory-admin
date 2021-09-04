@@ -55,8 +55,8 @@ const ExperienceForm = ({
         position: expDetail.position,
         descriptionVN: expDetail.descriptionVN,
         descriptionEN: expDetail.descriptionEN,
-        startTime: expDetail.startTime,
-        endTime: expDetail.endTime,
+        startTime: parseInt(expDetail.startTime),
+        endTime: parseInt(expDetail.startTime),
         status: expDetail.status,
         thumbnail: expDetail.thumbnail,
       } as CreateExpInput);

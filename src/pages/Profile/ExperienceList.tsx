@@ -18,13 +18,16 @@ import { useSelector } from "react-redux";
 import { DrawerExperienceForm } from "../../components/Profile/ExperienceList/DrawerExperienceForm";
 import { useFormExp, useSearchExpList } from "../../hooks/useExperience";
 import { getExpSlice, getListExpStart } from "../../redux/slices/experienceSlice";
-import { FETCH_POLICY } from "../../constant";
+import { FETCH_POLICY, TIME_FORMAT } from "../../constant";
 import { Experience, ExperienceStatus, ExperienceType } from "../../models/ExperienceModel";
 import { Status } from "../../components/Profile/Status";
 import { TypeExp } from "../../components/Profile/ExperienceList/TypeExp";
 import { EditOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
 import { BoxIconAndName } from "../../components/Tag/BoxIconAndName";
+import { HelperService } from "../../services/helperService";
+
+const helper = new HelperService()
 
 
 export const ExperienceList = () => {
@@ -71,7 +74,7 @@ export const ExperienceList = () => {
       key: "time",
       render: (value: any, row: Experience) => (
         <div>
-          {dayjs(parseInt(row.startTime)).format("DD/MM/YY")} - {dayjs(parseInt(row.endTime)).format("DD/MM/YY")}         
+          {helper.convertTimeDisplay(parseInt(row.startTime), TIME_FORMAT.DD_MM_YY)} - {helper.convertTimeDisplay(parseInt(row.startTime), TIME_FORMAT.DD_MM_YY)}         
         </div>
       )
     },
