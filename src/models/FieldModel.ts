@@ -1,3 +1,4 @@
+import { If } from 'yup/lib/util/types';
 import { OPTION_FILTER_STATUS_EXPERIENCE, OPTION_FILTER_TYPE_EXPERIENCE } from './ExperienceModel';
 import { TagStatus } from './TagModel';
 
@@ -76,6 +77,8 @@ export interface FieldSearchTag {
 export interface FieldSearchExperience {
   key: IField;
   status: IField;
+  type: IField;
+
 }
 
 export const fieldSearchTag: FieldSearchTag = {
@@ -103,6 +106,11 @@ export const fieldSearchExperience : FieldSearchExperience = {
     label: 'profile.status',
     options: OPTION_FILTER_STATUS_EXPERIENCE,
   },
+  type: {
+    name: 'type',
+    label: 'profile.type',
+    options: OPTION_FILTER_TYPE_EXPERIENCE,
+  }
 }
 
 export interface FieldCreateTag {

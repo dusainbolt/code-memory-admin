@@ -28,6 +28,9 @@ export const SearchListForm = () => {
         <Col xs={8} xxl={6}>
           <Field {...fieldSearchExperience.status} mode="multiple" component={SelectComponent} />
         </Col>
+        <Col xs={8} xxl={6}>
+          <Field {...fieldSearchExperience.type} mode="multiple" component={SelectComponent} />
+        </Col>
         <Col xs={4}>
           <Box className="flx-center align-left control-btn mt-6">
             <ButtonCommon
