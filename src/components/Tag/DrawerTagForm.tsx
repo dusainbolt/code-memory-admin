@@ -18,7 +18,6 @@ import { FETCH_POLICY } from '../../constant';
 import UploadService from '../../services/uploadService';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { setUploadSliceClose, setUploadSliceStart } from '../../redux/slices/layoutSlice';
-import { setUploadSliceAction } from '../../redux/actionTypes/layoutActionTypes';
 import { ProcessUpload } from '../../models/LayoutModel';
 
 const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {

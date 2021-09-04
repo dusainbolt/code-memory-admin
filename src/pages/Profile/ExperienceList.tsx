@@ -24,6 +24,7 @@ import { Status } from "../../components/Profile/Status";
 import { TypeExp } from "../../components/Profile/ExperienceList/TypeExp";
 import { EditOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
+import { BoxIconAndName } from "../../components/Tag/BoxIconAndName";
 
 
 export const ExperienceList = () => {
@@ -45,11 +46,13 @@ export const ExperienceList = () => {
       title: t("profile.work_place_name_vn"),
       dataIndex: "nameVN",
       key: "nameVN",
+      render: (value: any, row: Experience)=> <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />
     },
     {
       title: t("profile.work_place_name_en"),
       dataIndex: "nameEN",
       key: "nameEN",
+      render: (value: any, row: Experience)=> <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />
     },
     {
       title: t("profile.type"),
