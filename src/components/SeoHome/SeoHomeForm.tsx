@@ -43,11 +43,12 @@ export const SeoHomeForm: FC<{
         </Title>
         <Field {...fieldSeoHome.siteName} component={InputComponent} />
         <Field {...fieldSeoHome.title} component={InputComponent} />
+        <Field {...fieldSeoHome.titleEN} component={InputComponent} />
         <Field {...fieldSeoHome.description} component={InputComponent} />
+        <Field {...fieldSeoHome.descriptionEN} component={InputComponent} />
         <Field {...fieldSeoHome.domain} component={InputComponent} />
         <Field {...fieldSeoHome.searchBoxUrl} component={InputComponent} />
         <Field {...fieldSeoHome.facebookChatPlugin} component={TextAreaComponent} />
-        <Field {...fieldSeoHome.languageAlternates} component={InputComponent} />
         <Title className="title-form mt-30" level={3}>
           {t('seo.social')}
         </Title>
@@ -67,6 +68,7 @@ export const SeoHomeForm: FC<{
           {t('seo.image')}
         </Title>
         <Field {...image.logoAlt} component={InputComponent} />
+        <Field {...image.logoAltEN} component={InputComponent} />
         <Row>
           <Col xs={12}>
             <FieldUpload isLoadingForm={isLoadingSubmit} {...image.faviconUrlICO} crop={false} />

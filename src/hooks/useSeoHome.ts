@@ -38,16 +38,18 @@ export const useSeoHome = (isCallValue: boolean = true, callback: any = null): {
     dispatch(submitSeoHomeStart({
       input: {
         description: values.description,
+        descriptionEN: values.descriptionEN,
         domain: values.domain,
         facebookChatPlugin: values.facebookChatPlugin,
         siteName: values.siteName,
         social: values.social,
-        languageAlternates: values.languageAlternates,
         searchBoxUrl: values.searchBoxUrl,
         title: values.title,
+        titleEN: values.titleEN,
         reason: values.reason,
         image: {
           logoAlt: values.image.logoAlt,
+          logoAltEN: values.image.logoAltEN,
           faviconUrlICO,
           faviconUrlJPG,
           logo1280x720,

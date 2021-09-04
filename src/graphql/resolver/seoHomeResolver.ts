@@ -11,6 +11,7 @@ export const seoHomeResolver = `
   id
   image {
     logoAlt
+    logoAltEN
     logo1280x720
     logo800x600
     faviconUrlJPG
@@ -18,7 +19,6 @@ export const seoHomeResolver = `
     logo400x400
   }
   searchBoxUrl
-  languageAlternates
   siteName
   social {
     youtubeUrl
@@ -29,6 +29,8 @@ export const seoHomeResolver = `
   title
   createdAt
   reason
+  descriptionEN
+  titleEN
 `;
 
 export const RS_SEO_HOME = {
