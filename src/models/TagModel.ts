@@ -59,3 +59,4 @@ export interface UpdateTagInput {
   data: CreateTagInput;
   tagId: string;
 }
+

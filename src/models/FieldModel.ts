@@ -1,3 +1,4 @@
+import { OPTION_FILTER_STATUS_EXPERIENCE, OPTION_FILTER_TYPE_EXPERIENCE } from './ExperienceModel';
 import { TagStatus } from './TagModel';
 
 export interface OptionSelect {
@@ -62,16 +63,9 @@ export const OPTION_FILTER_STATUS_TAG: OptionSelect[] = [
   },
 ];
 
-export const OPTION_FILTER_STATUS_EXPERIENCE: OptionSelect[] =[
-  {
-    label: 'tag.active',
-    value: TagStatus.ACTIVE,
-  },
-  {
-    label: 'tag.hide',
-    value: TagStatus.HIDE,
-  },
-]
+
+
+
 
 
 export interface FieldSearchTag {
@@ -141,7 +135,7 @@ export const fieldCreateTag: FieldCreateTag = {
 export interface FieldCreateExperience {
   nameVN: IField;
   nameEN: IField;
-  type: IField;
+  workType: IField;
   position: IField;
   descriptionVN: IField;
   descriptionEN: IField;
@@ -162,10 +156,10 @@ export const fieldCreateExperience: FieldCreateExperience = {
     label: 'profile.work_place_name_en',
     placeholder: 'profile.work_place_name_en'
   },
-  type:{
-    name: 'type',
+  workType:{
+    name: 'workType',
     label: 'profile.type',
-    options: OPTION_FILTER_STATUS_EXPERIENCE,
+    options: OPTION_FILTER_TYPE_EXPERIENCE,
   },
   position: {
     name: 'position',

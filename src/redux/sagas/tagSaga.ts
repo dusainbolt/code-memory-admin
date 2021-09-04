@@ -28,6 +28,7 @@ function* getListTagSaga({ payload }: GetListTagAction) {
 function* submitTagSaga({ payload: { input, callback } }: SubmitTagAction) {
   try {
     const data = yield submitTagRequest(input);
+    console.log("phuong", data)
     yield delay(300);
     yield put(submitTagSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);

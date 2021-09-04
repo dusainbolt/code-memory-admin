@@ -10,12 +10,12 @@ import { fieldSearchExperience } from '../../../models/FieldModel';
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { SelectComponent } from '../../../common/Select';
 import { useAppSelector } from '../../../redux/rootStore';
-import { getTagSlice } from '../../../redux/slices/tagSlice';
 import { handleResetSearch } from '../../../services/utils';
+import { getExpSlice } from '../../../redux/slices/experienceSlice';
 
 export const SearchListForm = () => {
   const { t } = useTranslation();
-  const isLoadingList = useAppSelector(getTagSlice).isLoadingList;
+  const { isLoadingList } = useAppSelector(getExpSlice);
 
   const { handleSubmit, handleReset } = useFormikContext();
 
@@ -26,7 +26,7 @@ export const SearchListForm = () => {
           <Field {...fieldSearchExperience.key} component={InputComponent} onPressEnter={handleSubmit} />
         </Col>
         <Col xs={8} xxl={6}>
-          <Field {...fieldSearchExperience  .status} mode="multiple" component={SelectComponent} />
+          <Field {...fieldSearchExperience.status} mode="multiple" component={SelectComponent} />
         </Col>
         <Col xs={4}>
           <Box className="flx-center align-left control-btn mt-6">
