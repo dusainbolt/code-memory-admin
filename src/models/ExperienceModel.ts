@@ -49,8 +49,8 @@ export interface CreateExpInput {
     position: string;
     descriptionVN: string;
     descriptionEN: string;
-    startTime: string;
-    endTime: string;
+    startTime: any;
+    endTime: any;
     status: string;
     thumbnail?: any;
 }
