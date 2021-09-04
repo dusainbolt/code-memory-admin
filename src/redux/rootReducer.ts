@@ -5,6 +5,8 @@ import storage from 'redux-persist/lib/storage';
 import layoutSlice from './slices/layoutSlice';
 import loginSlice from './slices/loginSlice';
 import tagSlice from './slices/tagSlice';
+import expSlice from './slices/experienceSlice';
+
 
 export const getPersistConfig = (key = '', nested = {}) => {
   return {
@@ -18,7 +20,7 @@ export const whitelist = [];
 
 const persistLoginSlice = persistReducer(getPersistConfig('loginSlice', { whitelist: ['token', 'user'] }), loginSlice);
 
-const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice, tagSlice, seoHomeSlice });
+const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice, tagSlice, seoHomeSlice, expSlice });
 
 export type IRootState = ReturnType<typeof rootReducer>;
 

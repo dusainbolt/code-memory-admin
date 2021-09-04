@@ -3,21 +3,19 @@ import Form from 'antd/lib/form/Form';
 import { Field, useFormikContext } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Box from '../../common/Box';
-import ButtonCommon from '../../common/Button';
-import { InputComponent } from '../../common/Input';
-import { fieldSearchExperience, fieldSearchTag } from '../../models/FieldModel';
+import Box from '../../../common/Box';
+import ButtonCommon from '../../../common/Button';
+import { InputComponent } from '../../../common/Input';
+import { fieldSearchExperience } from '../../../models/FieldModel';
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
-import { SelectComponent } from '../../common/Select';
-import { useAppSelector } from '../../redux/rootStore';
-import { getTagSlice } from '../../redux/slices/tagSlice';
-import { HelperService } from '../../services/helperService';
+import { SelectComponent } from '../../../common/Select';
+import { useAppSelector } from '../../../redux/rootStore';
+import { handleResetSearch } from '../../../services/utils';
+import { getExpSlice } from '../../../redux/slices/experienceSlice';
 
-const helper = new HelperService();
-
-export const SearchTagListForm = () => {
+export const SearchListForm = () => {
   const { t } = useTranslation();
-  const isLoadingList = useAppSelector(getTagSlice).isLoadingList;
+  const { isLoadingList } = useAppSelector(getExpSlice);
 
   const { handleSubmit, handleReset } = useFormikContext();
 
@@ -29,6 +27,9 @@ export const SearchTagListForm = () => {
         </Col>
         <Col xs={8} xxl={6}>
           <Field {...fieldSearchExperience.status} mode="multiple" component={SelectComponent} />
+        </Col>
+        <Col xs={8} xxl={6}>
+          <Field {...fieldSearchExperience.type} mode="multiple" component={SelectComponent} />
         </Col>
         <Col xs={4}>
           <Box className="flx-center align-left control-btn mt-6">
@@ -42,7 +43,7 @@ export const SearchTagListForm = () => {
               size="middle"
             />
             <ButtonCommon
-              onClick={helper.handleResetSearch(handleReset, handleSubmit)}
+              onClick={handleResetSearch(handleReset, handleSubmit)}
               loading={isLoadingList}
               type="primary"
               shape="circle"

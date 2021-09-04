@@ -1,7 +1,7 @@
 import { HelperService } from './helperService';
 import { TFunction } from 'react-i18next';
 import * as Yup from 'yup';
-import { FieldCreateTag, FieldLogin } from '../models/FieldModel';
+import { FieldCreateExperience, fieldCreateExperience, FieldCreateTag, FieldLogin } from '../models/FieldModel';
 import { FieldSeoHome } from '../models/SeoHomeModel';
 
 export class ValidateService extends HelperService {
@@ -44,6 +44,18 @@ export class ValidateService extends HelperService {
     });
   };
 
+  readonly validateCreateExperienceInput = (fieldCreateExperience: FieldCreateExperience) => {
+    const { nameVN,nameEN, descriptionVN, descriptionEN, position, thumbnail } = fieldCreateExperience;
+    return Yup.object({
+      [nameVN.name]: this.stringRequire(nameVN.label),
+      [nameEN.name]: this.stringRequire(nameEN.label),
+      [descriptionEN.name]: this.stringRequire(descriptionEN.label),
+      [descriptionVN.name]: this.stringRequire(descriptionVN.label),
+      [position.name]: this.stringRequire(position.label),
+      [position.name]: this.stringRequire(position.label),
+      [thumbnail.name]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+    })
+  }
   readonly validateSeoHomeInput = (fieldSeoHome: FieldSeoHome) => {
     const { title, description, domain, siteName, facebookChatPlugin, searchBoxUrl, reason } = fieldSeoHome;
     return Yup.object({

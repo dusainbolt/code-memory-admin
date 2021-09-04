@@ -1,8 +1,9 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import DatePicker from '.';
 import { FieldInputProps, FieldMetaProps, FormikProps } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 export interface IDateComponent {
   label?: string;
@@ -35,6 +36,7 @@ export const DateComponent: FC<IDateComponent> = ({
 }) => {
   const touched = formTouched[name];
   const errorMessage = formErrors[name];
+  const { t } = useTranslation()
 
   const onChangeValue = changeVal => {
     setFieldValue(name, changeVal ? changeVal.unix() * 1000 : '');
@@ -46,7 +48,7 @@ export const DateComponent: FC<IDateComponent> = ({
 
   return (
     <div className={clsx('field-wrap', [classWrap] && classWrap)}>
-      {label && <label className="field-wrap__label">{label}</label>}
+      {label && <label className="field-wrap__label">{t(label)}</label>}
       {renderPicker}
       {errorMessage && touched && <span className="required">{errorMessage}</span>}
     </div>
