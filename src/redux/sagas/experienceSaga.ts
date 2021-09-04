@@ -6,18 +6,17 @@ import { ProcessUpload } from '../../models/LayoutModel';
 import { getListExpAction, SubmitExpAction } from '../actionTypes/experienceActionTypes';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
 import { getListExpError, getListExpStart, getListExpSuccess, submitExpSliceError, submitExpSliceStart, submitExpSliceSuccess } from '../slices/experienceSlice';
-import { setProcessUploadSlice } from '../slices/layoutSlice';
+import { setUploadSliceClose } from '../slices/layoutSlice';
+// import { setProcessUploadSlice } from '../slices/layoutSlice';
 
 function* submitExpSaga({ payload: { input, callback } }: SubmitExpAction) {
   try {
+    yield delay(1000);
+    yield put(setUploadSliceClose({}));
     const data = yield submitExpRequest(input);
-    yield delay(300);
     yield put(submitExpSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);
-    if (!!callback) {
-      yield call(callback);
-      yield put(setProcessUploadSlice({ visibleProcessModal: false } as ProcessUpload));
-    }
+    yield callback && call(callback);
   } catch (error) {
     yield put(submitExpSliceError({}));
     yield handleMessageErrorSaga(error);

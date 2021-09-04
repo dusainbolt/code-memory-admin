@@ -20,3 +20,5 @@ export const FETCH_POLICY = {
   DEFAULT: 'cache-first',
   NO_CACHE: 'no-cache',
 };
+
+export const DATA_KEY_IMAGE = ['faviconUrlICO', 'faviconUrlJPG', 'logo400x400', 'logo800x600', 'logo1280x720'];

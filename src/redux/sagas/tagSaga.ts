@@ -1,10 +1,9 @@
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects';
 import { MESSAGE } from '../../constant';
 import { getListTagRequest, submitTagRequest } from '../../graphql/tagRequest';
-import { ProcessUpload } from '../../models/LayoutModel';
 import { GetListTagAction, SubmitTagAction } from '../actionTypes/tagActionTypes';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
-import { setProcessUploadSlice } from '../slices/layoutSlice';
+import { setUploadSliceClose } from '../slices/layoutSlice';
 import {
   getTagListSliceError,
   getTagListSliceStart,
@@ -27,15 +26,12 @@ function* getListTagSaga({ payload }: GetListTagAction) {
 
 function* submitTagSaga({ payload: { input, callback } }: SubmitTagAction) {
   try {
+    yield delay(1000);
+    yield put(setUploadSliceClose({}));
     const data = yield submitTagRequest(input);
-    console.log("phuong", data)
-    yield delay(300);
     yield put(submitTagSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);
-    if (!!callback) {
-      yield call(callback);
-      yield put(setProcessUploadSlice({ visibleProcessModal: false } as ProcessUpload));
-    }
+    yield callback && call(callback);
   } catch (error) {
     yield put(submitTagSliceError({}));
     yield handleMessageErrorSaga(error);

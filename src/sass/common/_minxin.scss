@@ -36,3 +36,10 @@
   max-width: $width_container;
   margin: auto;
 }
+
+@mixin _hover_action {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+}

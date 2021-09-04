@@ -4,9 +4,10 @@ import { setNotifySlice } from './slices/layoutSlice';
 import WatchLoginSaga from './sagas/loginSaga';
 import watchTagSaga from './sagas/tagSaga';
 import watchExpSaga from './sagas/experienceSaga';
+import { watchSeoHome } from './sagas/seoHomeSaga';
 
 function* rootSaga() {
-  yield all([WatchLoginSaga(), watchTagSaga(), watchExpSaga()]);
+  yield all([WatchLoginSaga(), watchTagSaga(), watchSeoHome(), watchExpSaga()]);
 }
 
 export function* handleMessageErrorSaga(error) {

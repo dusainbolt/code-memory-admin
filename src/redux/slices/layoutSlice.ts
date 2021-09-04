@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LayoutSlice } from '../../models/LayoutModel';
-import { SetNotifyAction, SetProcessUploadAction } from '../actionTypes/layoutActionTypes';
+import { SetNotifyAction, setUploadSliceAction } from '../actionTypes/layoutActionTypes';
 import { IRootState } from '../rootReducer';
 
 const initialState: LayoutSlice = {
   processUpload: {
     loadingUpload: false,
     visibleProcessModal: false,
-    messageUpload: '',
-    uploadDone: false,
+    msgErrUpload: '',
+    count: 0,
   },
 };
 
@@ -19,14 +19,24 @@ export const layoutSlice = createSlice({
     setNotifySlice: (state: LayoutSlice, action: SetNotifyAction) => {
       state.notify = action.payload;
     },
-    setProcessUploadSlice: (state: LayoutSlice, action: SetProcessUploadAction) => {
-      state.processUpload = action.payload;
+    setUploadSliceStart: (state: LayoutSlice, { payload }: setUploadSliceAction) => {
+      state.processUpload.count = payload.count || state.processUpload.count;
+      state.processUpload.loadingUpload = true;
+      state.processUpload.visibleProcessModal = payload.visibleProcessModal;
     },
+    setUploadSliceDone: (state: LayoutSlice, { payload }: setUploadSliceAction) => {
+      state.processUpload.count--;
+      state.processUpload.msgErrUpload = payload.msgErrUpload;
+    },
+    setUploadSliceClose: (state: LayoutSlice, action: any) => {
+      state.processUpload.visibleProcessModal = false;
+      state.processUpload.loadingUpload = false;
+    }
   },
 });
 
 export const getLayoutSlice = (state: IRootState) => state.layoutSlice as LayoutSlice;
 
-export const { setNotifySlice, setProcessUploadSlice } = layoutSlice.actions;
+export const { setNotifySlice, setUploadSliceStart, setUploadSliceDone, setUploadSliceClose } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

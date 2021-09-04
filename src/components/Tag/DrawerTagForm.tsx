@@ -17,6 +17,9 @@ import { getTagSlice, submitTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';
 import UploadService from '../../services/uploadService';
 import { UploadFile } from 'antd/lib/upload/interface';
+import { setUploadSliceClose, setUploadSliceStart } from '../../redux/slices/layoutSlice';
+import { setUploadSliceAction } from '../../redux/actionTypes/layoutActionTypes';
+import { ProcessUpload } from '../../models/LayoutModel';
 
 const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
@@ -76,15 +79,10 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
   };
 
   const handleSubmitForm = async (values: CreateTagInput) => {
-    // handle set thumbnail
-    let thumbnail = '';
     const uploadService = new UploadService();
-    if (!!(values.thumbnail as UploadFile).size) {
-      thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.title);
-    } else {
-      thumbnail = values.thumbnail;
-    }
-
+    // handle set thumbnail
+    dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
+    const thumbnail = await uploadService.handleUpload(values.thumbnail, values.title);
     dispatch(
       submitTagSliceStart({
         input: { ...values, thumbnail },

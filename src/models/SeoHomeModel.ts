@@ -1,3 +1,5 @@
+import { HistoryField } from './CommonModel';
+import { User } from './UserModel';
 import { IField } from "./FieldModel";
 
 
@@ -8,6 +10,7 @@ export type SeoHomeImage = {
   logo800x600: String,
   logo1280x720: String,
   logoAlt: String,
+  logoAltEN: String,
 }
 
 export type SeoHomeSocial = {
@@ -19,15 +22,21 @@ export type SeoHomeSocial = {
 
 export interface SeoHome {
   id?: string,
-  description: string,
-  domain: string,
-  facebookChatPlugin: string,
-  image: SeoHomeImage,
-  languageAlternates: string,
-  searchBoxUrl: string,
-  siteName: string,
-  social: SeoHomeSocial,
-  title: string,
+  title?: string,
+  titleEN?: string,
+  description?: string,
+  descriptionEN?: String
+  domain?: string,
+  facebookChatPlugin?: string,
+  image?: SeoHomeImage,
+  searchBoxUrl?: string,
+  siteName?: string,
+  social?: SeoHomeSocial,
+  history?: HistoryField[],
+  createBy?: string;
+  createdAt?: string;
+  reason?: string;
+  userCreate?: User;
 }
 
 export interface FieldSocialSeoHome {
@@ -44,16 +53,19 @@ export interface FieldImageSeoHome {
   logo400x400: IField,
   logo800x600: IField,
   logoAlt: IField,
+  logoAltEN: IField,
 }
 
 export interface FieldSeoHome {
-  description: IField;
-  domain: IField;
   title: IField;
+  description: IField;
+  titleEN: IField;
+  descriptionEN: IField;
+  domain: IField;
   facebookChatPlugin: IField;
   searchBoxUrl: IField;
-  languageAlternates: IField;
   siteName: IField;
+  reason: IField;
   image: FieldImageSeoHome,
   social: FieldSocialSeoHome,
 }
@@ -71,9 +83,19 @@ export const fieldSeoHome: FieldSeoHome = {
     label: "seo.title",
     placeholder: "seo.placeholder_title"
   },
+  titleEN: {
+    name: "titleEN",
+    label: "seo.titleEN",
+    placeholder: "seo.placeholder_title"
+  },
   description: {
     name: "description",
     label: "seo.description",
+    placeholder: "seo.placeholder_description",
+  },
+  descriptionEN: {
+    name: "descriptionEN",
+    label: "seo.descriptionEN",
     placeholder: "seo.placeholder_description",
   },
   domain: {
@@ -86,15 +108,14 @@ export const fieldSeoHome: FieldSeoHome = {
     label: "seo.searchBoxUrl",
     placeholder: "seo.placeholder_searchBoxUrl",
   },
-  languageAlternates: {
-    name: "languageAlternates",
-    label: "seo.languageAlternates",
-    placeholder: "seo.placeholder_languageAlternates",
-  },
   facebookChatPlugin: {
     name: "facebookChatPlugin",
     label: "seo.facebookChatPlugin",
     placeholder: "seo.placeholder_facebookChatPlugin"
+  },
+  reason: {
+    name: "reason",
+    label: "seo.reason",
   },
   image: {
     faviconUrlICO: {
@@ -121,6 +142,11 @@ export const fieldSeoHome: FieldSeoHome = {
       name: "image.logoAlt",
       label: "seo.logoAlt",
     },
+    logoAltEN: {
+      name: "image.logoAltEN",
+      label: "seo.logoAltEN",
+    },
+
   },
   social: {
     facebookAppId: {

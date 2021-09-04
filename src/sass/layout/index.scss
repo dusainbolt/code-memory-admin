@@ -4,6 +4,7 @@
 .admin {
   &__content {
     padding: 0 50px;
+    margin-bottom: 100px;
   }
 }
 
@@ -36,6 +37,10 @@
 
 .control-btn {
   height: 100%;
+}
+
+.hover-action {
+  @include _hover_action;
 }
 
 @for $i from 0 through 32 {

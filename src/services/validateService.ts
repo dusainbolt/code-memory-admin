@@ -57,8 +57,7 @@ export class ValidateService extends HelperService {
     })
   }
   readonly validateSeoHomeInput = (fieldSeoHome: FieldSeoHome) => {
-    const { title, description, domain, siteName, facebookChatPlugin, searchBoxUrl } = fieldSeoHome;
-    const { faviconUrlICO, faviconUrlJPG, logo1280x720, logo400x400, logo800x600, logoAlt } = fieldSeoHome.image;
+    const { title, description, domain, siteName, facebookChatPlugin, searchBoxUrl, reason } = fieldSeoHome;
     return Yup.object({
       [siteName.name]: this.stringRequire(domain.label),
       [title.name]: this.stringRequire(title.label),
@@ -66,14 +65,15 @@ export class ValidateService extends HelperService {
       [domain.name]: this.stringRequire(domain.label),
       [facebookChatPlugin.name]: this.stringRequire(facebookChatPlugin.label),
       [searchBoxUrl.name]: this.stringRequire(searchBoxUrl.label),
-      image: Yup.object({
-        [this.getKeyByObjStr(faviconUrlICO.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
-        [this.getKeyByObjStr(faviconUrlJPG.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
-        [this.getKeyByObjStr(logo1280x720.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
-        [this.getKeyByObjStr(logo400x400.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
-        [this.getKeyByObjStr(logo800x600.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
-        [this.getKeyByObjStr(logoAlt.name)]: this.stringRequire(logoAlt.label),
-      }),
+      [reason.name]: this.stringRequire(reason.label),
+      // image: Yup.object({
+      //   [this.getKeyByObjStr(faviconUrlICO.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+      //   [this.getKeyByObjStr(faviconUrlJPG.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+      //   [this.getKeyByObjStr(logo1280x720.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+      //   [this.getKeyByObjStr(logo400x400.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+      //   [this.getKeyByObjStr(logo800x600.name)]: this.mixRequire(this.LABEL_FIELD_IMAGE),
+      //   [this.getKeyByObjStr(logoAlt.name)]: this.stringRequire(logoAlt.label),
+      // }),
     });
   };
 }

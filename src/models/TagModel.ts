@@ -20,8 +20,6 @@ export interface SearchTagInput {
 }
 
 export interface Tag {
-  createBy?: string;
-  createdAt?: string;
   description?: string;
   id?: string;
   slug?: string;
@@ -29,6 +27,8 @@ export interface Tag {
   tagType?: TagType;
   thumbnail?: string;
   title?: string;
+  createBy?: string;
+  createdAt?: string;
   updatedAt?: string;
   userCreate?: User;
 }

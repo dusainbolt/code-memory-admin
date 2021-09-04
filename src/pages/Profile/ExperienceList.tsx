@@ -22,8 +22,8 @@ import { FETCH_POLICY } from "../../constant";
 import { Experience, ExperienceStatus, ExperienceType } from "../../models/ExperienceModel";
 import { Status } from "../../components/Profile/Status";
 import { TypeExp } from "../../components/Profile/ExperienceList/TypeExp";
-import moment from "moment";
 import { EditOutlined } from '@ant-design/icons';
+import dayjs from "dayjs";
 
 
 export const ExperienceList = () => {
@@ -68,7 +68,7 @@ export const ExperienceList = () => {
       key: "time",
       render: (value: any, row: Experience) => (
         <div>
-          {moment.unix(parseInt(row.startTime)).format("DD/MM/YY")} - {moment.unix(parseInt(row.endTime)).format("DD/MM/YY")}         
+          {dayjs(parseInt(row.startTime)).format("DD/MM/YY")} - {dayjs(parseInt(row.endTime)).format("DD/MM/YY")}         
         </div>
       )
     },

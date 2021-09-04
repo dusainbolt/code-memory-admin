@@ -28,6 +28,8 @@ import {
 import { DateComponent } from "../../../common/DatePicker/DatePickerForm";
 import { FieldUpload } from "../../../common/Upload/FieldUpload";
 import { getExpSlice, submitExpSliceStart } from "../../../redux/slices/experienceSlice";
+import { setUploadSliceStart } from "../../../redux/slices/layoutSlice";
+import { ProcessUpload } from "../../../models/LayoutModel";
 
 const ExperienceForm = ({
   t,
@@ -160,13 +162,9 @@ export const DrawerExperienceForm = ({
   };
 
   const handleSubmitForm = async (values: CreateExpInput) => {
-    let thumbnail = '';
     const uploadService = new UploadService();
-    if (!!(values.thumbnail as UploadFile).size) {
-      thumbnail = await uploadService.uploadFile((values.thumbnail as UploadFile).originFileObj, values.nameVN);
-    } else {
-      thumbnail = values.thumbnail;
-    }
+    dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
+    const thumbnail = await uploadService.handleUpload(values.thumbnail, values.nameVN);
     const data = {...values, startTime: values.startTime.toString(), endTime: values.endTime.toString(), thumbnail};
 
     dispatch(
