@@ -13,6 +13,7 @@ export interface SeoHomeSlice {
 const initialState: SeoHomeSlice = {
   seoHome: {
     description: "",
+    descriptionEN: "",
     domain: "",
     facebookChatPlugin: "",
     image: {
@@ -22,6 +23,7 @@ const initialState: SeoHomeSlice = {
       logo400x400: "",
       logo800x600: "",
       logoAlt: "",
+      logoAltEN: "",
     },
     siteName: "",
     social: {
@@ -30,9 +32,9 @@ const initialState: SeoHomeSlice = {
       twitterUrl: "",
       youtubeUrl: "",
     },
-    languageAlternates: "",
     searchBoxUrl: "",
     title: "",
+    titleEN: "",
     id: "",
   },
   isLoadingSubmit: false,
