@@ -4,8 +4,6 @@ import { PayloadName } from './loginActionTypes';
 
 export type SubmitSeoHome = Record<PayloadName, { input: SeoHome, callback?: any }>;
 
-export type GetEntireSeoHomeStart = Record<PayloadName, { policy: string }>;
-
 export type GetEntireSeoHomeSuccess = Record<PayloadName, { seoHomeEntire: SeoHome[] }>;
 
 export type SubmitSeoHomeSuccess = Record<PayloadName, { seoHome: SeoHome }>;

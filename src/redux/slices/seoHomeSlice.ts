@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IRootState } from './../rootReducer';
 import { SeoHome } from './../../models/SeoHomeModel';
-import { SubmitSeoHome, SubmitSeoHomeSuccess, GetEntireSeoHomeStart, GetEntireSeoHomeSuccess } from './../actionTypes/seoHomeActionTypes';
+import { SubmitSeoHome, SubmitSeoHomeSuccess, GetEntireSeoHomeSuccess } from './../actionTypes/seoHomeActionTypes';
 export interface SeoHomeSlice {
   seoHome: SeoHome,
   seoHomeEntire: SeoHome[],
@@ -58,7 +58,7 @@ export const seoHomeSlice = createSlice({
     getSeoHomeError: (state: SeoHomeSlice, action: any) => {
       state.isLoadingSeoHome = false;
     },
-    getSeoHomeEntireStart: (state: SeoHomeSlice, action: GetEntireSeoHomeStart) => {
+    getSeoHomeEntireStart: (state: SeoHomeSlice) => {
       state.isLoadingList = true;
     },
     getSeoHomeEntireSuccess: (state: SeoHomeSlice, { payload }: GetEntireSeoHomeSuccess) => {
