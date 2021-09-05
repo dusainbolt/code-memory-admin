@@ -24,8 +24,8 @@ export const useSearchTagList = (
     offset: 0,
   });
 
-  const handleGetListCategory = (fetchPolicy?: any) => {
-    dispatch(getTagListSliceStart({ input: paramsSearch, fetchPolicy }));
+  const handleGetListCategory = () => {
+    dispatch(getTagListSliceStart({ input: paramsSearch }));
   };
 
   useEffect(() => {

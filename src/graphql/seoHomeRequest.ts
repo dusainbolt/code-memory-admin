@@ -34,7 +34,7 @@ export const seoHomeEntireQuery = gql`
 `;
 
 export const getSeoHomeRequest = async (): Promise<SeoHome> => {
-  return await requestService.query(seoHomeQuery, {}, RS_SEO_HOME.getSeoHome, FETCH_POLICY.NO_CACHE);
+  return await requestService.query(seoHomeQuery, {}, RS_SEO_HOME.getSeoHome);
 };
 
 

@@ -45,8 +45,8 @@ const updateTagQuery = gql`
   }
 `;
 
-export const getListExpRequest = (input: SearchExpInput, fetchPolicy?: any): any => {
-  return requestService.query(getListExpQuery, { input }, RESPONSE_EXP.workList, fetchPolicy);
+export const getListExpRequest = (input: SearchExpInput): any => {
+  return requestService.query(getListExpQuery, { input }, RESPONSE_EXP.workList);
 };
 
 
