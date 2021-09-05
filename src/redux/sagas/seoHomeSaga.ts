@@ -1,4 +1,3 @@
-import { GetEntireSeoHomeStart } from './../actionTypes/seoHomeActionTypes';
 import { getSeoHomeRequest, getSeoHomeEntireRequest } from './../../graphql/seoHomeRequest';
 import { MESSAGE } from './../../constant/index';
 import { delay, put, takeEvery, call } from 'redux-saga/effects';
@@ -34,9 +33,9 @@ function* getSeoHomeSaga() {
 }
 
 
-function* getSeoHomeEntireSaga({ payload }: GetEntireSeoHomeStart) {
+function* getSeoHomeEntireSaga() {
   try {
-    const seoHomeEntire = yield getSeoHomeEntireRequest(payload.policy);
+    const seoHomeEntire = yield getSeoHomeEntireRequest();
     yield put(getSeoHomeEntireSuccess({ seoHomeEntire }));
   } catch (error: any) {
     yield put(getSeoHomeEntireError({}));

@@ -15,7 +15,7 @@ import {
 
 function* getListTagSaga({ payload }: GetListTagAction) {
   try {
-    const data = yield getListTagRequest(payload.input, payload.fetchPolicy);
+    const data = yield getListTagRequest(payload.input);
     yield delay(300);
     yield put(getTagListSliceSuccess(data));
   } catch (error) {

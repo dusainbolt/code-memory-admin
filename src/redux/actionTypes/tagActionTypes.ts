@@ -5,7 +5,6 @@ export type GetListTagAction = Record<
   PayloadName,
   {
     input: SearchTagInput;
-    fetchPolicy: any;
   }
 >;
 

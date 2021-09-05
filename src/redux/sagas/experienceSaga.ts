@@ -26,8 +26,8 @@ function* submitExpSaga({ payload: { input, callback } }: SubmitExpAction) {
 
 function* getListExpSaga({ payload }: getListExpAction) {
   try {
-    const data = yield getListExpRequest(payload.input, payload.fetchPolicy);
-    const dataConvert: SearchExpOutput = {dataExps: data.dataWorks, total: data.total}
+    const data = yield getListExpRequest(payload.input);
+    const dataConvert: SearchExpOutput = { dataExps: data.dataWorks, total: data.total }
     yield delay(300);
     yield put(getListExpSuccess(dataConvert));
   } catch (error) {

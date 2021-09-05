@@ -20,8 +20,8 @@ const getListTagQuery = gql`
   }
 `;
 
-export const getListTagRequest = (input: SearchTagInput, fetchPolicy?: any): any => {
-  return requestService.query(getListTagQuery, { input }, RESPONSE_TAG.tagList, fetchPolicy);
+export const getListTagRequest = (input: SearchTagInput): any => {
+  return requestService.query(getListTagQuery, { input }, RESPONSE_TAG.tagList);
 };
 
 const addTagQuery = gql`

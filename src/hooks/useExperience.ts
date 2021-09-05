@@ -25,8 +25,8 @@ export const useSearchExpList = (
     offset: 0,
   });
 
-  const handleGetListCategory = (fetchPolicy?: any) => {
-    dispatch(getListExpStart({ input: paramsSearch, fetchPolicy }));
+  const handleGetListCategory = () => {
+    dispatch(getListExpStart({ input: paramsSearch }));
   };
 
   useEffect(() => {
@@ -50,31 +50,31 @@ export const useSearchExpList = (
     setParamsSearch({ ...paramsSearch, orderBy: field, sortBy: helper.getOrderType(order) });
   };
 
-  return { paramsSearch,getPageIndexNumber, handleGetListCategory, handleSearch, handleChangePage, handleSortByParams };
+  return { paramsSearch, getPageIndexNumber, handleGetListCategory, handleSearch, handleChangePage, handleSortByParams };
 };
 
 
 
 export const useFormExp = (): {
-    openFormModal: any;
-    setVisible: any;
-    visibleFormExp: boolean;
-    openFormEdit: any
-  } => {
-    const dispatch = useAppDispatch();
-    const { visibleFormExp } = useAppSelector(getExpSlice);
-  
-    const openFormModal = () => {
-      dispatch(setVisibleFormExp({ visibleFormExp: true }));
-    };
-  
-    const setVisible = (value: boolean) => {
-      dispatch(setVisibleFormExp({ visibleFormExp: value }));
-    };
-  
-    const openFormEdit = (expDetail: Experience) => () => {
-      dispatch(setVisibleFormExp({ visibleFormExp: true, expDetail }));
-    };
-  
-    return { openFormModal, visibleFormExp, setVisible, openFormEdit  };
+  openFormModal: any;
+  setVisible: any;
+  visibleFormExp: boolean;
+  openFormEdit: any
+} => {
+  const dispatch = useAppDispatch();
+  const { visibleFormExp } = useAppSelector(getExpSlice);
+
+  const openFormModal = () => {
+    dispatch(setVisibleFormExp({ visibleFormExp: true }));
   };
+
+  const setVisible = (value: boolean) => {
+    dispatch(setVisibleFormExp({ visibleFormExp: value }));
+  };
+
+  const openFormEdit = (expDetail: Experience) => () => {
+    dispatch(setVisibleFormExp({ visibleFormExp: true, expDetail }));
+  };
+
+  return { openFormModal, visibleFormExp, setVisible, openFormEdit };
+};

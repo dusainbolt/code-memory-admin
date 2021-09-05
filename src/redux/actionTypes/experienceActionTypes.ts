@@ -20,7 +20,6 @@ export type setVisibleExpFormAction = Record<
 
 export type getListExpAction = Record<PayloadName, {
   input: SearchExpInput;
-  fetchPolicy: any;
 }>
 
 export type GetListExpSuccessAction = Record<PayloadName, SearchExpOutput>;

@@ -74,7 +74,7 @@ export const useSeoHomeHistory = (): {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.DEFAULT }))
+    dispatch(getSeoHomeEntireStart());
   }, []);
 
   const onViewSeoHomeDetail = (seoHome: SeoHome) => () => {
@@ -82,7 +82,7 @@ export const useSeoHomeHistory = (): {
   };
 
   const onCallbackUpdateSeoHome = () => {
-    dispatch(getSeoHomeEntireStart({ policy: FETCH_POLICY.NO_CACHE }))
+    dispatch(getSeoHomeEntireStart());
     setSeoHomeDetail({})
   };;
 
