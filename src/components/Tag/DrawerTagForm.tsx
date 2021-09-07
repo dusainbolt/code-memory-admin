@@ -15,9 +15,8 @@ import { ValidateService } from '../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { getTagSlice, submitTagSliceStart } from '../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../constant';
-import UploadService from '../../services/uploadService';
-import { UploadFile } from 'antd/lib/upload/interface';
-import { setUploadSliceClose, setUploadSliceStart } from '../../redux/slices/layoutSlice';
+import UploadService, { S3Storage } from '../../services/uploadService';
+import { setUploadSliceStart } from '../../redux/slices/layoutSlice';
 import { ProcessUpload } from '../../models/LayoutModel';
 
 const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
@@ -81,7 +80,7 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
     const uploadService = new UploadService();
     // handle set thumbnail
     dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
-    const thumbnail = await uploadService.handleUpload(values.thumbnail, values.title);
+    const thumbnail = await uploadService.handleUpload(values.thumbnail, S3Storage.TAG);
     dispatch(
       submitTagSliceStart({
         input: { ...values, thumbnail },
