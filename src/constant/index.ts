@@ -23,3 +23,9 @@ export const FETCH_POLICY = {
 };
 
 export const DATA_KEY_IMAGE = ['faviconUrlICO', 'faviconUrlJPG', 'logo400x400', 'logo800x600', 'logo1280x720'];
+
+
+export const ENV_STORAGE = {
+  local: "test",
+  production: "prd",
+}

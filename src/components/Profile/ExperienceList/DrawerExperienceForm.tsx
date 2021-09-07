@@ -1,48 +1,28 @@
-import { Col, Divider, Drawer, Row } from "antd";
-import Text from "antd/lib/typography/Text";
-import { Field, Formik, useFormikContext } from "formik";
-import React, { useEffect } from "react";
-import { TFunction, useTranslation } from "react-i18next";
-import Box from "../../../common/Box";
-import { InputComponent } from "../../../common/Input";
-import { TextAreaComponent } from "../../../common/Input/TextAreaForm";
-import { SelectComponent } from "../../../common/Select";
-import { UploadComponent } from "../../../common/Upload";
-import { fieldCreateExperience } from "../../../models/FieldModel";
-import { CreateTagInput, TagStatus } from "../../../models/TagModel";
-import { ButtonForm } from "../../../common/Button/ButtonForm";
-import { ValidateService } from "../../../services/validateService";
-import { useAppDispatch, useAppSelector } from "../../../redux/rootStore";
-import {
-  getTagSlice,
-  submitTagSliceStart,
-} from "../../../redux/slices/tagSlice";
-import { FETCH_POLICY } from "../../../constant";
-import UploadService from "../../../services/uploadService";
-import { UploadFile } from "antd/lib/upload/interface";
-import {
-  CreateExpInput,
-  ExperienceStatus,
-  ExperienceType,
-} from "../../../models/ExperienceModel";
-import { DateComponent } from "../../../common/DatePicker/DatePickerForm";
-import { FieldUpload } from "../../../common/Upload/FieldUpload";
-import { getExpSlice, submitExpSliceStart } from "../../../redux/slices/experienceSlice";
-import { setUploadSliceStart } from "../../../redux/slices/layoutSlice";
-import { ProcessUpload } from "../../../models/LayoutModel";
+import { Col, Divider, Drawer, Row } from 'antd';
+import Text from 'antd/lib/typography/Text';
+import { Field, Formik, useFormikContext } from 'formik';
+import React, { useEffect } from 'react';
+import { TFunction, useTranslation } from 'react-i18next';
+import Box from '../../../common/Box';
+import { InputComponent } from '../../../common/Input';
+import { TextAreaComponent } from '../../../common/Input/TextAreaForm';
+import { SelectComponent } from '../../../common/Select';
+import { fieldCreateExperience } from '../../../models/FieldModel';
+import { ButtonForm } from '../../../common/Button/ButtonForm';
+import { ValidateService } from '../../../services/validateService';
+import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
+import { getTagSlice } from '../../../redux/slices/tagSlice';
+import { FETCH_POLICY } from '../../../constant';
+import UploadService, { S3Storage } from '../../../services/uploadService';
+import { CreateExpInput, ExperienceStatus, ExperienceType } from '../../../models/ExperienceModel';
+import { DateComponent } from '../../../common/DatePicker/DatePickerForm';
+import { FieldUpload } from '../../../common/Upload/FieldUpload';
+import { getExpSlice, submitExpSliceStart } from '../../../redux/slices/experienceSlice';
+import { setUploadSliceStart } from '../../../redux/slices/layoutSlice';
+import { ProcessUpload } from '../../../models/LayoutModel';
 
-const ExperienceForm = ({
-  t,
-  onCloseForm,
-  isLoadingForm,
-  visible,
-}: {
-  t: TFunction;
-  onCloseForm: any;
-  visible: boolean;
-  isLoadingForm: boolean;
-}) => {
-  const { handleSubmit, setFieldValue, handleReset, setValues } = useFormikContext();
+const ExperienceForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
+  const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { expDetail } = useAppSelector(getExpSlice);
 
   useEffect(() => {
@@ -74,87 +54,48 @@ const ExperienceForm = ({
   return (
     <Row className="tag-form form-label-md">
       <Box className="upload__field center-block">
-        <Text className="tag-upload-dec">{t("profile.label_thumbnail")}</Text>
-        <FieldUpload
-          setFieldValue={setFieldValue}
-          isLoadingForm={isLoadingForm}
-          name={fieldCreateExperience.thumbnail.name}
-          crop={true}
-        />
+        <Text className="tag-upload-dec">{t('profile.label_thumbnail')}</Text>
+        <FieldUpload isLoadingForm={isLoadingForm} name={fieldCreateExperience.thumbnail.name} crop={true} />
       </Box>
       <Field {...fieldCreateExperience.nameVN} component={InputComponent} />
       <Field {...fieldCreateExperience.nameEN} component={InputComponent} />
-      <Field
-        {...fieldCreateExperience.workType}
-        allowClear={false}
-        component={SelectComponent}
-      />
+      <Field {...fieldCreateExperience.workType} allowClear={false} component={SelectComponent} />
       <Field {...fieldCreateExperience.position} component={InputComponent} />
-      <Field
-        {...fieldCreateExperience.descriptionVN}
-        component={TextAreaComponent}
-      />
-      <Field
-        {...fieldCreateExperience.descriptionEN}
-        component={TextAreaComponent}
-      />
+      <Field {...fieldCreateExperience.descriptionVN} component={TextAreaComponent} />
+      <Field {...fieldCreateExperience.descriptionEN} component={TextAreaComponent} />
       <Row gutter={[16, 16]}>
         <Col>
-          <Field
-            {...fieldCreateExperience.startTime}
-            component={DateComponent}
-          />
+          <Field {...fieldCreateExperience.startTime} component={DateComponent} />
         </Col>
         <Col>
-          <Field
-            {...fieldCreateExperience.endTime}
-            component={DateComponent}
-          />
+          <Field {...fieldCreateExperience.endTime} component={DateComponent} />
         </Col>
       </Row>
-      <Field
-        {...fieldCreateExperience.status}
-        allowClear={false}
-        component={SelectComponent}
-      />
+      <Field {...fieldCreateExperience.status} allowClear={false} component={SelectComponent} />
       <Divider />
-      <ButtonForm
-        loading={isLoadingForm}
-        onClickClose={onCloseForm}
-        onClickSubmit={handleSubmit}
-      />
+      <ButtonForm loading={isLoadingForm} onClickClose={onCloseForm} onClickSubmit={handleSubmit} />
     </Row>
   );
 };
 
-export const DrawerExperienceForm = ({
-  visible,
-  setVisible,
-  callbackSubmit,
-}: {
-  visible: boolean;
-  setVisible: any;
-  callbackSubmit: any;
-}) => {
+export const DrawerExperienceForm = ({ visible, setVisible, callbackSubmit }: { visible: boolean; setVisible: any; callbackSubmit: any }) => {
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const validateExpInput = new ValidateService(t).validateCreateExperienceInput(
-    fieldCreateExperience
-  );
+  const validateExpInput = new ValidateService(t).validateCreateExperienceInput(fieldCreateExperience);
 
   const initialValues: CreateExpInput = {
-    id: "",
-    nameVN: "",
-    nameEN: "",
+    id: '',
+    nameVN: '',
+    nameEN: '',
     workType: ExperienceType.CERTIFICATE,
-    position: "",
-    descriptionVN: "",
-    descriptionEN: "",
-    startTime: "",
-    endTime: "",
+    position: '',
+    descriptionVN: '',
+    descriptionEN: '',
+    startTime: '',
+    endTime: '',
     status: ExperienceStatus.ACTIVE,
-    thumbnail: "",
+    thumbnail: '',
   };
 
   const onCloseDrawer = () => {
@@ -164,8 +105,8 @@ export const DrawerExperienceForm = ({
   const handleSubmitForm = async (values: CreateExpInput) => {
     const uploadService = new UploadService();
     dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
-    const thumbnail = await uploadService.handleUpload(values.thumbnail, values.nameVN);
-    const data = {...values, startTime: values.startTime.toString(), endTime: values.endTime.toString(), thumbnail};
+    const thumbnail = await uploadService.handleUpload(values.thumbnail, S3Storage.WORK);
+    const data = { ...values, startTime: values.startTime.toString(), endTime: values.endTime.toString(), thumbnail };
 
     dispatch(
       submitExpSliceStart({
@@ -176,25 +117,9 @@ export const DrawerExperienceForm = ({
   };
 
   return (
-    <Drawer
-      title={t("tag.add_tag_title")}
-      maskClosable={false}
-      width={520}
-      closable={!isLoadingForm}
-      onClose={onCloseDrawer}
-      visible={visible}
-    >
-      <Formik
-        onSubmit={handleSubmitForm}
-        validationSchema={validateExpInput}
-        initialValues={initialValues}
-      >
-        <ExperienceForm
-          visible={visible}
-          isLoadingForm={isLoadingForm}
-          t={t}
-          onCloseForm={onCloseDrawer}
-        />
+    <Drawer title={t('tag.add_tag_title')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
+      <Formik onSubmit={handleSubmitForm} validationSchema={validateExpInput} initialValues={initialValues}>
+        <ExperienceForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>
     </Drawer>
   );

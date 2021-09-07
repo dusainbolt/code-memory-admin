@@ -48,7 +48,6 @@ export class HelperService {
   convertTimeDisplay = (value: any, format: string = TIME_FORMAT.DD_MM_YYYY_HH_MM_SS) => {
     return dayjs(parseInt(value)).format(format);
   }
-
 };
 
 

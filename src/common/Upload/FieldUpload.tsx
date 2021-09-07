@@ -16,7 +16,6 @@ const uploadService = new UploadService();
 
 interface FieldUpload {
   name?: string;
-  setFieldValue?: any;
   urlDefault?: string;
   classNameWrap?: string;
   limitSize?: number;
