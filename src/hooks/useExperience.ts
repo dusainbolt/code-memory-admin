@@ -1,10 +1,8 @@
+import { helper } from './../services/helperService';
 import { useEffect, useState } from "react";
 import { Experience, ExperienceStatus, ExperienceType, SearchExpInput } from "../models/ExperienceModel";
 import { useAppDispatch, useAppSelector } from "../redux/rootStore";
 import { getExpSlice, getListExpStart, setVisibleFormExp } from "../redux/slices/experienceSlice";
-import { HelperService } from "../services/helperService";
-
-const helper = new HelperService()
 
 export const useSearchExpList = (
   dispatch: any

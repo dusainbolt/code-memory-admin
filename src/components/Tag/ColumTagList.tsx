@@ -1,18 +1,14 @@
-import dayjs from 'dayjs';
 import React from 'react';
 import { TFunction } from 'react-i18next';
 import { EditOutlined } from '@ant-design/icons';
 import { Tag, TagStatus } from '../../models/TagModel';
 import { BoxIconAndName } from './BoxIconAndName';
-import { TIME_FORMAT } from '../../constant';
 import { StatusTag } from './StatusTag';
 import { User } from '../../models/UserModel';
-import { HelperService } from '../../services/helperService';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
 import { ColumnType } from 'antd/lib/table';
-
-const helper = new HelperService();
+import { helper } from '../../services/helperService';
 
 export const useColumnTag = (t: TFunction, pageIndex: any, callbackEdit: any): ColumnType<any>[] => {
   return [

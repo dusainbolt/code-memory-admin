@@ -5,7 +5,7 @@ import Text from 'antd/lib/typography/Text';
 import Box from '../../common/Box';
 import { useAppSelector } from '../../redux/rootStore';
 import { getSeoHomeSlice } from '../../redux/slices/seoHomeSlice';
-import { HelperService } from '../../services/helperService';
+import { helper, HelperService } from '../../services/helperService';
 import TableCommon from '../../common/Table';
 import { useSeoHome, useSeoHomeHistory } from '../../hooks/useSeoHome';
 import clsx from 'clsx';
@@ -17,8 +17,6 @@ import { SeoHomeForm } from './SeoHomeForm';
 import { Formik } from 'formik';
 
 const { TabPane } = Tabs;
-
-const helper = new HelperService();
 
 export const SeoHomeHistory = () => {
   const { onViewSeoHomeDetail, seoHomeDetail, onCallbackUpdateSeoHome } = useSeoHomeHistory();

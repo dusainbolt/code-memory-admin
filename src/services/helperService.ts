@@ -50,5 +50,7 @@ export class HelperService {
   }
 };
 
+export const helper = new HelperService();
+
 
 

@@ -10,8 +10,8 @@ import { fieldSearchExperience } from '../../../models/FieldModel';
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { SelectComponent } from '../../../common/Select';
 import { useAppSelector } from '../../../redux/rootStore';
-import { handleResetSearch } from '../../../services/utils';
 import { getExpSlice } from '../../../redux/slices/experienceSlice';
+import { helper, HelperService } from '../../../services/helperService';
 
 export const SearchListForm = () => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ export const SearchListForm = () => {
               size="middle"
             />
             <ButtonCommon
-              onClick={handleResetSearch(handleReset, handleSubmit)}
+              onClick={helper.handleResetSearch(handleReset, handleSubmit)}
               loading={isLoadingList}
               type="primary"
               shape="circle"

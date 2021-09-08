@@ -6,14 +6,12 @@ import { useTranslation } from 'react-i18next';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
 import { InputComponent } from '../../common/Input';
-import { fieldSearchExperience, fieldSearchTag } from '../../models/FieldModel';
+import { fieldSearchExperience } from '../../models/FieldModel';
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { SelectComponent } from '../../common/Select';
 import { useAppSelector } from '../../redux/rootStore';
 import { getTagSlice } from '../../redux/slices/tagSlice';
-import { HelperService } from '../../services/helperService';
-
-const helper = new HelperService();
+import { helper } from '../../services/helperService';
 
 export const SearchTagListForm = () => {
   const { t } = useTranslation();

@@ -1,1 +1,32 @@
-@import '../components/blog/addBlog';
+.draft-editor {
+  display: flex;
+  .wrap-raw-html {
+    width: 50%;
+    margin-left: 10px;
+  }
+  &__form-wrapper {
+    width: 50%;
+    margin-right: 10px;
+    height: 100%;
+  }
+}
+
+.code-editor {
+  display: flex;
+  .code-editor-input {
+    width: 50%;
+    margin-right: 10px;
+  }
+  .Code {
+    margin-left: 10px;
+    width: 50%;
+  }
+}
+
+.section-form {
+  padding: 20px;
+  background-color: $color_bg_header_card;
+  margin-bottom: 30px;
+  .control-group {
+  }
+}

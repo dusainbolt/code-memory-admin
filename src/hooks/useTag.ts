@@ -1,10 +1,8 @@
-import { HelperService } from '../services/helperService';
-import { useCallback, useEffect, useState } from 'react';
+import { helper } from './../services/helperService';
+import { useEffect, useState } from 'react';
 import { SearchTagInput, Tag, TagStatus } from '../models/TagModel';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
 import { getTagListSliceStart, getTagSlice, setVisibleFormTag } from '../redux/slices/tagSlice';
-
-const helper = new HelperService();
 
 export const useSearchTagList = (
   dispatch: any
