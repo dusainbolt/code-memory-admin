@@ -8,15 +8,17 @@ import { Code } from './Code';
 
 export interface ICodeEditor {
   className?: string;
-  fieldName: string;
+  index: number;
 }
-export const CodeEditor = ({ className, fieldName }: ICodeEditor) => {
+export const CodeEditor = ({ className, index }: ICodeEditor) => {
   const { values, setFieldValue } = useFormikContext();
-  const fieldValue: BlogContent = values[fieldName];
+  const contentValue = (values as any)?.content;
+  const fieldValue: BlogContent = contentValue[index];
 
   const onChangeTextarea = ({ target: { value } }) => {
-    console.log(values);
-    setFieldValue(fieldName, { ...fieldValue, data: value });
+    const fieldChangeVal = { ...fieldValue, data: value };
+    contentValue[index] = fieldChangeVal;
+    setFieldValue('content', contentValue);
   };
 
   return (

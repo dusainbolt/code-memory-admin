@@ -5,9 +5,7 @@ import { FC } from 'react';
 import Box from '../Box';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { HelperService } from '../../services/helperService';
-
-const helper = new HelperService();
+import { helper } from '../../services/helperService';
 
 export interface IInputComponent {
   label?: string;

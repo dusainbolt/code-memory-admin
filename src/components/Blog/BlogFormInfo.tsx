@@ -4,7 +4,7 @@ import React from 'react';
 import { InputComponent } from '../../common/Input';
 import { fieldBlog } from '../../models/FieldModel';
 
-export const FormInputBlog = () => {
+export const BlogFormInfo = () => {
   return (
     <Row className="form-input-blog" gutter={[24, 24]}>
       <Col xs={24}>

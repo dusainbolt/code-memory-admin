@@ -1,20 +1,10 @@
-import React, { ReactNode, useState } from 'react';
-import Box from '../../common/Box';
+import React from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { DraftEditor } from '../../components/Blog/DraftEditor';
-import { Code } from '../../components/Blog/Code';
-import { CodeEditor } from '../../components/Blog/CodeEditor';
 import { Formik } from 'formik';
 import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
-import ButtonCommon from '../../common/Button';
-import { FormInputBlog } from '../../components/Blog/FormInputBlog';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-// import { actionBlog } from '../../redux/actionsCreators/blogActionCreators';
-import { Divider } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { HelperService } from '../../services/helperService';
-
-const helper = new HelperService();
+import { helper, HelperService } from '../../services/helperService';
+import { BlogForm } from '../../components/Blog/BlogForm';
 
 const code = `const App = props => {
   return (
@@ -52,10 +42,9 @@ const mapContentBlog = (values: any): BlogContent[] => {
 export const AddBlogPage = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(state => state.loginSlice.user);
-  const { t } = useTranslation();
 
   const onSubmit = (values: blogInput) => {
-    // console.log('HaNDLE SUBMIT ==========>', values);
+    console.log('HaNDLE SUBMIT ==========>', values);
     const data: blogInput = {
       title: values.title,
       description: values.description,
@@ -65,43 +54,33 @@ export const AddBlogPage = () => {
     // dispatch(actionBlog.addBlog(data));
   };
 
-  const renderListFiedl = fieldObject => {
-    let htmlFlieds: ReactNode[] = [];
-    if (!!!fieldObject) {
-      return htmlFlieds;
-    }
-    let index = 0;
-    for (const data of Object.entries(fieldObject)) {
-      const blogContent: BlogContent = data[1];
-      const fieldName: string = data[0];
-      if (helper.ignoreString(fieldName, BLOG_FIELD_NAME)) {
-        continue;
-      }
-      if (blogContent.type === BlogContentType.CODE) {
-        htmlFlieds.push(<CodeEditor fieldName={fieldName} key={index} className="mt-26" />);
-      } else {
-        htmlFlieds.push(<DraftEditor fieldName={fieldName} key={index} />);
-      }
-      index++;
-    }
-    return htmlFlieds;
+  const renderListField = fieldObject => {
+    // let htmlFlieds: ReactNode[] = [];
+    // if (!!!fieldObject) {
+    //   return htmlFlieds;
+    // }
+    // let index = 0;
+    // for (const data of Object.entries(fieldObject)) {
+    //   const blogContent: BlogContent = data[1];
+    //   const fieldName: string = data[0];
+    //   if (helper.ignoreString(fieldName, BLOG_FIELD_NAME)) {
+    //     continue;
+    //   }
+    //   if (blogContent.type === BlogContentType.CODE) {
+    //     htmlFlieds.push(<CodeEditor index={index} className="mt-26" />);
+    //   } else {
+    //     htmlFlieds.push(<DraftEditor fieldName={fieldName} key={index} />);
+    //   }
+    //   index++;
+    // }
+    return [];
   };
 
+  const items = ['Apple', 'Banana', 'Cherry', 'Guava', 'Peach', 'Strawberry'];
+
   return (
-    <Formik initialValues={helper.toObject(contentDefault, BLOG_FIELD_NAME)} onSubmit={onSubmit}>
-      {({ values, handleSubmit }) => (
-        <Box className="admin__content">
-          <Divider orientation="left" className="title-field-divider" plain>
-            {t('blog.title_field_blog_info')}
-          </Divider>
-          <FormInputBlog />
-          <Divider orientation="left" className="title-field-divider" plain>
-            {t('blog.title_field_blog_content')}
-          </Divider>
-          {renderListFiedl(values)}
-          <ButtonCommon onClick={handleSubmit} children="OKe" className="mt-30" />
-        </Box>
-      )}
+    <Formik initialValues={{ title: '', description: '', content: contentDefault }} onSubmit={onSubmit}>
+      <BlogForm />
     </Formik>
   );
 };

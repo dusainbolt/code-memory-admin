@@ -18,9 +18,7 @@ import { Status } from '../../components/Profile/Status';
 import { TypeExp } from '../../components/Profile/ExperienceList/TypeExp';
 import { EditOutlined } from '@ant-design/icons';
 import { BoxIconAndName } from '../../components/Tag/BoxIconAndName';
-import { HelperService } from '../../services/helperService';
-
-const helper = new HelperService();
+import { helper } from '../../services/helperService';
 
 export const ExperienceList = () => {
   const { t } = useTranslation();
