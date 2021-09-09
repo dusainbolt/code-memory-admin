@@ -12,7 +12,7 @@ class DraftService {
   };
 
   draftBlocksToHtml = (blockDraft: any) => {
-    return draftToHtml(convertToRaw(blockDraft.getCurrentContent()));
+    return draftToHtml(convertToRaw(blockDraft?.getCurrentContent()));
   }
 }
 

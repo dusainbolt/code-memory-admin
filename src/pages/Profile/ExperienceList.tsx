@@ -103,7 +103,7 @@ export const ExperienceList = () => {
         </Formik>
         <ButtonCommon
           onClick={openFormModal}
-          className="btn-tag-add"
+          className="btn-green"
           loading={isLoadingList}
           type="primary"
           shape="circle"

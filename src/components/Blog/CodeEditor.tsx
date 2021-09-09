@@ -1,17 +1,16 @@
 import clsx from 'clsx';
 import { useFormikContext } from 'formik';
-import React from 'react';
+import React, { FC, useMemo } from 'react';
 import Box from '../../common/Box';
 import { TextAreaCommon } from '../../common/Input/TextArea';
 import { BlogContent } from '../../models/BlogModel';
 import { Code } from './Code';
 
-export interface ICodeEditor {
+export const CodeEditor: FC<{
   className?: string;
-  index: number;
-}
-export const CodeEditor = ({ className, index }: ICodeEditor) => {
-  const { values, setFieldValue } = useFormikContext();
+  index?: number;
+}> = ({ className, index }) => {
+  const { setFieldValue, values } = useFormikContext();
   const contentValue = (values as any)?.content;
   const fieldValue: BlogContent = contentValue[index];
 
@@ -21,12 +20,17 @@ export const CodeEditor = ({ className, index }: ICodeEditor) => {
     setFieldValue('content', contentValue);
   };
 
-  return (
-    <Box className={clsx('code-editor', [className] && className)}>
-      <Box className="code-editor-input">
-        <TextAreaCommon onChange={onChangeTextarea} value={fieldValue.data} autoSize={{ minRows: 3 }} />
+  const renderDOM = useMemo(() => {
+    console.log(12312321);
+    return (
+      <Box className={clsx('code-editor', [className] && className)}>
+        <Box className="code-editor-input">
+          <TextAreaCommon onChange={onChangeTextarea} value={fieldValue.data} autoSize={{ minRows: 3 }} />
+        </Box>
+        <Code code={fieldValue.data} language="javascript" />
       </Box>
-      <Code code={fieldValue.data} language="javascript" />
-    </Box>
-  );
+    );
+  }, [fieldValue, className]);
+
+  return renderDOM;
 };

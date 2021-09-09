@@ -3,8 +3,9 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { Formik } from 'formik';
 import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-import { helper, HelperService } from '../../services/helperService';
+import { helper } from '../../services/helperService';
 import { BlogForm } from '../../components/Blog/BlogForm';
+import { draftService } from '../../services/draftService';
 
 const code = `const App = props => {
   return (
@@ -19,8 +20,23 @@ const code = `const App = props => {
 const contentDefault: BlogContent[] = [
   {
     type: BlogContentType.NORMAL,
-    data: '123123',
+    data: draftService.htmlToDraftBlocks('123123'),
     language: 'normal',
+  },
+  {
+    type: BlogContentType.CODE,
+    data: '',
+    language: 'javascript',
+  },
+  {
+    type: BlogContentType.CODE,
+    data: '',
+    language: 'javascript',
+  },
+  {
+    type: BlogContentType.CODE,
+    data: '',
+    language: 'javascript',
   },
   {
     type: BlogContentType.CODE,

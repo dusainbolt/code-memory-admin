@@ -9,6 +9,10 @@
     margin-right: 10px;
     height: 100%;
   }
+  &__form-editor {
+    background-color: $color_bg_page;
+    padding: 20px;
+  }
 }
 
 .code-editor {
@@ -24,9 +28,21 @@
 }
 
 .section-form {
-  padding: 20px;
-  background-color: $color_bg_header_card;
-  margin-bottom: 30px;
+  &[draggable='true'] {
+    border: solid 1px $color_success;
+  }
   .control-group {
+    border: solid 1px $color_primary;
+    padding: 6px;
+    width: max-content;
+    .ant-btn:first-child {
+      margin-right: 12px;
+    }
+    .ant-btn:last-child {
+      margin-left: 12px;
+    }
+  }
+  .field-item {
+    background-color: $color_bg_header_card;
   }
 }
