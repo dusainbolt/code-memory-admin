@@ -51,7 +51,10 @@
     "label_description": "Mô tả",
     "place_description": "Hãy nhập mô tả",
     "title_field_blog_info": "Thông tin bài đăng",
-    "title_field_blog_content": "Nội dung bài đăng"
+    "title_field_blog_content": "Nội dung bài đăng",
+    "code": "Mã Code",
+    "editor": "Văn bản",
+    "dec_select_type": "Loại nội dung"
   },
   "menu": {
     "blog": "Bài đăng",
@@ -103,7 +106,12 @@
     "certificate": "Chứng chỉ",
     "learn": "Học tập",
     "work": "Công ty",
-    "edit": "Chỉnh sửa"
+    "edit": "Chỉnh sửa",
+    "project_name_vn": "Tên dự án(VN)",
+    "project_name_en": "Tên dự án(EN)",
+    "user_size": "Quy mô thành viên",
+    "technology": "Công nghệ",
+    "add_project": "Thêm dự án"
   },
   "seo": {
     "title_page": "Cài đặt SEO",

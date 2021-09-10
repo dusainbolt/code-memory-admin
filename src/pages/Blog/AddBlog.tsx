@@ -5,43 +5,13 @@ import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { helper } from '../../services/helperService';
 import { BlogForm } from '../../components/Blog/BlogForm';
-import { draftService } from '../../services/draftService';
+import { dataBlogDefault } from '../../components/Blog/DefaultType';
 
-const code = `const App = props => {
-  return (
-    <div>
-      <h1> React App </h1>
-      <div>Awesome code</div>
-    </div>
-  );
-};
-`;
-
-const contentDefault: BlogContent[] = [
+export const contentDefault: BlogContent[] = [
   {
-    type: BlogContentType.NORMAL,
-    data: draftService.htmlToDraftBlocks('123123'),
-    language: 'normal',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
+    type: BlogContentType.EDITOR,
+    data: dataBlogDefault[BlogContentType.EDITOR],
+    language: 'js',
   },
 ];
 
@@ -91,8 +61,6 @@ export const AddBlogPage = () => {
     // }
     return [];
   };
-
-  const items = ['Apple', 'Banana', 'Cherry', 'Guava', 'Peach', 'Strawberry'];
 
   return (
     <Formik initialValues={{ title: '', description: '', content: contentDefault }} onSubmit={onSubmit}>

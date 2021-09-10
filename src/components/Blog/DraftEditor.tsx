@@ -12,7 +12,6 @@ export const DraftEditor: FC<{ className?: string; index?: number }> = ({ classN
   const { values, setFieldValue } = useFormikContext();
   const contentValue = (values as any)?.content;
   const fieldValue: BlogContent = contentValue[index];
-
   const onChangeVal = (value: any) => {
     const fieldChangeVal = { ...fieldValue, data: value };
     contentValue[index] = fieldChangeVal;
@@ -27,21 +26,19 @@ export const DraftEditor: FC<{ className?: string; index?: number }> = ({ classN
     onChangeVal(draftService.htmlToDraftBlocks(value));
   };
 
-  const renderDOM = useMemo(() => {
-    return (
-      <Box className={clsx('draft-editor', [className] && className)}>
-        <Editor
-          editorState={fieldValue.data}
-          wrapperClassName="draft-editor__form-wrapper"
-          editorClassName="draft-editor__form-editor"
-          onEditorStateChange={onContentStateChange}
-        />
-        <Box className="wrap-raw-html">
-          <TextAreaCommon onChange={onChangeTextarea} value={draftService.draftBlocksToHtml(fieldValue.data)} autoSize={{ minRows: 3 }} />
-        </Box>
-      </Box>
-    );
-  }, [className, fieldValue.data]);
+  console.log('OKOKOKO', index);
 
-  return renderDOM;
+  return (
+    <Box className={clsx('draft-editor', [className] && className)}>
+      <Editor
+        editorState={fieldValue.data}
+        wrapperClassName="draft-editor__form-wrapper"
+        editorClassName="draft-editor__form-editor"
+        onEditorStateChange={onContentStateChange}
+      />
+      <Box className="wrap-raw-html">
+        <TextAreaCommon onChange={onChangeTextarea} value={draftService.draftBlocksToHtml(fieldValue.data)} autoSize={{ minRows: 3 }} />
+      </Box>
+    </Box>
+  );
 };

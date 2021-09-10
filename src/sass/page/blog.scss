@@ -21,13 +21,16 @@
     width: 50%;
     margin-right: 10px;
   }
-  .Code {
+  .code {
     margin-left: 10px;
     width: 50%;
   }
 }
 
 .section-form {
+  display: flex;
+  animation: fadein 1.5s;
+
   &[draggable='true'] {
     border: solid 1px $color_success;
   }
@@ -35,14 +38,18 @@
     border: solid 1px $color_primary;
     padding: 6px;
     width: max-content;
+    button {
+      display: block;
+    }
     .ant-btn:first-child {
-      margin-right: 12px;
+      margin-bottom: 12px;
     }
     .ant-btn:last-child {
-      margin-left: 12px;
+      margin-top: 12px;
     }
   }
   .field-item {
     background-color: $color_bg_header_card;
+    width: 100%;
   }
 }
