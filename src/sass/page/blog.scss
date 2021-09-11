@@ -1,12 +1,8 @@
 .draft-editor {
   display: flex;
-  .wrap-raw-html {
-    width: 50%;
-    margin-left: 10px;
-  }
+  min-height: 100px;
   &__form-wrapper {
-    width: 50%;
-    margin-right: 10px;
+    width: 100%;
     height: 100%;
   }
   &__form-editor {
@@ -17,20 +13,19 @@
 
 .code-editor {
   display: flex;
+  .code,
   .code-editor-input {
-    width: 50%;
-    margin-right: 10px;
+    width: 100%;
   }
-  .code {
-    margin-left: 10px;
-    width: 50%;
-  }
+}
+
+.form-input-blog {
+  max-width: 800px;
 }
 
 .section-form {
   display: flex;
   animation: fadein 1.5s;
-
   &[draggable='true'] {
     border: solid 1px $color_success;
   }

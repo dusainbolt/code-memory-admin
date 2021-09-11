@@ -12,7 +12,6 @@ import { contentDefault } from '../../pages/Blog/AddBlog';
 // import _ from 'lodash';
 
 export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ field, index }) => {
-  // console.log('DROPPPPPPPP => ', _.dropRight([1, 2, 3], 1));
   const { setFieldValue, values } = useFormikContext();
   const contentValue = (values as any)?.content;
 
@@ -31,7 +30,7 @@ export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ fie
   };
 
   return (
-    <Box className="section-form mb-30">
+    <Box className="section-form form-input-blog mb-30">
       <Box className="control-group mb-6">
         <ButtonCommon type="primary" className="handle-drag" shape="circle" icon={<MenuOutlined />} size="small" />
         <ButtonCommon className="btn-green" onClick={onAddIndex} shape="circle" icon={<PlusOutlined />} size="small" />

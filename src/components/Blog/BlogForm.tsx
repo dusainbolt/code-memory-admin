@@ -8,6 +8,7 @@ import { BlogFormSection } from './BlogFormSection';
 import { BlogFormInfo } from './BlogFormInfo';
 import { ReactSortable } from 'react-sortablejs';
 import Sortable, { AutoScroll } from 'sortablejs/modular/sortable.core.esm.js';
+import { BlogContent } from '../../models/BlogModel';
 
 Sortable.mount(new AutoScroll());
 
@@ -19,9 +20,8 @@ export const BlogForm: FC<any> = () => {
     values: { content },
   } = useFormikContext();
 
-  const onChangeList = (data: any) => {
+  const onChangeList = (data: Array<any>) => {
     setFieldValue('content', data);
-    console.log('DATA');
   };
 
   return (
