@@ -26,7 +26,7 @@ export const CompanyList = () => {
 
   return (
     <Box className="admin__content tag-list">
-      {console.log(offset, limit,total,dataTags, column, "xnxx")}
+      {console.log(offset, limit, total, dataTags, column, 'xnxx')}
       <Title className="title-page">{t('menu.tag_child_list')}</Title>
       <Divider />
       <Box className="flx-center space-center control-top">
@@ -35,7 +35,7 @@ export const CompanyList = () => {
         </Formik>
         <ButtonCommon
           onClick={openFormModal}
-          className="btn-tag-add"
+          className="btn-green"
           loading={isLoadingList}
           type="primary"
           shape="circle"

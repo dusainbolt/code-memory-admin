@@ -6,8 +6,6 @@
 }
 
 .ant-btn.app-btn {
-  // border-radius: 20px;
-  // height: 40px;
   > span {
     font-weight: 500;
     font-size: $font_size_base - 2;
@@ -27,4 +25,8 @@
     background: #777e903b !important;
     opacity: 0.7;
   }
+}
+
+.btn-green.ant-btn-primary.ant-btn-circle {
+  background-color: $color_success !important;
 }

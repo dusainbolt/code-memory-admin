@@ -2,7 +2,7 @@ export const BLOG_FIELD_NAME = 'blog_content_field';
 
 export enum BlogContentType {
   CODE,
-  NORMAL,
+  EDITOR,
 }
 
 export interface BlogContent {
@@ -12,6 +12,12 @@ export interface BlogContent {
 
   language?: string;
 }
+
+export type FieldBlogProps = {
+  className?: string;
+  fieldValue: BlogContent;
+  callbackChange: any;
+};
 
 export interface Blog {
   id: string;
