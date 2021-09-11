@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { helper } from '../../services/helperService';
 import { BlogForm } from '../../components/Blog/BlogForm';
 import { dataBlogDefault } from '../../components/Blog/DefaultType';
+import { draftService } from '../../services/draftService';
 
 export const contentDefault: BlogContent[] = [
   {
@@ -30,7 +31,10 @@ export const AddBlogPage = () => {
   const { id } = useAppSelector(state => state.loginSlice.user);
 
   const onSubmit = (values: blogInput) => {
-    console.log('HaNDLE SUBMIT ==========>', values);
+    console.log(
+      'HaNDLE SUBMIT ==========>',
+      values.content.forEach(item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data)))
+    );
     const data: blogInput = {
       title: values.title,
       description: values.description,

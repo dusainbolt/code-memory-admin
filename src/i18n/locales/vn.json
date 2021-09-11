@@ -43,7 +43,8 @@
     "title_error": "Đã xảy ra lỗi",
     "title_warning": "Cảnh báo",
     "title_info": "Thông báo",
-    "title_success": "Thành công"
+    "title_success": "Thành công",
+    "need_number": "Trường này cần phải điền số"
   },
   "blog": {
     "label_title": "Tiêu đề",
@@ -54,6 +55,8 @@
     "title_field_blog_content": "Nội dung bài đăng",
     "code": "Mã Code",
     "editor": "Văn bản",
+    "loading_data": "Đang nhận dữ liệu",
+    "switch_edit": "Chế độ edit",
     "dec_select_type": "Loại nội dung"
   },
   "menu": {
@@ -68,7 +71,7 @@
     "seo_home": "Cài đặt",
     "seo_history": "Lịch sử",
     "experience_list": "Quá trình làm việc",
-    "company_list": "Danh sách nơi làm việc"
+    "project_list": "Danh sách dự án"
   },
   "tag": {
     "tag_name": "Tên thẻ tag",
@@ -85,6 +88,7 @@
   },
   "profile": {
     "experience_list": "Quá trình làm việc",
+    "add_experience": "Thêm quá trình làm việc",
     "company_list": "Danh sách nơi làm việc",
     "serial": "STT",
     "description_vn": "Mô tả(Tiếng Việt)",

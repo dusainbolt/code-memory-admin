@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FC } from 'react';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
@@ -12,8 +12,9 @@ import { contentDefault } from '../../pages/Blog/AddBlog';
 // import _ from 'lodash';
 
 export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ field, index }) => {
-  const { setFieldValue, values } = useFormikContext();
+  const { values, setFieldValue } = useFormikContext();
   const contentValue = (values as any)?.content;
+  // const fieldValue: BlogContent = contentValue[index];
 
   const onRemoveIndex = () => {
     if (contentValue.length > 1) {
@@ -29,6 +30,15 @@ export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ fie
     setFieldValue('content', contentValue);
   };
 
+  const callbackChangeVal = useCallback(
+    data => {
+      const fieldChangeVal = { ...contentValue[index], data };
+      contentValue[index] = fieldChangeVal;
+      setFieldValue('content', contentValue);
+    },
+    [contentValue]
+  );
+
   return (
     <Box className="section-form form-input-blog mb-30">
       <Box className="control-group mb-6">
@@ -39,7 +49,7 @@ export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ fie
       <Box className="field-item p-12">
         <DefaultType index={index} />
         {field.type === BlogContentType.CODE && <CodeEditor index={index} />}
-        {field.type === BlogContentType.EDITOR && <DraftEditor index={index} />}
+        {field.type === BlogContentType.EDITOR && <DraftEditor callbackChange={callbackChangeVal} fieldValue={contentValue[index]} />}
       </Box>
     </Box>
   );
