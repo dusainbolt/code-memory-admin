@@ -31,6 +31,7 @@ export const AddBlogPage = () => {
   const { id } = useAppSelector(state => state.loginSlice.user);
 
   const onSubmit = (values: blogInput) => {
+    console.log(values);
     console.log(
       'HaNDLE SUBMIT ==========>',
       values.content.forEach(item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data)))

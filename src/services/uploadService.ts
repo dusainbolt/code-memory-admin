@@ -11,7 +11,8 @@ import { v4 } from "uuid";
 export enum S3Storage {
   TAG = 'tag',
   META = "meta",
-  WORK = "work"
+  WORK = "work",
+  BLOG = "blog",
 }
 
 export type ResponseS3 = {
@@ -91,3 +92,5 @@ export default class UploadService {
     }
   }
 }
+
+export const uploadService = new UploadService();

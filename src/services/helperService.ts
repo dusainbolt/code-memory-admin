@@ -48,6 +48,10 @@ export class HelperService {
   convertTimeDisplay = (value: any, format: string = TIME_FORMAT.DD_MM_YYYY_HH_MM_SS) => {
     return dayjs(parseInt(value)).format(format);
   }
+
+  percentage = (num: any, per: any) => {
+    return ((parseFloat(num) / parseFloat(per)) * 100).toFixed(2);
+  }
 };
 
 export const helper = new HelperService();

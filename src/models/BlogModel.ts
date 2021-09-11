@@ -3,6 +3,7 @@ export const BLOG_FIELD_NAME = 'blog_content_field';
 export enum BlogContentType {
   CODE,
   EDITOR,
+  IMAGE,
 }
 
 export interface BlogContent {

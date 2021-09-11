@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import clsx from 'clsx';
-import { FieldBlogProps } from '../../models/BlogModel';
+import { BlogContent, FieldBlogProps } from '../../models/BlogModel';
 import { Switch } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { draftService } from '../../services/draftService';
@@ -36,7 +36,7 @@ export const DraftEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbac
           editorState={editorState}
           onFocus={event => {}}
           onBlur={(event, editorState) => {
-            callbackChange(editorState);
+            callbackChange({ data: editorState } as BlogContent);
           }}
           onTab={event => {}}
           wrapperClassName="draft-editor__form-wrapper"
