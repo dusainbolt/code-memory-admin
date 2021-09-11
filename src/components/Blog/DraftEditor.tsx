@@ -2,17 +2,16 @@ import React, { FC, useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import clsx from 'clsx';
-import { BlogContent } from '../../models/BlogModel';
+import { FieldBlogProps } from '../../models/BlogModel';
 import { Switch } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { draftService } from '../../services/draftService';
 import { useTranslation } from 'react-i18next';
+import renderHTML from 'react-render-html';
 
-export type EditorState = { index: number; data: any };
-
-export const DraftEditor: FC<{ className?: string; fieldValue: BlogContent; callbackChange: any }> = ({ fieldValue, className, callbackChange }) => {
+export const DraftEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
   const { t } = useTranslation();
-  const [isFocus, setIsFocus] = useState<boolean>(true);
+  const [isEditor, setIsEditor] = useState<boolean>(true);
 
   const [editorState, setEditorState] = useState(fieldValue.data);
 
@@ -28,7 +27,11 @@ export const DraftEditor: FC<{ className?: string; fieldValue: BlogContent; call
 
   return (
     <div className={clsx('draft-editor', [className] && className)}>
-      {isFocus && (
+      <div className="mb-12 control-field">
+        <Text className="mr-12">{t('blog.switch_edit')}</Text>
+        <Switch defaultChecked onChange={checked => setIsEditor(checked)} />
+      </div>
+      {isEditor && (
         <Editor
           editorState={editorState}
           onFocus={event => {}}
@@ -41,10 +44,7 @@ export const DraftEditor: FC<{ className?: string; fieldValue: BlogContent; call
           onEditorStateChange={onContentStateChange}
         />
       )}
-      <div>
-        <Text>{t('blog.switch_edit')}</Text>
-        <Switch defaultChecked onChange={checked => setIsFocus(checked)} />
-      </div>
+      {!isEditor && <div className="draft-editor__form-view">{renderHTML(draftService.draftBlocksToHtml(editorState))}</div>}
     </div>
   );
 };

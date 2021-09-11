@@ -14,7 +14,6 @@ import { contentDefault } from '../../pages/Blog/AddBlog';
 export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ field, index }) => {
   const { values, setFieldValue } = useFormikContext();
   const contentValue = (values as any)?.content;
-  // const fieldValue: BlogContent = contentValue[index];
 
   const onRemoveIndex = () => {
     if (contentValue.length > 1) {
@@ -26,7 +25,7 @@ export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ fie
   };
 
   const onAddIndex = () => {
-    contentValue.splice(index, 0, contentDefault[0]);
+    contentValue.splice(index + 1, 0, contentDefault[0]);
     setFieldValue('content', contentValue);
   };
 
@@ -48,7 +47,7 @@ export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ fie
       </Box>
       <Box className="field-item p-12">
         <DefaultType index={index} />
-        {field.type === BlogContentType.CODE && <CodeEditor index={index} />}
+        {field.type === BlogContentType.CODE && <CodeEditor callbackChange={callbackChangeVal} fieldValue={contentValue[index]} />}
         {field.type === BlogContentType.EDITOR && <DraftEditor callbackChange={callbackChangeVal} fieldValue={contentValue[index]} />}
       </Box>
     </Box>

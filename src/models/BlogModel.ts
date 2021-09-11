@@ -13,6 +13,12 @@ export interface BlogContent {
   language?: string;
 }
 
+export type FieldBlogProps = {
+  className?: string;
+  fieldValue: BlogContent;
+  callbackChange: any;
+};
+
 export interface Blog {
   id: string;
 

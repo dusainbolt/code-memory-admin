@@ -44,28 +44,6 @@ export const AddBlogPage = () => {
     // dispatch(actionBlog.addBlog(data));
   };
 
-  const renderListField = fieldObject => {
-    // let htmlFlieds: ReactNode[] = [];
-    // if (!!!fieldObject) {
-    //   return htmlFlieds;
-    // }
-    // let index = 0;
-    // for (const data of Object.entries(fieldObject)) {
-    //   const blogContent: BlogContent = data[1];
-    //   const fieldName: string = data[0];
-    //   if (helper.ignoreString(fieldName, BLOG_FIELD_NAME)) {
-    //     continue;
-    //   }
-    //   if (blogContent.type === BlogContentType.CODE) {
-    //     htmlFlieds.push(<CodeEditor index={index} className="mt-26" />);
-    //   } else {
-    //     htmlFlieds.push(<DraftEditor fieldName={fieldName} key={index} />);
-    //   }
-    //   index++;
-    // }
-    return [];
-  };
-
   return (
     <Formik initialValues={{ title: '', description: '', content: contentDefault }} onSubmit={onSubmit}>
       <BlogForm />
