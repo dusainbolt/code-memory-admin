@@ -1,25 +1,25 @@
 // import { LoginPages } from './pages/Login';
-import { AddBlogPage } from "./pages/Blog/AddBlog";
-import { TagListPage } from "./pages/Tag/List";
-import { DashBoardPage } from "./pages/DashBoard";
-import { LoginPages } from "./pages/LoginPage";
-import { ExperienceList } from "./pages/Profile/ExperienceList";
-import { CompanyList } from "./pages/Profile/CompanyList";
-import { SeoPage } from "./pages/Seo";
-import { SeoHistory } from "./pages/Seo/History";
+import { AddBlogPage } from './pages/Blog/AddBlog';
+import { TagListPage } from './pages/Tag/List';
+import { DashBoardPage } from './pages/DashBoard';
+import { LoginPages } from './pages/LoginPage';
+import { ExperienceList } from './pages/Profile/ExperienceList';
+import { ProjectList } from './pages/Profile/ProjectList';
+import { SeoPage } from './pages/Seo';
+import { SeoHistory } from './pages/Seo/History';
 
 export const ROUTE = {
-  INDEX: "/",
-  LOGIN: "/login",
-  DASHBOARD_BLOG: "/dashboard",
-  BLOG_ADD: "/blog/add",
-  BLOG_LIST: "/blog",
-  TAG_LIST: "/tag",
-  SEO: "/seo",
-  SEO_HISTORY: "/seo/history",
-  PROFILE: "/profile",
-  PROFILE_EXPERIENCE_LIST: "/experience-list",
-  PROFILE_COMPANY_LIST: "/company-list",
+  INDEX: '/',
+  LOGIN: '/login',
+  DASHBOARD_BLOG: '/dashboard',
+  BLOG_ADD: '/blog/add',
+  BLOG_LIST: '/blog',
+  TAG_LIST: '/tag',
+  SEO: '/seo',
+  SEO_HISTORY: '/seo/history',
+  PROFILE: '/profile',
+  PROFILE_EXPERIENCE_LIST: '/experience-list',
+  PROFILE_PROJECT_LIST: '/project-list',
 };
 
 export const RouteLayoutAdmin = [
@@ -29,7 +29,7 @@ export const RouteLayoutAdmin = [
   ROUTE.TAG_LIST,
   ROUTE.SEO,
   ROUTE.SEO_HISTORY,
-  ROUTE.PROFILE_COMPANY_LIST,
+  ROUTE.PROFILE_PROJECT_LIST,
   ROUTE.PROFILE_EXPERIENCE_LIST,
 ];
 export const RouteLayoutPublic = [ROUTE.INDEX, ROUTE.LOGIN];
@@ -42,13 +42,13 @@ export interface IRoute {
 
 const publicRoute: IRoute[] = [
   {
-    name: "Login",
+    name: 'Login',
     path: ROUTE.INDEX,
     component: LoginPages,
     exact: true,
   },
   {
-    name: "Login",
+    name: 'Login',
     path: ROUTE.LOGIN,
     component: LoginPages,
     exact: true,
@@ -57,49 +57,49 @@ const publicRoute: IRoute[] = [
 
 const privateRoutes: IRoute[] = [
   {
-    name: "DashBoardBlog",
+    name: 'DashBoardBlog',
     path: ROUTE.DASHBOARD_BLOG,
     component: DashBoardPage,
     exact: true,
   },
   {
-    name: "BlogList",
+    name: 'BlogList',
     path: ROUTE.BLOG_LIST,
     component: AddBlogPage,
     exact: true,
   },
   {
-    name: "AddBlog",
+    name: 'AddBlog',
     path: ROUTE.BLOG_ADD,
     component: AddBlogPage,
     exact: true,
   },
   {
-    name: "TagList",
+    name: 'TagList',
     path: ROUTE.TAG_LIST,
     component: TagListPage,
     exact: true,
   },
   {
-    name: "ExperienceList",
+    name: 'ExperienceList',
     path: ROUTE.PROFILE_EXPERIENCE_LIST,
     component: ExperienceList,
     exact: true,
   },
   {
-    name: "CompanyList",
-    path: ROUTE.PROFILE_COMPANY_LIST,
-    component: CompanyList,
+    name: 'ProjectList',
+    path: ROUTE.PROFILE_PROJECT_LIST,
+    component: ProjectList,
     exact: true,
   },
   {
-    name: "SeoSetting",
+    name: 'SeoSetting',
     path: ROUTE.SEO,
     component: SeoPage,
     exact: true,
   },
   {
-    name: "SeoHistory",
+    name: 'SeoHistory',
     path: ROUTE.SEO_HISTORY,
     component: SeoHistory,
     exact: true,

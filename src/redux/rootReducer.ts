@@ -6,7 +6,7 @@ import layoutSlice from './slices/layoutSlice';
 import loginSlice from './slices/loginSlice';
 import tagSlice from './slices/tagSlice';
 import expSlice from './slices/experienceSlice';
-
+import pjSlice from './slices/projectSlice';
 
 export const getPersistConfig = (key = '', nested = {}) => {
   return {
@@ -20,7 +20,14 @@ export const whitelist = [];
 
 const persistLoginSlice = persistReducer(getPersistConfig('loginSlice', { whitelist: ['token', 'user'] }), loginSlice);
 
-const rootReducer = combineReducers({ loginSlice: persistLoginSlice, layoutSlice, tagSlice, seoHomeSlice, expSlice });
+const rootReducer = combineReducers({
+  loginSlice: persistLoginSlice,
+  layoutSlice,
+  tagSlice,
+  seoHomeSlice,
+  expSlice,
+  pjSlice,
+});
 
 export type IRootState = ReturnType<typeof rootReducer>;
 

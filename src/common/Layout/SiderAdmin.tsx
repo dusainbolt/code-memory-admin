@@ -71,23 +71,23 @@ const menuSider: IMenuSider[] = [
     ],
   },
   {
-    menu:{
+    menu: {
       title: 'menu.profile',
-      key: getKeyMenu(ROUTE.PROFILE)
+      key: getKeyMenu(ROUTE.PROFILE),
     },
-    icon: <UserOutlined/>,
-    child:[
+    icon: <UserOutlined />,
+    child: [
       {
         title: 'menu.experience_list',
         key: ROUTE.PROFILE_EXPERIENCE_LIST,
         url: ROUTE.PROFILE_EXPERIENCE_LIST,
       },
       {
-        title: 'menu.company_list',
-        key: ROUTE.PROFILE_COMPANY_LIST,
-        url: ROUTE.PROFILE_COMPANY_LIST,
-      }
-    ]
+        title: 'menu.project_list',
+        key: ROUTE.PROFILE_PROJECT_LIST,
+        url: ROUTE.PROFILE_PROJECT_LIST,
+      },
+    ],
   },
   {
     menu: {

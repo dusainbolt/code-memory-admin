@@ -21,7 +21,17 @@ import { getExpSlice, submitExpSliceStart } from '../../../redux/slices/experien
 import { setUploadSliceStart } from '../../../redux/slices/layoutSlice';
 import { ProcessUpload } from '../../../models/LayoutModel';
 
-const ExperienceForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
+const ExperienceForm = ({
+  t,
+  onCloseForm,
+  isLoadingForm,
+  visible,
+}: {
+  t: TFunction;
+  onCloseForm: any;
+  visible: boolean;
+  isLoadingForm: boolean;
+}) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { expDetail } = useAppSelector(getExpSlice);
 
@@ -78,7 +88,15 @@ const ExperienceForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFuncti
   );
 };
 
-export const DrawerExperienceForm = ({ visible, setVisible, callbackSubmit }: { visible: boolean; setVisible: any; callbackSubmit: any }) => {
+export const DrawerExperienceForm = ({
+  visible,
+  setVisible,
+  callbackSubmit,
+}: {
+  visible: boolean;
+  setVisible: any;
+  callbackSubmit: any;
+}) => {
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -117,7 +135,14 @@ export const DrawerExperienceForm = ({ visible, setVisible, callbackSubmit }: { 
   };
 
   return (
-    <Drawer title={t('tag.add_tag_title')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
+    <Drawer
+      title={t('profile.add_experience')}
+      maskClosable={false}
+      width={520}
+      closable={!isLoadingForm}
+      onClose={onCloseDrawer}
+      visible={visible}
+    >
       <Formik onSubmit={handleSubmitForm} validationSchema={validateExpInput} initialValues={initialValues}>
         <ExperienceForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>
