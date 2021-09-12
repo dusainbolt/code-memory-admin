@@ -3,29 +3,16 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { Formik } from 'formik';
 import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
-import { helper, HelperService } from '../../services/helperService';
+import { helper } from '../../services/helperService';
 import { BlogForm } from '../../components/Blog/BlogForm';
+import { dataBlogDefault } from '../../components/Blog/DefaultType';
+import { draftService } from '../../services/draftService';
 
-const code = `const App = props => {
-  return (
-    <div>
-      <h1> React App </h1>
-      <div>Awesome code</div>
-    </div>
-  );
-};
-`;
-
-const contentDefault: BlogContent[] = [
+export const contentDefault: BlogContent[] = [
   {
-    type: BlogContentType.NORMAL,
-    data: '123123',
-    language: 'normal',
-  },
-  {
-    type: BlogContentType.CODE,
-    data: '',
-    language: 'javascript',
+    type: BlogContentType.EDITOR,
+    data: dataBlogDefault[BlogContentType.EDITOR],
+    language: 'js',
   },
 ];
 
@@ -44,7 +31,10 @@ export const AddBlogPage = () => {
   const { id } = useAppSelector(state => state.loginSlice.user);
 
   const onSubmit = (values: blogInput) => {
-    console.log('HaNDLE SUBMIT ==========>', values);
+    console.log(
+      'HaNDLE SUBMIT ==========>',
+      values.content.forEach(item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data)))
+    );
     const data: blogInput = {
       title: values.title,
       description: values.description,
@@ -53,30 +43,6 @@ export const AddBlogPage = () => {
     };
     // dispatch(actionBlog.addBlog(data));
   };
-
-  const renderListField = fieldObject => {
-    // let htmlFlieds: ReactNode[] = [];
-    // if (!!!fieldObject) {
-    //   return htmlFlieds;
-    // }
-    // let index = 0;
-    // for (const data of Object.entries(fieldObject)) {
-    //   const blogContent: BlogContent = data[1];
-    //   const fieldName: string = data[0];
-    //   if (helper.ignoreString(fieldName, BLOG_FIELD_NAME)) {
-    //     continue;
-    //   }
-    //   if (blogContent.type === BlogContentType.CODE) {
-    //     htmlFlieds.push(<CodeEditor index={index} className="mt-26" />);
-    //   } else {
-    //     htmlFlieds.push(<DraftEditor fieldName={fieldName} key={index} />);
-    //   }
-    //   index++;
-    // }
-    return [];
-  };
-
-  const items = ['Apple', 'Banana', 'Cherry', 'Guava', 'Peach', 'Strawberry'];
 
   return (
     <Formik initialValues={{ title: '', description: '', content: contentDefault }} onSubmit={onSubmit}>

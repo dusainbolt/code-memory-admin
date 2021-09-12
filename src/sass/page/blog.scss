@@ -1,32 +1,59 @@
 .draft-editor {
-  display: flex;
-  .wrap-raw-html {
-    width: 50%;
-    margin-left: 10px;
-  }
+  // display: flex;
   &__form-wrapper {
-    width: 50%;
-    margin-right: 10px;
+    width: 100%;
     height: 100%;
+  }
+  &__form-editor,
+  &__form-view {
+    background-color: $color_bg_page;
+    padding: 20px;
+    margin-top: 12px;
+    min-height: 100px;
+    max-height: 500px;
   }
 }
 
 .code-editor {
-  display: flex;
+  // display: flex;
+  .code,
   .code-editor-input {
-    width: 50%;
-    margin-right: 10px;
-  }
-  .Code {
-    margin-left: 10px;
-    width: 50%;
+    width: 100%;
   }
 }
 
+.form-input-blog {
+  max-width: 800px;
+}
+
 .section-form {
-  padding: 20px;
-  background-color: $color_bg_header_card;
-  margin-bottom: 30px;
+  display: flex;
+  animation: fadein 1.5s;
+  position: relative;
+  &[draggable='true'] {
+    border: solid 1px $color_success;
+  }
   .control-group {
+    border: solid 1px $color_primary;
+    padding: 6px;
+    width: max-content;
+    button {
+      display: block;
+    }
+    .ant-btn:first-child {
+      margin-bottom: 12px;
+    }
+    .ant-btn:last-child {
+      margin-top: 12px;
+    }
+  }
+  .control-field {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+  .field-item {
+    background-color: $color_bg_header_card;
+    width: 100%;
   }
 }

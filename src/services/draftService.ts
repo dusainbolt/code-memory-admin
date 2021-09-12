@@ -12,7 +12,11 @@ class DraftService {
   };
 
   draftBlocksToHtml = (blockDraft: any) => {
-    return draftToHtml(convertToRaw(blockDraft.getCurrentContent()));
+    return draftToHtml(convertToRaw(blockDraft?.getCurrentContent()));
+  }
+
+  checkDiff = (blockDraft1: any, blockDraft2: any) => {
+    return this.draftBlocksToHtml(blockDraft1) !== this.draftBlocksToHtml(blockDraft2);
   }
 }
 
