@@ -206,7 +206,7 @@ export interface FieldCreateProject {
   nameEN: IField;
   size: IField;
   techs: IField;
-  descriptionVN: IField;
+  description: IField;
   descriptionEN: IField;
   startTime: IField;
   endTime: IField;
@@ -234,8 +234,8 @@ export const fieldCreateProject: FieldCreateProject = {
     label: 'profile.technology',
     placeholder: 'profile.technology',
   },
-  descriptionVN: {
-    name: 'descriptionVN',
+  description: {
+    name: 'description',
     label: 'profile.description_vn',
     placeholder: 'profile.description_vn',
   },

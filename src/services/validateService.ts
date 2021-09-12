@@ -68,12 +68,12 @@ export class ValidateService extends HelperService {
   };
 
   readonly validateCreateProjectInput = (fieldCreateProject: FieldCreateProject) => {
-    const { name, nameEN, descriptionVN, descriptionEN, size, techs } = fieldCreateProject;
+    const { name, nameEN, description, descriptionEN, size, techs } = fieldCreateProject;
     return Yup.object({
       [name.name]: this.stringRequire(name.label),
       [nameEN.name]: this.stringRequire(nameEN.label),
       [descriptionEN.name]: this.stringRequire(descriptionEN.label),
-      [descriptionVN.name]: this.stringRequire(descriptionVN.label),
+      [description.name]: this.stringRequire(description.label),
       [size.name]: this.numberRequire(size.label),
     });
   };

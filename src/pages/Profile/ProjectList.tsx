@@ -30,14 +30,7 @@ export const ProjectList = () => {
   const { dataPJs, total, isLoadingList } = useAppSelector(getPJSlice);
   const { openFormModal, visibleFormPJ, setVisible, openFormEdit } = useFormProject();
   const { t } = useTranslation();
-  const {
-    paramsSearch,
-    handleSearch,
-    getPageIndexNumber,
-    handleGetListCategory,
-    handleChangePage,
-    handleSortByParams,
-  } = useSearchPJList(dispatch);
+  const { paramsSearch, handleSearch, getPageIndexNumber, handleGetListCategory, handleChangePage, handleSortByParams } = useSearchPJList(dispatch);
   const { offset, limit } = paramsSearch;
 
   const column = (t, pageIndex, callbackEdit) => [
