@@ -25,14 +25,7 @@ export const ProjectList = () => {
   const { dataPJs, total, isLoadingList } = useAppSelector(getPJSlice);
   const { openFormModal, visibleFormPJ, setVisible } = useFormProject();
   const { t } = useTranslation();
-  const {
-    paramsSearch,
-    handleSearch,
-    getPageIndexNumber,
-    handleGetListCategory,
-    handleChangePage,
-    handleSortByParams,
-  } = useSearchPJList(dispatch);
+  const { paramsSearch, handleSearch, getPageIndexNumber, handleGetListCategory, handleChangePage, handleSortByParams } = useSearchPJList(dispatch);
   const { offset, limit } = paramsSearch;
 
   const column = (t, pageIndex, callbackEdit) => [
@@ -42,8 +35,8 @@ export const ProjectList = () => {
     },
     {
       title: t('profile.project_name_vn'),
-      dataIndex: 'nameVN',
-      key: 'nameVN',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: t('profile.project_name_en'),
@@ -72,8 +65,8 @@ export const ProjectList = () => {
     },
     {
       title: t('profile.description_vn'),
-      dataIndex: 'descriptionVN',
-      key: 'descriptionVN',
+      dataIndex: 'description',
+      key: 'description',
     },
     {
       title: t('profile.description_en'),

@@ -1,9 +1,7 @@
 import { Col, Divider, Drawer, Row } from 'antd';
-import Text from 'antd/lib/typography/Text';
 import { Field, Formik, useFormikContext } from 'formik';
 import React, { useEffect } from 'react';
 import { TFunction, useTranslation } from 'react-i18next';
-import Box from '../../../common/Box';
 import { InputComponent } from '../../../common/Input';
 import { TextAreaComponent } from '../../../common/Input/TextAreaForm';
 import { SelectComponent } from '../../../common/Select';
@@ -13,29 +11,13 @@ import { ValidateService } from '../../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
 import { getTagSlice } from '../../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../../constant';
-import UploadService, { S3Storage } from '../../../services/uploadService';
-import { CreateExpInput, ExperienceStatus, ExperienceType } from '../../../models/ExperienceModel';
 import { DateComponent } from '../../../common/DatePicker/DatePickerForm';
-import { FieldUpload } from '../../../common/Upload/FieldUpload';
-import { getExpSlice, submitExpSliceStart } from '../../../redux/slices/experienceSlice';
-import { setUploadSliceStart } from '../../../redux/slices/layoutSlice';
-import { ProcessUpload } from '../../../models/LayoutModel';
 import { InputNumberComponent } from '../../../common/Input/InputNumber';
 import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
 import { TechsComponent } from './TechsComponent';
 import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
 
-const ProjectForm = ({
-  t,
-  onCloseForm,
-  isLoadingForm,
-  visible,
-}: {
-  t: TFunction;
-  onCloseForm: any;
-  visible: boolean;
-  isLoadingForm: boolean;
-}) => {
+const ProjectForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { pjDetail } = useAppSelector(getPJSlice);
 
@@ -47,7 +29,7 @@ const ProjectForm = ({
         nameEN: pjDetail.nameEN,
         size: pjDetail.size,
         techs: pjDetail.techs,
-        descriptionVN: pjDetail.description,
+        description: pjDetail.description,
         descriptionEN: pjDetail.descriptionEN,
         startTime: parseInt(pjDetail.startTime),
         endTime: parseInt(pjDetail.startTime),
@@ -70,7 +52,7 @@ const ProjectForm = ({
       <Field {...fieldCreateProject.nameEN} component={InputComponent} />
       <Field {...fieldCreateProject.size} component={InputNumberComponent} />
       <Field {...fieldCreateProject.techs} component={TechsComponent} />
-      <Field {...fieldCreateProject.descriptionVN} component={TextAreaComponent} />
+      <Field {...fieldCreateProject.description} component={TextAreaComponent} />
       <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
       <Row gutter={[16, 16]}>
         <Col>
@@ -87,15 +69,7 @@ const ProjectForm = ({
   );
 };
 
-export const DrawerProjectForm = ({
-  visible,
-  setVisible,
-  callbackSubmit,
-}: {
-  visible: boolean;
-  setVisible: any;
-  callbackSubmit: any;
-}) => {
+export const DrawerProjectForm = ({ visible, setVisible, callbackSubmit }: { visible: boolean; setVisible: any; callbackSubmit: any }) => {
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -107,7 +81,7 @@ export const DrawerProjectForm = ({
     nameEN: '',
     size: 4,
     techs: [],
-    descriptionVN: '',
+    description: '',
     descriptionEN: '',
     startTime: '',
     endTime: '',
@@ -130,14 +104,7 @@ export const DrawerProjectForm = ({
   };
 
   return (
-    <Drawer
-      title={t('profile.add_project')}
-      maskClosable={false}
-      width={520}
-      closable={!isLoadingForm}
-      onClose={onCloseDrawer}
-      visible={visible}
-    >
+    <Drawer title={t('profile.add_project')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
       <Formik onSubmit={handleSubmitForm} validationSchema={validatePJInput} initialValues={initialValues}>
         <ProjectForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>

@@ -30,7 +30,7 @@ export interface CreatePJInput {
   nameEN: string;
   size: number;
   techs: string[];
-  descriptionVN: string;
+  description: string;
   descriptionEN: string;
   startTime: any;
   endTime: any;
