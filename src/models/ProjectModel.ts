@@ -59,3 +59,8 @@ export interface SearchProjectOutput {
   dataProjects: Project[];
   total: number;
 }
+
+export interface UpdateProjectInput {
+  data: CreatePJInput;
+  projectId: string;
+}

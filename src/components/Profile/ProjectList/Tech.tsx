@@ -26,10 +26,10 @@ export interface TechInterface {
 
 export const Tech: FC<TechInterface> = ({ data, setFieldValue, field, index, optionsChoosed, setOptionsChoosed }) => {
   const removeItem = () => {
-    const fieldValue = field.value;
+    const fieldValue = [...field.value];
     const optionsChoosedValue = optionsChoosed;
     fieldValue.splice(index, 1);
-    optionsChoosed.splice(index, 1);
+    optionsChoosedValue.splice(index, 1);
     setFieldValue(field.name, fieldValue);
     setOptionsChoosed(optionsChoosedValue);
   };

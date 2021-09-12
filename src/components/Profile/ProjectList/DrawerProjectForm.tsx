@@ -17,7 +17,17 @@ import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
 import { TechsComponent } from './TechsComponent';
 import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
 
-const ProjectForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
+const ProjectForm = ({
+  t,
+  onCloseForm,
+  isLoadingForm,
+  visible,
+}: {
+  t: TFunction;
+  onCloseForm: any;
+  visible: boolean;
+  isLoadingForm: boolean;
+}) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { pjDetail } = useAppSelector(getPJSlice);
 
@@ -51,7 +61,7 @@ const ProjectForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction;
       <Field {...fieldCreateProject.name} component={InputComponent} />
       <Field {...fieldCreateProject.nameEN} component={InputComponent} />
       <Field {...fieldCreateProject.size} component={InputNumberComponent} />
-      <Field {...fieldCreateProject.techs} component={TechsComponent} />
+      <Field {...fieldCreateProject.techs} techsData={pjDetail.techsData} component={TechsComponent} />
       <Field {...fieldCreateProject.description} component={TextAreaComponent} />
       <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
       <Row gutter={[16, 16]}>
@@ -69,7 +79,15 @@ const ProjectForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction;
   );
 };
 
-export const DrawerProjectForm = ({ visible, setVisible, callbackSubmit }: { visible: boolean; setVisible: any; callbackSubmit: any }) => {
+export const DrawerProjectForm = ({
+  visible,
+  setVisible,
+  callbackSubmit,
+}: {
+  visible: boolean;
+  setVisible: any;
+  callbackSubmit: any;
+}) => {
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -104,7 +122,14 @@ export const DrawerProjectForm = ({ visible, setVisible, callbackSubmit }: { vis
   };
 
   return (
-    <Drawer title={t('profile.add_project')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
+    <Drawer
+      title={t('profile.add_project')}
+      maskClosable={false}
+      width={520}
+      closable={!isLoadingForm}
+      onClose={onCloseDrawer}
+      visible={visible}
+    >
       <Formik onSubmit={handleSubmitForm} validationSchema={validatePJInput} initialValues={initialValues}>
         <ProjectForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>

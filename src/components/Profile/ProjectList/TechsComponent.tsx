@@ -12,7 +12,7 @@ import _ from 'lodash';
 import { SelectProps } from 'antd/es/select';
 import debounce from 'lodash/debounce';
 import { getListTagRequest } from '../../../graphql/tagRequest';
-import { SearchTagInput, TagStatus } from '../../../models/TagModel';
+import { SearchTagInput, Tag, TagStatus } from '../../../models/TagModel';
 import Avatar from 'antd/lib/avatar/avatar';
 import { Tech } from './Tech';
 
@@ -27,6 +27,7 @@ export interface TechsInterface {
   field?: FieldInputProps<any>;
   form?: FormikProps<any>;
   meta?: FieldMetaProps<any>;
+  techsData?: Tag[];
 }
 
 export interface DebounceSelectProps<ValueType = any> extends Omit<SelectProps<ValueType>, 'options' | 'children'> {
@@ -36,6 +37,7 @@ export interface DebounceSelectProps<ValueType = any> extends Omit<SelectProps<V
 
 export const TechsComponent = ({
   field,
+  techsData,
   form: { touched: formTouched, errors: formErrors, setFieldValue },
   label = '',
   prefix = null,
@@ -51,6 +53,13 @@ export const TechsComponent = ({
   const [fetching, setFetching] = useState(false);
   const fetchRef = useRef(0);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (techsData) {
+      const techsDataCopy = techsData.map((a) => ({ ...a }));
+      setOptionsChoosed([...techsDataCopy]);
+    }
+  }, [techsData]);
 
   const onPressEnter = (value, data) => {
     console.log('phuong', value, data);
