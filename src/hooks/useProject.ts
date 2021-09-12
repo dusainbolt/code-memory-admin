@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
 import { getListPJStart, getPJSlice, setVisibleFormProject } from '../redux/slices/projectSlice';
 import { SearchExpInput } from '../models/ExperienceModel';
-import { ProjectStatus, SearchProjectInput } from '../models/ProjectModel';
+import { Project, ProjectStatus, SearchProjectInput } from '../models/ProjectModel';
 import { getListPJRequest } from '../graphql/ProjectRequest';
 
 export const useSearchPJList = (
@@ -63,7 +63,7 @@ export const useFormProject = (): {
   openFormModal: any;
   setVisible: any;
   visibleFormPJ: boolean;
-  // openFormEdit: any
+  openFormEdit: any;
 } => {
   const dispatch = useAppDispatch();
   const { visibleFormPJ } = useAppSelector(getPJSlice);
@@ -76,9 +76,9 @@ export const useFormProject = (): {
     dispatch(setVisibleFormProject({ visibleFormPJ: value }));
   };
 
-  // const openFormEdit = (expDetail: Experience) => () => {
-  //   dispatch(setVisibleFormExp({ visibleFormExp: true, expDetail }));
-  // };
+  const openFormEdit = (pjDetail: Project) => () => {
+    dispatch(setVisibleFormProject({ visibleFormPJ: true, pjDetail }));
+  };
 
-  return { openFormModal, visibleFormPJ, setVisible };
+  return { openFormModal, visibleFormPJ, setVisible, openFormEdit };
 };

@@ -14,6 +14,7 @@ import debounce from 'lodash/debounce';
 import { getListTagRequest } from '../../../graphql/tagRequest';
 import { SearchTagInput, TagStatus } from '../../../models/TagModel';
 import Avatar from 'antd/lib/avatar/avatar';
+import { Tech } from './Tech';
 
 export interface TechsInterface {
   label?: string;
@@ -26,15 +27,6 @@ export interface TechsInterface {
   field?: FieldInputProps<any>;
   form?: FormikProps<any>;
   meta?: FieldMetaProps<any>;
-}
-
-export interface TechInterface {
-  name: any;
-  setFieldValue: any;
-  field: any;
-  index: number;
-  optionsChoosed: any;
-  setOptionsChoosed: any;
 }
 
 export interface DebounceSelectProps<ValueType = any> extends Omit<SelectProps<ValueType>, 'options' | 'children'> {
@@ -61,8 +53,9 @@ export const TechsComponent = ({
   const { t } = useTranslation();
 
   const onPressEnter = (value, data) => {
+    console.log('phuong', value, data);
     setFieldValue(field.name, [...field.value, data.key]);
-    setOptionsChoosed([...optionsChoosed, data.value]);
+    setOptionsChoosed([...optionsChoosed, data.title]);
   };
 
   const fetchUserList = async (value: string) => {
@@ -115,7 +108,7 @@ export const TechsComponent = ({
       >
         {options.map((value, index) => {
           return (
-            <Select.Option value={value.title} key={value.id}>
+            <Select.Option title={value} value={value.title} key={value.id}>
               <div className="option">
                 <Avatar size="small" src={value?.thumbnail} />
                 {`       ${value.title}`}
@@ -131,7 +124,7 @@ export const TechsComponent = ({
             <Tech
               field={field}
               setFieldValue={setFieldValue}
-              name={value}
+              data={value}
               key={index}
               index={index}
               optionsChoosed={optionsChoosed}
@@ -141,23 +134,5 @@ export const TechsComponent = ({
         })}
       </div>
     </Box>
-  );
-};
-
-const Tech: FC<TechInterface> = ({ name, setFieldValue, field, index, optionsChoosed, setOptionsChoosed }) => {
-  const removeItem = () => {
-    const fieldValue = field.value;
-    const optionsChoosedValue = optionsChoosed;
-    fieldValue.splice(index, 1);
-    optionsChoosed.splice(index, 1);
-    setFieldValue(field.name, fieldValue);
-    setOptionsChoosed(optionsChoosedValue);
-  };
-
-  return (
-    <div className="tech">
-      <div>{name}</div>
-      <CloseCircleOutlined onClick={removeItem} className="close-icon" />
-    </div>
   );
 };

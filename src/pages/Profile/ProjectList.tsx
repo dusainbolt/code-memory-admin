@@ -19,11 +19,16 @@ import { DrawerProjectForm } from '../../components/Profile/ProjectList/DrawerPr
 import { useFormProject, useSearchPJList } from '../../hooks/useProject';
 import { useSearchExpList } from '../../hooks/useExperience';
 import { getPJSlice } from '../../redux/slices/projectSlice';
+import { helper } from '../../services/helperService';
+import { TIME_FORMAT } from '../../constant';
+import { EditOutlined } from '@ant-design/icons';
+import { Status } from '../../components/Profile/Status';
+import { Tech } from '../../components/Profile/ProjectList/Tech';
 
 export const ProjectList = () => {
   const dispatch = useAppDispatch();
   const { dataPJs, total, isLoadingList } = useAppSelector(getPJSlice);
-  const { openFormModal, visibleFormPJ, setVisible } = useFormProject();
+  const { openFormModal, visibleFormPJ, setVisible, openFormEdit } = useFormProject();
   const { t } = useTranslation();
   const {
     paramsSearch,
@@ -42,8 +47,8 @@ export const ProjectList = () => {
     },
     {
       title: t('profile.project_name_vn'),
-      dataIndex: 'nameVN',
-      key: 'nameVN',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: t('profile.project_name_en'),
@@ -52,28 +57,43 @@ export const ProjectList = () => {
     },
     {
       title: t('profile.user_size'),
-      dataIndex: 'userSize',
-      key: 'userSize',
+      dataIndex: 'size',
+      key: 'size',
+      render: (value: any, row: any) => <div>{`${value} ${t('profile.members')}`}</div>,
     },
     {
       title: t('profile.technology'),
-      dataIndex: 'technology',
-      key: 'technology',
+      dataIndex: 'techsData',
+      key: 'techsData',
+      render: (value: any) => (
+        <div className="tech-box">
+          {value.map((value, index) => {
+            return <Tech data={value} key={index} index={index} />;
+          })}
+        </div>
+      ),
     },
     {
       title: t('profile.time'),
       dataIndex: 'time',
       key: 'time',
+      render: (value: any, row: Project) => (
+        <div>
+          {helper.convertTimeDisplay(parseInt(row.startTime), TIME_FORMAT.DD_MM_YY)} -{' '}
+          {helper.convertTimeDisplay(parseInt(row.startTime), TIME_FORMAT.DD_MM_YY)}
+        </div>
+      ),
     },
     {
       title: t('profile.status'),
       dataIndex: 'status',
       key: 'status',
+      render: (value: any, row: Project) => <Status status={value} />,
     },
     {
       title: t('profile.description_vn'),
-      dataIndex: 'descriptionVN',
-      key: 'descriptionVN',
+      dataIndex: 'description',
+      key: 'description',
     },
     {
       title: t('profile.description_en'),
@@ -82,6 +102,11 @@ export const ProjectList = () => {
     },
     {
       title: t('profile.edit'),
+      render: (_id: string, row: Project) => (
+        <Box className="flx-center align-left">
+          <ButtonCommon onClick={callbackEdit(row)} type="primary" shape="round" icon={<EditOutlined />} size="small" />
+        </Box>
+      ),
     },
   ];
 
@@ -115,7 +140,7 @@ export const ProjectList = () => {
           scroll={{ x: 800 }}
           total={total}
           dataSource={dataPJs}
-          columns={column(t, 0, () => {})}
+          columns={column(t, getPageIndexNumber(), openFormEdit)}
         />
       </Box>
       <DrawerProjectForm callbackSubmit={handleGetListCategory} visible={visibleFormPJ} setVisible={setVisible} />

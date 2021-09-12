@@ -55,6 +55,8 @@
     "title_field_blog_content": "Nội dung bài đăng",
     "code": "Mã Code",
     "editor": "Văn bản",
+    "loading_data": "Đang nhận dữ liệu",
+    "switch_edit": "Chế độ edit",
     "dec_select_type": "Loại nội dung"
   },
   "menu": {
@@ -113,7 +115,8 @@
     "project_name_en": "Tên dự án(EN)",
     "user_size": "Quy mô thành viên",
     "technology": "Công nghệ",
-    "add_project": "Thêm dự án"
+    "add_project": "Thêm dự án",
+    "members": "thành viên"
   },
   "seo": {
     "title_page": "Cài đặt SEO",

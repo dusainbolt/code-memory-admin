@@ -19,4 +19,5 @@ export const RESPONSE_PJ = {
   projectUpdate: 'projectUpdate',
   projectList: 'projectList',
   userCreate: 'userCreate',
+  techsData: 'techsData',
 };

@@ -29,6 +29,10 @@ const getListPJQuery = gql`
         ${RESPONSE_PJ.userCreate} {
           ${UserResolver}
         }
+        ${RESPONSE_PJ.techsData} {
+          ${TagResolver}
+        }
+
       }
       total
     }
