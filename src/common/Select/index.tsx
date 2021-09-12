@@ -37,13 +37,20 @@ export const SelectComponent: FC<ISelectComponent> = ({
   const errorMessage = formErrors[field.name];
 
   const handleChange = (values: any) => {
-    setFieldValue && setFieldValue(field.name, values);
+    setFieldValue(field.name, values);
   };
 
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
-      <Select allowClear={allowClear} style={{ width: '100%' }} placeholder={t(placeholder)} onChange={handleChange} value={field.value} {...props}>
+      <Select
+        allowClear={allowClear}
+        style={{ width: '100%' }}
+        placeholder={t(placeholder)}
+        onChange={handleChange}
+        value={field.value}
+        {...props}
+      >
         {options.map((item: OptionSelect, index: number) => (
           <Option key={index} value={item.value} disabled={item.disabled}>
             {t(item.label)}

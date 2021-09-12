@@ -1,0 +1,20 @@
+.tech-box {
+  margin-top: 20px;
+  .tech {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color_bg_content;
+    background-color: $color_text_select;
+    padding: 5px 10px 5px 15px;
+    margin: 7px 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    .close-icon {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}

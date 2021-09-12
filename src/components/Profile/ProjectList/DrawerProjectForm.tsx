@@ -7,7 +7,7 @@ import Box from '../../../common/Box';
 import { InputComponent } from '../../../common/Input';
 import { TextAreaComponent } from '../../../common/Input/TextAreaForm';
 import { SelectComponent } from '../../../common/Select';
-import { fieldCreateExperience } from '../../../models/FieldModel';
+import { fieldCreateProject } from '../../../models/FieldModel';
 import { ButtonForm } from '../../../common/Button/ButtonForm';
 import { ValidateService } from '../../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
@@ -20,8 +20,12 @@ import { FieldUpload } from '../../../common/Upload/FieldUpload';
 import { getExpSlice, submitExpSliceStart } from '../../../redux/slices/experienceSlice';
 import { setUploadSliceStart } from '../../../redux/slices/layoutSlice';
 import { ProcessUpload } from '../../../models/LayoutModel';
+import { InputNumberComponent } from '../../../common/Input/InputNumber';
+import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
+import { TechsComponent } from './TechsComponent';
+import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
 
-const ExperienceForm = ({
+const ProjectForm = ({
   t,
   onCloseForm,
   isLoadingForm,
@@ -33,27 +37,26 @@ const ExperienceForm = ({
   isLoadingForm: boolean;
 }) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
-  const { expDetail } = useAppSelector(getExpSlice);
+  const { pjDetail } = useAppSelector(getPJSlice);
 
   useEffect(() => {
-    if (!!expDetail.id) {
+    if (!!pjDetail.id) {
       setValues({
-        id: expDetail.id,
-        nameVN: expDetail.nameVN,
-        nameEN: expDetail.nameEN,
-        workType: expDetail.workType,
-        position: expDetail.position,
-        descriptionVN: expDetail.descriptionVN,
-        descriptionEN: expDetail.descriptionEN,
-        startTime: parseInt(expDetail.startTime),
-        endTime: parseInt(expDetail.startTime),
-        status: expDetail.status,
-        thumbnail: expDetail.thumbnail,
-      } as CreateExpInput);
+        id: pjDetail.id,
+        name: pjDetail.name,
+        nameEN: pjDetail.nameEN,
+        size: pjDetail.size,
+        techs: pjDetail.techs,
+        descriptionVN: pjDetail.description,
+        descriptionEN: pjDetail.descriptionEN,
+        startTime: parseInt(pjDetail.startTime),
+        endTime: parseInt(pjDetail.startTime),
+        status: pjDetail.status,
+      } as CreatePJInput);
     } else {
       handleReset();
     }
-  }, [expDetail]);
+  }, [pjDetail]);
 
   useEffect(() => {
     if (!visible) {
@@ -63,32 +66,28 @@ const ExperienceForm = ({
 
   return (
     <Row className="tag-form form-label-md">
-      <Box className="upload__field center-block">
-        <Text className="tag-upload-dec">{t('profile.label_thumbnail')}</Text>
-        <FieldUpload isLoadingForm={isLoadingForm} name={fieldCreateExperience.thumbnail.name} crop={true} />
-      </Box>
-      <Field {...fieldCreateExperience.nameVN} component={InputComponent} />
-      <Field {...fieldCreateExperience.nameEN} component={InputComponent} />
-      <Field {...fieldCreateExperience.workType} allowClear={false} component={SelectComponent} />
-      <Field {...fieldCreateExperience.position} component={InputComponent} />
-      <Field {...fieldCreateExperience.descriptionVN} component={TextAreaComponent} />
-      <Field {...fieldCreateExperience.descriptionEN} component={TextAreaComponent} />
+      <Field {...fieldCreateProject.name} component={InputComponent} />
+      <Field {...fieldCreateProject.nameEN} component={InputComponent} />
+      <Field {...fieldCreateProject.size} component={InputNumberComponent} />
+      <Field {...fieldCreateProject.techs} component={TechsComponent} />
+      <Field {...fieldCreateProject.descriptionVN} component={TextAreaComponent} />
+      <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
       <Row gutter={[16, 16]}>
         <Col>
-          <Field {...fieldCreateExperience.startTime} component={DateComponent} />
+          <Field {...fieldCreateProject.startTime} component={DateComponent} />
         </Col>
         <Col>
-          <Field {...fieldCreateExperience.endTime} component={DateComponent} />
+          <Field {...fieldCreateProject.endTime} component={DateComponent} />
         </Col>
       </Row>
-      <Field {...fieldCreateExperience.status} allowClear={false} component={SelectComponent} />
+      <Field {...fieldCreateProject.status} allowClear={false} component={SelectComponent} />
       <Divider />
       <ButtonForm loading={isLoadingForm} onClickClose={onCloseForm} onClickSubmit={handleSubmit} />
     </Row>
   );
 };
 
-export const DrawerExperienceForm = ({
+export const DrawerProjectForm = ({
   visible,
   setVisible,
   callbackSubmit,
@@ -100,34 +99,30 @@ export const DrawerExperienceForm = ({
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const validateExpInput = new ValidateService(t).validateCreateExperienceInput(fieldCreateExperience);
+  const validatePJInput = new ValidateService(t).validateCreateProjectInput(fieldCreateProject);
 
-  const initialValues: CreateExpInput = {
+  const initialValues: CreatePJInput = {
     id: '',
-    nameVN: '',
+    name: '',
     nameEN: '',
-    workType: ExperienceType.CERTIFICATE,
-    position: '',
+    size: 4,
+    techs: [],
     descriptionVN: '',
     descriptionEN: '',
     startTime: '',
     endTime: '',
-    status: ExperienceStatus.ACTIVE,
-    thumbnail: '',
+    status: ProjectStatus.ACTIVE,
   };
 
   const onCloseDrawer = () => {
     setVisible(false);
   };
 
-  const handleSubmitForm = async (values: CreateExpInput) => {
-    const uploadService = new UploadService();
-    dispatch(setUploadSliceStart({ count: 1, visibleProcessModal: false } as ProcessUpload));
-    const thumbnail = await uploadService.handleUpload(values.thumbnail, S3Storage.WORK);
-    const data = { ...values, startTime: values.startTime.toString(), endTime: values.endTime.toString(), thumbnail };
-
+  const handleSubmitForm = async (values: CreatePJInput) => {
+    console.log('phuong122', values);
+    const data = { ...values, startTime: values.startTime.toString(), endTime: values.endTime.toString() };
     dispatch(
-      submitExpSliceStart({
+      submitPJSliceStart({
         input: data,
         callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
       })
@@ -136,15 +131,15 @@ export const DrawerExperienceForm = ({
 
   return (
     <Drawer
-      title={t('profile.add_experience')}
+      title={t('profile.add_project')}
       maskClosable={false}
       width={520}
       closable={!isLoadingForm}
       onClose={onCloseDrawer}
       visible={visible}
     >
-      <Formik onSubmit={handleSubmitForm} validationSchema={validateExpInput} initialValues={initialValues}>
-        <ExperienceForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
+      <Formik onSubmit={handleSubmitForm} validationSchema={validatePJInput} initialValues={initialValues}>
+        <ProjectForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>
     </Drawer>
   );
