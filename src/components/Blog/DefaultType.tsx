@@ -18,6 +18,10 @@ const DATA_TYPE: Array<{ label: string; value: BlogContentType }> = [
     label: 'blog.editor',
     value: BlogContentType.EDITOR,
   },
+  {
+    label: 'blog.editor',
+    value: BlogContentType.IMAGE,
+  },
 ];
 
 export const dataBlogDefault = {
@@ -27,25 +31,17 @@ export const dataBlogDefault = {
 
 export const DefaultType: FC<{
   className?: string;
-  index?: number;
-}> = ({ className, index }) => {
+  fieldValue?: BlogContent;
+  callbackChange?: any;
+}> = ({ className, fieldValue, callbackChange }) => {
   const { t } = useTranslation();
-  const { setFieldValue, values } = useFormikContext();
-  const contentValue = (values as any)?.content;
-  const fieldValue: BlogContent = contentValue[index];
-
-  const onChangeField = (value: BlogContent) => {
-    const fieldChangeVal = { ...fieldValue, ...value };
-    contentValue[index] = fieldChangeVal;
-    setFieldValue('content', contentValue);
-  };
 
   const onChangeType = (value: any) => {
-    onChangeField({ type: value, data: dataBlogDefault[value], language: 'javascript' });
+    callbackChange({ type: value, data: dataBlogDefault[value], language: 'javascript' });
   };
 
   const onChangeLanguageCode = (language: any) => {
-    onChangeField({ language });
+    callbackChange({ language });
   };
 
   return (

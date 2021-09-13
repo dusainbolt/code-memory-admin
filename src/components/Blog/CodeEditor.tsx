@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import React, { FC } from 'react';
 import Box from '../../common/Box';
 import { TextAreaCommon } from '../../common/Input/TextArea';
-import { FieldBlogProps } from '../../models/BlogModel';
+import { BlogContent, FieldBlogProps } from '../../models/BlogModel';
 import { Code } from './Code';
 
 export const CodeEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
   const onChangeTextarea = ({ target: { value } }) => {
-    callbackChange(value);
+    callbackChange({ data: value } as BlogContent);
   };
 
   return (

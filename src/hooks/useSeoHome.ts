@@ -30,7 +30,6 @@ export const useSeoHome = (isCallValue: boolean = true, callback: any = null): {
     const uploadService = new UploadService();
     // handle upload image SEO
     dispatch(setUploadSliceStart({ count: 5, visibleProcessModal: false } as ProcessUpload));
-    const currentTime = Date.now();
     const faviconUrlICO = await uploadService.handleUpload(values.image.faviconUrlICO, S3Storage.META);
     const faviconUrlJPG = await uploadService.handleUpload(values.image.faviconUrlJPG, S3Storage.META);
     const logo1280x720 = await uploadService.handleUpload(values.image.logo1280x720, S3Storage.META);
