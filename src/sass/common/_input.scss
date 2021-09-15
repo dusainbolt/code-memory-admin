@@ -34,9 +34,14 @@
   .ant-upload {
     margin: 0;
     height: auto;
-    min-width: 102px;
+    min-width: unset;
+    width: 100%;
     min-height: 102px;
+    .app-spin {
+      width: 100% !important;
+    }
   }
+
   &.full-width {
     .ant-upload {
       width: 100%;

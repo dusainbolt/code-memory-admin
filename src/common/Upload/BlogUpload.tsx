@@ -8,7 +8,7 @@ import Box from '../Box';
 import clsx from 'clsx';
 import UploadService from '../../services/uploadService';
 import { helper } from '../../services/helperService';
-import { BlogContent } from '../../models/BlogModel';
+import { BlogContent, ImageLanguage } from '../../models/BlogModel';
 
 const uploadService = new UploadService();
 interface BlogUpload {
@@ -23,6 +23,7 @@ interface BlogUpload {
   fullWidth?: boolean;
   callbackUpload?: any;
   callbackChange?: any;
+  disabled?: boolean;
   fieldValue?: BlogContent;
 }
 
@@ -33,23 +34,43 @@ export const BlogUpload: FC<BlogUpload> = ({
   crop = false,
   classNameWrap = '',
   isLoadingForm,
+  disabled = false,
   label,
-  fieldValue,
+  fieldValue: { data, language },
   callbackUpload,
   callbackChange,
 }) => {
   const imgRef = useRef(null);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(fieldValue.data);
+  const [imageUrl, setImageUrl] = useState(data);
 
   useEffect(() => {
-    setLoading(false);
-    setImageUrl(fieldValue.data);
-  }, [fieldValue]);
+    if (!!data && !!(data as any).type) {
+      // Get this url from response in real world.
+      uploadService.getBase64((data as any).originFileObj, (imageUrl: string) => {
+        setTimeout(() => {
+          setLoading(false);
+          setImageUrl(imageUrl);
+        }, 200);
+      });
+    } else {
+      setImageUrl(data);
+    }
+  }, [data]);
+
+  console.log(helper.strToObj(language));
 
   const handleOnLoad = () => {
-    callbackChange({ language: helper.percentage(imgRef.current.naturalHeight, imgRef.current.naturalWidth) } as BlogContent);
+    const imageLanguage: ImageLanguage = {
+      alt: 'Anh mo ta',
+      autoWidth: true,
+      height: imgRef.current.naturalHeight,
+      width: imgRef.current.naturalWidth,
+    };
+    callbackChange({
+      language: JSON.stringify(imageLanguage),
+    } as BlogContent);
   };
 
   const handleChange = (info: any) => {
@@ -73,17 +94,27 @@ export const BlogUpload: FC<BlogUpload> = ({
       className="upload__wrap"
       showUploadList={false}
       action="/"
-      disabled={isLoadingForm}
+      disabled={isLoadingForm || disabled}
       maxCount={1}
       beforeUpload={uploadService.beforeUpload(t, limitSize)}
       onChange={handleChange}>
       <AppSpinning loading={loading}>
-        {imageUrl ? <img ref={imgRef} src={imageUrl} onLoad={handleOnLoad} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+        {imageUrl ? (
+          <img ref={imgRef} src={imageUrl} onLoad={handleOnLoad} alt="avatar" style={{ width: '100%' }} />
+        ) : (
+          uploadButton
+        )}
       </AppSpinning>
     </Upload>
   );
   return (
-    <Box className={clsx('field-wrap upload-filed', [classNameWrap] && classNameWrap, center && 'center-field', fullWidth && 'full-width')}>
+    <Box
+      className={clsx(
+        'field-wrap upload-filed',
+        [classNameWrap] && classNameWrap,
+        center && 'center-field',
+        fullWidth && 'full-width'
+      )}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
       {crop ? <ImgCrop rotate>{UploadChild}</ImgCrop> : UploadChild}
     </Box>
