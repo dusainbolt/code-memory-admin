@@ -8,7 +8,6 @@ import { BlogFormSection } from './BlogFormSection';
 import { BlogFormInfo } from './BlogFormInfo';
 import { ReactSortable } from 'react-sortablejs';
 import Sortable, { AutoScroll } from 'sortablejs/modular/sortable.core.esm.js';
-import { BlogContent } from '../../models/BlogModel';
 
 Sortable.mount(new AutoScroll());
 
@@ -35,7 +34,7 @@ export const BlogForm: FC<any> = () => {
       </Divider>
       <ReactSortable handle=".handle-drag" list={content as any} setList={onChangeList}>
         {content.map((item, index) => (
-          <BlogFormSection field={item} key={index} index={index} />
+          <BlogFormSection content={content} field={item} key={index} index={index} />
         ))}
       </ReactSortable>
       <ButtonCommon onClick={handleSubmit} children="OKe" className="mt-30" />

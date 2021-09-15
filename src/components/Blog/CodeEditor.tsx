@@ -10,6 +10,8 @@ export const CodeEditor: FC<FieldBlogProps> = ({ fieldValue, className, callback
     callbackChange({ data: value } as BlogContent);
   };
 
+  console.log(fieldValue);
+
   return (
     <Box className={clsx('code-editor', [className] && className)}>
       <Box className="code-editor-input">

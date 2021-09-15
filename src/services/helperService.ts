@@ -4,7 +4,6 @@ import { User } from '../models/UserModel';
 import dayjs from 'dayjs';
 
 export class HelperService {
-
   getFullName = (user: User) => {
     return `${user.firstName} ${user.lastName}`;
   };
@@ -36,25 +35,30 @@ export class HelperService {
   };
 
   getKeyByObjStr = (key: string) => {
-    const keyArr = key?.split(".");
+    const keyArr = key?.split('.');
     return keyArr.length > 1 ? keyArr[1] : key;
-  }
+  };
 
   getValByStrKey = (obj: any, key: string) => {
-    const keyArr = key.split(".");
+    const keyArr = key.split('.');
     return keyArr.length > 1 ? obj[keyArr[0]]?.[keyArr[1]] : obj[key];
   };
 
   convertTimeDisplay = (value: any, format: string = TIME_FORMAT.DD_MM_YYYY_HH_MM_SS) => {
     return dayjs(parseInt(value)).format(format);
-  }
+  };
 
   percentage = (num: any, per: any) => {
     return ((parseFloat(num) / parseFloat(per)) * 100).toFixed(2);
-  }
-};
+  };
+
+  strToObj = (string: string) => {
+    try {
+      return JSON?.parse(string);
+    } catch (e: any) {
+      return null;
+    }
+  };
+}
 
 export const helper = new HelperService();
-
-
-

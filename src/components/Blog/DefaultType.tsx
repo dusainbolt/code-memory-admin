@@ -19,7 +19,7 @@ const DATA_TYPE: Array<{ label: string; value: BlogContentType }> = [
     value: BlogContentType.EDITOR,
   },
   {
-    label: 'blog.editor',
+    label: 'blog.image',
     value: BlogContentType.IMAGE,
   },
 ];
@@ -37,7 +37,7 @@ export const DefaultType: FC<{
   const { t } = useTranslation();
 
   const onChangeType = (value: any) => {
-    callbackChange({ type: value, data: dataBlogDefault[value], language: 'javascript' });
+    callbackChange({ type: value, data: dataBlogDefault[value], language: 'js' });
   };
 
   const onChangeLanguageCode = (language: any) => {

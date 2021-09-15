@@ -10,36 +10,37 @@ import { DefaultType } from './DefaultType';
 import { useFormikContext } from 'formik';
 import { contentDefault } from '../../pages/Blog/AddBlog';
 import { ImageEditor } from './ImageEditor';
-// import _ from 'lodash';
 
-export const BlogFormSection: FC<{ field: BlogContent; index: number }> = ({ field, index }) => {
-  const { values, setFieldValue } = useFormikContext();
-  const contentValue = (values as any)?.content;
-
+export const BlogFormSection: FC<{ content: BlogContent[]; field: BlogContent; index: number }> = ({
+  field,
+  index,
+  content,
+}) => {
+  const { setFieldValue } = useFormikContext();
   const onRemoveIndex = () => {
-    if (contentValue.length > 1) {
-      contentValue.splice(index, 1);
-      setFieldValue('content', contentValue);
+    if (content.length > 1) {
+      content.splice(index, 1);
+      setFieldValue('content', content);
     } else {
       alert('Không thể xóa nội dung cuối này');
     }
   };
 
   const onAddIndex = () => {
-    contentValue.splice(index + 1, 0, contentDefault[0]);
-    setFieldValue('content', contentValue);
+    content.splice(index + 1, 0, contentDefault[0]);
+    setFieldValue('content', content);
   };
 
   const callbackChangeVal = useCallback(
     data => {
-      const fieldChangeVal = { ...contentValue[index], ...data };
-      contentValue[index] = fieldChangeVal;
-      setFieldValue('content', contentValue);
+      const fieldChangeVal = { ...content[index], ...data };
+      content[index] = fieldChangeVal;
+      setFieldValue('content', content);
     },
-    [contentValue]
+    [content]
   );
 
-  const fieldProps = { callbackChange: callbackChangeVal, fieldValue: contentValue[index] };
+  const fieldProps = { callbackChange: callbackChangeVal, fieldValue: content[index] };
 
   return (
     <Box className="section-form form-input-blog mb-30">

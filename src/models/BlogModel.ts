@@ -6,6 +6,13 @@ export enum BlogContentType {
   IMAGE,
 }
 
+export type ImageLanguage = {
+  alt: string;
+  width: string;
+  height: string;
+  autoWidth: boolean;
+};
+
 export interface BlogContent {
   type?: BlogContentType;
 

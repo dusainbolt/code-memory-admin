@@ -55,6 +55,10 @@
     "title_field_blog_content": "Nội dung bài đăng",
     "code": "Mã Code",
     "editor": "Văn bản",
+    "image": "Hình ảnh",
+    "autosize": "Auto Size",
+    "upload_or_url": "Tải ảnh hoặc nhập url",
+    "press_to_upload": "Upload ảnh",
     "loading_data": "Đang nhận dữ liệu",
     "switch_edit": "Chế độ edit",
     "dec_select_type": "Loại nội dung"
