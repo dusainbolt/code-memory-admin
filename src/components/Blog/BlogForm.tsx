@@ -8,6 +8,7 @@ import { BlogFormSection } from './BlogFormSection';
 import { BlogFormInfo } from './BlogFormInfo';
 import { ReactSortable } from 'react-sortablejs';
 import Sortable, { AutoScroll } from 'sortablejs/modular/sortable.core.esm.js';
+import { DemoTagSelect } from '../../common/Select/TagSelect';
 
 Sortable.mount(new AutoScroll());
 
@@ -25,6 +26,7 @@ export const BlogForm: FC<any> = () => {
 
   return (
     <Box className="admin__content">
+      <DemoTagSelect />
       <Divider orientation="left" className="title-field-divider" plain>
         {t('blog.title_field_blog_info')}
       </Divider>
