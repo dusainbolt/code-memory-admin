@@ -1,5 +1,16 @@
+.blog-form-info-wrap {
+  position: sticky;
+  top: 0;
+  max-height: calc(100vh - 100px);
+}
+
+.add-blog-page {
+  display: grid;
+  grid-template-columns: 800px auto;
+  grid-column-gap: 50px;
+}
+
 .draft-editor {
-  // display: flex;
   &__form-wrapper {
     width: 100%;
     height: 100%;
@@ -15,15 +26,10 @@
 }
 
 .code-editor {
-  // display: flex;
   .code,
   .code-editor-input {
     width: 100%;
   }
-}
-
-.form-input-blog {
-  max-width: 800px;
 }
 
 .section-form {

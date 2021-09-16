@@ -53,8 +53,10 @@
     "place_description": "Hãy nhập mô tả",
     "title_field_blog_info": "Thông tin bài đăng",
     "title_field_blog_content": "Nội dung bài đăng",
+    "label_tag": "Thẻ tag",
     "code": "Mã Code",
     "editor": "Văn bản",
+    "iframe": "Mã nhúng",
     "image": "Hình ảnh",
     "autosize": "Auto Size",
     "upload_or_url": "Tải ảnh hoặc nhập url",
@@ -88,6 +90,7 @@
     "place_input_tag": "Nhập tên thẻ tag",
     "place_input_tag_dec": "Nội dung giới thiệu",
     "add_tag_title": "Thêm thẻ Tag",
+    "sort_mode": "Chế độ sắp xếp",
     "update_tag_title": "Chỉnh sửa thẻ Tag"
   },
   "profile": {

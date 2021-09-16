@@ -22,6 +22,10 @@ const DATA_TYPE: Array<{ label: string; value: BlogContentType }> = [
     label: 'blog.image',
     value: BlogContentType.IMAGE,
   },
+  {
+    label: 'blog.iframe',
+    value: BlogContentType.IFRAME,
+  },
 ];
 
 export const dataBlogDefault = {

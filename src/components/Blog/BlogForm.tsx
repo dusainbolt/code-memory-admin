@@ -1,4 +1,4 @@
-import { Divider } from 'antd';
+import { Divider, Row } from 'antd';
 import { useFormikContext } from 'formik';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,25 +19,29 @@ export const BlogForm: FC<any> = () => {
     values: { content },
   } = useFormikContext();
 
-  const onChangeList = (data: Array<any>) => {
-    setFieldValue('content', data);
+  const onChangeList = (newValue: Array<any>) => {
+    setFieldValue('content', newValue);
   };
 
   return (
-    <Box className="admin__content">
-      <Divider orientation="left" className="title-field-divider" plain>
-        {t('blog.title_field_blog_info')}
-      </Divider>
-      <BlogFormInfo />
-      <Divider orientation="left" className="title-field-divider" plain>
-        {t('blog.title_field_blog_content')}
-      </Divider>
-      <ReactSortable handle=".handle-drag" list={content as any} setList={onChangeList}>
-        {content.map((item, index) => (
-          <BlogFormSection content={content} field={item} key={index} index={index} />
-        ))}
-      </ReactSortable>
-      <ButtonCommon onClick={handleSubmit} children="OKe" className="mt-30" />
+    <Box className="admin__content add-blog-page">
+      <Box className="blog-form-content-wrap">
+        <Divider orientation="left" className="title-field-divider" plain>
+          {t('blog.title_field_blog_content')}
+        </Divider>
+        <ReactSortable handle=".handle-drag" list={content as any} setList={onChangeList}>
+          {content.map((item, index) => (
+            <BlogFormSection content={content} field={item} key={index} index={index} />
+          ))}
+        </ReactSortable>
+      </Box>
+      <Box className="blog-form-info-wrap">
+        <Divider orientation="left" className="title-field-divider" plain>
+          {t('blog.title_field_blog_info')}
+        </Divider>
+        <BlogFormInfo />
+        <ButtonCommon onClick={handleSubmit} children="OKe" className="mt-30" />
+      </Box>
     </Box>
   );
 };

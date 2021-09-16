@@ -34,9 +34,15 @@
   .ant-upload {
     margin: 0;
     height: auto;
-    min-width: unset;
-    width: 100%;
+    min-width: 102px;
     min-height: 102px;
+  }
+
+  &.blog-field-image {
+    .ant-upload {
+      min-width: unset;
+      width: 100%;
+    }
     .app-spin {
       width: 100% !important;
     }

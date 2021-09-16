@@ -18,8 +18,19 @@ import { FETCH_POLICY } from '../../constant';
 import UploadService, { S3Storage } from '../../services/uploadService';
 import { setUploadSliceStart } from '../../redux/slices/layoutSlice';
 import { ProcessUpload } from '../../models/LayoutModel';
+import { FieldUpload } from '../../common/Upload/FieldUpload';
 
-const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onCloseForm: any; visible: boolean; isLoadingForm: boolean }) => {
+const TagForm = ({
+  t,
+  onCloseForm,
+  isLoadingForm,
+  visible,
+}: {
+  t: TFunction;
+  onCloseForm: any;
+  visible: boolean;
+  isLoadingForm: boolean;
+}) => {
   const { handleSubmit, handleReset, setValues } = useFormikContext();
   const { tagDetail } = useAppSelector(getTagSlice);
 
@@ -47,7 +58,7 @@ const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onC
     <Row className="tag-form form-label-md">
       <Box className="upload__field center-block">
         <Text className="tag-upload-dec">{t('tag.label_thumbnail')}</Text>
-        <UploadComponent isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
+        <FieldUpload isLoadingForm={isLoadingForm} name={fieldCreateTag.thumbnail.name} crop={true} />
       </Box>
       <Field {...fieldCreateTag.title} component={InputComponent} />
       <Field {...fieldCreateTag.description} component={TextAreaComponent} />
@@ -58,7 +69,15 @@ const TagForm = ({ t, onCloseForm, isLoadingForm, visible }: { t: TFunction; onC
   );
 };
 
-export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible: boolean; setVisible: any; callbackSubmit: any }) => {
+export const DrawerTagForm = ({
+  visible,
+  setVisible,
+  callbackSubmit,
+}: {
+  visible: boolean;
+  setVisible: any;
+  callbackSubmit: any;
+}) => {
   const { isLoadingForm } = useAppSelector(getTagSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -84,13 +103,19 @@ export const DrawerTagForm = ({ visible, setVisible, callbackSubmit }: { visible
     dispatch(
       submitTagSliceStart({
         input: { ...values, thumbnail },
-        callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
+        callback: () => callbackSubmit && callbackSubmit(FETCH_POLICY.NO_CACHE),
       })
     );
   };
 
   return (
-    <Drawer title={t('tag.add_tag_title')} maskClosable={false} width={520} closable={!isLoadingForm} onClose={onCloseDrawer} visible={visible}>
+    <Drawer
+      title={t('tag.add_tag_title')}
+      maskClosable={false}
+      width={520}
+      closable={!isLoadingForm}
+      onClose={onCloseDrawer}
+      visible={visible}>
       <Formik onSubmit={handleSubmitForm} validationSchema={validateTagInput} initialValues={initialValues}>
         <TagForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>

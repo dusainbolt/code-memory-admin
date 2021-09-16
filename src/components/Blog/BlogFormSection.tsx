@@ -10,6 +10,7 @@ import { DefaultType } from './DefaultType';
 import { useFormikContext } from 'formik';
 import { contentDefault } from '../../pages/Blog/AddBlog';
 import { ImageEditor } from './ImageEditor';
+import { IframeEditor } from './IframeEditor';
 
 export const BlogFormSection: FC<{ content: BlogContent[]; field: BlogContent; index: number }> = ({
   field,
@@ -41,7 +42,7 @@ export const BlogFormSection: FC<{ content: BlogContent[]; field: BlogContent; i
   );
 
   const fieldProps = { callbackChange: callbackChangeVal, fieldValue: content[index] };
-
+  console.log('RE-RENDER');
   return (
     <Box className="section-form form-input-blog mb-30">
       <Box className="control-group mb-6">
@@ -54,6 +55,7 @@ export const BlogFormSection: FC<{ content: BlogContent[]; field: BlogContent; i
         {field.type === BlogContentType.CODE && <CodeEditor {...fieldProps} />}
         {field.type === BlogContentType.EDITOR && <DraftEditor {...fieldProps} />}
         {field.type === BlogContentType.IMAGE && <ImageEditor {...fieldProps} />}
+        {field.type === BlogContentType.IFRAME && <IframeEditor {...fieldProps} />}
       </Box>
     </Box>
   );
