@@ -4,6 +4,7 @@ export enum BlogContentType {
   CODE,
   EDITOR,
   IMAGE,
+  IFRAME,
 }
 
 export type ImageLanguage = {

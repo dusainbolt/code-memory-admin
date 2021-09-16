@@ -67,6 +67,7 @@ export const ImageEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbac
       </div>
       <BlogUpload
         disabled={!isEditor}
+        classNameWrap="blog-field-image"
         callbackUpload={onChangeUploadFile}
         callbackChange={callbackChange}
         fieldValue={fieldValue}

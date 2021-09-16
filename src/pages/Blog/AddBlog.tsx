@@ -34,7 +34,9 @@ export const AddBlogPage = () => {
     console.log(values);
     console.log(
       'HaNDLE SUBMIT ==========>',
-      values.content.forEach(item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data)))
+      values.content.forEach(
+        item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data))
+      )
     );
     const data: blogInput = {
       title: values.title,

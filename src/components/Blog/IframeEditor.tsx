@@ -3,19 +3,21 @@ import React, { FC } from 'react';
 import Box from '../../common/Box';
 import { TextAreaCommon } from '../../common/Input/TextArea';
 import { BlogContent, FieldBlogProps } from '../../models/BlogModel';
-import { Code } from './Code';
+import renderHTML from 'react-render-html';
 
-export const CodeEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
+export const IframeEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
   const onChangeTextarea = ({ target: { value } }) => {
     callbackChange({ data: value } as BlogContent);
   };
 
+  console.log(fieldValue);
+
   return (
-    <Box className={clsx('code-editor', [className] && className)}>
-      <Box className="code-editor-input">
+    <Box className={clsx('iframe-editor', [className] && className)}>
+      <Box className="iframe-editor-input mb-20">
         <TextAreaCommon onChange={onChangeTextarea} value={fieldValue.data} rows={2} />
       </Box>
-      <Code code={fieldValue.data} language={fieldValue.language} />
+      {fieldValue.data && <div className="relative-pos">{renderHTML(fieldValue.data)}</div>}
     </Box>
   );
 };
