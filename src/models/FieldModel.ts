@@ -39,24 +39,6 @@ export const fieldLogin: FieldLogin = {
   },
 };
 
-export interface FieldBlog {
-  title: IField;
-  description: IField;
-}
-
-export const fieldBlog: FieldBlog = {
-  title: {
-    name: 'title',
-    label: 'blog.label_title',
-    placeholder: 'blog.place_title',
-  },
-  description: {
-    name: 'description',
-    label: 'blog.label_description',
-    placeholder: 'blog.place_description',
-  },
-};
-
 export const OPTION_FILTER_STATUS_TAG: OptionSelect[] = [
   {
     label: 'tag.active',

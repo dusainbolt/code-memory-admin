@@ -19,8 +19,8 @@ export const BlogForm: FC<any> = () => {
     values: { content },
   } = useFormikContext();
 
-  const onChangeList = (data: Array<any>) => {
-    setFieldValue('content', data);
+  const onChangeList = (newValue: Array<any>) => {
+    setFieldValue('content', newValue);
   };
 
   return (

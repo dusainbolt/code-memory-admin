@@ -1,4 +1,4 @@
-import { Blog, blogInput } from '../../models/BlogModel';
+import { Blog, BlogInput } from '../../models/BlogModel';
 import { LoginInput } from '../../models/LoginModel';
 
 export const BLOG_ACTION_TYPES = 'blogActionTypes';
@@ -6,7 +6,7 @@ export const BLOG_ACTION_TYPES = 'blogActionTypes';
 export const ADD_BLOG_REQUESTING = `${BLOG_ACTION_TYPES}/ADD_BLOG_REQUESTING`;
 export interface addBlogAction {
   type: typeof ADD_BLOG_REQUESTING;
-  blogInput: blogInput;
+  blogInput: BlogInput;
 }
 export const ADD_BLOG_SUCCESS = `${BLOG_ACTION_TYPES}/ADD_BLOG_SUCCESS`;
 export interface addBlogActionSuccess {
@@ -22,7 +22,7 @@ export interface addBlogActionError {
 
 export type BlogAction = {
   type: string;
-  blogInput: LoginInput;
+  BlogInput: LoginInput;
   blog: Blog;
   messageError: string;
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { Formik } from 'formik';
-import { BlogContent, BlogContentType, blogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
+import { BlogContent, BlogContentType, BlogInput, BLOG_FIELD_NAME } from '../../models/BlogModel';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { helper } from '../../services/helperService';
 import { BlogForm } from '../../components/Blog/BlogForm';
@@ -28,27 +28,28 @@ const mapContentBlog = (values: any): BlogContent[] => {
 
 export const AddBlogPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useAppSelector(state => state.loginSlice.user);
+  // const { id } = useAppSelector(state => state.loginSlice.user);
 
-  const onSubmit = (values: blogInput) => {
-    console.log(values);
-    console.log(
-      'HaNDLE SUBMIT ==========>',
-      values.content.forEach(
-        item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data))
-      )
-    );
-    const data: blogInput = {
+  const onSubmit = (values: BlogInput) => {
+    // console.log(values);
+    // console.log(
+    //   'HaNDLE SUBMIT ==========>',
+    //   values.content.forEach(
+    //     item => item.type === BlogContentType.EDITOR && console.log(draftService.draftBlocksToHtml(item.data))
+    //   )
+    // );
+    const data: BlogInput = {
       title: values.title,
       description: values.description,
       content: mapContentBlog(values),
-      createBy: id,
     };
     // dispatch(actionBlog.addBlog(data));
   };
 
   return (
-    <Formik initialValues={{ title: '', description: '', content: contentDefault }} onSubmit={onSubmit}>
+    <Formik
+      initialValues={{ title: '', description: '', content: contentDefault, tag: [] } as BlogInput}
+      onSubmit={onSubmit}>
       <BlogForm />
     </Formik>
   );

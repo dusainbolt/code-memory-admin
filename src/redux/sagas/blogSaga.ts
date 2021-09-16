@@ -4,7 +4,7 @@ import { addBlogAction, ADD_BLOG_REQUESTING } from '../actionTypes/blogActionTyp
 
 function* onAddBlog(action: addBlogAction) {
   // try {
-  //   const data: Blog = yield addBlogRequest(action.blogInput);
+  //   const data: Blog = yield addBlogRequest(action.BlogInput);
   //   yield put(actionBlog.addBlogSuccess(data));
   // } catch (error) {
   //   yield put(actionLogin.postLoginError(error?.message as string));
