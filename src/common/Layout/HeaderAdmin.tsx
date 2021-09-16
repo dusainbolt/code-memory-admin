@@ -4,7 +4,7 @@ import { Header } from 'antd/lib/layout/layout';
 import Title from 'antd/lib/typography/Title';
 import React, { useState } from 'react';
 import { useAppSelector } from '../../redux/rootStore';
-import { HelperService } from '../../services/helperService';
+import { helper } from '../../services/helperService';
 import Box from '../Box';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -12,8 +12,6 @@ import ButtonCommon from '../Button';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { logoutSliceStart } from '../../redux/slices/loginSlice';
-
-const helper = new HelperService();
 
 export const HeaderAdmin = () => {
   const { t } = useTranslation();

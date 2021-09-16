@@ -1,6 +1,3 @@
-@import '../components/tag/tagList';
-@import '../components/tag/tagForm';
-
 .tag {
   &__box-icon {
     @include _flexBox(center, flex-start);
@@ -10,5 +7,27 @@
       border-radius: 8px;
       overflow: hidden;
     }
+  }
+}
+
+.tag-list {
+  &__form-search {
+    width: 100%;
+  }
+}
+
+.tag-form {
+  .upload__wrap {
+    display: block;
+    margin: auto;
+    width: max-content;
+    .ant-upload {
+      margin: 0px !important;
+    }
+  }
+  .tag-upload-dec {
+    text-align: center;
+    display: block;
+    font-weight: bold;
   }
 }

@@ -43,7 +43,8 @@
     "title_error": "Đã xảy ra lỗi",
     "title_warning": "Cảnh báo",
     "title_info": "Thông báo",
-    "title_success": "Thành công"
+    "title_success": "Thành công",
+    "need_number": "Trường này cần phải điền số"
   },
   "blog": {
     "label_title": "Tiêu đề",
@@ -51,7 +52,18 @@
     "label_description": "Mô tả",
     "place_description": "Hãy nhập mô tả",
     "title_field_blog_info": "Thông tin bài đăng",
-    "title_field_blog_content": "Nội dung bài đăng"
+    "title_field_blog_content": "Nội dung bài đăng",
+    "label_tag": "Thẻ tag",
+    "code": "Mã Code",
+    "editor": "Văn bản",
+    "iframe": "Mã nhúng",
+    "image": "Hình ảnh",
+    "autosize": "Auto Size",
+    "upload_or_url": "Tải ảnh hoặc nhập url",
+    "press_to_upload": "Upload ảnh",
+    "loading_data": "Đang nhận dữ liệu",
+    "switch_edit": "Chế độ edit",
+    "dec_select_type": "Loại nội dung"
   },
   "menu": {
     "blog": "Bài đăng",
@@ -65,7 +77,7 @@
     "seo_home": "Cài đặt",
     "seo_history": "Lịch sử",
     "experience_list": "Quá trình làm việc",
-    "company_list": "Danh sách nơi làm việc"
+    "project_list": "Danh sách dự án"
   },
   "tag": {
     "tag_name": "Tên thẻ tag",
@@ -78,10 +90,12 @@
     "place_input_tag": "Nhập tên thẻ tag",
     "place_input_tag_dec": "Nội dung giới thiệu",
     "add_tag_title": "Thêm thẻ Tag",
+    "sort_mode": "Chế độ sắp xếp",
     "update_tag_title": "Chỉnh sửa thẻ Tag"
   },
   "profile": {
     "experience_list": "Quá trình làm việc",
+    "add_experience": "Thêm quá trình làm việc",
     "company_list": "Danh sách nơi làm việc",
     "serial": "STT",
     "description_vn": "Mô tả(Tiếng Việt)",
@@ -102,7 +116,14 @@
     "inactive": "Ngừng hoạt động",
     "certificate": "Chứng chỉ",
     "learn": "Học tập",
-    "work": "Công ty"
+    "work": "Công ty",
+    "edit": "Chỉnh sửa",
+    "project_name_vn": "Tên dự án(VN)",
+    "project_name_en": "Tên dự án(EN)",
+    "user_size": "Quy mô thành viên",
+    "technology": "Công nghệ",
+    "add_project": "Thêm dự án",
+    "members": "thành viên"
   },
   "seo": {
     "title_page": "Cài đặt SEO",
@@ -114,15 +135,15 @@
     "placeholder_siteName": "Nhập tên của website",
     "title": "Tiêu đề",
     "placeholder_title": "Nhập tiêu đề của website",
+    "titleEN": "Tiêu đề (EN)",
     "description": "Mô tả",
     "placeholder_description": "Nhập mô tả  của website",
+    "descriptionEN": "Mô tả (EN)",
     "domain": "Tên miền",
     "placeholder_domain": "Tên miền của website",
     "reason": "Lý do thay đổi",
     "searchBoxUrl": "URL thanh tìm kiếm",
     "placeholder_searchBoxUrl": "NHập URL thanh tìm kiếm của website",
-    "languageAlternates": "Ngôn ngữ thay thế",
-    "placeholder_languageAlternates": "Nhập ngôn ngữ thay thế của website",
     "facebookChatPlugin": "Plugin Chat Messenger Script",
     "placeholder_facebookChatPlugin": "Nhâp Plugin Chat Messenger Script của Website",
     "faviconUrlICO": "Ảnh Favicon dạng .ico",
@@ -131,6 +152,7 @@
     "logo400x400": "Ảnh Logo 4:4 - 400x400px",
     "logo800x600": "Ảnh Preview 4:3 - 800x600px",
     "logoAlt": "Mô tả SEO của Logo & Preview",
+    "logoAltEN": "Mô tả SEO của Logo & Preview (EN)",
     "facebookAppId": "Facebook Fanpage ID",
     "facebookPageUrl": "Facebook Fanpage URL",
     "twitterUrl": "Twitter URL",

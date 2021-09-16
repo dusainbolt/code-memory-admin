@@ -1,30 +1,21 @@
 import clsx from 'clsx';
-import { useFormikContext } from 'formik';
-import React from 'react';
+import React, { FC } from 'react';
 import Box from '../../common/Box';
 import { TextAreaCommon } from '../../common/Input/TextArea';
-import { BlogContent } from '../../models/BlogModel';
+import { BlogContent, FieldBlogProps } from '../../models/BlogModel';
 import { Code } from './Code';
 
-export interface ICodeEditor {
-  className?: string;
-  fieldName: string;
-}
-export const CodeEditor = ({ className, fieldName }: ICodeEditor) => {
-  const { values, setFieldValue } = useFormikContext();
-  const fieldValue: BlogContent = values[fieldName];
-
+export const CodeEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
   const onChangeTextarea = ({ target: { value } }) => {
-    console.log(values);
-    setFieldValue(fieldName, { ...fieldValue, data: value });
+    callbackChange({ data: value } as BlogContent);
   };
 
   return (
     <Box className={clsx('code-editor', [className] && className)}>
       <Box className="code-editor-input">
-        <TextAreaCommon onChange={onChangeTextarea} value={fieldValue.data} autoSize={{ minRows: 3 }} />
+        <TextAreaCommon onChange={onChangeTextarea} value={fieldValue.data} rows={2} />
       </Box>
-      <Code code={fieldValue.data} language="javascript" />
+      <Code code={fieldValue.data} language={fieldValue.language} />
     </Box>
   );
 };

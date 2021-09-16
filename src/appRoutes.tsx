@@ -3,6 +3,8 @@ import { AddBlogPage } from './pages/Blog/AddBlog';
 import { TagListPage } from './pages/Tag/List';
 import { DashBoardPage } from './pages/DashBoard';
 import { LoginPages } from './pages/LoginPage';
+import { ExperienceList } from './pages/Profile/ExperienceList';
+import { ProjectList } from './pages/Profile/ProjectList';
 import { SeoPage } from './pages/Seo';
 import { SeoHistory } from './pages/Seo/History';
 
@@ -15,9 +17,21 @@ export const ROUTE = {
   TAG_LIST: '/tag',
   SEO: '/seo',
   SEO_HISTORY: '/seo/history',
+  PROFILE: '/profile',
+  PROFILE_EXPERIENCE_LIST: '/experience-list',
+  PROFILE_PROJECT_LIST: '/project-list',
 };
 
-export const RouteLayoutAdmin = [ROUTE.DASHBOARD_BLOG, ROUTE.BLOG_ADD, ROUTE.BLOG_LIST, ROUTE.TAG_LIST, ROUTE.SEO, ROUTE.SEO_HISTORY];
+export const RouteLayoutAdmin = [
+  ROUTE.DASHBOARD_BLOG,
+  ROUTE.BLOG_ADD,
+  ROUTE.BLOG_LIST,
+  ROUTE.TAG_LIST,
+  ROUTE.SEO,
+  ROUTE.SEO_HISTORY,
+  ROUTE.PROFILE_PROJECT_LIST,
+  ROUTE.PROFILE_EXPERIENCE_LIST,
+];
 export const RouteLayoutPublic = [ROUTE.INDEX, ROUTE.LOGIN];
 export interface IRoute {
   name: string;
@@ -64,6 +78,18 @@ const privateRoutes: IRoute[] = [
     name: 'TagList',
     path: ROUTE.TAG_LIST,
     component: TagListPage,
+    exact: true,
+  },
+  {
+    name: 'ExperienceList',
+    path: ROUTE.PROFILE_EXPERIENCE_LIST,
+    component: ExperienceList,
+    exact: true,
+  },
+  {
+    name: 'ProjectList',
+    path: ROUTE.PROFILE_PROJECT_LIST,
+    component: ProjectList,
     exact: true,
   },
   {

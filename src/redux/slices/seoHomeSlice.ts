@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IRootState } from './../rootReducer';
 import { SeoHome } from './../../models/SeoHomeModel';
-import { SubmitSeoHome, SubmitSeoHomeSuccess, GetEntireSeoHomeStart, GetEntireSeoHomeSuccess } from './../actionTypes/seoHomeActionTypes';
+import { SubmitSeoHome, SubmitSeoHomeSuccess, GetEntireSeoHomeSuccess } from './../actionTypes/seoHomeActionTypes';
 export interface SeoHomeSlice {
   seoHome: SeoHome,
   seoHomeEntire: SeoHome[],
@@ -13,6 +13,7 @@ export interface SeoHomeSlice {
 const initialState: SeoHomeSlice = {
   seoHome: {
     description: "",
+    descriptionEN: "",
     domain: "",
     facebookChatPlugin: "",
     image: {
@@ -22,6 +23,7 @@ const initialState: SeoHomeSlice = {
       logo400x400: "",
       logo800x600: "",
       logoAlt: "",
+      logoAltEN: "",
     },
     siteName: "",
     social: {
@@ -30,9 +32,9 @@ const initialState: SeoHomeSlice = {
       twitterUrl: "",
       youtubeUrl: "",
     },
-    languageAlternates: "",
     searchBoxUrl: "",
     title: "",
+    titleEN: "",
     id: "",
   },
   isLoadingSubmit: false,
@@ -56,7 +58,7 @@ export const seoHomeSlice = createSlice({
     getSeoHomeError: (state: SeoHomeSlice, action: any) => {
       state.isLoadingSeoHome = false;
     },
-    getSeoHomeEntireStart: (state: SeoHomeSlice, action: GetEntireSeoHomeStart) => {
+    getSeoHomeEntireStart: (state: SeoHomeSlice) => {
       state.isLoadingList = true;
     },
     getSeoHomeEntireSuccess: (state: SeoHomeSlice, { payload }: GetEntireSeoHomeSuccess) => {

@@ -8,15 +8,12 @@ import { useFormikContext } from 'formik';
 import Box from '../Box';
 import clsx from 'clsx';
 import { UploadFile } from 'antd/lib/upload/interface';
-import { HelperService } from '../../services/helperService';
 import UploadService from '../../services/uploadService';
+import { helper } from '../../services/helperService';
 
-const helper = new HelperService();
 const uploadService = new UploadService();
-
 interface FieldUpload {
   name?: string;
-  setFieldValue?: any;
   urlDefault?: string;
   classNameWrap?: string;
   limitSize?: number;

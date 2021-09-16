@@ -1,57 +1,50 @@
-import React, { Fragment, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import Box from '../../common/Box';
-import { ContentState, convertToRaw, EditorState } from 'draft-js';
+import React, { FC, useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { TextAreaCommon } from '../../common/Input/TextArea';
 import clsx from 'clsx';
-import { BlogContent } from '../../models/BlogModel';
+import { BlogContent, FieldBlogProps } from '../../models/BlogModel';
+import { Switch } from 'antd';
+import Text from 'antd/lib/typography/Text';
+import { draftService } from '../../services/draftService';
+import { useTranslation } from 'react-i18next';
+import renderHTML from 'react-render-html';
 
-const content = {
-  entityMap: {},
-  blocks: [{ key: '637gr', text: 'Initialized from content state.', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {} }],
-};
-
-const htmlToDraftBlocks = html => {
-  const blocksFromHtml = htmlToDraft(html);
-  const { contentBlocks, entityMap } = blocksFromHtml;
-  const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-  const editorState = EditorState.createWithContent(contentState);
-  return editorState;
-};
-
-export interface IDraftEditor extends BlogContent {
-  className?: string;
-  fieldName?: string;
-}
-
-export const DraftEditor = ({ className, type, data, language }: IDraftEditor) => {
+export const DraftEditor: FC<FieldBlogProps> = ({ fieldValue, className, callbackChange }) => {
   const { t } = useTranslation();
-  const [contentState, setContentState] = useState(htmlToDraftBlocks(draftToHtml(content)));
+  const [isEditor, setIsEditor] = useState<boolean>(true);
 
-  const onContentStateChange = values => {
-    console.log(values.getCurrentContent());
-    console.log(convertToRaw(values.getCurrentContent()));
-    setContentState(values);
+  const [editorState, setEditorState] = useState(fieldValue.data);
+
+  const onContentStateChange = value => {
+    setEditorState(value);
   };
-  const onChangeTextarea = ({ target: { value } }) => {
-    setContentState(htmlToDraftBlocks(value));
-  };
+
+  useEffect(() => {
+    if (draftService.checkDiff(fieldValue.data, editorState)) {
+      setEditorState(fieldValue.data);
+    }
+  }, [fieldValue]);
 
   return (
-    <Box className={clsx('draft-editor', [className] && className)}>
-      <Editor
-        editorState={contentState}
-        wrapperClassName="draft-editor__form-wrapper"
-        editorClassName="draft-editor__form-editor"
-        onEditorStateChange={onContentStateChange}
-      />
-      <Box className="wrap-raw-html">
-        <TextAreaCommon onChange={onChangeTextarea} value={draftToHtml(convertToRaw(contentState.getCurrentContent()))} autoSize={{ minRows: 3 }} />
-      </Box>
-    </Box>
+    <div className={clsx('draft-editor', [className] && className)}>
+      <div className="mb-12 control-field">
+        <Text className="mr-12">{t('blog.switch_edit')}</Text>
+        <Switch defaultChecked onChange={checked => setIsEditor(checked)} />
+      </div>
+      {isEditor && (
+        <Editor
+          editorState={editorState}
+          onFocus={event => {}}
+          onBlur={(event, editorState) => {
+            callbackChange({ data: editorState } as BlogContent);
+          }}
+          onTab={event => {}}
+          wrapperClassName="draft-editor__form-wrapper"
+          editorClassName="draft-editor__form-editor"
+          onEditorStateChange={onContentStateChange}
+        />
+      )}
+      {!isEditor && <div className="draft-editor__form-view">{renderHTML(draftService.draftBlocksToHtml(editorState))}</div>}
+    </div>
   );
 };

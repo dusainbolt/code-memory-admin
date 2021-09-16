@@ -1,3 +1,4 @@
+import { ENV_STORAGE } from './../constant/index';
 import { TFunction } from 'react-i18next';
 import { message } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
@@ -5,10 +6,13 @@ import S3 from 'react-aws-s3';
 import { ProcessUpload } from '../models/LayoutModel';
 import store from '../redux/rootStore';
 import { setUploadSliceDone, setUploadSliceStart } from '../redux/slices/layoutSlice';
+import { v4 } from "uuid";
 
-export enum Storage {
+export enum S3Storage {
   TAG = 'tag',
   META = "meta",
+  WORK = "work",
+  BLOG = "blog",
 }
 
 export type ResponseS3 = {
@@ -29,9 +33,12 @@ const config = {
 export default class UploadService {
   private s3 = null;
   private dispatch = null;
+  public envFolder = "";
   constructor() {
     this.s3 = new S3(config);
     this.dispatch = store.dispatch;
+    this.envFolder = process.env.NODE_ENV !== "production" ? ENV_STORAGE.local : ENV_STORAGE.production;
+
   }
 
   isValidFormatImage = (type: string) => {
@@ -64,12 +71,12 @@ export default class UploadService {
     return isJpgOrPng && isLt1M;
   };
 
-  handleUpload = async (file: any, fileName, typeStorage = Storage.TAG): Promise<string> => {
+  handleUpload = async (file: any, storage: string = ""): Promise<string> => {
     if (!!(file as UploadFile).size) {
       // when upload file show modal process
       this.dispatch((setUploadSliceStart({ visibleProcessModal: true } as ProcessUpload)));
       return await this.s3
-        .uploadFile((file as UploadFile).originFileObj, `${typeStorage}/${fileName}`)
+        .uploadFile((file as UploadFile).originFileObj, `${this.envFolder}/${storage}/${v4()}`)
         .then(({ location }: ResponseS3) => {
           this.dispatch(setUploadSliceDone({}));
           return location;
@@ -85,3 +92,5 @@ export default class UploadService {
     }
   }
 }
+
+export const uploadService = new UploadService();

@@ -2,6 +2,7 @@ export const TIME_FORMAT = {
   HH_MM: 'HH:mm',
   DD_MM_YYYY_HH_MM: 'DD-MM-YYYY HH:mm',
   DD_MM_YYYY_HH_MM_SS: 'DD-MM-YYYY HH:mm:ss',
+  DD_MM_YY: 'DD-MM-YY'
 };
 
 export const STATUS_BADGE_ANT: any = {
@@ -22,3 +23,9 @@ export const FETCH_POLICY = {
 };
 
 export const DATA_KEY_IMAGE = ['faviconUrlICO', 'faviconUrlJPG', 'logo400x400', 'logo800x600', 'logo1280x720'];
+
+
+export const ENV_STORAGE = {
+  local: "test",
+  production: "prd",
+}

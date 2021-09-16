@@ -1,3 +1,9 @@
+import { If } from 'yup/lib/util/types';
+import {
+  OPTION_FILTER_STATUS_EXPERIENCE,
+  OPTION_FILTER_STATUS_PROJECT,
+  OPTION_FILTER_TYPE_EXPERIENCE,
+} from './ExperienceModel';
 import { TagStatus } from './TagModel';
 
 export interface OptionSelect {
@@ -33,24 +39,6 @@ export const fieldLogin: FieldLogin = {
   },
 };
 
-export interface FieldBlog {
-  title: IField;
-  description: IField;
-}
-
-export const fieldBlog: FieldBlog = {
-  title: {
-    name: 'title',
-    label: 'blog.label_title',
-    placeholder: 'blog.place_title',
-  },
-  description: {
-    name: 'description',
-    label: 'blog.label_description',
-    placeholder: 'blog.place_description',
-  },
-};
-
 export const OPTION_FILTER_STATUS_TAG: OptionSelect[] = [
   {
     label: 'tag.active',
@@ -67,6 +55,12 @@ export interface FieldSearchTag {
   status: IField;
 }
 
+export interface FieldSearchExperience {
+  key: IField;
+  status: IField;
+  type: IField;
+}
+
 export const fieldSearchTag: FieldSearchTag = {
   key: {
     name: 'key',
@@ -77,6 +71,24 @@ export const fieldSearchTag: FieldSearchTag = {
     name: 'status',
     label: 'tag.label_search_status',
     options: OPTION_FILTER_STATUS_TAG,
+  },
+};
+
+export const fieldSearchExperience: FieldSearchExperience = {
+  key: {
+    name: 'key',
+    label: 'profile.experience',
+    placeholder: 'profile.experience',
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_EXPERIENCE,
+  },
+  type: {
+    name: 'type',
+    label: 'profile.type',
+    options: OPTION_FILTER_TYPE_EXPERIENCE,
   },
 };
 
@@ -107,3 +119,126 @@ export const fieldCreateTag: FieldCreateTag = {
   },
 };
 
+export interface FieldCreateExperience {
+  nameVN: IField;
+  nameEN: IField;
+  workType: IField;
+  position: IField;
+  descriptionVN: IField;
+  descriptionEN: IField;
+  startTime: IField;
+  endTime: IField;
+  status: IField;
+  thumbnail?: IField;
+}
+
+export const fieldCreateExperience: FieldCreateExperience = {
+  nameVN: {
+    name: 'nameVN',
+    label: 'profile.work_place_name_vn',
+    placeholder: 'profile.work_place_name_vn',
+  },
+  nameEN: {
+    name: 'nameEN',
+    label: 'profile.work_place_name_en',
+    placeholder: 'profile.work_place_name_en',
+  },
+  workType: {
+    name: 'workType',
+    label: 'profile.type',
+    options: OPTION_FILTER_TYPE_EXPERIENCE,
+  },
+  position: {
+    name: 'position',
+    label: 'profile.position',
+    placeholder: 'profile.position',
+  },
+  descriptionVN: {
+    name: 'descriptionVN',
+    label: 'profile.description_vn',
+    placeholder: 'profile.description_vn',
+  },
+  descriptionEN: {
+    name: 'descriptionEN',
+    label: 'profile.description_en',
+    placeholder: 'profile.description_en',
+  },
+  startTime: {
+    name: 'startTime',
+    label: 'profile.start',
+    placeholder: 'profile.start',
+  },
+  endTime: {
+    name: 'endTime',
+    label: 'profile.end',
+    placeholder: 'profile.end',
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_EXPERIENCE,
+  },
+  thumbnail: {
+    name: 'thumbnail',
+  },
+};
+
+export interface FieldCreateProject {
+  name: IField;
+  nameEN: IField;
+  size: IField;
+  techs: IField;
+  description: IField;
+  descriptionEN: IField;
+  startTime: IField;
+  endTime: IField;
+  status: IField;
+}
+
+export const fieldCreateProject: FieldCreateProject = {
+  name: {
+    name: 'name',
+    label: 'profile.project_name_vn',
+    placeholder: 'profile.project_name_vn',
+  },
+  nameEN: {
+    name: 'nameEN',
+    label: 'profile.project_name_en',
+    placeholder: 'profile.project_name_en',
+  },
+  size: {
+    name: 'size',
+    label: 'profile.user_size',
+    placeholder: 'profile.user_size',
+  },
+  techs: {
+    name: 'techs',
+    label: 'profile.technology',
+    placeholder: 'profile.technology',
+  },
+  description: {
+    name: 'description',
+    label: 'profile.description_vn',
+    placeholder: 'profile.description_vn',
+  },
+  descriptionEN: {
+    name: 'descriptionEN',
+    label: 'profile.description_en',
+    placeholder: 'profile.description_en',
+  },
+  startTime: {
+    name: 'startTime',
+    label: 'profile.start',
+    placeholder: 'profile.start',
+  },
+  endTime: {
+    name: 'endTime',
+    label: 'profile.end',
+    placeholder: 'profile.end',
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_PROJECT,
+  },
+};

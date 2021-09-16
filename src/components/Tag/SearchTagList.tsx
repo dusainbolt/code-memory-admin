@@ -6,14 +6,12 @@ import { useTranslation } from 'react-i18next';
 import Box from '../../common/Box';
 import ButtonCommon from '../../common/Button';
 import { InputComponent } from '../../common/Input';
-import { fieldSearchTag } from '../../models/FieldModel';
+import { fieldSearchExperience } from '../../models/FieldModel';
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { SelectComponent } from '../../common/Select';
 import { useAppSelector } from '../../redux/rootStore';
 import { getTagSlice } from '../../redux/slices/tagSlice';
-import { HelperService } from '../../services/helperService';
-
-const helper = new HelperService();
+import { helper } from '../../services/helperService';
 
 export const SearchTagListForm = () => {
   const { t } = useTranslation();
@@ -25,10 +23,10 @@ export const SearchTagListForm = () => {
     <Form className="tag-list__form-search">
       <Row gutter={[8, 8]}>
         <Col xs={4}>
-          <Field {...fieldSearchTag.key} component={InputComponent} onPressEnter={handleSubmit} />
+          <Field {...fieldSearchExperience.key} component={InputComponent} onPressEnter={handleSubmit} />
         </Col>
         <Col xs={8} xxl={6}>
-          <Field {...fieldSearchTag.status} mode="multiple" component={SelectComponent} />
+          <Field {...fieldSearchExperience.status} mode="multiple" component={SelectComponent} />
         </Col>
         <Col xs={4}>
           <Box className="flx-center align-left control-btn mt-6">

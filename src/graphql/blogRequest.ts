@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { blogInput } from '../models/BlogModel';
+import { BlogInput } from '../models/BlogModel';
 import { LoginInput } from '../models/LoginModel';
 import RequestService from '../services/requestService';
 
@@ -13,6 +13,6 @@ const addBlogQuery = gql`
   }
 `;
 
-export const addBlogRequest = (variables: blogInput): any => {
+export const addBlogRequest = (variables: BlogInput): any => {
   return requestService.mutation(addBlogQuery, variables, 'blogCreate');
 };
