@@ -15,6 +15,7 @@ import { getListTagRequest } from '../../../graphql/tagRequest';
 import { SearchTagInput, Tag, TagStatus } from '../../../models/TagModel';
 import Avatar from 'antd/lib/avatar/avatar';
 import { Tech } from './Tech';
+import { ReactSortable } from 'react-sortablejs';
 
 export interface TechsInterface {
   label?: string;
@@ -128,19 +129,21 @@ export const TechsComponent = ({
       </Select>
 
       <div className="tech-box">
-        {optionsChoosed.map((value, index) => {
-          return (
-            <Tech
-              field={field}
-              setFieldValue={setFieldValue}
-              data={value}
-              key={index}
-              index={index}
-              optionsChoosed={optionsChoosed}
-              setOptionsChoosed={setOptionsChoosed}
-            />
-          );
-        })}
+        <ReactSortable>
+          {optionsChoosed.map((value, index) => {
+            return (
+              <Tech
+                field={field}
+                setFieldValue={setFieldValue}
+                data={value}
+                key={index}
+                index={index}
+                optionsChoosed={optionsChoosed}
+                setOptionsChoosed={setOptionsChoosed}
+              />
+            );
+          })}
+        </ReactSortable>
       </div>
     </Box>
   );
