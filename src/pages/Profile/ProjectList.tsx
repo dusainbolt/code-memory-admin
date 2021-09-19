@@ -30,7 +30,14 @@ export const ProjectList = () => {
   const { dataPJs, total, isLoadingList } = useAppSelector(getPJSlice);
   const { openFormModal, visibleFormPJ, setVisible, openFormEdit } = useFormProject();
   const { t } = useTranslation();
-  const { paramsSearch, handleSearch, getPageIndexNumber, handleGetListCategory, handleChangePage, handleSortByParams } = useSearchPJList(dispatch);
+  const {
+    paramsSearch,
+    handleSearch,
+    getPageIndexNumber,
+    handleGetListCategory,
+    handleChangePage,
+    handleSortByParams,
+  } = useSearchPJList(dispatch);
   const { offset, limit } = paramsSearch;
 
   const column = (t, pageIndex, callbackEdit) => [
@@ -105,7 +112,6 @@ export const ProjectList = () => {
 
   return (
     <Box className="admin__content tag-list">
-      {console.log(offset, limit, total, dataPJs, column, 'xnxx')}
       <Title className="title-page">{t('menu.project_list')}</Title>
       <Divider />
       <Box className="flx-center space-center control-top">

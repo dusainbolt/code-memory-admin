@@ -15,6 +15,7 @@ import { getListTagRequest } from '../../../graphql/tagRequest';
 import { SearchTagInput, Tag, TagStatus } from '../../../models/TagModel';
 import Avatar from 'antd/lib/avatar/avatar';
 import { Tech } from './Tech';
+import { ReactSortable } from 'react-sortablejs';
 
 export interface TechsInterface {
   label?: string;
@@ -38,7 +39,7 @@ export interface DebounceSelectProps<ValueType = any> extends Omit<SelectProps<V
 export const TechsComponent = ({
   field,
   techsData,
-  form: { touched: formTouched, errors: formErrors, setFieldValue },
+  form: { touched: formTouched, errors: formErrors, setFieldValue, values },
   label = '',
   prefix = null,
   suffix = null,
@@ -62,7 +63,6 @@ export const TechsComponent = ({
   }, [techsData]);
 
   const onPressEnter = (value, data) => {
-    console.log('phuong', value, data);
     setFieldValue(field.name, [...field.value, data.key]);
     setOptionsChoosed([...optionsChoosed, data.title]);
   };
@@ -99,6 +99,12 @@ export const TechsComponent = ({
     return debounce(loadOptions, 800);
   }, []);
 
+  const sortTechs = (newValue: any) => {
+    const newFieldValue = newValue.map((value) => value.id);
+    setOptionsChoosed(newValue);
+    setFieldValue(field.name, newFieldValue);
+  };
+
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
@@ -128,19 +134,21 @@ export const TechsComponent = ({
       </Select>
 
       <div className="tech-box">
-        {optionsChoosed.map((value, index) => {
-          return (
-            <Tech
-              field={field}
-              setFieldValue={setFieldValue}
-              data={value}
-              key={index}
-              index={index}
-              optionsChoosed={optionsChoosed}
-              setOptionsChoosed={setOptionsChoosed}
-            />
-          );
-        })}
+        <ReactSortable setList={sortTechs} list={optionsChoosed as any}>
+          {optionsChoosed.map((value, index) => {
+            return (
+              <Tech
+                field={field}
+                setFieldValue={setFieldValue}
+                data={value}
+                key={index}
+                index={index}
+                optionsChoosed={optionsChoosed}
+                setOptionsChoosed={setOptionsChoosed}
+              />
+            );
+          })}
+        </ReactSortable>
       </div>
     </Box>
   );
