@@ -111,7 +111,6 @@ export const DrawerProjectForm = ({
   };
 
   const handleSubmitForm = async (values: CreatePJInput) => {
-    console.log('phuong122', values);
     const data = { ...values, startTime: values.startTime.toString(), endTime: values.endTime.toString() };
     dispatch(
       submitPJSliceStart({

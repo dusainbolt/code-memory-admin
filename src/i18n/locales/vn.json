@@ -77,7 +77,8 @@
     "seo_home": "Cài đặt",
     "seo_history": "Lịch sử",
     "experience_list": "Quá trình làm việc",
-    "project_list": "Danh sách dự án"
+    "project_list": "Danh sách dự án",
+    "skill_list": "Danh sách kỹ năng"
   },
   "tag": {
     "tag_name": "Tên thẻ tag",
@@ -123,7 +124,17 @@
     "user_size": "Quy mô thành viên",
     "technology": "Công nghệ",
     "add_project": "Thêm dự án",
-    "members": "thành viên"
+    "members": "thành viên",
+    "show_in_profile": "Hiển thị trên hồ sơ",
+    "save": "Lưu thay đổi",
+    "add_skill": "Thêm kỹ năng",
+    "choose_skill": "Chọn kỹ năng",
+    "enter_proficiency_level": "Nhập mức độ thông thạo",
+    "complete": "Hoàn tất",
+    "close": "Đóng",
+    "skill_proficiency": "Độ thành thạo",
+    "skill": "Kỹ năng",
+    "dont_show_in_profile": "Không hiển thị trên hồ sơ"
   },
   "seo": {
     "title_page": "Cài đặt SEO",

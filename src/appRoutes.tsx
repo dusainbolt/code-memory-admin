@@ -7,6 +7,7 @@ import { ExperienceList } from './pages/Profile/ExperienceList';
 import { ProjectList } from './pages/Profile/ProjectList';
 import { SeoPage } from './pages/Seo';
 import { SeoHistory } from './pages/Seo/History';
+import { SkillList } from './pages/Profile/SkillList';
 
 export const ROUTE = {
   INDEX: '/',
@@ -20,6 +21,7 @@ export const ROUTE = {
   PROFILE: '/profile',
   PROFILE_EXPERIENCE_LIST: '/experience-list',
   PROFILE_PROJECT_LIST: '/project-list',
+  SKILL_LIST: '/skill-list',
 };
 
 export const RouteLayoutAdmin = [
@@ -31,6 +33,7 @@ export const RouteLayoutAdmin = [
   ROUTE.SEO_HISTORY,
   ROUTE.PROFILE_PROJECT_LIST,
   ROUTE.PROFILE_EXPERIENCE_LIST,
+  ROUTE.SKILL_LIST,
 ];
 export const RouteLayoutPublic = [ROUTE.INDEX, ROUTE.LOGIN];
 export interface IRoute {
@@ -90,6 +93,12 @@ const privateRoutes: IRoute[] = [
     name: 'ProjectList',
     path: ROUTE.PROFILE_PROJECT_LIST,
     component: ProjectList,
+    exact: true,
+  },
+  {
+    name: 'SkillList',
+    path: ROUTE.SKILL_LIST,
+    component: SkillList,
     exact: true,
   },
   {

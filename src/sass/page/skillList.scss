@@ -1,0 +1,65 @@
+.skill-list {
+  .list {
+    .ant-col {
+      display: flex;
+      justify-content: center;
+      .skill {
+        @include _box_shadow;
+        width: 200px;
+        border-radius: 10px;
+        &__content {
+          padding: 5px 10px;
+          .show-in-profile {
+            margin-top: -43px;
+            margin-left: -5px;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 5px;
+            border-radius: 2px;
+            span {
+              color: $color_bg_header_card;
+            }
+          }
+          .name {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+          }
+        }
+        .ant-image{
+          display: block;
+          .ant-image-img {
+            border-radius: 10px 10px 0px 0px;
+            object-fit: cover;
+            width: 100%;
+            height: 150px;
+          }
+        }
+        
+      }
+      .btn-add-skill {
+        @include _hover_action;
+        background-color: rgba(0, 0, 0, 0.01);
+        border: dotted rgba(0, 0, 0, 0.2);
+        width: 200px;
+        height: 200px !important;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 40px;
+      }
+    }
+  }
+  .btn-save {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    .ant-btn {
+      width: 250px;
+      font-size: 20px;
+      height: 50px;
+    }
+  }
+}

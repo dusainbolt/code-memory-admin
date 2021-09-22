@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '../../common/Box';
 import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
 import { useTranslation } from 'react-i18next';
@@ -7,17 +7,11 @@ import { Divider } from 'antd';
 import { SearchTagListForm } from '../../components/Tag/SearchTagList';
 import { Formik } from 'formik';
 import TableCommon from '../../common/Table';
-import { useFormTag, useSearchTagList } from '../../hooks/useTag';
-import { getTagSlice } from '../../redux/slices/tagSlice';
-import { useColumnTag } from '../../components/Tag/ColumTagList';
 import ButtonCommon from '../../common/Button';
 import { PlusOutlined } from '@ant-design/icons';
-import { DrawerTagForm } from '../../components/Tag/DrawerTagForm';
 import { Project } from '../../models/ProjectModel';
-import { BoxIconAndName } from '../../components/Tag/BoxIconAndName';
 import { DrawerProjectForm } from '../../components/Profile/ProjectList/DrawerProjectForm';
 import { useFormProject, useSearchPJList } from '../../hooks/useProject';
-import { useSearchExpList } from '../../hooks/useExperience';
 import { getPJSlice } from '../../redux/slices/projectSlice';
 import { helper } from '../../services/helperService';
 import { TIME_FORMAT } from '../../constant';
@@ -111,7 +105,7 @@ export const ProjectList = () => {
   ];
 
   return (
-    <Box className="admin__content tag-list">
+    <Box className="admin__content project-list">
       <Title className="title-page">{t('menu.project_list')}</Title>
       <Divider />
       <Box className="flx-center space-center control-top">
@@ -128,7 +122,7 @@ export const ProjectList = () => {
           size="middle"
         />
       </Box>
-      <Box className="tag-list__table">
+      <Box className="project-list__table">
         <TableCommon
           onChangeTable={handleSortByParams}
           onChangePagination={handleChangePage}

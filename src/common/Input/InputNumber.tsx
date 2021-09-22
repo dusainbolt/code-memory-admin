@@ -18,6 +18,8 @@ export interface IInputNumberComponent {
   field?: FieldInputProps<any>;
   form?: FormikProps<any>;
   meta?: FieldMetaProps<any>;
+  max?: number;
+  min?: number;
 }
 
 export const InputNumberComponent: FC<IInputNumberComponent> = ({
@@ -35,12 +37,7 @@ export const InputNumberComponent: FC<IInputNumberComponent> = ({
   const { t } = useTranslation();
   const touched = helper.getValByStrKey(formTouched, field.name);
   const errorMessage = helper.getValByStrKey(formErrors, field.name);
-  const InputCommon = passwordMode ? Input.Password : Input;
   const placeHolderDefault = !!label ? t('message.placeholder_default', { label: t(label) }) : '';
-  const handleChange = (values: any) => {
-    console.log('phuong', values);
-    setFieldValue && setFieldValue(field.name, values);
-  };
 
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>

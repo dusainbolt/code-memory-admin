@@ -6,9 +6,10 @@ import watchTagSaga from './sagas/tagSaga';
 import watchExpSaga from './sagas/experienceSaga';
 import { watchSeoHome } from './sagas/seoHomeSaga';
 import watchPJSaga from './sagas/projectSaga';
+import watchSkillSaga from './sagas/skillSaga';
 
 function* rootSaga() {
-  yield all([WatchLoginSaga(), watchTagSaga(), watchSeoHome(), watchExpSaga(), watchPJSaga()]);
+  yield all([WatchLoginSaga(), watchTagSaga(), watchSeoHome(), watchExpSaga(), watchPJSaga(), watchSkillSaga()]);
 }
 
 export function* handleMessageErrorSaga(error) {
