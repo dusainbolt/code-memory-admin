@@ -87,6 +87,11 @@ const menuSider: IMenuSider[] = [
         key: ROUTE.PROFILE_PROJECT_LIST,
         url: ROUTE.PROFILE_PROJECT_LIST,
       },
+      {
+        title: 'menu.skill_list',
+        key: ROUTE.SKILL_LIST,
+        url: ROUTE.SKILL_LIST,
+      },
     ],
   },
   {

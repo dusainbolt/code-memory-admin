@@ -14,10 +14,9 @@ import debounce from 'lodash/debounce';
 import { getListTagRequest } from '../../../graphql/tagRequest';
 import { SearchTagInput, Tag, TagStatus } from '../../../models/TagModel';
 import Avatar from 'antd/lib/avatar/avatar';
-import { Tech } from './Tech';
 import { ReactSortable } from 'react-sortablejs';
 
-export interface TechsInterface {
+export interface SkillsInterface {
   label?: string;
   prefix?: any;
   suffix?: any;
@@ -36,7 +35,7 @@ export interface DebounceSelectProps<ValueType = any> extends Omit<SelectProps<V
   debounceTimeout?: number;
 }
 
-export const TechsComponent = ({
+export const SkillsComponent = ({
   field,
   techsData,
   form: { touched: formTouched, errors: formErrors, setFieldValue, values },
@@ -48,23 +47,14 @@ export const TechsComponent = ({
   className = '',
   classNameWrap = '',
   ...props
-}: TechsInterface) => {
+}: SkillsInterface) => {
   const [options, setOptions] = useState([]);
-  const [optionsChoosed, setOptionsChoosed] = useState([]);
   const [fetching, setFetching] = useState(false);
   const fetchRef = useRef(0);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (techsData) {
-      const techsDataCopy = techsData.map((a) => ({ ...a }));
-      setOptionsChoosed([...techsDataCopy]);
-    }
-  }, [techsData]);
-
   const onPressEnter = (value, data) => {
-    setFieldValue(field.name, [...field.value, data.key]);
-    setOptionsChoosed([...optionsChoosed, data.title]);
+    setFieldValue(field.name, data.key);
   };
 
   const fetchUserList = async (value: string) => {
@@ -98,19 +88,13 @@ export const TechsComponent = ({
     return debounce(loadOptions, 800);
   }, []);
 
-  const sortTechs = (newValue: any) => {
-    const newFieldValue = newValue.map((value) => value.id);
-    setOptionsChoosed(newValue);
-    setFieldValue(field.name, newFieldValue);
-  };
-
   return (
     <Box className={clsx('field-wrap', [classNameWrap] && classNameWrap)}>
       {label && <label className="field-wrap__label">{t(label)}</label>}
       <Select
-        mode="multiple"
-        placeholder="Select users"
-        value={[]}
+        onFocus={() => debounceFetcher('')}
+        showSearch
+        placeholder={t(placeholder)}
         onSelect={onPressEnter}
         labelInValue
         className={clsx('app-input-number', [className] && className)}
@@ -118,7 +102,6 @@ export const TechsComponent = ({
         onSearch={debounceFetcher}
         notFoundContent={fetching ? <Spin size="small" /> : null}
         {...props}
-        // options={options}
       >
         {options.map((value, index) => {
           return (
@@ -131,24 +114,6 @@ export const TechsComponent = ({
           );
         })}
       </Select>
-
-      <div className="tech-box">
-        <ReactSortable setList={sortTechs} list={optionsChoosed as any}>
-          {optionsChoosed.map((value, index) => {
-            return (
-              <Tech
-                field={field}
-                setFieldValue={setFieldValue}
-                data={value}
-                key={index}
-                index={index}
-                optionsChoosed={optionsChoosed}
-                setOptionsChoosed={setOptionsChoosed}
-              />
-            );
-          })}
-        </ReactSortable>
-      </div>
     </Box>
   );
 };

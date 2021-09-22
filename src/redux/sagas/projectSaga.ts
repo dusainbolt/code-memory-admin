@@ -31,7 +31,6 @@ function* submitPJSaga({ payload: { input, callback } }: SubmitPJAction) {
   try {
     yield delay(1000);
     yield put(setUploadSliceClose({}));
-    console.log('phuong26', input);
     const data = yield submitPJRequest(input);
     yield put(submitPJSliceSuccess(data));
     yield handleMessageSuccessSaga(MESSAGE.SUBMIT_SUCCESS);

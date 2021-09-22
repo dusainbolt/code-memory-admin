@@ -7,6 +7,7 @@ import loginSlice from './slices/loginSlice';
 import tagSlice from './slices/tagSlice';
 import expSlice from './slices/experienceSlice';
 import pjSlice from './slices/projectSlice';
+import skillSlice from './slices/skillSlice';
 
 export const getPersistConfig = (key = '', nested = {}) => {
   return {
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   seoHomeSlice,
   expSlice,
   pjSlice,
+  skillSlice,
 });
 
 export type IRootState = ReturnType<typeof rootReducer>;
