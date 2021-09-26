@@ -9,8 +9,10 @@ import { ModalAddSkill } from '../../components/Profile/SkillList/ModalAddSkill'
 import { useFormSkill } from '../../hooks/useSkill';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../redux/rootStore';
-import { getListSkillStart, getSkillSlice, updateSkill } from '../../redux/slices/skillSlice';
+import { getListSkillStart, getSkillSlice, updateSkill, updateSkillList } from '../../redux/slices/skillSlice';
 import { showNotification } from '../../common/Utils';
+import { ReactSortable } from 'react-sortablejs';
+import { Skill as SkillModal } from '../../models/SkillModel';
 
 export const SkillList = () => {
   const { openFormModal, visibleFormSkill, setVisible, openFormEdit } = useFormSkill();
@@ -32,6 +34,10 @@ export const SkillList = () => {
     dispatch(updateSkill({callback:(mess, type)=>showNotification(t(mess), type)}))
   }
 
+  const sortSkillList = (dataSkills: any) => {
+    dispatch(updateSkillList({dataSkills}))
+  } 
+
   
 
 
@@ -39,25 +45,24 @@ export const SkillList = () => {
     <Box className="admin__content skill-list">
       <Title className="title-page">{t('menu.skill_list')}</Title>
       <Divider />
-      {!isLoadingList?<Box className="flx-center space-center control-top">
-        <Row gutter={[12, 50]} className="list">
-          {dataSkills.map((value, index) => {
+      {!isLoadingList?<Box className="flx-center space-center control-top skill-list-item">
+        <ReactSortable
+          className="list"
+          list={dataSkills as any}
+          setList={sortSkillList}
+        >
+            {dataSkills.map((value, index) => {
             return (
-              <Col xs={4} key={index}>
+              <div className="flx-center">
                 <Skill data={value} index={index}/>
-              </Col>
+              </div>
             );
           })}
-
-          <Col xs={4}>
-            <div className="btn-add-skill" onClick={openFormModal}>
-              <PlusOutlined />
-            </div>
-          </Col>
-        </Row>
+          </ReactSortable>
       </Box>:<Skeleton active />}
       <Box className="btn-save">
         <Button disabled={disableButton} loading={isLoadingList} onClick={updateSkills} type="primary">{t('profile.save')}</Button>
+        <Button loading={isLoadingList} onClick={openFormModal} type="primary">{t('profile.add')}</Button>
       </Box>
       <ModalAddSkill visible={visibleFormSkill} setVisible={setVisible} callbackSubmit={getListSkill}/>
     </Box>
