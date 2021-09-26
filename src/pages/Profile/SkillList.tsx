@@ -34,8 +34,8 @@ export const SkillList = () => {
     dispatch(updateSkill({callback:(mess, type)=>showNotification(t(mess), type)}))
   }
 
-  const sortSkillList = (dataSkills: any) => {
-    dispatch(updateSkillList({dataSkills}))
+  const sortSkillList = (dataSkills: any, sortable: any) => {
+    if(sortable) dispatch(updateSkillList({dataSkills}))
   } 
 
   
@@ -53,7 +53,7 @@ export const SkillList = () => {
         >
             {dataSkills.map((value, index) => {
             return (
-              <div className="flx-center">
+              <div key={index} className="flx-center">
                 <Skill data={value} index={index}/>
               </div>
             );
