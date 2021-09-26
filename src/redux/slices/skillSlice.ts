@@ -9,6 +9,7 @@ import {
   setCheckedSkillAction,
   setVisibleSkillFormAction,
   SubmitSkillAction,
+  udpateSkillListAction,
   updateSkillAction,
 } from '../actionTypes/skillActionTypes';
 
@@ -65,7 +66,14 @@ export const skillSlice = createSlice({
         ...state,
         disableButton: true,
       }
-    }
+    },
+    updateSkillList: (state: SkillSlice, action: udpateSkillListAction) => {
+      return {
+        ...state,
+        dataSkills: action.payload.dataSkills,
+        disableButton:false,
+      }
+    } 
 
   },
 });
@@ -81,7 +89,8 @@ export const {
   getListSkillSuccess,
   getListSkillError,
   setCheckedSkill,
-  updateSkill
+  updateSkill,
+  updateSkillList
 } = skillSlice.actions;
 
 export default skillSlice.reducer;

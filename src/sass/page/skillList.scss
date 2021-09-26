@@ -1,15 +1,17 @@
 .skill-list {
-  .list {
-    .ant-col {
-      display: flex;
-      justify-content: center;
+  .skill-list-item {
+      .list{
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto;
+      width: 100%;
       .skill {
         @include _box_shadow;
-        width: 200px;
+        margin-top: 60px;
+        min-width: 200px;
         border-radius: 10px;
         &__content {
           padding: 5px 10px;
-          .show-in-profile {
+          .show-in-profile {  
             margin-top: -43px;
             margin-left: -5px;
             position: absolute;
@@ -26,7 +28,7 @@
             font-size: 20px;
           }
         }
-        .ant-image{
+        .ant-image {
           display: block;
           .ant-image-img {
             border-radius: 10px 10px 0px 0px;
@@ -35,31 +37,32 @@
             height: 150px;
           }
         }
-        
       }
-      .btn-add-skill {
-        @include _hover_action;
-        background-color: rgba(0, 0, 0, 0.01);
-        border: dotted rgba(0, 0, 0, 0.2);
-        width: 200px;
-        height: 200px !important;
-        height: 100%;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 40px;
-      }
+    }
+    
+    .btn-add-skill {
+      @include _hover_action;
+      background-color: rgba(0, 0, 0, 0.01);
+      border: dotted rgba(0, 0, 0, 0.2);
+      width: 200px;
+      height: 200px !important;
+      height: 100%;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 40px;
     }
   }
-  .btn-save {
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
-    .ant-btn {
-      width: 250px;
-      font-size: 20px;
-      height: 50px;
-    }
+}
+.btn-save {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  .ant-btn {
+    margin: 0px 20px;
+    width: 250px;
+    font-size: 20px;
+    height: 50px;
   }
 }

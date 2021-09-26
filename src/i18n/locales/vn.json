@@ -134,7 +134,8 @@
     "close": "Đóng",
     "skill_proficiency": "Độ thành thạo",
     "skill": "Kỹ năng",
-    "dont_show_in_profile": "Không hiển thị trên hồ sơ"
+    "dont_show_in_profile": "Không hiển thị trên hồ sơ",
+    "add": "Thêm"
   },
   "seo": {
     "title_page": "Cài đặt SEO",

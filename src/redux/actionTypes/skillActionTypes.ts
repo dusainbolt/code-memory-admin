@@ -27,3 +27,4 @@ export type getListSkillAction = Record<PayloadName, {
 export type getListSkillSuccessAction = Record<PayloadName, Skill[]>
 export type setCheckedSkillAction = Record<PayloadName,{status: string, index:number}>
 export type updateSkillAction = Record<PayloadName, {callback: any}>
+export type udpateSkillListAction = Record<PayloadName, {dataSkills: Skill[]}>
