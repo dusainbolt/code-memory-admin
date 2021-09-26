@@ -9,13 +9,12 @@ import { fieldCreateProject } from '../../../models/FieldModel';
 import { ButtonForm } from '../../../common/Button/ButtonForm';
 import { ValidateService } from '../../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
-import { getTagSlice } from '../../../redux/slices/tagSlice';
 import { FETCH_POLICY } from '../../../constant';
 import { DateComponent } from '../../../common/DatePicker/DatePickerForm';
 import { InputNumberComponent } from '../../../common/Input/InputNumber';
 import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
-import { TechsComponent } from './TechsComponent';
 import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
+import { FiledTagSelect } from '../../../common/Select/TagSelect';
 
 const ProjectForm = ({
   t,
@@ -38,7 +37,7 @@ const ProjectForm = ({
         name: pjDetail.name,
         nameEN: pjDetail.nameEN,
         size: pjDetail.size,
-        techs: pjDetail.techs,
+        techs: pjDetail.techsData.length ? pjDetail.techsData : [],
         description: pjDetail.description,
         descriptionEN: pjDetail.descriptionEN,
         startTime: parseInt(pjDetail.startTime),
@@ -48,7 +47,7 @@ const ProjectForm = ({
     } else {
       handleReset();
     }
-  }, [pjDetail]);
+  }, [pjDetail, visible]);
 
   useEffect(() => {
     if (!visible) {
@@ -61,7 +60,7 @@ const ProjectForm = ({
       <Field {...fieldCreateProject.name} component={InputComponent} />
       <Field {...fieldCreateProject.nameEN} component={InputComponent} />
       <Field {...fieldCreateProject.size} component={InputNumberComponent} />
-      <Field {...fieldCreateProject.techs} techsData={pjDetail.techsData} component={TechsComponent} />
+      <Field {...fieldCreateProject.techs} component={FiledTagSelect} />
       <Field {...fieldCreateProject.description} component={TextAreaComponent} />
       <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
       <Row gutter={[16, 16]}>
@@ -88,7 +87,7 @@ export const DrawerProjectForm = ({
   setVisible: any;
   callbackSubmit: any;
 }) => {
-  const { isLoadingForm } = useAppSelector(getTagSlice);
+  const { isLoadingForm } = useAppSelector(getPJSlice);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const validatePJInput = new ValidateService(t).validateCreateProjectInput(fieldCreateProject);
@@ -111,7 +110,12 @@ export const DrawerProjectForm = ({
   };
 
   const handleSubmitForm = async (values: CreatePJInput) => {
-    const data = { ...values, startTime: values.startTime.toString(), endTime: values.endTime.toString() };
+    const data = {
+      ...values,
+      startTime: values.startTime.toString(),
+      endTime: values.endTime.toString(),
+      techs: values.techs.map((item: any) => item.value),
+    };
     dispatch(
       submitPJSliceStart({
         input: data,
@@ -127,8 +131,7 @@ export const DrawerProjectForm = ({
       width={520}
       closable={!isLoadingForm}
       onClose={onCloseDrawer}
-      visible={visible}
-    >
+      visible={visible}>
       <Formik onSubmit={handleSubmitForm} validationSchema={validatePJInput} initialValues={initialValues}>
         <ProjectForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>

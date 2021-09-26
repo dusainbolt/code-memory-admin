@@ -17,6 +17,7 @@ export interface SearchTagInput {
   offset: number;
   sortBy?: number | string;
   orderBy?: string;
+  count?: boolean;
 }
 
 export interface Tag {
@@ -59,4 +60,3 @@ export interface UpdateTagInput {
   data: CreateTagInput;
   tagId: string;
 }
-
