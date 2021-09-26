@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ExpSlice } from '../../models/ExperienceModel';
 import { PJSlice } from '../../models/ProjectModel';
-import { TagSlice } from '../../models/TagModel';
 import {
   getListPJAction,
   GetListPJSuccessAction,

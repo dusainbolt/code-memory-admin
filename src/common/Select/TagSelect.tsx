@@ -71,6 +71,22 @@ function DebounceSelect<ValueType extends { key?: string; label: ReactNode; valu
     />
   );
 }
+
+export const renderOption = data => {
+  return data.map((item: Tag) => ({
+    label: (
+      <BoxIconAndName
+        classNameWrap="handle-drag"
+        size={25}
+        name={item.title}
+        thumbnail={item.thumbnail}
+        updatedAt={item.updatedAt}
+      />
+    ),
+    value: item.id,
+    key: item.id,
+  }));
+};
 interface SelectValue {
   key?: string;
   label: string | ReactNode;
@@ -84,19 +100,9 @@ async function fetchUserList(username: string, dispatch: any): Promise<SelectVal
       status: [TagStatus.ACTIVE],
       limit: 10,
       offset: 0,
+      count: false,
     });
-    return data.dataTags.map((item: Tag) => ({
-      label: (
-        <BoxIconAndName
-          classNameWrap="handle-drag"
-          size={25}
-          name={item.title}
-          thumbnail={item.thumbnail}
-          updatedAt={item.updatedAt}
-        />
-      ),
-      value: item.id,
-    }));
+    return renderOption(data.dataTags);
   } catch (error: any) {
     dispatch(
       setNotifySlice({
@@ -117,25 +123,43 @@ export const FiledTagSelect: FC<{
 }> = ({ field: { value, name }, form: { setFieldValue }, classNameWrap, placeholder, label }) => {
   const [sortMode, setSortMode] = useState<boolean>(false);
   const [stateValue, setStateValue] = useState([]);
+  const [countInit, setCountInit] = useState<number>(0);
   const { t } = useTranslation();
+
   const [options, setOptions] = useState<SelectValue[]>([]);
 
   const placeHolderDefault = !!label ? t('message.placeholder_default', { label: t(label) }) : '';
 
   const onChangeList = (newValue: Array<any>) => {
+    setStateValue(newValue);
     setFieldValue(name, newValue);
   };
 
   useEffect(() => {
-    setValueForm(stateValue);
+    setCountInit(countInit + 1);
+    if (value?.length && value[0]?.id) {
+      const valueTemp = renderOption(value);
+      setStateValue(valueTemp);
+      setOptions(valueTemp);
+    } else if (!value?.length) {
+      setStateValue([]);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (countInit) {
+      setValueForm(stateValue);
+    }
   }, [stateValue]);
 
   const setValueForm = useCallback(
     debounce(value => {
       setFieldValue(name, value);
-    }, 1000),
+    }, 500),
     []
   );
+
+  console.log('TAG SELECT ==========>', stateValue);
 
   const { openFormModal, visibleFormTag, setVisible } = useFormTag();
 

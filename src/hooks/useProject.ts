@@ -69,7 +69,7 @@ export const useFormProject = (): {
   const { visibleFormPJ } = useAppSelector(getPJSlice);
 
   const openFormModal = () => {
-    dispatch(setVisibleFormProject({ visibleFormPJ: true }));
+    dispatch(setVisibleFormProject({ visibleFormPJ: true, pjDetail: {} }));
   };
 
   const setVisible = (value: boolean) => {
