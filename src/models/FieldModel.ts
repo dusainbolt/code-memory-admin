@@ -1,9 +1,9 @@
-import { If } from 'yup/lib/util/types';
 import {
   OPTION_FILTER_STATUS_EXPERIENCE,
   OPTION_FILTER_STATUS_PROJECT,
   OPTION_FILTER_TYPE_EXPERIENCE,
 } from './ExperienceModel';
+import { OPTION_FILTER_STATUS_SKILL } from './SkillModel';
 import { TagStatus } from './TagModel';
 
 export interface OptionSelect {
@@ -240,5 +240,29 @@ export const fieldCreateProject: FieldCreateProject = {
     name: 'status',
     label: 'profile.status',
     options: OPTION_FILTER_STATUS_PROJECT,
+  },
+};
+
+export interface FieldCreateSkill {
+  percent: IField;
+  status: IField;
+  tagId: IField;
+}
+
+export const FieldCreateSkill: FieldCreateSkill = {
+  percent: {
+    name: 'percent',
+    label: 'profile.skill_proficiency',
+    placeholder: '%',
+  },
+  status: {
+    name: 'status',
+    label: 'profile.status',
+    options: OPTION_FILTER_STATUS_SKILL,
+  },
+  tagId: {
+    name: 'tagId',
+    label: 'profile.skill',
+    placeholder: 'profile.skill',
   },
 };

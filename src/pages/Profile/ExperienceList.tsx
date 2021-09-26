@@ -25,7 +25,14 @@ export const ExperienceList = () => {
   const { dataExps, isLoadingList, total } = useAppSelector(getExpSlice);
   const { openFormModal, visibleFormExp, setVisible, openFormEdit } = useFormExp();
   const dispatch = useAppDispatch();
-  const { paramsSearch, handleGetListCategory, getPageIndexNumber, handleSearch, handleChangePage, handleSortByParams } = useSearchExpList(dispatch);
+  const {
+    paramsSearch,
+    handleGetListCategory,
+    getPageIndexNumber,
+    handleSearch,
+    handleChangePage,
+    handleSortByParams,
+  } = useSearchExpList(dispatch);
   const { offset, limit } = paramsSearch;
 
   const column = (t, pageIndex, callbackEdit) => [
@@ -37,13 +44,17 @@ export const ExperienceList = () => {
       title: t('profile.work_place_name_vn'),
       dataIndex: 'nameVN',
       key: 'nameVN',
-      render: (value: any, row: Experience) => <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />,
+      render: (value: any, row: Experience) => (
+        <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />
+      ),
     },
     {
       title: t('profile.work_place_name_en'),
       dataIndex: 'nameEN',
       key: 'nameEN',
-      render: (value: any, row: Experience) => <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />,
+      render: (value: any, row: Experience) => (
+        <BoxIconAndName name={value} thumbnail={row.thumbnail} updatedAt={row.updatedAt} />
+      ),
     },
     {
       title: t('profile.type'),
@@ -94,7 +105,7 @@ export const ExperienceList = () => {
   ];
 
   return (
-    <Box className="admin__content tag-list">
+    <Box className="admin__content experience-list">
       <Title className="title-page">{t('profile.experience_list')}</Title>
       <Divider />
       <Box className="flx-center space-center control-top">
@@ -111,7 +122,7 @@ export const ExperienceList = () => {
           size="middle"
         />
       </Box>
-      <Box className="tag-list__table">
+      <Box className="experience-list__table">
         <TableCommon
           onChangeTable={handleSortByParams}
           onChangePagination={handleChangePage}

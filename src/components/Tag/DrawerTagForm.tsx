@@ -7,7 +7,6 @@ import Box from '../../common/Box';
 import { InputComponent } from '../../common/Input';
 import { TextAreaComponent } from '../../common/Input/TextAreaForm';
 import { SelectComponent } from '../../common/Select';
-import { UploadComponent } from '../../common/Upload';
 import { fieldCreateTag } from '../../models/FieldModel';
 import { CreateTagInput, TagStatus } from '../../models/TagModel';
 import { ButtonForm } from '../../common/Button/ButtonForm';

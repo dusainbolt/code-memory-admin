@@ -1,18 +1,5 @@
-import { Col, Divider, Drawer, Input, Row, Select, Spin } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
-import Text from 'antd/lib/typography/Text';
-import { Field, FieldInputProps, FieldMetaProps, Formik, FormikProps, useFormikContext } from 'formik';
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { TFunction, useTranslation } from 'react-i18next';
-import Box from '../../../common/Box';
-import { helper } from '../../../services/helperService';
-import clsx from 'clsx';
-import { valueFromAST } from 'graphql';
-import _ from 'lodash';
-import { SelectProps } from 'antd/es/select';
-import debounce from 'lodash/debounce';
-import { getListTagRequest } from '../../../graphql/tagRequest';
-import { SearchTagInput, TagStatus } from '../../../models/TagModel';
+import React, { FC } from 'react';
 import Avatar from 'antd/lib/avatar/avatar';
 
 export interface TechInterface {

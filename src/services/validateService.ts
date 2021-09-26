@@ -5,6 +5,7 @@ import {
   FieldCreateExperience,
   fieldCreateExperience,
   FieldCreateProject,
+  FieldCreateSkill,
   FieldCreateTag,
   FieldLogin,
 } from '../models/FieldModel';
@@ -75,6 +76,14 @@ export class ValidateService extends HelperService {
       [descriptionEN.name]: this.stringRequire(descriptionEN.label),
       [description.name]: this.stringRequire(description.label),
       [size.name]: this.numberRequire(size.label),
+    });
+  };
+
+  readonly validateCreateSkillInput = (fieldCreateSkill: FieldCreateSkill) => {
+    const { percent, tagId } = fieldCreateSkill;
+    return Yup.object({
+      [percent.name]: this.numberRequire(percent.label),
+      [tagId.name]: this.stringRequire(tagId.label),
     });
   };
 
