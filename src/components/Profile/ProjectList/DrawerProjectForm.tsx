@@ -15,6 +15,7 @@ import { InputNumberComponent } from '../../../common/Input/InputNumber';
 import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
 import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
 import { FiledTagSelect } from '../../../common/Select/TagSelect';
+import { FiledWorkSelect } from '../../../common/Select/WorkSelect';
 
 const ProjectForm = ({
   t,
@@ -60,9 +61,10 @@ const ProjectForm = ({
       <Field {...fieldCreateProject.name} component={InputComponent} />
       <Field {...fieldCreateProject.nameEN} component={InputComponent} />
       <Field {...fieldCreateProject.size} component={InputNumberComponent} />
-      <Field {...fieldCreateProject.techs} component={FiledTagSelect} />
       <Field {...fieldCreateProject.description} component={TextAreaComponent} />
       <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
+      <Field {...fieldCreateProject.techs} component={FiledTagSelect} />
+      <Field {...fieldCreateProject.techs} component={FiledWorkSelect} />
       <Row gutter={[16, 16]}>
         <Col>
           <Field {...fieldCreateProject.startTime} component={DateComponent} />

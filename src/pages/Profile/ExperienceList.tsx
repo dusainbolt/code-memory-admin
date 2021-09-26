@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '../../common/Box';
-import { useAppDispatch, useAppSelector } from '../../redux/rootStore';
+import { useAppSelector } from '../../redux/rootStore';
 import { useTranslation } from 'react-i18next';
 import Title from 'antd/lib/typography/Title';
 import { Divider } from 'antd';
@@ -24,7 +24,6 @@ export const ExperienceList = () => {
   const { t } = useTranslation();
   const { dataExps, isLoadingList, total } = useAppSelector(getExpSlice);
   const { openFormModal, visibleFormExp, setVisible, openFormEdit } = useFormExp();
-  const dispatch = useAppDispatch();
   const {
     paramsSearch,
     handleGetListCategory,
@@ -32,7 +31,7 @@ export const ExperienceList = () => {
     handleSearch,
     handleChangePage,
     handleSortByParams,
-  } = useSearchExpList(dispatch);
+  } = useSearchExpList();
   const { offset, limit } = paramsSearch;
 
   const column = (t, pageIndex, callbackEdit) => [

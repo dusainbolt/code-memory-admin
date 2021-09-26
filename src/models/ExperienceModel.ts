@@ -21,6 +21,7 @@ export interface SearchExpInput {
   offset: number;
   sortBy?: number | string;
   orderBy?: string;
+  count?: boolean;
 }
 
 export interface Experience {

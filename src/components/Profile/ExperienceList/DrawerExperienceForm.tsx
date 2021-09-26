@@ -129,7 +129,7 @@ export const DrawerExperienceForm = ({
     dispatch(
       submitExpSliceStart({
         input: data,
-        callback: () => callbackSubmit(FETCH_POLICY.NO_CACHE),
+        callback: () => callbackSubmit && callbackSubmit(FETCH_POLICY.NO_CACHE),
       })
     );
   };
@@ -141,8 +141,7 @@ export const DrawerExperienceForm = ({
       width={520}
       closable={!isLoadingForm}
       onClose={onCloseDrawer}
-      visible={visible}
-    >
+      visible={visible}>
       <Formik onSubmit={handleSubmitForm} validationSchema={validateExpInput} initialValues={initialValues}>
         <ExperienceForm visible={visible} isLoadingForm={isLoadingForm} t={t} onCloseForm={onCloseDrawer} />
       </Formik>

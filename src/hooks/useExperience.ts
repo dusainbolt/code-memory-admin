@@ -1,12 +1,10 @@
 import { helper } from './../services/helperService';
-import { useEffect, useState } from "react";
-import { Experience, ExperienceStatus, ExperienceType, SearchExpInput } from "../models/ExperienceModel";
-import { useAppDispatch, useAppSelector } from "../redux/rootStore";
-import { getExpSlice, getListExpStart, setVisibleFormExp } from "../redux/slices/experienceSlice";
+import { useEffect, useState } from 'react';
+import { Experience, ExperienceStatus, ExperienceType, SearchExpInput } from '../models/ExperienceModel';
+import { useAppDispatch, useAppSelector } from '../redux/rootStore';
+import { getExpSlice, getListExpStart, setVisibleFormExp } from '../redux/slices/experienceSlice';
 
-export const useSearchExpList = (
-  dispatch: any
-): {
+export const useSearchExpList = (): {
   paramsSearch: SearchExpInput;
   handleSearch: any;
   // // handleResetSearch: any;
@@ -15,8 +13,9 @@ export const useSearchExpList = (
   getPageIndexNumber: any;
   handleGetListCategory: any;
 } => {
+  const dispatch = useAppDispatch();
   const [paramsSearch, setParamsSearch] = useState<SearchExpInput>({
-    key: "",
+    key: '',
     type: [ExperienceType.CERTIFICATE, ExperienceType.LEARN, ExperienceType.WORK],
     status: [ExperienceStatus.ACTIVE, ExperienceStatus.INACTIVE],
     limit: 10,
@@ -48,16 +47,21 @@ export const useSearchExpList = (
     setParamsSearch({ ...paramsSearch, orderBy: field, sortBy: helper.getOrderType(order) });
   };
 
-  return { paramsSearch, getPageIndexNumber, handleGetListCategory, handleSearch, handleChangePage, handleSortByParams };
+  return {
+    paramsSearch,
+    getPageIndexNumber,
+    handleGetListCategory,
+    handleSearch,
+    handleChangePage,
+    handleSortByParams,
+  };
 };
-
-
 
 export const useFormExp = (): {
   openFormModal: any;
   setVisible: any;
   visibleFormExp: boolean;
-  openFormEdit: any
+  openFormEdit: any;
 } => {
   const dispatch = useAppDispatch();
   const { visibleFormExp } = useAppSelector(getExpSlice);
