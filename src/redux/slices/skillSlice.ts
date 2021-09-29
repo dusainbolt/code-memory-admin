@@ -7,6 +7,7 @@ import {
   getListSkillAction,
   getListSkillSuccessAction,
   setCheckedSkillAction,
+  setProficiencyAction,
   setVisibleSkillFormAction,
   SubmitSkillAction,
   udpateSkillListAction,
@@ -61,6 +62,10 @@ export const skillSlice = createSlice({
       state.dataSkills[action.payload.index].status=action.payload.status
       state.disableButton=false
     },
+    setProficiency: (state: SkillSlice, action: setProficiencyAction) => {
+      state.dataSkills[action.payload.index].percent=action.payload.percent
+      state.disableButton=false
+    },
     updateSkill: (state: SkillSlice, action: updateSkillAction) => {
       return {
         ...state,
@@ -90,7 +95,8 @@ export const {
   getListSkillError,
   setCheckedSkill,
   updateSkill,
-  updateSkillList
+  updateSkillList,
+  setProficiency,
 } = skillSlice.actions;
 
 export default skillSlice.reducer;
