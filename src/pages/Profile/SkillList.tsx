@@ -34,7 +34,7 @@ export const SkillList = () => {
     dispatch(updateSkill({callback:(mess, type)=>showNotification(t(mess), type)}))
   }
 
-  const sortSkillList = (dataSkills: any, sortable: any) => {
+  const sortSkillList = (dataSkills: any, sortable: any, x) => {
     if(sortable) dispatch(updateSkillList({dataSkills}))
   } 
 

@@ -2,15 +2,15 @@
   .skill-list-item {
       .list{
       display: grid;
-      grid-template-columns: auto auto auto auto auto auto;
+      grid-template-columns: 20% 20% 20% 20% 20%;
       width: 100%;
       .skill {
         @include _box_shadow;
         margin-top: 60px;
-        min-width: 200px;
+        width: 200px;
         border-radius: 10px;
         &__content {
-          padding: 5px 10px;
+          padding: 10px 10px;
           .show-in-profile {  
             margin-top: -43px;
             margin-left: -5px;
@@ -25,7 +25,25 @@
           .name {
             text-align: center;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 20px;  
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* number of lines to show */
+            -webkit-box-orient: vertical;
+          }
+          .btn-group{
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            .ant-btn-group{
+              margin: 0px 0px 0px 10px;
+              .ant-btn{
+                width: 25px;
+                height: 25px;
+              }
+            }
+            
           }
         }
         .ant-image {
