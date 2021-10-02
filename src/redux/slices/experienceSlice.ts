@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ExpSlice } from '../../models/ExperienceModel';
 import { TagSlice } from '../../models/TagModel';
-import { getListExpAction, GetListExpSuccessAction, setVisibleExpFormAction, SubmitExpAction, SubmitExpActionSuccess } from '../actionTypes/experienceActionTypes';
+import {
+  getListExpAction,
+  GetListExpSuccessAction,
+  setVisibleExpFormAction,
+  SubmitExpAction,
+  SubmitExpActionSuccess,
+} from '../actionTypes/experienceActionTypes';
 import { IRootState } from '../rootReducer';
 
 const initialState: ExpSlice = {
-  dataExps: [],
+  dataWorks: [],
   total: 0,
   isLoadingList: false,
   isLoadingForm: false,
@@ -28,16 +34,16 @@ export const expSlice = createSlice({
       state.isLoadingForm = false;
     },
     setVisibleFormExp: (state: ExpSlice, { payload }: setVisibleExpFormAction) => ({
-        ...state,
-        ...payload,
-      }),
+      ...state,
+      ...payload,
+    }),
     getListExpStart: (state: ExpSlice, action: getListExpAction) => {
       state.isLoadingList = true;
     },
     getListExpSuccess: (state: ExpSlice, action: GetListExpSuccessAction) => {
       return {
         ...state,
-        dataExps: action.payload.dataExps,
+        dataWorks: action.payload.dataWorks,
         total: action.payload.total,
         isLoadingList: false,
       };
@@ -45,21 +51,19 @@ export const expSlice = createSlice({
     getListExpError: (state: ExpSlice, action: any) => {
       state.isLoadingList = false;
     },
-
-    
   },
 });
 
 export const getExpSlice = (state: IRootState) => state.expSlice as ExpSlice;
 
 export const {
-    submitExpSliceStart,
-    submitExpSliceSuccess,
-    submitExpSliceError,
-    setVisibleFormExp,
-    getListExpStart,
-    getListExpSuccess,
-    getListExpError
+  submitExpSliceStart,
+  submitExpSliceSuccess,
+  submitExpSliceError,
+  setVisibleFormExp,
+  getListExpStart,
+  getListExpSuccess,
+  getListExpError,
 } = expSlice.actions;
 
 export default expSlice.reducer;

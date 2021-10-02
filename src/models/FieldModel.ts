@@ -1,8 +1,4 @@
-import {
-  OPTION_FILTER_STATUS_EXPERIENCE,
-  OPTION_FILTER_STATUS_PROJECT,
-  OPTION_FILTER_TYPE_EXPERIENCE,
-} from './ExperienceModel';
+import { OPTION_FILTER_STATUS_EXPERIENCE, OPTION_FILTER_TYPE_EXPERIENCE } from './ExperienceModel';
 import { OPTION_FILTER_STATUS_SKILL } from './SkillModel';
 import { TagStatus } from './TagModel';
 
@@ -180,66 +176,6 @@ export const fieldCreateExperience: FieldCreateExperience = {
   },
   thumbnail: {
     name: 'thumbnail',
-  },
-};
-
-export interface FieldCreateProject {
-  name: IField;
-  nameEN: IField;
-  size: IField;
-  techs: IField;
-  description: IField;
-  descriptionEN: IField;
-  startTime: IField;
-  endTime: IField;
-  status: IField;
-}
-
-export const fieldCreateProject: FieldCreateProject = {
-  name: {
-    name: 'name',
-    label: 'profile.project_name_vn',
-    placeholder: 'profile.project_name_vn',
-  },
-  nameEN: {
-    name: 'nameEN',
-    label: 'profile.project_name_en',
-    placeholder: 'profile.project_name_en',
-  },
-  size: {
-    name: 'size',
-    label: 'profile.user_size',
-    placeholder: 'profile.user_size',
-  },
-  techs: {
-    name: 'techs',
-    label: 'profile.technology',
-    placeholder: 'profile.technology',
-  },
-  description: {
-    name: 'description',
-    label: 'profile.description_vn',
-    placeholder: 'profile.description_vn',
-  },
-  descriptionEN: {
-    name: 'descriptionEN',
-    label: 'profile.description_en',
-    placeholder: 'profile.description_en',
-  },
-  startTime: {
-    name: 'startTime',
-    label: 'profile.start',
-    placeholder: 'profile.start',
-  },
-  endTime: {
-    name: 'endTime',
-    label: 'profile.end',
-    placeholder: 'profile.end',
-  },
-  status: {
-    name: 'status',
-    label: 'profile.status',
-    options: OPTION_FILTER_STATUS_PROJECT,
   },
 };
 

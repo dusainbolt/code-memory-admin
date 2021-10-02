@@ -2,9 +2,7 @@ import { helper } from './../services/helperService';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/rootStore';
 import { getListPJStart, getPJSlice, setVisibleFormProject } from '../redux/slices/projectSlice';
-import { SearchExpInput } from '../models/ExperienceModel';
 import { Project, ProjectStatus, SearchProjectInput } from '../models/ProjectModel';
-import { getListPJRequest } from '../graphql/ProjectRequest';
 
 export const useSearchPJList = (
   dispatch: any

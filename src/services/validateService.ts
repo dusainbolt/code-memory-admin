@@ -1,15 +1,9 @@
 import { HelperService } from './helperService';
 import { TFunction } from 'react-i18next';
 import * as Yup from 'yup';
-import {
-  FieldCreateExperience,
-  fieldCreateExperience,
-  FieldCreateProject,
-  FieldCreateSkill,
-  FieldCreateTag,
-  FieldLogin,
-} from '../models/FieldModel';
+import { FieldCreateExperience, FieldCreateSkill, FieldCreateTag, FieldLogin } from '../models/FieldModel';
 import { FieldSeoHome } from '../models/SeoHomeModel';
+import { FieldCreateProject } from '../models/ProjectModel';
 
 export class ValidateService extends HelperService {
   public instance = Yup;
@@ -22,19 +16,19 @@ export class ValidateService extends HelperService {
     this.t = t;
   }
 
-  getMessageRequire = (fieldName) => {
+  getMessageRequire = fieldName => {
     return this.t('message.MSG_1', { fieldName: this.t(fieldName) });
   };
 
-  stringRequire = (fieldName) => {
+  stringRequire = fieldName => {
     return Yup.string().required(this.getMessageRequire(fieldName));
   };
 
-  numberRequire = (fieldName) => {
+  numberRequire = fieldName => {
     return Yup.number().typeError(this.t('message.need_number')).required(this.getMessageRequire(fieldName));
   };
 
-  mixRequire = (fieldName) => {
+  mixRequire = fieldName => {
     return Yup.mixed().required(this.getMessageRequire(fieldName));
   };
 
@@ -69,7 +63,7 @@ export class ValidateService extends HelperService {
   };
 
   readonly validateCreateProjectInput = (fieldCreateProject: FieldCreateProject) => {
-    const { name, nameEN, description, descriptionEN, size, techs } = fieldCreateProject;
+    const { name, nameEN, description, descriptionEN, size } = fieldCreateProject;
     return Yup.object({
       [name.name]: this.stringRequire(name.label),
       [nameEN.name]: this.stringRequire(nameEN.label),

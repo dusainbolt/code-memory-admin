@@ -5,7 +5,14 @@ import { SearchExpOutput } from '../../models/ExperienceModel';
 import { ProcessUpload } from '../../models/LayoutModel';
 import { getListExpAction, SubmitExpAction } from '../actionTypes/experienceActionTypes';
 import { handleMessageErrorSaga, handleMessageSuccessSaga } from '../rootSaga';
-import { getListExpError, getListExpStart, getListExpSuccess, submitExpSliceError, submitExpSliceStart, submitExpSliceSuccess } from '../slices/experienceSlice';
+import {
+  getListExpError,
+  getListExpStart,
+  getListExpSuccess,
+  submitExpSliceError,
+  submitExpSliceStart,
+  submitExpSliceSuccess,
+} from '../slices/experienceSlice';
 import { setUploadSliceClose } from '../slices/layoutSlice';
 // import { setProcessUploadSlice } from '../slices/layoutSlice';
 
@@ -23,11 +30,10 @@ function* submitExpSaga({ payload: { input, callback } }: SubmitExpAction) {
   }
 }
 
-
 function* getListExpSaga({ payload }: getListExpAction) {
   try {
     const data = yield getListExpRequest(payload.input);
-    const dataConvert: SearchExpOutput = { dataExps: data.dataWorks, total: data.total }
+    const dataConvert: SearchExpOutput = { dataWorks: data.dataWorks, total: data.total };
     yield delay(300);
     yield put(getListExpSuccess(dataConvert));
   } catch (error) {
@@ -38,7 +44,7 @@ function* getListExpSaga({ payload }: getListExpAction) {
 
 function* watchHandleExp() {
   yield takeEvery(submitExpSliceStart, submitExpSaga);
-  yield takeEvery(getListExpStart, getListExpSaga)
+  yield takeEvery(getListExpStart, getListExpSaga);
 }
 
 export default function* watchExpSaga(): any {

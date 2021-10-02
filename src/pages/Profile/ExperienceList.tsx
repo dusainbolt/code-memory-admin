@@ -22,7 +22,7 @@ import { helper } from '../../services/helperService';
 
 export const ExperienceList = () => {
   const { t } = useTranslation();
-  const { dataExps, isLoadingList, total } = useAppSelector(getExpSlice);
+  const { dataWorks, isLoadingList, total } = useAppSelector(getExpSlice);
   const { openFormModal, visibleFormExp, setVisible, openFormEdit } = useFormExp();
   const {
     paramsSearch,
@@ -131,7 +131,7 @@ export const ExperienceList = () => {
           loading={isLoadingList}
           scroll={{ x: 800 }}
           total={total}
-          dataSource={dataExps}
+          dataSource={dataWorks}
           columns={column(t, getPageIndexNumber(), openFormEdit)}
         />
       </Box>

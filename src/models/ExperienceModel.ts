@@ -57,7 +57,7 @@ export interface CreateExpInput {
 }
 
 export interface SearchExpOutput {
-  dataExps: Experience[];
+  dataWorks: Experience[];
   total: number;
 }
 
@@ -69,17 +69,6 @@ export const OPTION_FILTER_STATUS_EXPERIENCE: OptionSelect[] = [
   {
     label: 'profile.inactive',
     value: ExperienceStatus.INACTIVE,
-  },
-];
-
-export const OPTION_FILTER_STATUS_PROJECT: OptionSelect[] = [
-  {
-    label: 'profile.active',
-    value: ProjectStatus.ACTIVE,
-  },
-  {
-    label: 'profile.inactive',
-    value: ProjectStatus.INACTIVE,
   },
 ];
 
@@ -99,7 +88,7 @@ export const OPTION_FILTER_TYPE_EXPERIENCE: OptionSelect[] = [
 ];
 
 export type ExpSlice = {
-  dataExps: Experience[];
+  dataWorks: Experience[];
   total: number;
   isLoadingList: boolean;
   isLoadingForm: boolean;

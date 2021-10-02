@@ -5,14 +5,13 @@ import { TFunction, useTranslation } from 'react-i18next';
 import { InputComponent } from '../../../common/Input';
 import { TextAreaComponent } from '../../../common/Input/TextAreaForm';
 import { SelectComponent } from '../../../common/Select';
-import { fieldCreateProject } from '../../../models/FieldModel';
 import { ButtonForm } from '../../../common/Button/ButtonForm';
 import { ValidateService } from '../../../services/validateService';
 import { useAppDispatch, useAppSelector } from '../../../redux/rootStore';
 import { FETCH_POLICY } from '../../../constant';
 import { DateComponent } from '../../../common/DatePicker/DatePickerForm';
 import { InputNumberComponent } from '../../../common/Input/InputNumber';
-import { CreatePJInput, ProjectStatus } from '../../../models/ProjectModel';
+import { CreatePJInput, fieldCreateProject, ProjectStatus } from '../../../models/ProjectModel';
 import { getPJSlice, submitPJSliceStart } from '../../../redux/slices/projectSlice';
 import { FiledTagSelect } from '../../../common/Select/TagSelect';
 import { FiledWorkSelect } from '../../../common/Select/WorkSelect';
@@ -39,6 +38,7 @@ const ProjectForm = ({
         nameEN: pjDetail.nameEN,
         size: pjDetail.size,
         techs: pjDetail.techsData.length ? pjDetail.techsData : [],
+        workId: pjDetail.workData.length ? pjDetail.workData : '',
         description: pjDetail.description,
         descriptionEN: pjDetail.descriptionEN,
         startTime: parseInt(pjDetail.startTime),
@@ -64,7 +64,7 @@ const ProjectForm = ({
       <Field {...fieldCreateProject.description} component={TextAreaComponent} />
       <Field {...fieldCreateProject.descriptionEN} component={TextAreaComponent} />
       <Field {...fieldCreateProject.techs} component={FiledTagSelect} />
-      <Field {...fieldCreateProject.techs} component={FiledWorkSelect} />
+      <Field {...fieldCreateProject.workId} multiple={false} component={FiledWorkSelect} />
       <Row gutter={[16, 16]}>
         <Col>
           <Field {...fieldCreateProject.startTime} component={DateComponent} />
@@ -104,6 +104,7 @@ export const DrawerProjectForm = ({
     descriptionEN: '',
     startTime: '',
     endTime: '',
+    workId: '',
     status: ProjectStatus.ACTIVE,
   };
 

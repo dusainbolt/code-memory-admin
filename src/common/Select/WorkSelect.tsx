@@ -1,21 +1,16 @@
 import { FC, ReactNode } from 'react';
 import React from 'react';
-import { getListTagRequest } from '../../graphql/tagRequest';
-import { SearchTagOutput, Tag, TagStatus } from '../../models/TagModel';
 import { setNotifySlice } from '../../redux/slices/layoutSlice';
 import { NotifySystem, TypeNotify } from '../../models/LayoutModel';
 import { Experience, ExperienceStatus, SearchExpOutput } from '../../models/ExperienceModel';
 import { BoxIconAndName } from '../../components/Tag/BoxIconAndName';
 import { FieldInputProps, FormikProps } from 'formik';
-import { DrawerTagForm } from '../../components/Tag/DrawerTagForm';
-import { useFormTag } from '../../hooks/useTag';
 import { SelectSearch } from './SelectSearch';
 import { DrawerExperienceForm } from '../../components/Profile/ExperienceList/DrawerExperienceForm';
-import { useFormExp, useSearchExpList } from '../../hooks/useExperience';
+import { useFormExp } from '../../hooks/useExperience';
 import { getListExpRequest } from '../../graphql/ExperienceRequest';
 
 export const renderOption = data => {
-  console.log('render ===============> ', data);
   return data.map((item: Experience) => ({
     label: (
       <BoxIconAndName
@@ -47,7 +42,7 @@ async function fetchExpList(key: string, dispatch: any): Promise<SelectValue[]> 
       type: [],
     });
     console.log(data);
-    return renderOption(data.dataExps);
+    return renderOption(data.dataWorks);
   } catch (error: any) {
     dispatch(
       setNotifySlice({
@@ -64,6 +59,7 @@ export const FiledWorkSelect: FC<{
   form?: FormikProps<any>;
   label?: string;
   placeholder?: string;
+  multiple?: boolean;
   classNameWrap?: string;
 }> = ({ ...props }) => {
   const { visibleFormExp, setVisible, openFormModal } = useFormExp();

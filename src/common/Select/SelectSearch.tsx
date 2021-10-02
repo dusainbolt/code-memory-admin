@@ -118,6 +118,7 @@ export const SelectSearch: FC<{
   field?: FieldInputProps<any>;
   form?: FormikProps<any>;
   label?: string;
+  multiple?: boolean;
   placeholder?: string;
   classNameWrap?: string;
   openFormAdd?: any;
@@ -128,6 +129,7 @@ export const SelectSearch: FC<{
   form: { setFieldValue },
   classNameWrap,
   placeholder,
+  multiple = true,
   label,
   openFormAdd,
   fetchData,
@@ -204,7 +206,7 @@ export const SelectSearch: FC<{
         </ReactSortable>
       ) : (
         <DebounceSelect
-          mode="multiple"
+          mode={multiple ? 'multiple' : null}
           value={stateValue}
           size="large"
           placeholder={!!placeholder ? t(placeholder) : placeHolderDefault}

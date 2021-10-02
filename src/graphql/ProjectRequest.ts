@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client';
-import { CreateExpInput, SearchExpInput, UpdateExpInput } from '../models/ExperienceModel';
 import { CreatePJInput, SearchProjectInput, UpdateProjectInput } from '../models/ProjectModel';
-import { UpdateTagInput } from '../models/TagModel';
 import RequestService from '../services/requestService';
 import { ExpResolver, RESPONSE_EXP } from './resolver/expResolver';
 import { PJResolver, RESPONSE_PJ } from './resolver/ProjectResolver';
@@ -32,7 +30,9 @@ const getListPJQuery = gql`
         ${RESPONSE_PJ.techsData} {
           ${TagResolver}
         }
-
+        ${RESPONSE_PJ.workData} {
+          ${ExpResolver}
+        }
       }
       total
     }
